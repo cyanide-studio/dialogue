@@ -1,4 +1,5 @@
 
+<a name="Top"/>
 # Dialogue Editor - 1.0.0 
 Technical Documentation 
 
@@ -27,6 +28,8 @@ The main functions of this editor pipeline are :
 - exports for the targeted game engines and localization, voicing, and any external tools. 
 - samples for easy integration and iteration in game engines, with both editors running in parallel. 
 
+[\[Top\]](#Top)
+
 <a name="ProjectContent"/>
 # Project content 
 
@@ -41,6 +44,8 @@ The main functions of this editor pipeline are :
 - ProjectDefault : the default "hello world" project assets. 
 - ProjectDemo : the demo project assets. 
 
+[\[Top\]](#Top)
+
 <a name="VisualStudioSolution"/>
 ## Visual Studio Solution 
 
@@ -53,6 +58,8 @@ When you open DialogueEditor.sln, you will find several projects inside :
 - DemoBuild : the sample build demo. You can use it to open the ProjectDemo/Demo.project, and use it as a reference when creating your project build. 
 
 - TestSingleWindow : a small build test using a single dialogue view with its properties. This is intended as a base for projects willing to integrate the editor inside another tool. 
+
+[\[Top\]](#Top)
 
 <a name="Design"/>
 # Design 
@@ -84,6 +91,8 @@ Flags act as static parameters that can be read during the node execution to pro
 - Voicing ID : This ID is generated and stored in the .dlg for every sentence, in the form "DialogueName_NodeID". It is exported inside the Wwise text helper file and the voicing spreadsheets. Sound files recorded should match this ID in order for your game to dynamically find 
 them during gameplay execution. 
 
+[\[Top\]](#Top)
+
 <a name="Code"/>
 # Code 
 
@@ -98,6 +107,8 @@ It's based on several libraries :
 
 The provided builds are compiled with Visual 2013, using .Net 4.5, other versions have not been tested. 
 
+[\[Top\]](#Top)
+
 <a name="NamingConventions"/>
 ## Naming conventions 
 
@@ -108,6 +119,8 @@ Node properties : this term references all the serialized parameters of a dialog
 Node attributes : this term is used to reference nodes conditions, actions, and flags under a common term. 
 
 Concerning the code, all methods and public variables use UpperCamelCase, while private variables use lowerCamelCase. 
+
+[\[Top\]](#Top)
 
 <a name="Architecture"/>
 ## Architecture 
@@ -134,6 +147,8 @@ Concerning the code, all methods and public variables use UpperCamelCase, while 
     - WindowMain.cs is the main window of the editor. It holds the docking area and the top menu. 
     - WindowViewer.cs is a basic dialogue parser, used to test how a dialogue plays out. 
 
+[\[Top\]](#Top)
+
 <a name="Integration"/>
 # Integration 
 
@@ -144,6 +159,8 @@ To start using the editor efficiently with your project, you will need to create
 As a first step, you can use the DefaultBuild to prepare the integration with your game. You will be able to create actors and interactive dialogue trees, but you won't have access to any actions or conditions associated with your nodes. 
 
 You can use the DefaultBuild as a base for your own build, and use the DemoBuild as a reference when iterating on it. You can declare all your overrides in your own Program.cs, and declare your own node attributes classes (conditions/actions/flags) in an adjacent folder. 
+
+[\[Top\]](#Top)
 
 <a name="NodeAttributes"/>
 ### Node attributes 
@@ -175,6 +192,8 @@ Use like this :
 
     [TypeConverter(typeof(PropertySkillNameConverter))] 
     public string Skill { get; set; } 
+
+[\[Top\]](#Top)
 
 <a name="CustomData"/>
 ### Custom data 
@@ -208,12 +227,16 @@ it through EditorCore.MainWindow.AddCustomMenu, like this :
     
     EditorCore.MainWindow.AddCustomMenu(menuItemGame); 
 
+[\[Top\]](#Top)
+
 <a name="GameIntegration"/>
 ## Game integration 
 
 To use the dialogues in your game, you will need to implement two main parts : 
 - the dialogue parser, to read the json files in your game. 
 - the dialogue interpreter, to run the dialogues in your game. 
+
+[\[Top\]](#Top)
 
 <a name="DialogueParser"/>
 ### Dialogue parser 
@@ -223,6 +246,8 @@ Unreal provides a json parsing helper, and the json.net library used in this edi
 engine using csharp, such as Unity. Solutions for json parsers ion other platforms should not be a problem to find. 
 
 The parsing will essentially consists in a loop on the ListNodes. Each node and attribute will have its type defined by the property "$type", allowing you to instanciate objects matching those types. 
+
+[\[Top\]](#Top)
 
 <a name="DialogueInterpreter"/>
 ### Dialogue interpreter 
@@ -240,9 +265,13 @@ The speaker is the actor actually speaking the sentence's text. The listener is 
 Your design should include a central manager for all the dialogues played. It would be in charge of starting, updating and closing the dialogues, as well as handling priorities on UI and voicing. 
 An interactive dialogue should always be unique and have top priority, while several ambiant dialogues may be played simultaneously. 
 
+[\[Top\]](#Top)
+
 <a name="Samples"/>
 ### Samples 
 
 You can find integration samples from the Cthulhu project in Docs/Samples. 
 You will find code extracts and instructions for the Unreal part, and the build sample used for the DialogueEditor. 
+
+[\[Top\]](#Top)
 
