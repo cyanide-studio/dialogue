@@ -1,0 +1,180 @@
+{
+  "VersionProject": "1.0.0",
+  "VersionEditor": "1.0.0",
+  "MaxLengthSentence": 150,
+  "MaxLengthReply": 50,
+  "LastVoicingExportDate": "2016-02-22T11:04:23.4527806Z",
+  "ListPackages": [
+    {
+      "Name": "Default",
+      "Export": true
+    },
+    {
+      "Name": "DLC",
+      "Export": true
+    }
+  ],
+  "ListLanguages": [
+    {
+      "Name": "English",
+      "LocalizationCode": "en",
+      "VoicingCode": "en"
+    },
+    {
+      "Name": "French",
+      "LocalizationCode": "fr",
+      "VoicingCode": "fr"
+    }
+  ],
+  "ListActors": [
+    {
+      "ID": "ActorID_1",
+      "Name": "Joffrey",
+      "Species": "Human",
+      "Gender": "Male",
+      "Build": "Normal",
+      "Age": 30,
+      "Height": 170,
+      "Personality": "",
+      "Description": "",
+      "VoiceKit": "Human 1",
+      "Portrait": "Portraits\\Joffrey.jpg",
+      "Color": -13676721
+    },
+    {
+      "ID": "ActorID_2",
+      "Name": "Littlefinger",
+      "Species": "Human",
+      "Gender": "Male",
+      "Build": "Normal",
+      "Age": 30,
+      "Height": 170,
+      "Personality": "",
+      "Description": "",
+      "VoiceKit": "Dark Elf 1",
+      "Portrait": "Portraits\\Littlefinger.png",
+      "Color": -32768
+    },
+    {
+      "ID": "ActorID_3",
+      "Name": "Cersei",
+      "Species": "Monster",
+      "Gender": "Female",
+      "Build": "Normal",
+      "Age": 30,
+      "Height": 170,
+      "Personality": "",
+      "Description": "",
+      "VoiceKit": "Queen",
+      "Portrait": "Portraits\\Cersei.jpg",
+      "Color": -13676721
+    },
+    {
+      "ID": "ActorID_4",
+      "Name": "Tyrion",
+      "Species": "Dwarf",
+      "Gender": "Male",
+      "Build": "Dwarf",
+      "Age": 30,
+      "Height": 170,
+      "Personality": "",
+      "Description": "",
+      "VoiceKit": "Human 1",
+      "Portrait": "Portraits\\tyrion.jpg",
+      "Color": -13676721
+    },
+    {
+      "ID": "ActorID_5",
+      "Name": "Eddard",
+      "Species": "Alien",
+      "Gender": "Male",
+      "Build": "Normal",
+      "Age": 30,
+      "Height": 170,
+      "Personality": "",
+      "Description": "",
+      "VoiceKit": "Dark Elf 1",
+      "Portrait": "Portraits\\Eddard.jpg",
+      "Color": -16744256
+    }
+  ],
+  "ListVoiceKits": [
+    {
+      "Name": "Human 1",
+      "VoiceActor": "Male 1"
+    },
+    {
+      "Name": "Dark Elf 1",
+      "VoiceActor": "Male 2"
+    },
+    {
+      "Name": "Queen",
+      "VoiceActor": "Female 1"
+    }
+  ],
+  "ListVoiceActors": [
+    {
+      "Name": "Male 1",
+      "ListLocalizedVoiceActors": [
+        {
+          "Name": "Ryan Reynolds",
+          "LanguageName": "English"
+        },
+        {
+          "Name": "Gerard Depardieu",
+          "LanguageName": "French"
+        }
+      ]
+    },
+    {
+      "Name": "Male 2",
+      "ListLocalizedVoiceActors": []
+    },
+    {
+      "Name": "Female 1",
+      "ListLocalizedVoiceActors": []
+    }
+  ],
+  "ListConstants": [
+    {
+      "ID": "OldKing",
+      "Workstring": "Robert Baratheon",
+      "LastEditDate": "2016-04-26T15:49:19.1289867Z",
+      "Comment": ""
+    },
+    {
+      "ID": "Executionner",
+      "Workstring": "Ser Illyn Paine",
+      "LastEditDate": "2016-04-27T09:34:35.2446744Z",
+      "Comment": "The royal executionner. His name must reflect pain."
+    }
+  ],
+  "Translations": {
+    "Entries": {
+      "OldKing": [
+        {
+          "LanguageName": "English",
+          "Text": "Robert Baratheon",
+          "SourceDate": "2016-04-26T15:49:19.1289867Z"
+        },
+        {
+          "LanguageName": "French",
+          "Text": "Robert Baratheon",
+          "SourceDate": "2016-04-26T15:49:19.1289867Z"
+        }
+      ],
+      "Executionner": [
+        {
+          "LanguageName": "English",
+          "Text": "Ser Illyn Paine",
+          "SourceDate": "2016-04-27T09:34:35.2446744Z"
+        },
+        {
+          "LanguageName": "French",
+          "Text": "Sire Souffrance",
+          "SourceDate": "2016-04-27T09:34:35.2446744Z"
+        }
+      ]
+    }
+  }
+}

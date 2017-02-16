@@ -1,0 +1,67 @@
+{
+  "VersionProject": "1.0.0",
+  "VersionEditor": "1.0.0",
+  "PackageName": "Default",
+  "LastIndex": 3,
+  "SceneType": "Interactive",
+  "VoiceBank": "",
+  "Context": "",
+  "Comment": "",
+  "RootNodeID": 1,
+  "ListNodes": [
+    {
+      "$type": "NodeRoot",
+      "ID": 1,
+      "NextID": 2,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Such hi, very world !",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "",
+      "VoicingID": "VX_Introduction_2",
+      "LastEditDate": "2016-04-14T16:23:52.3125113Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 2,
+      "NextID": 3,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Doge intensifies !",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "",
+      "VoicingID": "VX_Introduction_3",
+      "LastEditDate": "2016-04-14T16:24:19.592239Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 3,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    }
+  ],
+  "ListAdditionalActors": [],
+  "Translations": {
+    "Entries": {}
+  }
+}

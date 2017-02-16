@@ -681,7 +681,7 @@ An interactive dialogue should always be unique and have top priority, while sev
 <a name="Samples"/>
 #### Samples 
 
-You can find integration samples from the Cthulhu project in Docs/Samples. 
+You can find integration samples in Docs/Samples. 
 You will find code extracts and instructions for the Unreal part, and the build sample used for the DialogueEditor. 
 
 [\[Top\]](#Top)

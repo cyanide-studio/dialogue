@@ -1,0 +1,42 @@
+{
+  "VersionProject": "1.0.0",
+  "VersionEditor": "1.0.0",
+  "MaxLengthSentence": 150,
+  "MaxLengthReply": 50,
+  "LastVoicingExportDate": "0001-01-01T00:00:00",
+  "ListPackages": [
+    {
+      "Name": "Default",
+      "Export": true
+    }
+  ],
+  "ListLanguages": [
+    {
+      "Name": "English",
+      "LocalizationCode": "en",
+      "VoicingCode": "en"
+    }
+  ],
+  "ListActors": [
+    {
+      "ID": "ActorID_1",
+      "Name": "Doge",
+      "Species": "Undefined",
+      "Gender": "Undefined",
+      "Build": "Normal",
+      "Age": 10,
+      "Height": 100,
+      "Personality": "Such Charming, Very Bark",
+      "Description": "",
+      "VoiceKit": "",
+      "Portrait": "Portraits\\Doge.jpg",
+      "Color": -13676721
+    }
+  ],
+  "ListVoiceKits": [],
+  "ListVoiceActors": [],
+  "ListConstants": [],
+  "Translations": {
+    "Entries": {}
+  }
+}

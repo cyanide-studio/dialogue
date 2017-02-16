@@ -1,0 +1,276 @@
+{
+  "VersionProject": "1.0.0",
+  "VersionEditor": "1.0.0",
+  "PackageName": "DLC",
+  "LastIndex": 13,
+  "SceneType": "Interactive",
+  "VoiceBank": "",
+  "Context": "",
+  "Comment": "",
+  "RootNodeID": 1,
+  "ListNodes": [
+    {
+      "$type": "NodeRoot",
+      "ID": 1,
+      "NextID": 2,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Hi boy.",
+      "SpeakerID": "ActorID_5",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Purgatory_2",
+      "LastEditDate": "2016-02-17T10:02:56.0615557Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 2,
+      "NextID": 3,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Hi gramps.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_5",
+      "VoicingID": "VX_Purgatory_3",
+      "LastEditDate": "2016-02-17T10:03:02.2541749Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 3,
+      "NextID": 4,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "If you didn't mess up on my trial, everything would have been easier for everyone.",
+      "SpeakerID": "ActorID_5",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Purgatory_4",
+      "LastEditDate": "2016-02-17T10:03:50.9120402Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 4,
+      "NextID": 6,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeChoice",
+      "Choice": "Deal with the Stark ghost",
+      "RepliesIDs": [
+        7,
+        8
+      ],
+      "ID": 6,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeReply",
+      "Reply": "Apologize sincerely",
+      "LastEditDate": "2016-02-18T18:09:58.0888474Z",
+      "ID": 7,
+      "NextID": 12,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeReply",
+      "Reply": "Execute him again",
+      "LastEditDate": "2016-02-18T18:09:58.0888474Z",
+      "ID": 8,
+      "NextID": 9,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "{Executionner}, please bring me his head.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_5",
+      "VoicingID": "VX_Purgatory_9",
+      "LastEditDate": "2016-04-25T17:00:39.1893586Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 9,
+      "NextID": 11,
+      "Conditions": [],
+      "Actions": [
+        {
+          "$type": "ActionAddHonor",
+          "Value": -5,
+          "Character": "ActorID_1",
+          "OnNodeStart": true
+        }
+      ],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Damn, not again, I always hate this part.",
+      "SpeakerID": "ActorID_5",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Purgatory_11",
+      "LastEditDate": "2016-02-17T10:05:35.2034683Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 11,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Yeah, but you know... puberty and all...",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_5",
+      "VoicingID": "VX_Purgatory_12",
+      "LastEditDate": "0001-01-01T00:00:00",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 12,
+      "NextID": 13,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "I understand, children are always so troublesome.",
+      "SpeakerID": "ActorID_5",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Purgatory_13",
+      "LastEditDate": "2016-02-17T10:07:11.9281398Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 13,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    }
+  ],
+  "ListAdditionalActors": [],
+  "Translations": {
+    "Entries": {
+      "Node_2": [
+        {
+          "LanguageName": "English",
+          "Text": "Hi boy.",
+          "SourceDate": "2016-02-17T10:02:56.0615557Z"
+        }
+      ],
+      "Node_3": [
+        {
+          "LanguageName": "English",
+          "Text": "Hi uncle.",
+          "SourceDate": "2016-02-17T10:03:02.2541749Z"
+        }
+      ],
+      "Node_4": [
+        {
+          "LanguageName": "English",
+          "Text": "Why did you have to kill me ? Now Westeros is a mess.",
+          "SourceDate": "2016-02-17T10:03:50.9120402Z"
+        }
+      ],
+      "Node_7": [
+        {
+          "LanguageName": "English",
+          "Text": "Apologize",
+          "SourceDate": "2016-02-18T18:09:58.0888474Z"
+        }
+      ],
+      "Node_12": [
+        {
+          "LanguageName": "English",
+          "Text": "Sorry, I was being immature.",
+          "SourceDate": "0001-01-01T00:00:00"
+        }
+      ],
+      "Node_13": [
+        {
+          "LanguageName": "English",
+          "Text": "It's okay.",
+          "SourceDate": "2016-02-17T10:07:11.9281398Z"
+        }
+      ],
+      "Node_8": [
+        {
+          "LanguageName": "English",
+          "Text": "Execute",
+          "SourceDate": "2016-02-18T18:09:58.0888474Z"
+        }
+      ],
+      "Node_9": [
+        {
+          "LanguageName": "English",
+          "Text": "{Executionner}, head please.",
+          "SourceDate": "2016-04-25T17:00:39.1893586Z"
+        }
+      ],
+      "Node_11": [
+        {
+          "LanguageName": "English",
+          "Text": "Dammit.",
+          "SourceDate": "2016-02-17T10:05:35.2034683Z"
+        }
+      ]
+    }
+  }
+}

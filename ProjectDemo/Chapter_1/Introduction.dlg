@@ -1,0 +1,337 @@
+{
+  "VersionProject": "1.0.0",
+  "VersionEditor": "1.0.0",
+  "PackageName": "Default",
+  "LastIndex": 18,
+  "SceneType": "Interactive",
+  "VoiceBank": "",
+  "Context": "Inspector Joffrey has been killed, and wants to know who did it.\nHe starts by talking with the cunning Littlefinger.",
+  "Comment": "",
+  "RootNodeID": 1,
+  "ListNodes": [
+    {
+      "$type": "NodeRoot",
+      "ID": 1,
+      "NextID": 2,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Good morning, I'm investigating my death and would like to ask you a few questions.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_2",
+      "VoicingID": "VX_Introduction_2",
+      "LastEditDate": "2016-03-17T10:05:12.3171056Z",
+      "HideSubtitle": false,
+      "Context": "He's dead",
+      "Comment": "Firm",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 2,
+      "NextID": 13,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Before we start, I wish to insist on my innocence and purity of heart.",
+      "SpeakerID": "ActorID_2",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Introduction_3",
+      "LastEditDate": "2016-02-18T18:10:56.8818474Z",
+      "HideSubtitle": false,
+      "Context": "He's talking to a ghost",
+      "Comment": "Nervous",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 3,
+      "NextID": 4,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "You seem very confident for a traitor.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_2",
+      "VoicingID": "VX_Introduction_4",
+      "LastEditDate": "2016-02-18T10:47:29.3738754Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 4,
+      "NextID": 5,
+      "Conditions": [
+        {
+          "$type": "ConditionHasHonor",
+          "Min": 0,
+          "Max": 100,
+          "Character": "ActorID_1",
+          "IntendedResult": true
+        }
+      ],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeChoice",
+      "Choice": "Trust Littlefinger ?",
+      "RepliesIDs": [
+        6,
+        7
+      ],
+      "ID": 5,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeReply",
+      "Reply": "Trust him like a Stark",
+      "LastEditDate": "2016-02-18T10:20:29.517126Z",
+      "ID": 6,
+      "NextID": 8,
+      "Conditions": [],
+      "Actions": [
+        {
+          "$type": "ActionAddHonor",
+          "Value": 1,
+          "Character": "ActorID_1",
+          "OnNodeStart": true
+        }
+      ],
+      "Flags": []
+    },
+    {
+      "$type": "NodeReply",
+      "Reply": "Survive until next episode",
+      "LastEditDate": "2016-02-18T10:20:29.522126Z",
+      "ID": 7,
+      "NextID": 9,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Ok, I trust you.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_2",
+      "VoicingID": "VX_Introduction_8",
+      "LastEditDate": "2016-02-16T17:02:42.165199Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 8,
+      "NextID": 12,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Do what you want but stay away from my drinks.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_2",
+      "VoicingID": "VX_Introduction_9",
+      "LastEditDate": "2016-02-16T17:02:44.0693894Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 9,
+      "NextID": 11,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "See you soon.",
+      "SpeakerID": "ActorID_2",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Introduction_11",
+      "LastEditDate": "2016-04-18T16:47:28.8844673Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 11,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeGoto",
+      "GotoID": 11,
+      "ID": 12,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeBranch",
+      "Workstring": "",
+      "BranchID": 14,
+      "ID": 13,
+      "NextID": 3,
+      "Conditions": [
+        {
+          "$type": "ConditionHasHonor",
+          "Min": 75,
+          "Max": 100,
+          "Character": "ActorID_1",
+          "IntendedResult": true
+        }
+      ],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Hey, let's branch a bit.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_4",
+      "VoicingID": "VX_Introduction_14",
+      "LastEditDate": "2016-05-02T17:23:46.1131465Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 14,
+      "NextID": 18,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Or maybe not.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_4",
+      "VoicingID": "VX_Introduction_15",
+      "LastEditDate": "2016-05-02T17:23:54.6359987Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 15,
+      "NextID": 16,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeGoto",
+      "GotoID": 4,
+      "ID": 16,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Are you sure you want to do that ?",
+      "SpeakerID": "ActorID_4",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Introduction_18",
+      "LastEditDate": "2016-05-02T17:24:58.4693814Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 18,
+      "NextID": 15,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": []
+    }
+  ],
+  "ListAdditionalActors": [],
+  "Translations": {
+    "Entries": {
+      "Node_2": [
+        {
+          "LanguageName": "English",
+          "Text": "Good morning.",
+          "SourceDate": "2016-03-17T10:05:12.3171056Z"
+        },
+        {
+          "LanguageName": "French",
+          "Text": "Bonjour.",
+          "SourceDate": "2016-03-17T10:05:12.3171056Z"
+        }
+      ],
+      "Node_3": [
+        {
+          "LanguageName": "English",
+          "Text": "Je suis innocent !",
+          "SourceDate": "2016-02-18T18:10:56.8818474Z"
+        }
+      ],
+      "Node_4": [
+        {
+          "LanguageName": "English",
+          "Text": "Trahison.",
+          "SourceDate": "2016-02-18T10:47:29.3738754Z"
+        }
+      ],
+      "Node_9": [
+        {
+          "LanguageName": "English",
+          "Text": "Do what you want.",
+          "SourceDate": "2016-02-16T17:02:44.0693894Z"
+        },
+        {
+          "LanguageName": "French",
+          "Text": "Faites comme bon vous semble.",
+          "SourceDate": "2016-02-16T17:02:44.0693894Z"
+        }
+      ]
+    }
+  }
+}
