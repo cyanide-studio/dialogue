@@ -1,7 +1,7 @@
 
 <a name="Top"/>
 
-# DIALOG TOOL 1.0
+# Dialogue Editor 1.0
 Documentation
 
 # Summary
