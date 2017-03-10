@@ -62,10 +62,14 @@ namespace DialogueEditor
             textBoxWorkstring.Text = dialogueNode.Choice;
             textBoxTimer.Text = dialogueNode.Timer.ToString();
 
-            comboBoxBlueprint.DataSource = new BindingSource(EditorCore.CustomLists["DialogueChoices"], null);
-            comboBoxBlueprint.ValueMember = "Key";
-            comboBoxBlueprint.DisplayMember = "Value";
-            comboBoxBlueprint.SelectedValue = dialogueNode.Blueprint;
+            //TODO: Unreal Specific
+            if (EditorCore.CustomLists.ContainsKey("DialogueChoices"))
+            {
+                comboBoxBlueprint.DataSource = new BindingSource(EditorCore.CustomLists["DialogueChoices"], null);
+                comboBoxBlueprint.ValueMember = "Key";
+                comboBoxBlueprint.DisplayMember = "Value";
+                comboBoxBlueprint.SelectedValue = dialogueNode.Blueprint;
+            }
 
             checkBoxTimer.Checked = dialogueNode.HideTimer;
 
