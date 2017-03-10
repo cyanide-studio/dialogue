@@ -201,7 +201,7 @@ namespace DialogueEditor
                 string folderPath = "";
                 foreach (string folder in folders)
                 {
-                    folderPath += folder;
+                    folderPath = Path.Combine(folderPath, folder);
 
                     TreeNode[] nodeFolders = nodeParent.Nodes.Find(folder, false);
                     if (nodeFolders.Count() > 0)
