@@ -1972,7 +1972,7 @@ namespace DialogueEditor
 
         private void OnTreeItemDrag(object sender, ItemDragEventArgs e)
         {
-            EditorCore.LogInfo("Start Dragging");
+            //EditorCore.LogInfo("Start Dragging");
 
             if (!IsTreeNodeRoot(e.Item as TreeNode))
             {
@@ -2020,7 +2020,7 @@ namespace DialogueEditor
 
         private void OnTreeDragDrop(object sender, DragEventArgs e)
         {
-            EditorCore.LogInfo("Start Dropping");
+            //EditorCore.LogInfo("Start Dropping");
 
             TreeNode nodeMove = (TreeNode)e.Data.GetData(typeof(TreeNode));
 
@@ -2031,13 +2031,13 @@ namespace DialogueEditor
 
             if (nodeMove != null && nodeTarget != null)
             {
-                EditorCore.LogInfo(String.Format("Node {0} dropped on node {1}", GetDialogueNode(nodeMove).ID, GetDialogueNode(nodeTarget).ID));
+                //EditorCore.LogInfo(String.Format("Node {0} dropped on node {1}", GetDialogueNode(nodeMove).ID, GetDialogueNode(nodeTarget).ID));
 
                 if (MoveTreeNode(nodeMove, nodeTarget, EMoveTreeNode.Drop))
                 {
                     SetDirty();
 
-                    EditorCore.LogInfo("Drop Success");
+                    //EditorCore.LogInfo("Drop Success");
                 }
             }
         }

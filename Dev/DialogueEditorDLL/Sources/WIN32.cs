@@ -37,7 +37,7 @@ namespace DialogueEditor
 
         static public void ShowCrashMessage(object sender, System.Threading.ThreadExceptionEventArgs t)
         {
-            string errorMsg = "An crash occurred...\nPlease send a screenshot of this message to the devs !\n\n";
+            string errorMsg = "A crash occurred...\nPlease send a screenshot of this message to the devs !\n\n";
             errorMsg = errorMsg + t.Exception.Message;
             errorMsg = errorMsg + "\n\nStack Trace:\n";
             errorMsg = errorMsg + t.Exception.StackTrace;
