@@ -52,11 +52,12 @@ Documentation
 (You can find a list of all the available shortcuts at the end of this document, or by pressing F1 in the Editor.)
 
 [\[Top\]](#Top)
-
 <a name="UserDocumentation"/>
+
 # User Documentation
 
 <a name="UserOverview"/>
+
 ## Overview
 
 The goal of this editor is to allow quick iterations on dialogues writing, and to provide the necessary tools for gameplay flow and data exports.
@@ -68,8 +69,8 @@ The main functions of this editor pipeline are :
 - samples for easy integration and iteration in game engines, with both editors running in parallel.
 
 [\[Top\]](#Top)
-
 <a name="ProjectFiles"/>
+
 ### Project files
 
 The files manipulated by the editor consist of a .project file and several .dlg files.
@@ -83,16 +84,16 @@ Dialogues are accessed by their names, not their path. This means that every dia
 Several exporters have been implemented to provide the necessary data for external tools.
 
 [\[Top\]](#Top)
-
 <a name="DialoguesStructure"/>
+
 ### Dialogues structure
 
 Dialogues consist of a list of sentences, associated with a speaker and a listener.
 Special nodes can be used to fork the dialogue's flow and create multiple paths, either by using interactive choices, conditional branches or "jumps" (goto).
 
 [\[Top\]](#Top)
-
 <a name="NodesIDs"/>
+
 ### Nodes IDs
 
 Every dialogue node will automatically receive a numeric ID on their creation. This ID will be unique and constant for each node, and should never be modified by hand.
@@ -103,8 +104,8 @@ This implies that after some time editing a dialogue, nodes will appear as if th
 IDs are not indexes, and nodes will be ordered when exporting.
 
 [\[Top\]](#Top)
-
 <a name="GettingStarted"/>
+
 ## Getting started
 
 Launch the editor with the DialogueEditorBuild.exe executable, or the project specific build executable.
@@ -120,24 +121,24 @@ You will need to create actors in the Actors tab of the project configuration, a
 You can open an existing dialogue by double-clicking on it on the left panel (Project Explorer), or create a new dialogue by using the menu "File > New Dialogue", or right-clicking on a folder and select "New Dialogue".
 
 [\[Top\]](#Top)
-
 <a name="DialogueNodes"/>
+
 ## Dialogue nodes
 
 Dialogues are built with a succession of nodes. When playing a dialogue, the game will parse the nodes in sequence, top to bottom from the "Root" node, until a Choice, Goto or Branch node creates a fork. The dialogue will stop automatically after playing a node without child.
 You can use five types of nodes to edit a dialogue, defined below.
 
 [\[Top\]](#Top)
-
 <a name="Root"/>
+
 ### Root
 
 The root node allows the edition of the node attributes, as well as global dialogue's attributes.
 Additional Actors can be defined on this node. This allows you to include actors in a dialogue that are not used as speaker or listener in any sentence, but should be managed as participants anyway (spectators).
 
 [\[Top\]](#Top)
-
 <a name="Sentence"/>
+
 ### Sentence
 
 Represents a single line of dialogue.
@@ -147,8 +148,8 @@ A listener can be defined, to be used by the game's realization.
 Additional information can be filled, such as animations, directing, and voicing intensity.
 
 [\[Top\]](#Top)
-
 <a name="Choice"/>
+
 ### Choice
 
 Represents an interactive choice.
@@ -157,8 +158,8 @@ When parsing a choice node, the game will display the list of all the replies an
 A text can be registered on the choice node for debugging purposes, it is not intended to appear in the game. 
 
 [\[Top\]](#Top)
-
 <a name="Reply"/>
+
 ### Reply
 
 Represents a choice's option.
@@ -166,8 +167,8 @@ A workstring must be filled, and will be translated to appear in the game interf
 It acts as the new root of a fork.
 
 [\[Top\]](#Top)
-
 <a name="Goto"/>
+
 ### Goto
 
 Represents a jump in the dialogue's flow.
@@ -176,8 +177,8 @@ You can also use special paste (ctrl+shift+v) to set a goto reference.
 Goto nodes are useful to merge different forks back to a common flow, or to organize the nodes hierarchy.
 
 [\[Top\]](#Top)
-
 <a name="Branch"/>
+
 ### Branch
 
 Represents a conditional branch.
@@ -187,11 +188,12 @@ To edit a branch node, a dedicated option will appear on the context menu to add
 You can also use special paste (ctrl+shift+v) to paste a sequence as branch children.
 
 [\[Top\]](#Top)
-
 <a name="DialogueEdition"/>
+
 ## Dialogue edition
 
 <a name="ContextMenu"/>
+
 ### Context menu
 
 When you right-click on a node, a context menu will provide several edition options, depending on the selected node.
@@ -208,8 +210,8 @@ When you right-click on a node, a context menu will provide several edition opti
 - Delete : deletes the selected node.
 
 [\[Top\]](#Top)
-
 <a name="NodeProperties"/>
+
 ### Node properties
 
 When a node is selected, different properties will be available on the right side, depending on the type of node.
@@ -236,7 +238,6 @@ Choice properties allow the edition of :
 Common properties allow the edition of attributes (conditions, actions, flags) on each nodes.
 
 [\[Top\]](#Top)
-
 <a name="NodeAttributes"/>
 ### Node attributes (Conditions, Actions and Flags)
 
@@ -253,8 +254,8 @@ Actions will be used to trigger in-game events, like acquiring items or starting
 Flags will be used to store additional information that will be used by the dialogue system, like indicating that a Reply node will use a skill test when selected.
 
 [\[Top\]](#Top)
-
 <a name="Filters"/>
+
 ### Filters
 
 Filters are available on the document view to show/hide additional information on each nodes.
@@ -263,8 +264,8 @@ The second group allows you to use a user-defined colors for sentences, to use l
 The third group allows you to select the language used for display.
 
 [\[Top\]](#Top)
-
 <a name="Constants"/>
+
 ### Constants
 
 Constants are a list of IDs associated to a localized workstring. They are useful to use abstract names for characters or places in your sentences, centralize the localization of their names, and easily modify them during production.
@@ -276,8 +277,8 @@ You can press Tab when editing a sentence to display the list of available const
 You can toggle the "Constants" filter on the dialogue view to see the localized value of the constants used in your text.
 
 [\[Top\]](#Top)
-
 <a name="ProjectEdition"/>
+
 ## Project edition
 
 On the left panel, you can double-click on the project's name to open the dedicated edition panel.
@@ -311,25 +312,26 @@ The Constants panel allows the edition of the localized constants :
 The Debug panel displays a view of the custom lists used by the editor.
 
 [\[Top\]](#Top)
-
 <a name="Tools"/>
+
 ## Tools
 
 <a name="Viewer"/>
+
 ### Viewer
 
 You can use "Tools > Play Dialogue" to open a little viewer and test your dialogue flow.
 
 [\[Top\]](#Top)
-
 <a name="ErrorsCheck"/>
+
 ### Errors check
 
 You can use "Tools > Check Dialogue" to let the editor execute a quick sanity check on your dialogue. Error will be displayed in the bottom panel, and you can double-click on those to jump to the concerned node.
 
 [\[Top\]](#Top)
-
 <a name="Exporters"/>
+
 ### Exporters
 
 Several exporters are built-in in the editor under the "Tools >" menu.
@@ -340,8 +342,8 @@ Several exporters are built-in in the editor under the "Tools >" menu.
 - Export Game Lipsync is used to export lipsync informations towards generation tools. Currently only text helper files targeted for FaceFx are provided.
 
 [\[Top\]](#Top)
-
 <a name="Localization"/>
+
 ### Localization
 
 Each dialogue holds his own translation table. Each dialogue node will have his own section, containing the translated strings of its workstring.
@@ -354,8 +356,8 @@ Once your translation tables are filled, you can either read them directly from 
 The voicing exporter will also use the translation tables.
 
 [\[Top\]](#Top)
-
 <a name="Voicing"/>
+
 ### Voicing
 
 The voicing exporter allows you to export spreadsheets intended for the voicing sessions. This includes a "Loca_" file to handle all the localized sentences, an "Actors_" file to handle all the actors information, and a "Dialogues_" file to handle general dialogues information.
@@ -369,8 +371,8 @@ A Wwise text file is generated alongside every export. This file can be used ins
 Voicing intentions and scene context can be edited on each dialogue and sentence to provide the voicing sessions with as much information as possible. Those will be exported in the spreadsheets.
 
 [\[Top\]](#Top)
-
 <a name="CopyUndo"/>
+
 ### Copy / Undo
 
 You can copy and paste nodes inside a dialogue, as well as into other dialogues.
@@ -381,15 +383,15 @@ An undo/redo feature is available for the whole dialogue structure by using ctrl
 You can also use ctrl+z when editing a single text-field.
 
 [\[Top\]](#Top)
-
 <a name="Annex"/>
+
 ## Annex
 
 You can display the Help dialog by pressing F1 in the editor.
 
 [\[Top\]](#Top)
-
 <a name="Shortcuts"/>
+
 ### Shortcuts
 
 - Ctrl+N : Create new dialogue file.
@@ -422,8 +424,8 @@ You can display the Help dialog by pressing F1 in the editor.
 - Del : Delete selected node.
 
 [\[Top\]](#Top)
-
 <a name="Tips"/>
+
 ### Tips
 
 - Use copy on the root node to copy the whole dialogue.
@@ -431,11 +433,12 @@ You can display the Help dialog by pressing F1 in the editor.
 - Use special paste (ctrl+shift+v) to quickly edit goto and branch nodes.
 
 [\[Top\]](#Top)
-
 <a name="TechnicalDocumentation"/>
+
 # Technical Documentation
 
 <a name="TechnicalOverview"/>
+
 ## Overview 
 
 The goal of this editor is to allow quick iterations on dialogues writing, and to provide the necessary tools for gameplay flow and data exports. 
@@ -447,11 +450,12 @@ The main functions of this editor pipeline are :
 - samples for easy integration and iteration in game engines, with both editors running in parallel. 
 
 [\[Top\]](#Top)
-
 <a name="ProjectContent"/>
+
 ## Project content 
 
 <a name="Directories"/>
+
 ### Directories 
 
 - Build : the generated binary builds (release) of the demos. 
@@ -463,8 +467,8 @@ The main functions of this editor pipeline are :
 - ProjectDemo : the demo project assets. 
 
 [\[Top\]](#Top)
-
 <a name="VisualStudioSolution"/>
+
 ### Visual Studio Solution 
 
 When you open DialogueEditor.sln, you will find several projects inside : 
@@ -474,8 +478,8 @@ When you open DialogueEditor.sln, you will find several projects inside :
 - TestSingleWindow : a small build test using a single dialogue view with its properties. This is intended as a base for projects willing to integrate the editor inside another tool. 
 
 [\[Top\]](#Top)
-
 <a name="Design"/>
+
 ## Design 
 
 - Unique Files names : all dialogues are referenced by their names, and thus must all be unique accross the whole project. This ensures that all the files can be imported as a single big pack of assets in a common folder in any game engine. It could also allow dialogues to reference each other wherever they are stored in the hierarchy. 
@@ -506,11 +510,12 @@ Flags act as static parameters that can be read during the node execution to pro
 them during gameplay execution. 
 
 [\[Top\]](#Top)
-
 <a name="Code"/>
+
 ## Code 
 
 <a name="Libraries"/>
+
 ### Libraries 
 
 The editor is written in standard C#. 
@@ -522,8 +527,8 @@ It's based on several libraries :
 The provided builds are compiled with Visual 2013, using .Net 4.5, other versions have not been tested. 
 
 [\[Top\]](#Top)
-
 <a name="NamingConventions"/>
+
 ### Naming conventions 
 
 - Dialog and dialogue disambiguation : a dialog is a popup, while a dialogue is a conversation (uk english). 
@@ -532,8 +537,8 @@ The provided builds are compiled with Visual 2013, using .Net 4.5, other version
 - Concerning the code : all methods and public variables use UpperCamelCase, while private variables use lowerCamelCase. 
 
 [\[Top\]](#Top)
-
 <a name="Architecture"/>
+
 ### Architecture 
 
 - EditorCore.cs is a static class holding all the project's static resources and callbacks overrides. It also provides access to most of the editor components, such as windows, panels, logs, and settings. 
@@ -559,11 +564,12 @@ The provided builds are compiled with Visual 2013, using .Net 4.5, other version
     - WindowViewer.cs is a basic dialogue parser, used to test how a dialogue plays out. 
 
 [\[Top\]](#Top)
-
 <a name="Integration"/>
+
 ## Integration 
 
 <a name="EditorBuild"/>
+
 ### Editor build 
 
 To start using the editor efficiently with your project, you will need to create a custom build. This will allow you to declare custom attributes for your nodes, as well as injecting custom data into various properties. 
@@ -572,8 +578,8 @@ As a first step, you can use the DefaultBuild to prepare the integration with yo
 You can use the DefaultBuild as a base for your own build, and use the DemoBuild as a reference when iterating on it. You can declare all your overrides in your own Program.cs, and declare your own node attributes classes (conditions/actions/flags) in an adjacent folder. 
 
 [\[Top\]](#Top)
-
 <a name="NodeAttributes"/>
+
 #### Node attributes 
 
 To declare a node attribute, you will first need to declare the class itself, with NodeCondition, NodeAction or NodeFlag as a base (look for NodeConditionHasHonor as a sample). 
@@ -605,8 +611,8 @@ Use like this :
     public string Skill { get; set; } 
 
 [\[Top\]](#Top)
-
 <a name="CustomData"/>
+
 #### Custom data 
 
 You can edit the version number of your project build by editing EditorCore.VersionProject. 
@@ -639,8 +645,8 @@ it through EditorCore.MainWindow.AddCustomMenu, like this :
     EditorCore.MainWindow.AddCustomMenu(menuItemGame); 
 
 [\[Top\]](#Top)
-
 <a name="GameIntegration"/>
+
 ### Game integration 
 
 To use the dialogues in your game, you will need to implement two main parts : 
@@ -648,8 +654,8 @@ To use the dialogues in your game, you will need to implement two main parts :
 - the dialogue interpreter, to run the dialogues in your game. 
 
 [\[Top\]](#Top)
-
 <a name="DialogueParser"/>
+
 #### Dialogue parser 
 
 To write the parser, you can use the description of the files structure.
@@ -659,8 +665,8 @@ engine using csharp, such as Unity. Solutions for json parsers ion other platfor
 The parsing will essentially consists in a loop on the ListNodes. Each node and attribute will have its type defined by the property "$type", allowing you to instanciate objects matching those types. 
 
 [\[Top\]](#Top)
-
 <a name="DialogueInterpreter"/>
+
 #### Dialogue interpreter 
 
 To write the interpreter, you can look at the WindowViewer inside the editor for inspiration. 
@@ -677,8 +683,8 @@ Your design should include a central manager for all the dialogues played. It wo
 An interactive dialogue should always be unique and have top priority, while several ambiant dialogues may be played simultaneously. 
 
 [\[Top\]](#Top)
-
 <a name="Samples"/>
+
 #### Samples 
 
 You can find integration samples in Docs/Samples. 
