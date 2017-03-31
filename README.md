@@ -29,7 +29,7 @@ Documentation
         - [Errors check](#errors-check)
         - [Exporters](#exporters)
         - [Localization](#localization)
-        - [Copy / Undo](#copy-undo)
+        - [Copy / Undo](#copy--undo)
     - [Annex](#annex)
         - [Shortcuts](#shortcuts)
         - [Tips](#tips)
