@@ -1,68 +1,57 @@
 
-<a name="Top"/>
-
 # Dialogue Editor 1.0
 Documentation
 
 # Summary
 
-- [User Documentation](UserDocumentation)
-    - [Overview](UserOverview)
-        - [Project files](ProjectFiles)
-        - [Dialogues structure](DialoguesStructure)
-        - [test](DialoguesStructure)
-        - [test](user-content-dialogues-structure)
-        - [test](dialogues-structure)
-        - [test](#DialoguesStructure)
-        - [test](#user-content-dialogues-structure)
-        - [test](#dialogues-structure)
-        - [Nodes IDs](NodesIDs)
-    - [Getting started](GettingStarted)
-    - [Dialogue nodes](DialogueNodes)
-        - [Root](Root)
-        - [Sentence](Sentence)
-        - [Choice](Choice)
-        - [Reply](Reply)
-        - [Goto](Goto)
-        - [Branch](Branch)
-    - [Dialogue edition](DialogueEdition)
-        - [Context menu](ContextMenu)
-        - [Node properties](NodeProperties)
-        - [Node attributes (Conditions, Actions and Flags)](NodeAttributes)
-        - [Filters](Filters)
-        - [Constants](Constants)
-    - [Project edition](ProjectEdition)
-    - [Tools](Tools)
-        - [Viewer](Viewer)
-        - [Errors check](ErrorsCheck)
-        - [Exporters](Exporters)
-        - [Localization](Localization)
-        - [Copy / Undo](CopyUndo)
-    - [Annex](Annex)
-        - [Shortcuts](Shortcuts)
-        - [Tips](Tips)
-- [Technical Documentation](TechnicalDocumentation)
-    - [Overview](#TechnicalOverview)
-    - [Project content](#ProjectContent)
-        - [Directories](#Directories)
-        - [Visual Studio Solution](#VisualStudioSolution)
-    - [Design](#Design)
-    - [Code](#Code) 
-        - [Libraries](#Libraries)
-        - [Naming conventions](#NamingConventions)
-        - [Architecture](#Architecture)
-    - [Integration](#Integration)
-        - [Editor build](#EditorBuild)
-        - [Game integration](#GameIntegration)
+- [User Documentation](#user-documentation)
+    - [Overview](#user-overview)
+        - [Project files](#project-files)
+        - [Dialogues structure](#dialogues-structure)
+        - [Nodes IDs](#nodes-ids)
+    - [Getting started](#getting-started)
+    - [Dialogue nodes](#dialogue-nodes)
+        - [Root](#root)
+        - [Sentence](#sentence)
+        - [Choice](#choice)
+        - [Reply](#reply)
+        - [Goto](#goto)
+        - [Branch](#branch)
+    - [Dialogue edition](#dialogue-edition)
+        - [Context menu](#context-menu)
+        - [Node properties](#node-properties)
+        - [Node attributes (Conditions, Actions and Flags)](#node-attributes)
+        - [Filters](#filters)
+        - [Constants](#constants)
+    - [Project edition](#project-edition)
+    - [Tools](#tools)
+        - [Viewer](#viewer)
+        - [Errors check](#errors-check)
+        - [Exporters](#exporters)
+        - [Localization](#localization)
+        - [Copy / Undo](#copy-undo)
+    - [Annex](#annex)
+        - [Shortcuts](#shortcuts)
+        - [Tips](#tips)
+- [Technical Documentation](#technical-documentation)
+    - [Overview](##technical-overview)
+    - [Project content](##project-content)
+        - [Directories](##directories)
+        - [Visual Studio Solution](##visual-studio-solution)
+    - [Design](##design)
+    - [Code](##code) 
+        - [Libraries](##libraries)
+        - [Naming conventions](##naming-conventions)
+        - [Architecture](##architecture)
+    - [Integration](##integration)
+        - [Editor build](##editor-build)
+        - [Game integration](##game-integration)
         
 (You can find a list of all the available shortcuts at the end of this document, or by pressing F1 in the Editor.)
 
-[\[Top\]](#Top)
-<a name="UserDocumentation"/>
+[\[Top\]](#summary)
 
 # User Documentation
-
-<a name="UserOverview"/>
 
 ## Overview
 
@@ -74,8 +63,7 @@ The main functions of this editor pipeline are :
 - exports for the targeted game engines and localization, voicing, and any external tools.
 - samples for easy integration and iteration in game engines, with both editors running in parallel.
 
-[\[Top\]](#Top)
-<a name="ProjectFiles"/>
+[\[Top\]](#summary)
 
 ### Project files
 
@@ -89,16 +77,14 @@ Dialogues are accessed by their names, not their path. This means that every dia
 
 Several exporters have been implemented to provide the necessary data for external tools.
 
-[\[Top\]](#Top)
-[\[Top\]](#dialogue-editor-10)
+[\[Top\]](#summary)
 
 ### Dialogues structure
 
 Dialogues consist of a list of sentences, associated with a speaker and a listener.
 Special nodes can be used to fork the dialogue's flow and create multiple paths, either by using interactive choices, conditional branches or "jumps" (goto).
 
-[\[Top\]](#Top)
-<a name="NodesIDs"/>
+[\[Top\]](#summary)
 
 ### Nodes IDs
 
@@ -109,8 +95,7 @@ Rearranging nodes in the tree will not affect this ID.
 This implies that after some time editing a dialogue, nodes will appear as if they are disordered (if you display the ID in the interface). This is perfectly normal and intended.
 IDs are not indexes, and nodes will be ordered when exporting.
 
-[\[Top\]](#Top)
-<a name="GettingStarted"/>
+[\[Top\]](#summary)
 
 ## Getting started
 
@@ -126,24 +111,21 @@ You will need to create actors in the Actors tab of the project configuration, a
 
 You can open an existing dialogue by double-clicking on it on the left panel (Project Explorer), or create a new dialogue by using the menu "File > New Dialogue", or right-clicking on a folder and select "New Dialogue".
 
-[\[Top\]](#Top)
-<a name="DialogueNodes"/>
+[\[Top\]](#summary)
 
 ## Dialogue nodes
 
 Dialogues are built with a succession of nodes. When playing a dialogue, the game will parse the nodes in sequence, top to bottom from the "Root" node, until a Choice, Goto or Branch node creates a fork. The dialogue will stop automatically after playing a node without child.
 You can use five types of nodes to edit a dialogue, defined below.
 
-[\[Top\]](#Top)
-<a name="Root"/>
+[\[Top\]](#summary)
 
 ### Root
 
 The root node allows the edition of the node attributes, as well as global dialogue's attributes.
 Additional Actors can be defined on this node. This allows you to include actors in a dialogue that are not used as speaker or listener in any sentence, but should be managed as participants anyway (spectators).
 
-[\[Top\]](#Top)
-<a name="Sentence"/>
+[\[Top\]](#summary)
 
 ### Sentence
 
@@ -153,8 +135,7 @@ A speaker must be picked from the Actors list defined in the project file. It wi
 A listener can be defined, to be used by the game's realization.
 Additional information can be filled, such as animations, directing, and voicing intensity.
 
-[\[Top\]](#Top)
-<a name="Choice"/>
+[\[Top\]](#summary)
 
 ### Choice
 
@@ -163,8 +144,7 @@ It is composed of a list of replies, that must be added as children of the choic
 When parsing a choice node, the game will display the list of all the replies and let the player choose the option he wants to read.
 A text can be registered on the choice node for debugging purposes, it is not intended to appear in the game. 
 
-[\[Top\]](#Top)
-<a name="Reply"/>
+[\[Top\]](#summary)
 
 ### Reply
 
@@ -172,8 +152,7 @@ Represents a choice's option.
 A workstring must be filled, and will be translated to appear in the game interface, but will not be voiced.
 It acts as the new root of a fork.
 
-[\[Top\]](#Top)
-<a name="Goto"/>
+[\[Top\]](#summary)
 
 ### Goto
 
@@ -182,8 +161,7 @@ To edit a goto, you have to use "right click > copy reference" on the node you w
 You can also use special paste (ctrl+shift+v) to set a goto reference.
 Goto nodes are useful to merge different forks back to a common flow, or to organize the nodes hierarchy.
 
-[\[Top\]](#Top)
-<a name="Branch"/>
+[\[Top\]](#summary)
 
 ### Branch
 
@@ -193,12 +171,9 @@ A branch node needs conditions defined to be effective.
 To edit a branch node, a dedicated option will appear on the context menu to add children : "Branch > Add node".
 You can also use special paste (ctrl+shift+v) to paste a sequence as branch children.
 
-[\[Top\]](#Top)
-<a name="DialogueEdition"/>
+[\[Top\]](#summary)
 
 ## Dialogue edition
-
-<a name="ContextMenu"/>
 
 ### Context menu
 
@@ -215,8 +190,7 @@ When you right-click on a node, a context menu will provide several edition opti
 - Move Up/Down : moves the selected node upwards/downwards in the tree.
 - Delete : deletes the selected node.
 
-[\[Top\]](#Top)
-<a name="NodeProperties"/>
+[\[Top\]](#summary)
 
 ### Node properties
 
@@ -243,8 +217,8 @@ Choice properties allow the edition of :
 
 Common properties allow the edition of attributes (conditions, actions, flags) on each nodes.
 
-[\[Top\]](#Top)
-<a name="NodeAttributes"/>
+[\[Top\]](#summary)
+
 ### Node attributes (Conditions, Actions and Flags)
 
 It is possible to declare conditions on a node, like testing if the player possesses an item, or if he has information about a specific topic.
@@ -259,8 +233,7 @@ Actions will be used to trigger in-game events, like acquiring items or starting
 
 Flags will be used to store additional information that will be used by the dialogue system, like indicating that a Reply node will use a skill test when selected.
 
-[\[Top\]](#Top)
-<a name="Filters"/>
+[\[Top\]](#summary)
 
 ### Filters
 
@@ -269,8 +242,7 @@ The first group of filters will control the visibility of different bits of info
 The second group allows you to use a user-defined colors for sentences, to use localized Constants, and to change the font size and style.
 The third group allows you to select the language used for display.
 
-[\[Top\]](#Top)
-<a name="Constants"/>
+[\[Top\]](#summary)
 
 ### Constants
 
@@ -282,8 +254,7 @@ To use them, you have to wrap their names between { }, like this : {KingName}
 You can press Tab when editing a sentence to display the list of available constants.
 You can toggle the "Constants" filter on the dialogue view to see the localized value of the constants used in your text.
 
-[\[Top\]](#Top)
-<a name="ProjectEdition"/>
+[\[Top\]](#summary)
 
 ## Project edition
 
@@ -317,26 +288,21 @@ The Constants panel allows the edition of the localized constants :
 
 The Debug panel displays a view of the custom lists used by the editor.
 
-[\[Top\]](#Top)
-<a name="Tools"/>
+[\[Top\]](#summary)
 
 ## Tools
-
-<a name="Viewer"/>
 
 ### Viewer
 
 You can use "Tools > Play Dialogue" to open a little viewer and test your dialogue flow.
 
-[\[Top\]](#Top)
-<a name="ErrorsCheck"/>
+[\[Top\]](#summary)
 
 ### Errors check
 
 You can use "Tools > Check Dialogue" to let the editor execute a quick sanity check on your dialogue. Error will be displayed in the bottom panel, and you can double-click on those to jump to the concerned node.
 
-[\[Top\]](#Top)
-<a name="Exporters"/>
+[\[Top\]](#summary)
 
 ### Exporters
 
@@ -347,8 +313,7 @@ Several exporters are built-in in the editor under the "Tools >" menu.
 - Export Voicing is used to export spreadsheets dedicated to audio studios, containing informations for the voice actors and the localized texts to voice. A Wwise text helper file is also generated, and can be imported in Wwise to pre-generate all the events with the generated VoicingID.
 - Export Game Lipsync is used to export lipsync informations towards generation tools. Currently only text helper files targeted for FaceFx are provided.
 
-[\[Top\]](#Top)
-<a name="Localization"/>
+[\[Top\]](#summary)
 
 ### Localization
 
@@ -361,8 +326,7 @@ You can send this spreadsheet to your localization team, and import it back by u
 Once your translation tables are filled, you can either read them directly from the .dlg files when importing them in your game, or use the provided Unreal .po exporter, or any exporter your custom build may provide.
 The voicing exporter will also use the translation tables.
 
-[\[Top\]](#Top)
-<a name="Voicing"/>
+[\[Top\]](#summary)
 
 ### Voicing
 
@@ -376,8 +340,7 @@ A Wwise text file is generated alongside every export. This file can be used ins
 
 Voicing intentions and scene context can be edited on each dialogue and sentence to provide the voicing sessions with as much information as possible. Those will be exported in the spreadsheets.
 
-[\[Top\]](#Top)
-<a name="CopyUndo"/>
+[\[Top\]](#summary)
 
 ### Copy / Undo
 
@@ -388,15 +351,13 @@ Special paste (ctrl+shift+v) can be used to set goto references and branch child
 An undo/redo feature is available for the whole dialogue structure by using ctrl+z and ctrl+y, but only when the focus is on the dialogue tree.
 You can also use ctrl+z when editing a single text-field.
 
-[\[Top\]](#Top)
-<a name="Annex"/>
+[\[Top\]](#summary)
 
 ## Annex
 
 You can display the Help dialog by pressing F1 in the editor.
 
-[\[Top\]](#Top)
-<a name="Shortcuts"/>
+[\[Top\]](#summary)
 
 ### Shortcuts
 
@@ -429,8 +390,7 @@ You can display the Help dialog by pressing F1 in the editor.
 - Ctrl+Y : Redo.
 - Del : Delete selected node.
 
-[\[Top\]](#Top)
-<a name="Tips"/>
+[\[Top\]](#summary)
 
 ### Tips
 
@@ -438,12 +398,9 @@ You can display the Help dialog by pressing F1 in the editor.
 - Use copy on a root attribute to copy all its children.
 - Use special paste (ctrl+shift+v) to quickly edit goto and branch nodes.
 
-[\[Top\]](#Top)
-<a name="TechnicalDocumentation"/>
+[\[Top\]](#summary)
 
 # Technical Documentation
-
-<a name="TechnicalOverview"/>
 
 ## Overview 
 
@@ -455,12 +412,9 @@ The main functions of this editor pipeline are :
 - exports for the targeted game engines and localization, voicing, and any external tools. 
 - samples for easy integration and iteration in game engines, with both editors running in parallel. 
 
-[\[Top\]](#Top)
-<a name="ProjectContent"/>
+[\[Top\]](#summary)
 
 ## Project content 
-
-<a name="Directories"/>
 
 ### Directories 
 
@@ -472,8 +426,7 @@ The main functions of this editor pipeline are :
 - ProjectDefault : the default "hello world" project assets. 
 - ProjectDemo : the demo project assets. 
 
-[\[Top\]](#Top)
-<a name="VisualStudioSolution"/>
+[\[Top\]](#summary)
 
 ### Visual Studio Solution 
 
@@ -483,8 +436,7 @@ When you open DialogueEditor.sln, you will find several projects inside :
 - DemoBuild : the sample build demo. You can use it to open the ProjectDemo/Demo.project, and use it as a reference when creating your project build. 
 - TestSingleWindow : a small build test using a single dialogue view with its properties. This is intended as a base for projects willing to integrate the editor inside another tool. 
 
-[\[Top\]](#Top)
-<a name="Design"/>
+[\[Top\]](#summary)
 
 ## Design 
 
@@ -515,12 +467,9 @@ Flags act as static parameters that can be read during the node execution to pro
 - Voicing ID : This ID is generated and stored in the .dlg for every sentence, in the form "DialogueName_NodeID". It is exported inside the Wwise text helper file and the voicing spreadsheets. Sound files recorded should match this ID in order for your game to dynamically find 
 them during gameplay execution. 
 
-[\[Top\]](#Top)
-<a name="Code"/>
+[\[Top\]](#summary)
 
 ## Code 
-
-<a name="Libraries"/>
 
 ### Libraries 
 
@@ -532,8 +481,7 @@ It's based on several libraries :
 
 The provided builds are compiled with Visual 2013, using .Net 4.5, other versions have not been tested. 
 
-[\[Top\]](#Top)
-<a name="NamingConventions"/>
+[\[Top\]](#summary)
 
 ### Naming conventions 
 
@@ -542,8 +490,7 @@ The provided builds are compiled with Visual 2013, using .Net 4.5, other version
 - Node attributes : this term is used to reference nodes conditions, actions, and flags under a common term. 
 - Concerning the code : all methods and public variables use UpperCamelCase, while private variables use lowerCamelCase. 
 
-[\[Top\]](#Top)
-<a name="Architecture"/>
+[\[Top\]](#summary)
 
 ### Architecture 
 
@@ -569,12 +516,9 @@ The provided builds are compiled with Visual 2013, using .Net 4.5, other version
     - WindowMain.cs is the main window of the editor. It holds the docking area and the top menu. 
     - WindowViewer.cs is a basic dialogue parser, used to test how a dialogue plays out. 
 
-[\[Top\]](#Top)
-<a name="Integration"/>
+[\[Top\]](#summary)
 
 ## Integration 
-
-<a name="EditorBuild"/>
 
 ### Editor build 
 
@@ -583,8 +527,7 @@ As a first step, you can use the DefaultBuild to prepare the integration with yo
 
 You can use the DefaultBuild as a base for your own build, and use the DemoBuild as a reference when iterating on it. You can declare all your overrides in your own Program.cs, and declare your own node attributes classes (conditions/actions/flags) in an adjacent folder. 
 
-[\[Top\]](#Top)
-<a name="NodeAttributes"/>
+[\[Top\]](#summary)
 
 #### Node attributes 
 
@@ -616,8 +559,7 @@ Use like this :
     [TypeConverter(typeof(PropertySkillNameConverter))] 
     public string Skill { get; set; } 
 
-[\[Top\]](#Top)
-<a name="CustomData"/>
+[\[Top\]](#summary)
 
 #### Custom data 
 
@@ -650,8 +592,7 @@ it through EditorCore.MainWindow.AddCustomMenu, like this :
     
     EditorCore.MainWindow.AddCustomMenu(menuItemGame); 
 
-[\[Top\]](#Top)
-<a name="GameIntegration"/>
+[\[Top\]](#summary)
 
 ### Game integration 
 
@@ -659,8 +600,7 @@ To use the dialogues in your game, you will need to implement two main parts :
 - the dialogue parser, to read the json files in your game. 
 - the dialogue interpreter, to run the dialogues in your game. 
 
-[\[Top\]](#Top)
-<a name="DialogueParser"/>
+[\[Top\]](#summary)
 
 #### Dialogue parser 
 
@@ -670,8 +610,7 @@ engine using csharp, such as Unity. Solutions for json parsers ion other platfor
 
 The parsing will essentially consists in a loop on the ListNodes. Each node and attribute will have its type defined by the property "$type", allowing you to instanciate objects matching those types. 
 
-[\[Top\]](#Top)
-<a name="DialogueInterpreter"/>
+[\[Top\]](#summary)
 
 #### Dialogue interpreter 
 
@@ -688,13 +627,12 @@ The speaker is the actor actually speaking the sentence's text. The listener is 
 Your design should include a central manager for all the dialogues played. It would be in charge of starting, updating and closing the dialogues, as well as handling priorities on UI and voicing. 
 An interactive dialogue should always be unique and have top priority, while several ambiant dialogues may be played simultaneously. 
 
-[\[Top\]](#Top)
-<a name="Samples"/>
+[\[Top\]](#summary)
 
 #### Samples 
 
 You can find integration samples in Docs/Samples. 
 You will find code extracts and instructions for the Unreal part, and the build sample used for the DialogueEditor. 
 
-[\[Top\]](#Top)
+[\[Top\]](#summary)
 
