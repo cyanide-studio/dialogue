@@ -90,7 +90,7 @@ Dialogues are accessed by their names, not their path. This means that every dia
 Several exporters have been implemented to provide the necessary data for external tools.
 
 [\[Top\]](#Top)
-<a name="DialoguesStructure"/>
+[\[Top\]](#dialogue-editor-10)
 
 ### Dialogues structure
 
