@@ -20,7 +20,7 @@ Documentation
     - [Dialogue edition](#dialogue-edition)
         - [Context menu](#context-menu)
         - [Node properties](#node-properties)
-        - [Node attributes (Conditions, Actions and Flags)](#node-attributes)
+        - [Node attributes (Conditions, Actions and Flags)](#node-attributes-conditions-actions-and-flags)
         - [Filters](#filters)
         - [Constants](#constants)
     - [Project edition](#project-edition)
