@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DialogueEditor
+﻿namespace DialogueEditor
 {
-    static public class EditorVersion
+    public static class EditorVersion
     {
         public const int Major = 1;
         public const int Minor = 0;
         public const int Patch = 0;
 
-        static public string GetVersion()
+        public static string GetVersion()
         {
             return string.Format("{0}.{1}.{2}", Major, Minor, Patch);
         }

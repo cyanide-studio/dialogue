@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DialogueEditor
@@ -44,10 +40,10 @@ namespace DialogueEditor
             form.TopMost = true;
 
             //form.TopLevel = false;
-            //EditorCore.MainWindow.Controls.Add(form);
+            //ProjectController.MainWindow.Controls.Add(form);
 
             listBoxAutoComplete = new ListBox();
-            listBoxAutoComplete.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            listBoxAutoComplete.BorderStyle = BorderStyle.FixedSingle;
             //listBoxAutoComplete.ImageList = this.imageList1;
             //listBoxAutoComplete.Name = "listBoxAutoComplete";
             //listBoxAutoComplete.Size = new System.Drawing.Size(170, 170);
@@ -56,8 +52,8 @@ namespace DialogueEditor
             listBoxAutoComplete.DrawMode = DrawMode.OwnerDrawFixed;
             listBoxAutoComplete.IntegralHeight = false;
             listBoxAutoComplete.DrawItem += new DrawItemEventHandler(OnListBoxAutoCompleteDrawItem);
-            listBoxAutoComplete.KeyDown += new System.Windows.Forms.KeyEventHandler(OnListBoxAutoCompleteKeyDown);
-            listBoxAutoComplete.DoubleClick += new System.EventHandler(OnListBoxAutoCompleteDoubleClick);
+            listBoxAutoComplete.KeyDown += new KeyEventHandler(OnListBoxAutoCompleteKeyDown);
+            listBoxAutoComplete.DoubleClick += new EventHandler(OnListBoxAutoCompleteDoubleClick);
             listBoxAutoComplete.LostFocus += new EventHandler(OnListBoxAutoCompleteLostFocus);
             //listBoxAutoComplete.SelectedIndexChanged += new System.EventHandler(this.listBoxAutoComplete_SelectedIndexChanged);
 
@@ -65,8 +61,8 @@ namespace DialogueEditor
             form.Controls.Add(listBoxAutoComplete);
 
             // Size & Position
-            listBoxAutoComplete.Dock = System.Windows.Forms.DockStyle.Fill; //Use left-bottom-right when adding a textbox for search
-            form.Size = new System.Drawing.Size(240, 320);
+            listBoxAutoComplete.Dock = DockStyle.Fill; //Use left-bottom-right when adding a textbox for search
+            form.Size = new Size(240, 320);
 
             // Data
             listBoxAutoComplete.DataSource = source;
@@ -97,7 +93,7 @@ namespace DialogueEditor
 
             point.Y += 50;
             //point.Y += (int)Math.Ceiling(textBox.Font.GetHeight()) + 2;
-            point.X = Math.Min(point.X, EditorCore.MainWindow.Left + EditorCore.MainWindow.Width - listBoxAutoComplete.Size.Width - 50);
+            point.X = Math.Min(point.X, ProjectController.MainWindow.Left + ProjectController.MainWindow.Width - listBoxAutoComplete.Size.Width - 50);
 
             form.Show();
             form.BringToFront();

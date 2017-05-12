@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using DialogueEditor;
 
 namespace DemoBuild
@@ -30,7 +25,7 @@ namespace DemoBuild
 
         public override string GetDisplayText()
         {
-            return "[Add Honor]" + " [" + Value + "]" + " [" + ResourcesHandler.Project.GetActorName(Character) + "]";
+            return "[Add Honor]" + " [" + Value + "]" + " [" + ProjectController.Project.GetActorName(Character) + "]";
         }
     }
 }

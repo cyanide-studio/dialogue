@@ -1,30 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DialogueEditor
 {
     public partial class DialogVoiceActors : Form
     {
-        private DocumentProject document;
+        private DocumentProjectView document;
         private VoiceActor actor;
 
         private bool ready = false;
 
-        public DialogVoiceActors(DocumentProject inDocument, VoiceActor inActor)
+        public DialogVoiceActors(DocumentProjectView inDocument, VoiceActor inActor)
         {
             InitializeComponent();
 
             document = inDocument;
             actor = inActor;
 
-            listBoxLanguages.DataSource = new BindingSource(ResourcesHandler.Project.ListLanguages, null);
+            listBoxLanguages.DataSource = new BindingSource(ProjectController.Project.ListLanguages, null);
             listBoxLanguages.DisplayMember = "Name";
 
             ready = true;

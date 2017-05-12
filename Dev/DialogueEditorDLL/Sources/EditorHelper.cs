@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Drawing;
 using System.Globalization;
-using System.Windows.Forms;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using DialogueEditor.Properties;
 
 namespace DialogueEditor
 {
@@ -62,27 +62,27 @@ namespace DialogueEditor
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return (sourceType == typeof(string));
+            return sourceType == typeof(string);
         }
 
         public override bool CanConvertTo(ITypeDescriptorContext context, Type sourceType)
         {
-            return (sourceType == typeof(string));
+            return sourceType == typeof(string);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            return ResourcesHandler.Project.GetActorID(value as string);
+            return ProjectController.Project.GetActorID(value as string);
         }
 
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            return ResourcesHandler.Project.GetActorName(value as string);
+            return ProjectController.Project.GetActorName(value as string);
         }
 
-        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            return new StandardValuesCollection(ResourcesHandler.Project.GetAllActorIDs());
+            return new StandardValuesCollection(ProjectController.Project.GetAllActorIDs());
         }
     }
 
@@ -102,12 +102,12 @@ namespace DialogueEditor
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return (sourceType == typeof(string));
+            return sourceType == typeof(string);
         }
 
         public override bool CanConvertTo(ITypeDescriptorContext context, Type sourceType)
         {
-            return (sourceType == typeof(string));
+            return sourceType == typeof(string);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
@@ -120,7 +120,7 @@ namespace DialogueEditor
             return EditorCore.GetCustomListValueFromKey(CustomListName, value as string);
         }
 
-        public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
             return new StandardValuesCollection(EditorCore.CustomLists[CustomListName].Keys.ToList());
         }
@@ -132,57 +132,57 @@ namespace DialogueEditor
         public int sourceNodeID = DialogueNode.ID_NULL;
     }
 
-    static public class EditorHelper
+    public static class EditorHelper
     {
         //--------------------------------------------------------------------------------------------------------------
         // Public vars
 
         ///<summary> Copy/Paste helper </summary>
-        static public object Clipboard = null;
-        static public ClipboardInfos ClipboardInfos = null;
+        public static object Clipboard = null;
+        public static ClipboardInfos ClipboardInfos = null;
 
         ///<summary> Current Language used on documents edition </summary>
-        static public Language CurrentLanguage = null;
+        public static Language CurrentLanguage = null;
 
         ///<summary> Current Font used on documents edition </summary>
-        static public System.Drawing.Font CurrentFont = null;   //TODO: store on EditorSettings
+        public static Font CurrentFont = null;   //TODO: store on EditorSettings
 
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
 
-        static public string GetProjectDirectory()
+        public static string GetProjectDirectory()
         {
-            if (ResourcesHandler.Project != null)
-                return Path.GetFullPath(Path.Combine(System.Environment.CurrentDirectory, ResourcesHandler.Project.GetFilePath()));
+            if (ProjectController.Project != null)
+                return Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, ProjectController.Project.GetFilePath()));
             return "";
         }
 
-        static public string GetPrettyNodeID(Dialogue dialogue, DialogueNode node)
+        public static string GetPrettyNodeID(Dialogue dialogue, DialogueNode node)
         {
-            return String.Format("{0}_{1}", dialogue.GetName(), node.ID.ToString());
+            return string.Format("{0}_{1}", dialogue.GetName(), node.ID.ToString());
         }
 
-        static public string GetPrettyNodeVoicingID(Dialogue dialogue, DialogueNode node)
+        public static string GetPrettyNodeVoicingID(Dialogue dialogue, DialogueNode node)
         {
-            return String.Format("VX_{0}_{1}", dialogue.GetName(), node.ID.ToString());
+            return string.Format("VX_{0}_{1}", dialogue.GetName(), node.ID.ToString());
         }
 
-        static public string SanitizeText(string text)
+        public static string SanitizeText(string text)
         {
-            text = text.Replace("\t", String.Empty);
-            text = text.Replace("\r", String.Empty);
+            text = text.Replace("\t", string.Empty);
+            text = text.Replace("\r", string.Empty);
             text = text.Replace("\n", " ");     //Replace endlines with spaces before the trim, to keep a space between sentences but remove the trailing spaces.
             text = text.Trim();
 
             return text;
         }
 
-        static public string FormatTextEntry(string text, Language language)
+        public static string FormatTextEntry(string text, Language language)
         {
-            if (ResourcesHandler.Project != null)
+            if (ProjectController.Project != null)
             {
                 //TODO: Better parsing of Constants, this seems highly inefficient !
-                foreach (var constant in ResourcesHandler.Project.ListConstants)
+                foreach (var constant in ProjectController.Project.ListConstants)
                 {
                     if (language == null || language == EditorCore.LanguageWorkstring)
                     {
@@ -190,7 +190,7 @@ namespace DialogueEditor
                     }
                     else
                     {
-                        var entry = ResourcesHandler.Project.Translations.GetEntry(constant.ID, language);
+                        var entry = ProjectController.Project.Translations.GetEntry(constant.ID, language);
                         if (entry != null)
                         {
                             text = text.Replace("{" + constant.ID + "}", entry.Text);
@@ -201,7 +201,7 @@ namespace DialogueEditor
             return text;
         }
 
-        static public Dictionary<Utility.ETriBool, string> GetTriBoolDictionary(string undefined = "Undefined")
+        public static Dictionary<Utility.ETriBool, string> GetTriBoolDictionary(string undefined = "Undefined")
         {
             var dictTriBool = new Dictionary<Utility.ETriBool, string>();
             dictTriBool.Add(Utility.ETriBool.TB_undefined, undefined);
@@ -210,28 +210,28 @@ namespace DialogueEditor
             return dictTriBool;
         }
 
-        static public ImageList CreateDefaultImageList()
+        public static ImageList CreateDefaultImageList()
         {
             var imageList = new ImageList();
 
-            imageList.Images.Add("book", DialogueEditor.Properties.Resources.book);
-            imageList.Images.Add("inbox", DialogueEditor.Properties.Resources.inbox);
-            imageList.Images.Add("house", DialogueEditor.Properties.Resources.house);
-            imageList.Images.Add("folder", DialogueEditor.Properties.Resources.folder);
-            imageList.Images.Add("comment", DialogueEditor.Properties.Resources.comment);
-            imageList.Images.Add("add", DialogueEditor.Properties.Resources.add);
-            imageList.Images.Add("cog", DialogueEditor.Properties.Resources.cog);
-            imageList.Images.Add("lightning", DialogueEditor.Properties.Resources.lightning);
-            imageList.Images.Add("shield", DialogueEditor.Properties.Resources.shield);
-            imageList.Images.Add("note", DialogueEditor.Properties.Resources.note);
-            imageList.Images.Add("ArrowBlack", DialogueEditor.Properties.Resources.ArrowBlack);
-            imageList.Images.Add("DiamondBlack", DialogueEditor.Properties.Resources.DiamondBlack);
-            imageList.Images.Add("DotBlack", DialogueEditor.Properties.Resources.DotBlack);
+            imageList.Images.Add("book", Resources.book);
+            imageList.Images.Add("inbox", Resources.inbox);
+            imageList.Images.Add("house", Resources.house);
+            imageList.Images.Add("folder", Resources.folder);
+            imageList.Images.Add("comment", Resources.comment);
+            imageList.Images.Add("add", Resources.add);
+            imageList.Images.Add("cog", Resources.cog);
+            imageList.Images.Add("lightning", Resources.lightning);
+            imageList.Images.Add("shield", Resources.shield);
+            imageList.Images.Add("note", Resources.note);
+            imageList.Images.Add("ArrowBlack", Resources.ArrowBlack);
+            imageList.Images.Add("DiamondBlack", Resources.DiamondBlack);
+            imageList.Images.Add("DotBlack", Resources.DotBlack);
 
             return imageList;
         }
 
-        static public void SetNodeIcon(TreeNode node, ENodeIcon nodeIcon)
+        public static void SetNodeIcon(TreeNode node, ENodeIcon nodeIcon)
         {
             // Bind editor icons to actual register icons from the EditorCore.DefaultImageList
             string name = "";
@@ -264,16 +264,16 @@ namespace DialogueEditor
 
         public static void CheckDialogueErrors(Dialogue dialogue)
         {
-            Project project = ResourcesHandler.Project;
+            Project project = ProjectController.Project;
 
             if (!EditorCore.CustomLists["SceneTypes"].ContainsKey(dialogue.SceneType))
             {
-                EditorCore.LogError(String.Format("{0} - Unknown Scene Type : {1}", dialogue.GetName(), dialogue.SceneType), dialogue);
+                ProjectController.LogError(string.Format("{0} - Unknown Scene Type : {1}", dialogue.GetName(), dialogue.SceneType), dialogue);
             }
 
             if (!EditorCore.CustomLists["Cameras"].ContainsKey(dialogue.Camera))
             {
-                EditorCore.LogError(String.Format("{0} - Unknown Camera : {1}", dialogue.GetName(), dialogue.Camera), dialogue);
+                ProjectController.LogError(string.Format("{0} - Unknown Camera : {1}", dialogue.GetName(), dialogue.Camera), dialogue);
             }
 
             var usedIDs = new HashSet<int>();
@@ -282,7 +282,7 @@ namespace DialogueEditor
             {
                 if (usedIDs.Contains(node.ID))
                 {
-                    EditorCore.LogError(String.Format("{0} - Identical ID between two nodes : {1}", dialogue.GetName(), node.ID), dialogue, node);
+                    ProjectController.LogError(string.Format("{0} - Identical ID between two nodes : {1}", dialogue.GetName(), node.ID), dialogue, node);
                 }
                 else
                 {
@@ -296,13 +296,13 @@ namespace DialogueEditor
 
                     if (nodeSentence.SpeakerID == "")
                     {
-                        EditorCore.LogError(String.Format("{0} {1} - Sentence has no Speaker", dialogue.GetName(), node.ID), dialogue, node);
+                        ProjectController.LogError(string.Format("{0} {1} - Sentence has no Speaker", dialogue.GetName(), node.ID), dialogue, node);
                     }
                     else
                     {
                         if (project.GetActorFromID(nodeSentence.SpeakerID) == null)
                         {
-                            EditorCore.LogError(String.Format("{0} {1} - Sentence has an invalid Speaker : {2}", dialogue.GetName(), node.ID, nodeSentence.SpeakerID), dialogue, node);
+                            ProjectController.LogError(string.Format("{0} {1} - Sentence has an invalid Speaker : {2}", dialogue.GetName(), node.ID, nodeSentence.SpeakerID), dialogue, node);
                         }
                         else
                         {
@@ -314,7 +314,7 @@ namespace DialogueEditor
                     {
                         if (project.GetActorFromID(nodeSentence.ListenerID) == null)
                         {
-                            EditorCore.LogError(String.Format("{0} {1} - Sentence has an invalid Listener : {2}", dialogue.GetName(), node.ID, nodeSentence.ListenerID), dialogue, node);
+                            ProjectController.LogError(string.Format("{0} {1} - Sentence has an invalid Listener : {2}", dialogue.GetName(), node.ID, nodeSentence.ListenerID), dialogue, node);
                         }
                         else if (validSpeaker)
                         {
@@ -323,19 +323,19 @@ namespace DialogueEditor
 
                             if (speaker == listener)
                             {
-                                EditorCore.LogError(String.Format("{0} {1} - Listener is also Speaker", dialogue.GetName(), node.ID), dialogue, node);
+                                ProjectController.LogError(string.Format("{0} {1} - Listener is also Speaker", dialogue.GetName(), node.ID), dialogue, node);
                             }
                             else
                             {
-                                if (speaker.VoiceKit != String.Empty)
+                                if (speaker.VoiceKit != string.Empty)
                                 {
                                     if (speaker.VoiceKit == listener.VoiceKit)
                                     {
-                                        EditorCore.LogWarning(String.Format("{0} {1} - Speaker and Listener have the same Voice Kit", dialogue.GetName(), node.ID), dialogue, node);
+                                        ProjectController.LogWarning(string.Format("{0} {1} - Speaker and Listener have the same Voice Kit", dialogue.GetName(), node.ID), dialogue, node);
                                     }
                                     else if (project.GetVoiceActorNameFromKit(speaker.VoiceKit) == project.GetVoiceActorNameFromKit(listener.VoiceKit))
                                     {
-                                        EditorCore.LogWarning(String.Format("{0} {1} - Speaker and Listener have the same Voice Actor", dialogue.GetName(), node.ID), dialogue, node);
+                                        ProjectController.LogWarning(string.Format("{0} {1} - Speaker and Listener have the same Voice Actor", dialogue.GetName(), node.ID), dialogue, node);
                                     }
                                 }
                             }
@@ -344,7 +344,7 @@ namespace DialogueEditor
 
                     if (nodeSentence.Sentence.Length > project.MaxLengthSentence)
                     {
-                        EditorCore.LogWarning(String.Format("{0} {1} - Sentence has too many characters", dialogue.GetName(), node.ID), dialogue, node);
+                        ProjectController.LogWarning(string.Format("{0} {1} - Sentence has too many characters", dialogue.GetName(), node.ID), dialogue, node);
                     }
                 }
                 else if (node is DialogueNodeChoice)
@@ -353,7 +353,7 @@ namespace DialogueEditor
 
                     if (nodeChoice.Replies.Count == 0)
                     {
-                        EditorCore.LogError(String.Format("{0} {1} - Choice has no Reply", dialogue.GetName(), node.ID), dialogue, node);
+                        ProjectController.LogError(string.Format("{0} {1} - Choice has no Reply", dialogue.GetName(), node.ID), dialogue, node);
                     }
                 }
                 else if (node is DialogueNodeReply)
@@ -362,7 +362,7 @@ namespace DialogueEditor
 
                     if (nodeReply.Reply.Length > project.MaxLengthReply)
                     {
-                        EditorCore.LogWarning(String.Format("{0} {1} - Reply has too many characters", dialogue.GetName(), node.ID), dialogue, node);
+                        ProjectController.LogWarning(string.Format("{0} {1} - Reply has too many characters", dialogue.GetName(), node.ID), dialogue, node);
                     }
                 }
                 else if (node is DialogueNodeGoto)
@@ -371,7 +371,7 @@ namespace DialogueEditor
 
                     if (nodeGoto.Goto == null)
                     {
-                        EditorCore.LogError(String.Format("{0} {1} - Goto has no Target", dialogue.GetName(), node.ID), dialogue, node);
+                        ProjectController.LogError(string.Format("{0} {1} - Goto has no Target", dialogue.GetName(), node.ID), dialogue, node);
                     }
                 }
                 else if (node is DialogueNodeBranch)
@@ -380,7 +380,7 @@ namespace DialogueEditor
 
                     if (nodeBranch.Branch == null)
                     {
-                        EditorCore.LogError(String.Format("{0} {1} - Branch has no Target", dialogue.GetName(), node.ID), dialogue, node);
+                        ProjectController.LogError(string.Format("{0} {1} - Branch has no Target", dialogue.GetName(), node.ID), dialogue, node);
                     }
                 }
             }
