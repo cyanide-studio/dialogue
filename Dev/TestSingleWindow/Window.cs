@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
+﻿using System.Windows.Forms;
 using DialogueEditor;
-
 
 namespace TestSingleWindow
 {
@@ -19,14 +9,14 @@ namespace TestSingleWindow
         {
             InitializeComponent();
 
-            //Dialogue pDialogue = ResourcesHandler.CreateEmptyDialogueInstance("TestDialogue");    //This creates an empty document (no root !)
-            Dialogue dialogue = ResourcesHandler.CreateDialogueInstance("TestDialogue");           //This creates a document with a root, ready to go
+            //Dialogue dialogue = ProjectController.CreateDialogueInstance("TestDialogue", true);   //This creates an empty document (no root !)
+            Dialogue dialogue = ProjectController.CreateDialogueInstance("TestDialogue");           //This creates a document with a root, ready to go
 
-            EditorCore.Properties = new PanelProperties();
-            EditorCore.Properties.Owner = this;
-            EditorCore.Properties.Show();
+            ProjectController.CreateCustomProperties(this);
 
-            DocumentDialogue documentDialogue = new DocumentDialogue(dialogue);
+            DialogueController dialogueController = new DialogueController(dialogue);
+            DocumentDialogueTreeView documentDialogue = new DocumentDialogueTreeView(dialogueController);
+            dialogueController.AddView(documentDialogue);
             documentDialogue.Owner = this;
             documentDialogue.Show();
         }

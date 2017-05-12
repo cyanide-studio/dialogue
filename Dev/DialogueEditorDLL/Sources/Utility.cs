@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using System.IO;
 
 namespace DialogueEditor
 {
-    static public class Utility
+    public static class Utility
     {
         //--------------------------------------------------------------------------------------------------------------
         // Enums
@@ -23,12 +18,12 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
 
-        static public string GetRelativePathFromCurrentDir(string file)
+        public static string GetRelativePathFromCurrentDir(string file)
         {
-            return GetRelativePath(file, System.Environment.CurrentDirectory);
+            return GetRelativePath(file, Environment.CurrentDirectory);
         }
 
-        static public string GetRelativePath(string file, string folder)
+        public static string GetRelativePath(string file, string folder)
         {
             Uri pathUri = new Uri(file);
             if (!folder.EndsWith(Path.DirectorySeparatorChar.ToString()))
@@ -39,7 +34,7 @@ namespace DialogueEditor
             return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('/', Path.DirectorySeparatorChar));
         }
 
-        static public bool IsFileLocked(string path)
+        public static bool IsFileLocked(string path)
         {
             try
             {
@@ -56,32 +51,32 @@ namespace DialogueEditor
             return false;
         }
 
-        static public DateTime GetCurrentTime()
+        public static DateTime GetCurrentTime()
         {
             return DateTime.UtcNow;
         }
 
-        static public string GetCurrentTimeAsString()
+        public static string GetCurrentTimeAsString()
         {
             return GetTimeAsString(DateTime.UtcNow);
         }
 
-        static public string GetTimeAsString(DateTime date)
+        public static string GetTimeAsString(DateTime date)
         {
             return date.ToString("HH:mm:ss");
         }
 
-        static public string GetCurrentDateAsString()
+        public static string GetCurrentDateAsString()
         {
             return GetDateAsString(DateTime.UtcNow);
         }
 
-        static public string GetDateAsString(DateTime date)
+        public static string GetDateAsString(DateTime date)
         {
             return date.ToString("yyyy-MM-dd_HH-mm-ss");
         }
 
-        static public ETriBool GetTriBoolFromString(string value)
+        public static ETriBool GetTriBoolFromString(string value)
         {
             if (value == "true")
                 return ETriBool.TB_true;
@@ -90,7 +85,7 @@ namespace DialogueEditor
             return ETriBool.TB_undefined;
         }
 
-        static public string GetStringFromTriBool(ETriBool value)
+        public static string GetStringFromTriBool(ETriBool value)
         {
             if (value == ETriBool.TB_true)
                 return "true";

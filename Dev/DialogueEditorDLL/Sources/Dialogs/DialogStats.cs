@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace DialogueEditor
@@ -31,7 +26,7 @@ namespace DialogueEditor
 
             var stats = ExporterStats.GatherStats(dialogues, language, DateTime.MinValue, workstringOnly, false);
 
-            using (System.IO.StringWriter writer = new System.IO.StringWriter())
+            using (StringWriter writer = new StringWriter())
             {
                 ExporterStats.WriteStats(writer, stats, languages, workstringOnly, false);
 
