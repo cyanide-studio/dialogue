@@ -20,6 +20,13 @@
         }
         #endregion
 
+        #region Init
+        public virtual void InitView()
+        {
+            
+        }
+        #endregion
+
         #region DocumentView overrides
         public override void RefreshTitle()
         {

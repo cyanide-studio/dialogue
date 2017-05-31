@@ -56,17 +56,7 @@ namespace DialogueEditor
         {
             if (nodeFrom != null && nodeFrom is DialogueNodeReply)
             {
-                foreach (var node in currentDialogueController.Dialogue.ListNodes)
-                {
-                    if (node is DialogueNodeChoice)
-                    {
-                        if (((DialogueNodeChoice)node).Replies.Contains(nodeFrom))
-                        {
-                            nodeFrom = node;
-                            break;
-                        }
-                    }
-                }
+                nodeFrom = currentDialogueController.Dialogue.GetChoiceNode((nodeFrom as DialogueNodeReply));
             }
 
             if (nodeFrom != null  && !(nodeFrom is DialogueNodeRoot))

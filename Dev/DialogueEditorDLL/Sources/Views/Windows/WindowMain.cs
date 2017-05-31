@@ -644,7 +644,7 @@ namespace DialogueEditor
                     ProjectController.LogInfo("Reloaded project file");
                 }
             }
-            else if (dockPanel.ActiveDocument is DocumentDialogueTreeView)
+            else if (dockPanel.ActiveDocument is DocumentDialogueTreeView)  // TODO: fix about other views
             {
                 var document = dockPanel.ActiveDocument as DocumentDialogueTreeView;
                 document.DialogueController.ResolvePendingDirty();

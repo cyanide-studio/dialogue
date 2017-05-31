@@ -465,6 +465,7 @@ namespace DialogueEditor
             }
 
             DocumentDialogueView newDocument = (T) Activator.CreateInstance(typeof(T), dialogueController);
+            newDocument.InitView();
             MainWindow.ShowDocument(newDocument);
             if (newDocument is DocumentDialogueTreeView)   // TODO: SelectNode refactoring...
                 (newDocument as DocumentDialogueTreeView).SelectNode(node);
