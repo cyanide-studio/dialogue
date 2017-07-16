@@ -284,6 +284,22 @@ namespace DialogueEditor
             ParseNodeChildren(nodeFrom, true, ref dependendingNodes);
         }
 
+        public DialogueNodeChoice GetChoiceNode(DialogueNodeReply nodeReply)
+        {
+            foreach (var node in ListNodes)
+            {
+                if (node is DialogueNodeChoice)
+                {
+                    DialogueNodeChoice nodeChoice = node as DialogueNodeChoice;
+                    if (nodeChoice.Replies.Contains(nodeReply))
+                    {
+                        return nodeChoice;
+                    }
+                }
+            }
+            return null;
+        }
+
         public void AddNode(DialogueNode newNode)
         {
             //Generate flat list of all children nodes, for easier parsing
@@ -320,8 +336,8 @@ namespace DialogueEditor
         private static void ParseNodeChildren(DialogueNode nodeFrom, bool onlyDependencies, ref List<DialogueNode> result)
         {
             //onlyDependencies allows to get all nodes that will be affected when removing or moving nodeFrom.
-            //If nodeFrom is a Reply, all the Next nodes are depepndencies.
-            //If nodeFrom is a Choice or Branch, the direct Next nodes are NOT depepndencies.
+            //If nodeFrom is a Reply, all the Next nodes are dependencies.
+            //If nodeFrom is a Choice or Branch, the direct Next nodes are NOT dependencies.
 
             var node = nodeFrom;
             while (node != null)

@@ -129,7 +129,6 @@ namespace DialogueEditor
             }
         }
         
-
         private void RefreshViews(DocumentDialogueView originView = null)
         {
             // Tell the views to fully refresh
@@ -150,6 +149,16 @@ namespace DialogueEditor
             else
                 SetDirty();
             RefreshDialogueNode(dialogueNode, originView, preciseElements);
+        }
+
+        public void NotifyModifiedDialogue(bool modificationStillInProgress = false, DocumentDialogueView originView = null, List<string> preciseElements = null)
+        {
+            // Very blunt
+            if (modificationStillInProgress)
+                SetPendingDirty();
+            else
+                SetDirty();
+            RefreshViews(originView);
         }
 
         public void NotifyModifiedDialogueData(bool modificationStillInProgress = false, DocumentDialogueView originView = null, List<string> preciseElements = null)
@@ -449,34 +458,19 @@ namespace DialogueEditor
         #region Dialogue Node events
         public DialogueNodeSentence AddNodeSentence(DialogueNode parentNode, bool branch, string speakerID = null, string listenerID = null, DocumentDialogueView originView = null)
         {
-            if (branch && !(parentNode is DialogueNodeBranch))
-                return null;
+            DialogueNodeSentence newNode = AddNodeRaw<DialogueNodeSentence>(parentNode, branch, originView);
 
-            DialogueNodeSentence newNode = new DialogueNodeSentence();
-            Dialogue.AddNode(newNode);
-
-            if (branch)
+            if (newNode != null)
             {
-                newNode.Next = (parentNode as DialogueNodeBranch).Branch;
-                (parentNode as DialogueNodeBranch).Branch = newNode;
+                if (speakerID != null)
+                    newNode.SpeakerID = speakerID;
+                if (listenerID != null)
+                    newNode.ListenerID = listenerID;
             }
-            else
-            {
-                newNode.Next = parentNode.Next;
-                parentNode.Next = newNode;
-            }
-            if (speakerID != null)
-                newNode.SpeakerID = speakerID;
-            if (listenerID != null)
-                newNode.ListenerID = listenerID;
-
-            SetDirty();
-            RefreshViews(originView);
-            EditNode(newNode, false, originView);
-            return newNode;
+            return (DialogueNodeSentence)(FinalizeAddNode(newNode, originView));
         }
 
-        public DialogueNodeReply AddNodeReply(DialogueNode choiceNode, DocumentDialogueView originView = null)
+        public DialogueNodeReply AddNodeReplyRaw(DialogueNode choiceNode, DocumentDialogueView originView = null)
         {
             // NB: Always add as last reply (for now)
 
@@ -491,15 +485,23 @@ namespace DialogueEditor
 
             (choiceNode as DialogueNodeChoice).Replies.Add(newNode);
 
-            SetDirty();
-            RefreshViews(originView);
-            EditNode(newNode);
             return newNode;
         }
 
-        public DialogueNodeChoice AddNodeChoice(DialogueNode parentNode, bool branch, DocumentDialogueView originView = null)
+        public DialogueNodeReply AddNodeReply(DialogueNode choiceNode, DocumentDialogueView originView = null)
         {
-            return AddNode<DialogueNodeChoice>(parentNode, branch, originView);
+            return (DialogueNodeReply)(FinalizeAddNode(AddNodeReplyRaw(choiceNode, originView)));
+        }
+
+        public DialogueNodeChoice AddNodeChoice(DialogueNode parentNode, bool branch, DocumentDialogueView originView = null, int nReplies = 0)
+        {
+            DialogueNodeChoice newNode = AddNodeRaw<DialogueNodeChoice>(parentNode, branch, originView);
+
+            for (int i = 0; i < nReplies; i++)
+            {
+                AddNodeReplyRaw(newNode, originView);
+            }
+            return (DialogueNodeChoice)(FinalizeAddNode(newNode, originView));
         }
 
         public DialogueNodeBranch AddNodeBranch(DialogueNode parentNode, bool branch, DocumentDialogueView originView = null)
@@ -512,7 +514,7 @@ namespace DialogueEditor
             return AddNode<DialogueNodeGoto>(parentNode, branch, originView);
         }
 
-        private T AddNode<T>(DialogueNode parentNode, bool branch, DocumentDialogueView originView = null) where T : DialogueNode, new()
+        private T AddNodeRaw<T>(DialogueNode parentNode, bool branch, DocumentDialogueView originView = null) where T : DialogueNode, new()
         {
             if (branch && !(parentNode is DialogueNodeBranch))
                 return null;
@@ -520,21 +522,37 @@ namespace DialogueEditor
             T newNode = new T();
             Dialogue.AddNode(newNode);
 
-            if (branch)
+            if (parentNode != null)
             {
-                newNode.Next = (parentNode as DialogueNodeBranch).Branch;
-                (parentNode as DialogueNodeBranch).Branch = newNode;
+                if (branch)
+                {
+                    newNode.Next = (parentNode as DialogueNodeBranch).Branch;
+                    (parentNode as DialogueNodeBranch).Branch = newNode;
+                }
+                else
+                {
+                    newNode.Next = parentNode.Next;
+                    parentNode.Next = newNode;
+                }
             }
-            else
-            {
-                newNode.Next = parentNode.Next;
-                parentNode.Next = newNode;
-            }
+
+            return newNode;
+        }
+
+        private DialogueNode FinalizeAddNode(DialogueNode newNode, DocumentDialogueView originView = null)
+        {
+            if (newNode == null)
+                return null;
 
             SetDirty();
             RefreshViews(originView);
             EditNode(newNode, false, originView);
             return newNode;
+        }
+
+        private T AddNode<T>(DialogueNode parentNode, bool branch, DocumentDialogueView originView = null) where T : DialogueNode, new()
+        {
+            return (T)(FinalizeAddNode(AddNodeRaw<T>(parentNode, branch, originView), originView));
         }
 
         public bool RemoveNode(DialogueNode nodeToRemove, DocumentDialogueView originView = null)

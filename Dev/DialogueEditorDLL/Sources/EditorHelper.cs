@@ -27,6 +27,7 @@ namespace DialogueEditor
         Reply,
         Goto,
         Branch,
+        VirtualGoto,  // Cycle (defined in advanced view e.g. Graph) detected
 
         ListRootConditions,
         ListRootActions,
@@ -247,6 +248,8 @@ namespace DialogueEditor
                 case ENodeIcon.Reply:               name = "DotBlack";      break;
                 case ENodeIcon.Goto:                name = "ArrowBlack";    break;
                 case ENodeIcon.Branch:              name = "DiamondBlack";  break;
+
+                case ENodeIcon.VirtualGoto:         name = "ArrowBlack";    break;
 
                 case ENodeIcon.ListRootConditions:  name = "shield";        break;
                 case ENodeIcon.ListRootActions:     name = "lightning";     break;

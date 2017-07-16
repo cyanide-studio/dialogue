@@ -61,6 +61,10 @@ namespace DialogueEditor
         protected int copyReference = -1;
         protected Font font = null;
         protected TreeMemo treeMemo = null;
+        // Dictionary node ID => TreeNode (the int in the tuple is the number of (direct) cycles detected towards this node)
+        protected Dictionary<int, Tuple<TreeNode, int>> treeMap = null;
+        // TODO: maybe remove treeMap as a class variable as it's only used during BuildTree
+        // (this would involve passing it as a parameter through a few methods though)
         #endregion
 
         #region Constructor
@@ -77,8 +81,15 @@ namespace DialogueEditor
             tree.DrawMode = TreeViewDrawMode.OwnerDrawText;
             tree.DrawNode += OnTreeViewDrawNode;
 
-            DialogueController.SaveState();
+            treeMap = new Dictionary<int, Tuple<TreeNode, int>>();
 
+            DialogueController.SaveState(); // TODO: really??
+        }
+        #endregion
+
+        #region Init
+        public override void InitView()
+        {
             ResyncDisplayOptions();
             RebuildTree(false);
             SelectRootNode();
@@ -170,6 +181,7 @@ namespace DialogueEditor
 
         private void BuildTree()
         {
+            treeMap.Clear();
             if (DialogueController.Dialogue.RootNode != null)
             {
                 TreeNode newTreeNodeRoot = InsertTreeNode(DialogueController.Dialogue.RootNode, ENodeIcon.Dialogue);
@@ -182,18 +194,40 @@ namespace DialogueEditor
         protected TreeNode InsertTreeNode(DialogueNode node, ENodeIcon nodeIcon, TreeNode parentTreeNode = null, int insertIndex = -1)
         {
             TreeNode newTreeNode = null;
-            if (parentTreeNode == null)
+            if (treeMap.ContainsKey(node.ID))
             {
-                newTreeNode = tree.Nodes.Add(GetNodeKey(node.ID), "");
+                string nodeKey = $"Cycle_{treeMap[node.ID].Item2}_to_{GetNodeKey(node.ID)}";
+                if (parentTreeNode == null)
+                {
+                    newTreeNode = tree.Nodes.Add(nodeKey, "");
+                }
+                else
+                {
+                    newTreeNode = parentTreeNode.Nodes.Insert(insertIndex, nodeKey, "");
+                }
+                newTreeNode.Tag = new NodeWrap(node);
+                newTreeNode.ContextMenuStrip = null; // keeping interactivity minimal for those "virtual goto" nodes
+                EditorHelper.SetNodeIcon(newTreeNode, nodeIcon);
+                treeMap[node.ID] = new Tuple<TreeNode, int>(treeMap[node.ID].Item1, treeMap[node.ID].Item2 + 1);
+                return newTreeNode;
             }
             else
             {
-                newTreeNode = parentTreeNode.Nodes.Insert(insertIndex, GetNodeKey(node.ID), "");
+                string nodeKey = GetNodeKey(node.ID);
+                if (parentTreeNode == null)
+                {
+                    newTreeNode = tree.Nodes.Add(nodeKey, "");
+                }
+                else
+                {
+                    newTreeNode = parentTreeNode.Nodes.Insert(insertIndex, nodeKey, "");
+                }
+                newTreeNode.Tag = new NodeWrap(node);
+                newTreeNode.ContextMenuStrip = contextMenu;
+                EditorHelper.SetNodeIcon(newTreeNode, nodeIcon);
+                treeMap[node.ID] = new Tuple<TreeNode, int>(newTreeNode, 0);
+                return newTreeNode;
             }
-            newTreeNode.Tag = new NodeWrap(node);
-            newTreeNode.ContextMenuStrip = contextMenu;
-            EditorHelper.SetNodeIcon(newTreeNode, nodeIcon);
-            return newTreeNode;
         }
 
         private TreeNode AddTreeNodeChild(DialogueNode node, TreeNode parentTreeNode, bool noRecurs = false)
@@ -228,7 +262,13 @@ namespace DialogueEditor
                     ++insertIndex;
             }
 
-            if (node is DialogueNodeSentence)
+            if (treeMap.ContainsKey(node.ID))
+            {
+                // Cycle (defined in a more capable view) detected
+                // Displayed in the form of a very basic "Direct/virtual Goto" tree node
+                newTreeNode = InsertTreeNode(node, ENodeIcon.VirtualGoto, parentTreeNode, insertIndex);
+            }
+            else if (node is DialogueNodeSentence)
             {
                 newTreeNode = InsertTreeNode(node, ENodeIcon.Sentence, parentTreeNode, insertIndex);
 
@@ -505,9 +545,6 @@ namespace DialogueEditor
             newTreeNode = AddTreeNode(reply, treeNodeFrom, treeNodeFrom.LastNode, true);
             treeNodeFrom.Expand();
 
-            var nodeDialogueFrom = GetDialogueNode(treeNodeFrom) as DialogueNodeChoice;
-            nodeDialogueFrom.Replies.Add(reply);
-
             tree.EndUpdate();
             WIN32.ResumeRedraw(this);
             Refresh();
@@ -783,44 +820,59 @@ namespace DialogueEditor
 
             DialogueNode dialogueNode = GetDialogueNode(treeNode);
 
-            //Refresh Goto nodes targeting this node (only if not inside a recursive parsing)
-            if (!isTreeRefresh)
+            if (treeNode.Name.StartsWith("Cycle_"))
             {
-                List<DialogueNode> gotos = DialogueController.Dialogue.GetGotoReferencesOnNode(dialogueNode);
-                foreach (var nodeGoto in gotos)
-                    RefreshTreeNode_Impl(GetTreeNode(nodeGoto));
+                // Those nodes look almost like Gotos
+                treeNode.NodeFont = new Font(font, FontStyle.Italic);
+                treeNode.ForeColor = GetTreeNodeColorContent(dialogueNode);
+                treeNode.BackColor = tree.BackColor;
+                if (EditorCore.Settings.DisplayID)
+                    treeNode.Text = string.Format("Direct/virtual Goto > [{0}] {1}", dialogueNode.ID, GetTreeNodeTextContent(dialogueNode));
+                else
+                    treeNode.Text = string.Format("Direct/virtual Goto > {0}", GetTreeNodeTextContent(dialogueNode));
             }
-
-            //Style
-            FontStyle style = FontStyle.Regular;
-
-            if (dialogueNode is DialogueNodeRoot
-            ||  dialogueNode is DialogueNodeChoice
-            ||  dialogueNode is DialogueNodeGoto
-            ||  dialogueNode is DialogueNodeBranch)
+            else
             {
-                style |= FontStyle.Italic;
-            }
+                //Refresh Goto nodes targeting this node (only if not inside a recursive parsing)
+                if (!isTreeRefresh)
+                {
+                    List<DialogueNode> gotos = DialogueController.Dialogue.GetGotoReferencesOnNode(dialogueNode);
+                    foreach (var nodeGoto in gotos)
+                        RefreshTreeNode_Impl(GetTreeNode(nodeGoto));
+                }
 
-            if (DialogueController.Dialogue.IsNodeReferencedByGoto(dialogueNode))
-            {
-                style |= FontStyle.Bold;
-            }
+                //Style
+                FontStyle style = FontStyle.Regular;
 
-            Color color = GetTreeNodeColorContent(dialogueNode);
+                if (dialogueNode is DialogueNodeRoot
+                || dialogueNode is DialogueNodeChoice
+                || dialogueNode is DialogueNodeGoto
+                || dialogueNode is DialogueNodeBranch)
+                {
+                    style |= FontStyle.Italic;
+                }
 
-            treeNode.NodeFont = new Font(font, style);
-            treeNode.ForeColor = color;
-            treeNode.BackColor = tree.BackColor;
+                if (DialogueController.Dialogue.IsNodeReferencedByGoto(dialogueNode))
+                {
+                    style |= FontStyle.Bold;
+                }
 
-            //Text (I need to fill the line for the drag & drop to work)
-            {
-                string textID = GetTreeNodeTextID(dialogueNode);
-                string textAttributes = GetTreeNodeTextAttributes(dialogueNode);
-                string textActors = GetTreeNodeTextActors(dialogueNode);
-                string textContent = GetTreeNodeTextContent(dialogueNode);
+                Color color = GetTreeNodeColorContent(dialogueNode);
 
-                treeNode.Text = textID + textAttributes + textActors + textContent;
+                treeNode.NodeFont = new Font(font, style);
+                treeNode.ForeColor = color;
+                treeNode.BackColor = tree.BackColor;
+
+                //Text (I need to fill the line for the drag & drop to work)
+                {
+                    string textID = GetTreeNodeTextID(dialogueNode);
+                    string textAttributes = GetTreeNodeTextAttributes(dialogueNode);
+                    string textActors = GetTreeNodeTextActors(dialogueNode);
+                    string textContent = GetTreeNodeTextContent(dialogueNode);
+
+                    // NB: still gotta set a decent Text value even if OnTreeViewDrawNode kind of "overrides" it
+                    treeNode.Text = textID + textAttributes + textActors + textContent;
+                }
             }
         }
 
@@ -1033,6 +1085,7 @@ namespace DialogueEditor
 
         private void OnTreeViewDrawNode(object sender, DrawTreeNodeEventArgs e)
         {
+            // TODO: Refactoring between this and RefreshTreeNode_Impl
             e.DrawDefault = false;
 
             var node = e.Node;
@@ -1042,11 +1095,30 @@ namespace DialogueEditor
             if (nodeFont == null)
                 nodeFont = font;
 
-            // Retrieve texts
-            string textID = GetTreeNodeTextID(dialogueNode);
-            string textAttributes = GetTreeNodeTextAttributes(dialogueNode);
-            string textActors = GetTreeNodeTextActors(dialogueNode);
-            string textContent = GetTreeNodeTextContent(dialogueNode);
+            string textID = string.Empty;
+            string textAttributes = string.Empty;
+            string textActors = string.Empty;
+            string textContent = string.Empty;
+
+            if (node.Name.StartsWith("Cycle_"))
+            {
+                // Those nodes look almost like Gotos
+                node.NodeFont = new Font(font, FontStyle.Italic);
+                node.ForeColor = GetTreeNodeColorContent(dialogueNode);
+                node.BackColor = tree.BackColor;
+                if (EditorCore.Settings.DisplayID)
+                    textContent = string.Format("Direct/virtual Goto > [{0}] {1}", dialogueNode.ID, GetTreeNodeTextContent(dialogueNode));
+                else
+                    textContent = string.Format("Direct/virtual Goto > {0}", GetTreeNodeTextContent(dialogueNode));
+            }
+            else
+            {
+                // Retrieve texts
+                textID = GetTreeNodeTextID(dialogueNode);
+                textAttributes = GetTreeNodeTextAttributes(dialogueNode);
+                textActors = GetTreeNodeTextActors(dialogueNode);
+                textContent = GetTreeNodeTextContent(dialogueNode);
+            }
 
             // Highlight
             Rectangle bounds = node.Bounds;
@@ -1397,6 +1469,7 @@ namespace DialogueEditor
                     // We leave ourselves be fully refreshed (cf /*, this*/ above)
                 }
             }
+            // TODO: also handle undo/redo on other views or x-views
             else if (e.Control && e.KeyCode == Keys.Z)
             {
                 e.Handled = true;
