@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultBuild", "DefaultBuil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBuild", "DemoBuild\DemoBuild.csproj", "{6EE706EC-D9AC-45DD-ABCD-776A784C7A5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YourGameBuild", "YourGameBuild\YourGameBuild.csproj", "{0F325DEA-A0E3-4070-A479-CD343E5C13EF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{6EE706EC-D9AC-45DD-ABCD-776A784C7A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EE706EC-D9AC-45DD-ABCD-776A784C7A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EE706EC-D9AC-45DD-ABCD-776A784C7A5B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0F325DEA-A0E3-4070-A479-CD343E5C13EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F325DEA-A0E3-4070-A479-CD343E5C13EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F325DEA-A0E3-4070-A479-CD343E5C13EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F325DEA-A0E3-4070-A479-CD343E5C13EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
