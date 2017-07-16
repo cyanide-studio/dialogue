@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace DialogueEditor
 {
-    static public class Extensions
+    public static class Extensions
     {
         //--------------------------------------------------------------------------------------------------------------
         // List<>
 
-        static public IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
+        public static IList<T> Clone<T>(this IList<T> listToClone) where T : ICloneable
         {
             return listToClone.Select(item => (T)item.Clone()).ToList();
         }
@@ -20,7 +20,7 @@ namespace DialogueEditor
         // Dictionary<>
 
         //exemple : DialogueStats stats = Dialogues.GetOrAdd(dialogue.GetName(), (key) => new DialogueStats());
-        static public TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key, Func<TKey, TValue> valueFactory)
+        public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key, Func<TKey, TValue> valueFactory)
         {
             if (dict.ContainsKey(key))
             {
@@ -39,16 +39,16 @@ namespace DialogueEditor
 
         public static bool ContainsIgnoreCase(this string source, string toCheck)
         {
-            return (source.IndexOf(toCheck, StringComparison.OrdinalIgnoreCase) >= 0);
+            return source.IndexOf(toCheck, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         //--------------------------------------------------------------------------------------------------------------
         // ListBox
 
-        public static void RefreshItems(this System.Windows.Forms.ListBox list)
+        public static void RefreshItems(this ListBox list)
         {
-            typeof(System.Windows.Forms.ListBox).InvokeMember("RefreshItems", 
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.InvokeMethod,
+            typeof(ListBox).InvokeMember("RefreshItems", 
+                BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.InvokeMethod,
                 null, list, new object[] { }
             );
         }
@@ -56,7 +56,7 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // TreeNode
 
-        public static System.Windows.Forms.TreeNode GetRootNode(this System.Windows.Forms.TreeNode node)
+        public static TreeNode GetRootNode(this TreeNode node)
         {
             if (node != null)
             {
@@ -72,16 +72,16 @@ namespace DialogueEditor
         // TreeNodeCollection
 
         //Based on http://stackoverflow.com/questions/177277/how-to-get-a-list-of-all-child-nodes-in-a-treeview-in-net (Adrian Regan)
-        public static List<System.Windows.Forms.TreeNode> FlattenList(this System.Windows.Forms.TreeNode root, bool includeRoot)
+        public static List<TreeNode> FlattenList(this TreeNode root, bool includeRoot)
         {
-            List<System.Windows.Forms.TreeNode> list = new List<System.Windows.Forms.TreeNode>();
+            List<TreeNode> list = new List<TreeNode>();
             if (includeRoot)
             {
                 list.Add(root);
             }
 
-            Queue<System.Windows.Forms.TreeNode> queue = new Queue<System.Windows.Forms.TreeNode>();
-            foreach (System.Windows.Forms.TreeNode top in root.Nodes)
+            Queue<TreeNode> queue = new Queue<TreeNode>();
+            foreach (TreeNode top in root.Nodes)
             {
                 queue.Enqueue(top);
             }
@@ -93,7 +93,7 @@ namespace DialogueEditor
                 {
                     list.Add(node);
 
-                    foreach (System.Windows.Forms.TreeNode child in node.Nodes)
+                    foreach (TreeNode child in node.Nodes)
                     {
                         queue.Enqueue(child);
                     }

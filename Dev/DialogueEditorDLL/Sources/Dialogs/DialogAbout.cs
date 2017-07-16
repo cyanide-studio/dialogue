@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DialogueEditor
@@ -22,7 +15,7 @@ namespace DialogueEditor
             labelVersion.Text += EditorVersion.GetVersion();
             labelVersionProject.Text += EditorCore.VersionProject;
 
-            labelVersionNet.Text += System.Environment.Version.ToString();
+            labelVersionNet.Text += Environment.Version.ToString();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

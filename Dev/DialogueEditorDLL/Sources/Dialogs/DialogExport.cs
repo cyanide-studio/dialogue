@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DialogueEditor
@@ -41,7 +37,7 @@ namespace DialogueEditor
 
             Text = title;
 
-            var project = ResourcesHandler.Project;
+            var project = ProjectController.Project;
 
             checkedListBoxPackages.DataSource = new BindingSource(project.ListPackages, null);
             checkedListBoxPackages.DisplayMember = "Name";
@@ -111,7 +107,7 @@ namespace DialogueEditor
             UsePackagesDirectory = checkBoxPackagesDirectory.Checked;
 
             ExportFromDate = checkBoxExportFromDate.Checked;
-            DateFrom = (!ExportFromDate) ? new DateTime(0) : dateTimePicker.Value;
+            DateFrom = !ExportFromDate ? new DateTime(0) : dateTimePicker.Value;
         }
 
         private void OnEditPathClick(object sender, EventArgs e)
@@ -153,7 +149,7 @@ namespace DialogueEditor
 
         private void buttonChooseDialogues_Click(object sender, EventArgs e)
         {
-            var project = ResourcesHandler.Project;
+            var project = ProjectController.Project;
             string projectDirectory = EditorHelper.GetProjectDirectory();
             string exportDirectory = Path.Combine(projectDirectory, EditorCore.Settings.DirectoryExportDialogues);
 

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
-using System.IO;
-using System.Diagnostics;
 using DialogueEditor;
 
 namespace DemoBuild
@@ -16,8 +14,8 @@ namespace DemoBuild
         {
             // Handle float edition in PropertyGrid
             //http://visualhint.com/blog/70/how-to-format-a-number-with-a-specific-cultureinfonumberformatinfo-in-the-propert
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -56,20 +54,20 @@ namespace DemoBuild
             {
                 //...
                 // Here you can plug custom checks, using this kind of messages :
-                //EditorCore.LogError(String.Format("{0} {1} - Sentence has no Speaker", dialogue.GetName(), node.ID), dialogue, node);
+                //ProjectController.LogError(String.Format("{0} {1} - Sentence has no Speaker", dialogue.GetName(), node.ID), dialogue, node);
                 //...
             };
 
             //..............................................................
 
             // MainWindow
-            EditorCore.MainWindow.Init();
+            ProjectController.MainWindow.Init();
 
             // Add the event handler for handling UI thread exceptions to the event.
-            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(WIN32.ShowCrashMessage);
+            Application.ThreadException += new ThreadExceptionEventHandler(WIN32.ShowCrashMessage);
 
             // Run
-            Application.Run(EditorCore.MainWindow);
+            Application.Run(ProjectController.MainWindow);
         }
     }
 }
