@@ -61,7 +61,8 @@ namespace DialogueEditor
             statusTimer.Start();
 
 //#if DEBUG
-            //Debug code to generate 11250 dummy dialogues (337500 sentences)
+/*
+            //Debug code to generate 11250 dummy dialogues (337500 sentences, 6075000 words)
             //
             //  * USAGE
             //
@@ -75,8 +76,10 @@ namespace DialogueEditor
             // * NOTES
             //
             // it's faster in release ;)
+            // you must have a project already opened previously (LastProject != null)
+            // you can create a 'ProjectBig' folder to store this test project, its included in the git ignore file
             //
-            /*
+
             int indexFile = 0;
             for (int a = 1; a <= 15; ++a)
             {
@@ -90,7 +93,7 @@ namespace DialogueEditor
                     {
                         ++indexFile;
                         string file = string.Format("File_{0:000000}", indexFile);
-                        Dialogue dialogue = ResourcesHandler.CreateDialogueFile(Path.Combine(chapter, quest, file));
+                        Dialogue dialogue = ProjectController.CreateDialogueFile(Path.Combine(chapter, quest, file));
 
                         DialogueNode current = dialogue.RootNode;
                         for (int s = 1; s <= 30; ++s)
@@ -102,13 +105,13 @@ namespace DialogueEditor
 
                             current = sentence;
                         }
-
-                        ResourcesHandler.SaveDialogue(dialogue);
                     }
                 }
             }
-            EditorCore.ProjectExplorer.ResyncAllFiles();
-            */
+
+            ProjectController.SaveDialogues();
+            ProjectController.ResyncAllFiles();
+*/
 //#endif
         }
 
