@@ -176,8 +176,14 @@
     <Compile Include="Sources\Panels\PanelOutputLog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sources\Panels\PanelOutputLog.Designer.cs">
+    <Compile Include="Sources\Panels\PanelOutputLog.designer.cs">
       <DependentUpon>PanelOutputLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\Panels\PanelSearchResults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sources\Panels\PanelSearchResults.Designer.cs">
+      <DependentUpon>PanelSearchResults.cs</DependentUpon>
     </Compile>
     <Compile Include="Sources\Panels\Properties\FormPropertiesBranch.cs">
       <SubType>UserControl</SubType>
@@ -324,6 +330,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sources\Panels\PanelOutputLog.resx">
       <DependentUpon>PanelOutputLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\Panels\PanelSearchResults.resx">
+      <DependentUpon>PanelSearchResults.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sources\Panels\Properties\FormPropertiesBranch.resx">
       <DependentUpon>FormPropertiesBranch.cs</DependentUpon>

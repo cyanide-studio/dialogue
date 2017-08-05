@@ -28,6 +28,8 @@ namespace DialogueEditor
 
         private string lastClosedDialogue = "";
 
+        private bool ignoreMenuItemEvents = false;
+
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
 
@@ -198,12 +200,15 @@ namespace DialogueEditor
                 EditorCore.Properties.Show(dockPanel, DockState.DockRight);
             if (!dockPanel.Contains(EditorCore.OutputLog))
                 EditorCore.OutputLog.Show(dockPanel, DockState.DockBottom);
+            if (!dockPanel.Contains(EditorCore.SearchResults))
+                EditorCore.SearchResults.Show(dockPanel, DockState.DockBottom);
         }
 
         private void ResetPanels()
         {
             EditorCore.ProjectExplorer.Show(dockPanel, DockState.DockLeft);
             EditorCore.Properties.Show(dockPanel, DockState.DockRight);
+            EditorCore.SearchResults.Show(dockPanel, DockState.DockBottom);
             EditorCore.OutputLog.Show(dockPanel, DockState.DockBottom);
         }
 
@@ -213,8 +218,10 @@ namespace DialogueEditor
                 return EditorCore.ProjectExplorer;
             else if (persistString == typeof(PanelProperties).ToString())
                 return EditorCore.Properties;
-            else if (persistString == typeof(OutputLog).ToString())
+            else if (persistString == typeof(PanelOutputLog).ToString())
                 return EditorCore.OutputLog;
+            else if (persistString == typeof(PanelSearchResults).ToString())
+                return EditorCore.SearchResults;
             return null;
         }
 
@@ -413,6 +420,11 @@ namespace DialogueEditor
 
         public void SyncMenuItemFromPanel(DockContent panel)
         {
+            if (ignoreMenuItemEvents)
+                return;
+
+            ignoreMenuItemEvents = true;
+
             if (panel == EditorCore.ProjectExplorer)
             {
                 menuItemProjectExplorer.Checked = panel.Visible;
@@ -425,6 +437,12 @@ namespace DialogueEditor
             {
                 menuItemOutputLog.Checked = panel.Visible;
             }
+            else if (panel == EditorCore.SearchResults)
+            {
+                menuItemSearchResults.Checked = panel.Visible;
+            }
+
+            ignoreMenuItemEvents = false;
         }
 
         public void SyncPanelFromMenuItem(DockContent panel, ToolStripMenuItem menuItem)
@@ -573,20 +591,50 @@ namespace DialogueEditor
 
         private void OnCheckProjectExplorer(object sender, EventArgs e)
         {
+            if (ignoreMenuItemEvents)
+                return;
+            ignoreMenuItemEvents = true;
+
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
             SyncPanelFromMenuItem(EditorCore.ProjectExplorer, menuItem);
+
+            ignoreMenuItemEvents = false;
         }
 
         private void OnCheckProperties(object sender, EventArgs e)
         {
+            if (ignoreMenuItemEvents)
+                return;
+            ignoreMenuItemEvents = true;
+
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
             SyncPanelFromMenuItem(EditorCore.Properties, menuItem);
+
+            ignoreMenuItemEvents = false;
         }
 
         private void OnCheckOutputLog(object sender, EventArgs e)
         {
+            if (ignoreMenuItemEvents)
+                return;
+            ignoreMenuItemEvents = true;
+
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
             SyncPanelFromMenuItem(EditorCore.OutputLog, menuItem);
+
+            ignoreMenuItemEvents = false;
+        }
+
+        private void OnCheckSearchResults(object sender, EventArgs e)
+        {
+            if (ignoreMenuItemEvents)
+                return;
+            ignoreMenuItemEvents = true;
+
+            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+            SyncPanelFromMenuItem(EditorCore.SearchResults, menuItem);
+
+            ignoreMenuItemEvents = false;
         }
 
         private void OnResetPanels(object sender, EventArgs e)

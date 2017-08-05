@@ -18,7 +18,7 @@ namespace DialogueEditor
         Error,
     };
 
-    public partial class OutputLog : DockContent
+    public partial class PanelOutputLog : DockContent
     {
         //--------------------------------------------------------------------------------------------------------------
         // Helper Class
@@ -45,7 +45,7 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
 
-        public OutputLog()
+        public PanelOutputLog()
         {
             InitializeComponent();
 

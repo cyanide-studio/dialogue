@@ -64,7 +64,8 @@ namespace DialogueEditor
         static public WindowMain MainWindow = null;
         static public PanelProjectExplorer ProjectExplorer = null;
         static public PanelProperties Properties = null;
-        static public OutputLog OutputLog = null;
+        static public PanelOutputLog OutputLog = null;
+        static public PanelSearchResults SearchResults = null;
 
         // Custom Conditions, Actions and Flags associated with Nodes
         static public List<ConditionSlot> ConditionSlots = new List<ConditionSlot>();
@@ -101,7 +102,8 @@ namespace DialogueEditor
 
             ProjectExplorer = new PanelProjectExplorer();
             Properties = new PanelProperties();
-            OutputLog = new OutputLog();
+            OutputLog = new PanelOutputLog();
+            SearchResults = new PanelSearchResults();
         }
 
         static public void InitDefaultLists()
