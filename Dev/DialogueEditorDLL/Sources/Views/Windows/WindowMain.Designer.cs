@@ -39,21 +39,21 @@
             System.Windows.Forms.ToolStripMenuItem playDialogueNodeToolStripMenuItem;
             System.Windows.Forms.ToolStripMenuItem exportGameLipsyncToolStripMenuItem;
             System.Windows.Forms.ToolStripMenuItem menuItemHelp;
-            WeifenLuo.WinFormsUI.Docking.DockPanelSkin dockPanelSkin1 = new WeifenLuo.WinFormsUI.Docking.DockPanelSkin();
-            WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin autoHideStripSkin1 = new WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin();
-            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient1 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient1 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin dockPaneStripSkin1 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin();
-            WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient dockPaneStripGradient1 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient2 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient2 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient3 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient dockPaneStripToolWindowGradient1 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient4 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient5 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient3 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient6 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient7 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPanelSkin dockPanelSkin3 = new WeifenLuo.WinFormsUI.Docking.DockPanelSkin();
+            WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin autoHideStripSkin3 = new WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin();
+            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient7 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient15 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin dockPaneStripSkin3 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin();
+            WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient dockPaneStripGradient3 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient16 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient8 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient17 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient dockPaneStripToolWindowGradient3 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient18 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient19 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.DockPanelGradient dockPanelGradient9 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient20 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+            WeifenLuo.WinFormsUI.Docking.TabGradient tabGradient21 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.faceFXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,6 +100,7 @@
             this.menuItemAsk = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.menuItemSearchResults = new System.Windows.Forms.ToolStripMenuItem();
             toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             menuItem4 = new System.Windows.Forms.ToolStripSeparator();
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -118,12 +119,12 @@
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new System.Drawing.Size(223, 6);
+            toolStripSeparator2.Size = new System.Drawing.Size(227, 6);
             // 
             // menuItem4
             // 
             menuItem4.Name = "menuItem4";
-            menuItem4.Size = new System.Drawing.Size(238, 6);
+            menuItem4.Size = new System.Drawing.Size(242, 6);
             // 
             // toolStripSeparator1
             // 
@@ -154,29 +155,29 @@
             // toolStripSeparator4
             // 
             toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new System.Drawing.Size(238, 6);
+            toolStripSeparator4.Size = new System.Drawing.Size(242, 6);
             // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new System.Drawing.Size(238, 6);
+            toolStripSeparator5.Size = new System.Drawing.Size(242, 6);
             // 
             // toolStripSeparator6
             // 
             toolStripSeparator6.Name = "toolStripSeparator6";
-            toolStripSeparator6.Size = new System.Drawing.Size(238, 6);
+            toolStripSeparator6.Size = new System.Drawing.Size(242, 6);
             // 
             // toolStripSeparator7
             // 
             toolStripSeparator7.Name = "toolStripSeparator7";
-            toolStripSeparator7.Size = new System.Drawing.Size(238, 6);
+            toolStripSeparator7.Size = new System.Drawing.Size(242, 6);
             // 
             // playDialogueNodeToolStripMenuItem
             // 
             playDialogueNodeToolStripMenuItem.Image = global::DialogueEditor.Properties.Resources.filmDot;
             playDialogueNodeToolStripMenuItem.Name = "playDialogueNodeToolStripMenuItem";
             playDialogueNodeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F5)));
-            playDialogueNodeToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            playDialogueNodeToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             playDialogueNodeToolStripMenuItem.Text = "Play Dialogue Node";
             playDialogueNodeToolStripMenuItem.Click += new System.EventHandler(this.OnPlayDialogueNode);
             // 
@@ -186,7 +187,7 @@
             this.faceFXToolStripMenuItem});
             exportGameLipsyncToolStripMenuItem.Image = global::DialogueEditor.Properties.Resources.Export;
             exportGameLipsyncToolStripMenuItem.Name = "exportGameLipsyncToolStripMenuItem";
-            exportGameLipsyncToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            exportGameLipsyncToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             exportGameLipsyncToolStripMenuItem.Text = "Export Game Lipsync";
             // 
             // faceFXToolStripMenuItem
@@ -246,7 +247,7 @@
             // 
             this.menuItemNewProject.Image = global::DialogueEditor.Properties.Resources.book;
             this.menuItemNewProject.Name = "menuItemNewProject";
-            this.menuItemNewProject.Size = new System.Drawing.Size(241, 22);
+            this.menuItemNewProject.Size = new System.Drawing.Size(245, 22);
             this.menuItemNewProject.Text = "&New Project";
             this.menuItemNewProject.Click += new System.EventHandler(this.OnNewProject);
             // 
@@ -254,7 +255,7 @@
             // 
             this.menuItemOpenProject.Image = global::DialogueEditor.Properties.Resources.book_open;
             this.menuItemOpenProject.Name = "menuItemOpenProject";
-            this.menuItemOpenProject.Size = new System.Drawing.Size(241, 22);
+            this.menuItemOpenProject.Size = new System.Drawing.Size(245, 22);
             this.menuItemOpenProject.Text = "&Open Project";
             this.menuItemOpenProject.Click += new System.EventHandler(this.OnOpenProject);
             // 
@@ -263,7 +264,7 @@
             this.menuItemNewDialogue.Image = global::DialogueEditor.Properties.Resources.page;
             this.menuItemNewDialogue.Name = "menuItemNewDialogue";
             this.menuItemNewDialogue.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.menuItemNewDialogue.Size = new System.Drawing.Size(241, 22);
+            this.menuItemNewDialogue.Size = new System.Drawing.Size(245, 22);
             this.menuItemNewDialogue.Text = "New &Dialogue";
             this.menuItemNewDialogue.Click += new System.EventHandler(this.OnNewDialogue);
             // 
@@ -272,7 +273,7 @@
             this.saveFileToolStripMenuItem.Image = global::DialogueEditor.Properties.Resources.page_save_white;
             this.saveFileToolStripMenuItem.Name = "saveFileToolStripMenuItem";
             this.saveFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveFileToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.saveFileToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
             this.saveFileToolStripMenuItem.Text = "&Save File";
             this.saveFileToolStripMenuItem.Click += new System.EventHandler(this.OnSaveFile);
             // 
@@ -282,20 +283,20 @@
             this.saveAllDirtyToolStripMenuItem.Name = "saveAllDirtyToolStripMenuItem";
             this.saveAllDirtyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.saveAllDirtyToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.saveAllDirtyToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
             this.saveAllDirtyToolStripMenuItem.Text = "Save Opened Files";
             this.saveAllDirtyToolStripMenuItem.Click += new System.EventHandler(this.OnSaveAllFiles);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(238, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(242, 6);
             // 
             // menuItemSaveAll
             // 
             this.menuItemSaveAll.Image = global::DialogueEditor.Properties.Resources.drive_disk;
             this.menuItemSaveAll.Name = "menuItemSaveAll";
-            this.menuItemSaveAll.Size = new System.Drawing.Size(241, 22);
+            this.menuItemSaveAll.Size = new System.Drawing.Size(245, 22);
             this.menuItemSaveAll.Text = "&Force Save Full Project";
             this.menuItemSaveAll.Click += new System.EventHandler(this.OnForceSaveAll);
             // 
@@ -304,7 +305,7 @@
             this.menuItemReloadFile.Image = global::DialogueEditor.Properties.Resources.arrow_redo;
             this.menuItemReloadFile.Name = "menuItemReloadFile";
             this.menuItemReloadFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.menuItemReloadFile.Size = new System.Drawing.Size(241, 22);
+            this.menuItemReloadFile.Size = new System.Drawing.Size(245, 22);
             this.menuItemReloadFile.Text = "&Reload File";
             this.menuItemReloadFile.Click += new System.EventHandler(this.OnReloadFile);
             // 
@@ -314,7 +315,7 @@
             this.menuItemReloadAllFiles.Name = "menuItemReloadAllFiles";
             this.menuItemReloadAllFiles.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.R)));
-            this.menuItemReloadAllFiles.Size = new System.Drawing.Size(241, 22);
+            this.menuItemReloadAllFiles.Size = new System.Drawing.Size(245, 22);
             this.menuItemReloadAllFiles.Text = "Reload Full Project";
             this.menuItemReloadAllFiles.Click += new System.EventHandler(this.OnReloadAllFiles);
             // 
@@ -322,7 +323,7 @@
             // 
             this.menuItemCloseAll.Image = global::DialogueEditor.Properties.Resources.page_white_delete;
             this.menuItemCloseAll.Name = "menuItemCloseAll";
-            this.menuItemCloseAll.Size = new System.Drawing.Size(241, 22);
+            this.menuItemCloseAll.Size = new System.Drawing.Size(245, 22);
             this.menuItemCloseAll.Text = "&Close Opened Files";
             this.menuItemCloseAll.Click += new System.EventHandler(this.OnCloseAllFiles);
             // 
@@ -330,14 +331,14 @@
             // 
             this.menuItemCloseProject.Image = global::DialogueEditor.Properties.Resources.drive_delete;
             this.menuItemCloseProject.Name = "menuItemCloseProject";
-            this.menuItemCloseProject.Size = new System.Drawing.Size(241, 22);
+            this.menuItemCloseProject.Size = new System.Drawing.Size(245, 22);
             this.menuItemCloseProject.Text = "Close &Project";
             this.menuItemCloseProject.Click += new System.EventHandler(this.OnCloseProject);
             // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(241, 22);
+            this.menuItemExit.Size = new System.Drawing.Size(245, 22);
             this.menuItemExit.Text = "&Exit";
             this.menuItemExit.Click += new System.EventHandler(this.OnExit);
             // 
@@ -378,6 +379,7 @@
             this.menuItemProjectExplorer,
             this.menuItemProjectProperties,
             this.menuItemOutputLog,
+            this.menuItemSearchResults,
             toolStripSeparator1,
             this.menuItemResetPanels});
             this.menuItemViews.Name = "menuItemViews";
@@ -444,7 +446,7 @@
             this.menuItemPlayDialogue.Image = global::DialogueEditor.Properties.Resources.film;
             this.menuItemPlayDialogue.Name = "menuItemPlayDialogue";
             this.menuItemPlayDialogue.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.menuItemPlayDialogue.Size = new System.Drawing.Size(226, 22);
+            this.menuItemPlayDialogue.Size = new System.Drawing.Size(230, 22);
             this.menuItemPlayDialogue.Text = "&Play Dialogue";
             this.menuItemPlayDialogue.Click += new System.EventHandler(this.OnPlayDialogue);
             // 
@@ -453,7 +455,7 @@
             this.menuItemCheck.Image = global::DialogueEditor.Properties.Resources.check;
             this.menuItemCheck.Name = "menuItemCheck";
             this.menuItemCheck.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.menuItemCheck.Size = new System.Drawing.Size(226, 22);
+            this.menuItemCheck.Size = new System.Drawing.Size(230, 22);
             this.menuItemCheck.Text = "Check Dialogue";
             this.menuItemCheck.Click += new System.EventHandler(this.OnCheckCurrent);
             // 
@@ -462,20 +464,20 @@
             this.menuItemCheckAll.Image = global::DialogueEditor.Properties.Resources.check2;
             this.menuItemCheckAll.Name = "menuItemCheckAll";
             this.menuItemCheckAll.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F7)));
-            this.menuItemCheckAll.Size = new System.Drawing.Size(226, 22);
+            this.menuItemCheckAll.Size = new System.Drawing.Size(230, 22);
             this.menuItemCheckAll.Text = "&Check All Dialogues";
             this.menuItemCheckAll.Click += new System.EventHandler(this.OnCheckAll);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(223, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(227, 6);
             // 
             // menuItemImportLocalization
             // 
             this.menuItemImportLocalization.Image = global::DialogueEditor.Properties.Resources.Import;
             this.menuItemImportLocalization.Name = "menuItemImportLocalization";
-            this.menuItemImportLocalization.Size = new System.Drawing.Size(226, 22);
+            this.menuItemImportLocalization.Size = new System.Drawing.Size(230, 22);
             this.menuItemImportLocalization.Text = "Import Dialogues";
             this.menuItemImportLocalization.Click += new System.EventHandler(this.OnImportDialogues);
             // 
@@ -483,21 +485,21 @@
             // 
             this.exportDialoguesToolStripMenuItem.Image = global::DialogueEditor.Properties.Resources.Export;
             this.exportDialoguesToolStripMenuItem.Name = "exportDialoguesToolStripMenuItem";
-            this.exportDialoguesToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.exportDialoguesToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.exportDialoguesToolStripMenuItem.Text = "Export Dialogues";
             this.exportDialoguesToolStripMenuItem.Click += new System.EventHandler(this.OnExportDialogues);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(223, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(227, 6);
             // 
             // menuItemShowStats
             // 
             this.menuItemShowStats.Image = global::DialogueEditor.Properties.Resources.chart_bar;
             this.menuItemShowStats.Name = "menuItemShowStats";
             this.menuItemShowStats.ShortcutKeys = System.Windows.Forms.Keys.F4;
-            this.menuItemShowStats.Size = new System.Drawing.Size(226, 22);
+            this.menuItemShowStats.Size = new System.Drawing.Size(230, 22);
             this.menuItemShowStats.Text = "Show Dialogue Stats";
             this.menuItemShowStats.Click += new System.EventHandler(this.OnShowStats);
             // 
@@ -506,7 +508,7 @@
             this.showAllStatsToolStripMenuItem.Image = global::DialogueEditor.Properties.Resources.chart_bar;
             this.showAllStatsToolStripMenuItem.Name = "showAllStatsToolStripMenuItem";
             this.showAllStatsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F4)));
-            this.showAllStatsToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.showAllStatsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.showAllStatsToolStripMenuItem.Text = "Show All Stats";
             this.showAllStatsToolStripMenuItem.Click += new System.EventHandler(this.OnShowAllStats);
             // 
@@ -514,14 +516,14 @@
             // 
             this.menuItemExportStats.Image = global::DialogueEditor.Properties.Resources.Export;
             this.menuItemExportStats.Name = "menuItemExportStats";
-            this.menuItemExportStats.Size = new System.Drawing.Size(226, 22);
+            this.menuItemExportStats.Size = new System.Drawing.Size(230, 22);
             this.menuItemExportStats.Text = "Export All &Stats";
             this.menuItemExportStats.Click += new System.EventHandler(this.OnExportStats);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(223, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(227, 6);
             // 
             // menuItemLocalization
             // 
@@ -529,7 +531,7 @@
             this.unreal4pomanifestToolStripMenuItem});
             this.menuItemLocalization.Image = global::DialogueEditor.Properties.Resources.Export;
             this.menuItemLocalization.Name = "menuItemLocalization";
-            this.menuItemLocalization.Size = new System.Drawing.Size(226, 22);
+            this.menuItemLocalization.Size = new System.Drawing.Size(230, 22);
             this.menuItemLocalization.Text = "Export Game &Localization";
             // 
             // unreal4pomanifestToolStripMenuItem
@@ -543,7 +545,7 @@
             // 
             this.menuItemVoicing.Image = global::DialogueEditor.Properties.Resources.Export;
             this.menuItemVoicing.Name = "menuItemVoicing";
-            this.menuItemVoicing.Size = new System.Drawing.Size(226, 22);
+            this.menuItemVoicing.Size = new System.Drawing.Size(230, 22);
             this.menuItemVoicing.Text = "Export Game &Voicing";
             this.menuItemVoicing.Click += new System.EventHandler(this.OnExportVoicing);
             // 
@@ -553,7 +555,7 @@
             this.unreal4ToolStripMenuItem});
             this.exportGameConstantsToolStripMenuItem.Image = global::DialogueEditor.Properties.Resources.Export;
             this.exportGameConstantsToolStripMenuItem.Name = "exportGameConstantsToolStripMenuItem";
-            this.exportGameConstantsToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.exportGameConstantsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.exportGameConstantsToolStripMenuItem.Text = "Export Game Constants";
             // 
             // unreal4ToolStripMenuItem
@@ -594,54 +596,62 @@
             this.dockPanel.Name = "dockPanel";
             this.dockPanel.RightToLeftLayout = true;
             this.dockPanel.Size = new System.Drawing.Size(691, 399);
-            dockPanelGradient1.EndColor = System.Drawing.SystemColors.ControlLight;
-            dockPanelGradient1.StartColor = System.Drawing.SystemColors.ControlLight;
-            autoHideStripSkin1.DockStripGradient = dockPanelGradient1;
-            tabGradient1.EndColor = System.Drawing.SystemColors.Control;
-            tabGradient1.StartColor = System.Drawing.SystemColors.Control;
-            tabGradient1.TextColor = System.Drawing.SystemColors.ControlDarkDark;
-            autoHideStripSkin1.TabGradient = tabGradient1;
-            autoHideStripSkin1.TextFont = new System.Drawing.Font("Segoe UI", 9F);
-            dockPanelSkin1.AutoHideStripSkin = autoHideStripSkin1;
-            tabGradient2.EndColor = System.Drawing.SystemColors.ControlLightLight;
-            tabGradient2.StartColor = System.Drawing.SystemColors.ControlLightLight;
-            tabGradient2.TextColor = System.Drawing.SystemColors.ControlText;
-            dockPaneStripGradient1.ActiveTabGradient = tabGradient2;
-            dockPanelGradient2.EndColor = System.Drawing.SystemColors.Control;
-            dockPanelGradient2.StartColor = System.Drawing.SystemColors.Control;
-            dockPaneStripGradient1.DockStripGradient = dockPanelGradient2;
-            tabGradient3.EndColor = System.Drawing.SystemColors.ControlLight;
-            tabGradient3.StartColor = System.Drawing.SystemColors.ControlLight;
-            tabGradient3.TextColor = System.Drawing.SystemColors.ControlText;
-            dockPaneStripGradient1.InactiveTabGradient = tabGradient3;
-            dockPaneStripSkin1.DocumentGradient = dockPaneStripGradient1;
-            dockPaneStripSkin1.TextFont = new System.Drawing.Font("Segoe UI", 9F);
-            tabGradient4.EndColor = System.Drawing.SystemColors.ActiveCaption;
-            tabGradient4.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            tabGradient4.StartColor = System.Drawing.SystemColors.GradientActiveCaption;
-            tabGradient4.TextColor = System.Drawing.SystemColors.ActiveCaptionText;
-            dockPaneStripToolWindowGradient1.ActiveCaptionGradient = tabGradient4;
-            tabGradient5.EndColor = System.Drawing.SystemColors.Control;
-            tabGradient5.StartColor = System.Drawing.SystemColors.Control;
-            tabGradient5.TextColor = System.Drawing.SystemColors.ControlText;
-            dockPaneStripToolWindowGradient1.ActiveTabGradient = tabGradient5;
-            dockPanelGradient3.EndColor = System.Drawing.SystemColors.ControlLight;
-            dockPanelGradient3.StartColor = System.Drawing.SystemColors.ControlLight;
-            dockPaneStripToolWindowGradient1.DockStripGradient = dockPanelGradient3;
-            tabGradient6.EndColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            tabGradient6.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            tabGradient6.StartColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            tabGradient6.TextColor = System.Drawing.SystemColors.ControlText;
-            dockPaneStripToolWindowGradient1.InactiveCaptionGradient = tabGradient6;
-            tabGradient7.EndColor = System.Drawing.Color.Transparent;
-            tabGradient7.StartColor = System.Drawing.Color.Transparent;
-            tabGradient7.TextColor = System.Drawing.SystemColors.ControlDarkDark;
-            dockPaneStripToolWindowGradient1.InactiveTabGradient = tabGradient7;
-            dockPaneStripSkin1.ToolWindowGradient = dockPaneStripToolWindowGradient1;
-            dockPanelSkin1.DockPaneStripSkin = dockPaneStripSkin1;
-            this.dockPanel.Skin = dockPanelSkin1;
+            dockPanelGradient7.EndColor = System.Drawing.SystemColors.ControlLight;
+            dockPanelGradient7.StartColor = System.Drawing.SystemColors.ControlLight;
+            autoHideStripSkin3.DockStripGradient = dockPanelGradient7;
+            tabGradient15.EndColor = System.Drawing.SystemColors.Control;
+            tabGradient15.StartColor = System.Drawing.SystemColors.Control;
+            tabGradient15.TextColor = System.Drawing.SystemColors.ControlDarkDark;
+            autoHideStripSkin3.TabGradient = tabGradient15;
+            autoHideStripSkin3.TextFont = new System.Drawing.Font("Segoe UI", 9F);
+            dockPanelSkin3.AutoHideStripSkin = autoHideStripSkin3;
+            tabGradient16.EndColor = System.Drawing.SystemColors.ControlLightLight;
+            tabGradient16.StartColor = System.Drawing.SystemColors.ControlLightLight;
+            tabGradient16.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripGradient3.ActiveTabGradient = tabGradient16;
+            dockPanelGradient8.EndColor = System.Drawing.SystemColors.Control;
+            dockPanelGradient8.StartColor = System.Drawing.SystemColors.Control;
+            dockPaneStripGradient3.DockStripGradient = dockPanelGradient8;
+            tabGradient17.EndColor = System.Drawing.SystemColors.ControlLight;
+            tabGradient17.StartColor = System.Drawing.SystemColors.ControlLight;
+            tabGradient17.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripGradient3.InactiveTabGradient = tabGradient17;
+            dockPaneStripSkin3.DocumentGradient = dockPaneStripGradient3;
+            dockPaneStripSkin3.TextFont = new System.Drawing.Font("Segoe UI", 9F);
+            tabGradient18.EndColor = System.Drawing.SystemColors.ActiveCaption;
+            tabGradient18.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            tabGradient18.StartColor = System.Drawing.SystemColors.GradientActiveCaption;
+            tabGradient18.TextColor = System.Drawing.SystemColors.ActiveCaptionText;
+            dockPaneStripToolWindowGradient3.ActiveCaptionGradient = tabGradient18;
+            tabGradient19.EndColor = System.Drawing.SystemColors.Control;
+            tabGradient19.StartColor = System.Drawing.SystemColors.Control;
+            tabGradient19.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripToolWindowGradient3.ActiveTabGradient = tabGradient19;
+            dockPanelGradient9.EndColor = System.Drawing.SystemColors.ControlLight;
+            dockPanelGradient9.StartColor = System.Drawing.SystemColors.ControlLight;
+            dockPaneStripToolWindowGradient3.DockStripGradient = dockPanelGradient9;
+            tabGradient20.EndColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            tabGradient20.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            tabGradient20.StartColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            tabGradient20.TextColor = System.Drawing.SystemColors.ControlText;
+            dockPaneStripToolWindowGradient3.InactiveCaptionGradient = tabGradient20;
+            tabGradient21.EndColor = System.Drawing.Color.Transparent;
+            tabGradient21.StartColor = System.Drawing.Color.Transparent;
+            tabGradient21.TextColor = System.Drawing.SystemColors.ControlDarkDark;
+            dockPaneStripToolWindowGradient3.InactiveTabGradient = tabGradient21;
+            dockPaneStripSkin3.ToolWindowGradient = dockPaneStripToolWindowGradient3;
+            dockPanelSkin3.DockPaneStripSkin = dockPaneStripSkin3;
+            this.dockPanel.Skin = dockPanelSkin3;
             this.dockPanel.TabIndex = 0;
             this.dockPanel.ActiveDocumentChanged += new System.EventHandler(this.OnActiveDocumentChanged);
+            // 
+            // menuItemSearchResults
+            // 
+            this.menuItemSearchResults.CheckOnClick = true;
+            this.menuItemSearchResults.Name = "menuItemSearchResults";
+            this.menuItemSearchResults.Size = new System.Drawing.Size(156, 22);
+            this.menuItemSearchResults.Text = "&Search Results";
+            this.menuItemSearchResults.CheckedChanged += new System.EventHandler(this.OnCheckSearchResults);
             // 
             // WindowMain
             // 
@@ -711,5 +721,6 @@
         private System.Windows.Forms.ToolStripMenuItem exportGameConstantsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unreal4ToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
+        private System.Windows.Forms.ToolStripMenuItem menuItemSearchResults;
     }
 }

@@ -18,6 +18,8 @@ namespace DialogueEditor
         private Timer statusTimer;
         private string lastClosedDialogue = "";
 
+        private bool ignoreMenuItemEvents = false;
+
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
 
@@ -281,17 +283,30 @@ namespace DialogueEditor
 
         public void SetMenuItemProjectExplorer(bool visible)
         {
+            ignoreMenuItemEvents = true;
             menuItemProjectExplorer.Checked = visible;
+            ignoreMenuItemEvents = false;
         }
 
         public void SetMenuItemProjectProperties(bool visible)
         {
+            ignoreMenuItemEvents = true;
             menuItemProjectProperties.Checked = visible;
+            ignoreMenuItemEvents = false;
         }
 
         public void SetMenuItemOutputLog(bool visible)
         {
+            ignoreMenuItemEvents = true;
             menuItemOutputLog.Checked = visible;
+            ignoreMenuItemEvents = false;
+        }
+
+        public void SetMenuItemSearchResults(bool visible)
+        {
+            ignoreMenuItemEvents = true;
+            menuItemSearchResults.Checked = visible;
+            ignoreMenuItemEvents = false;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -425,20 +440,38 @@ namespace DialogueEditor
 
         private void OnCheckProjectExplorer(object sender, EventArgs e)
         {
+            if (ignoreMenuItemEvents)
+                return;
+
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
-            ProjectController.ShowProjectExplorer(menuItem.Checked);
+            ProjectController.ShowProjectExplorerPanel(menuItem.Checked);
         }
 
         private void OnCheckProperties(object sender, EventArgs e)
         {
+            if (ignoreMenuItemEvents)
+                return;
+
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
-            ProjectController.ShowProperties(menuItem.Checked);
+            ProjectController.ShowPropertiesPanel(menuItem.Checked);
         }
 
         private void OnCheckOutputLog(object sender, EventArgs e)
         {
+            if (ignoreMenuItemEvents)
+                return;
+
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
-            ProjectController.ShowOutputLog(menuItem.Checked);
+            ProjectController.ShowOutputLogPanel(menuItem.Checked);
+        }
+
+        private void OnCheckSearchResults(object sender, EventArgs e)
+        {
+            if (ignoreMenuItemEvents)
+                return;
+
+            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+            ProjectController.ShowSearchResultsPanel(menuItem.Checked);
         }
 
         private void OnResetPanels(object sender, EventArgs e)

@@ -7,21 +7,13 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace DialogueEditor
 {
-    public enum LogLevel
-    {
-        Info,
-        Warning,
-        Error,
-    };
-
-    public partial class PanelOutputLog : DockContent
+    public partial class PanelSearchResults : DockContent
     {
         //--------------------------------------------------------------------------------------------------------------
         // Helper Class
 
         protected class LogItem
         {
-            public LogLevel Level = LogLevel.Info;
             public string Text = "";
             public string Dialogue = "";
             public int Node = DialogueNode.ID_NULL;
@@ -41,57 +33,25 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
 
-        public PanelOutputLog()
+        public PanelSearchResults()
         {
             InitializeComponent();
 
             font = listBoxLog.Font;
             listBoxLog.DrawMode = DrawMode.OwnerDrawFixed;
             listBoxLog.DrawItem += listBox_DrawItem;
-
-            checkBoxShowInfos.Checked = true;
-            checkBoxShowWarnings.Checked = true;
-            checkBoxShowErrors.Checked = true;
         }
-
-        public void WriteLine(LogLevel level, string message)
-        {
-            WriteLine(level, message, "", DialogueNode.ID_NULL);
-        }
-
-        public void WriteLine(LogLevel level, string message, string dialogue, int node)
+        
+        public void WriteLine(string message, string dialogue, int node)
         {
             LogItem item = new LogItem();
 
             StringBuilder stringBuilder = new StringBuilder();
-            bool displayLine = false;
-            bool showPanel = false;
-
-            stringBuilder.Append(string.Format("[{0}]  ", Utility.GetCurrentTimeAsString()));
-
-            switch (level)
-            {
-                case LogLevel.Info:
-                    displayLine = checkBoxShowInfos.Checked;
-                    stringBuilder.Append("Info : ");
-                    break;
-
-                case LogLevel.Warning:
-                    displayLine = checkBoxShowWarnings.Checked;
-                    showPanel = true;
-                    stringBuilder.Append("Warning : "); 
-                    break;
-
-                case LogLevel.Error:
-                    displayLine = checkBoxShowErrors.Checked;
-                    showPanel = true;
-                    stringBuilder.Append("Error : "); 
-                    break;
-            }
-
+            bool displayLine = true;
+            bool showPanel = true;
+            
             stringBuilder.Append(message);
-
-            item.Level = level;
+            
             item.Text = stringBuilder.ToString();
             item.Dialogue = dialogue;
             item.Node = node;
@@ -125,26 +85,7 @@ namespace DialogueEditor
             listBoxLog.Items.Clear();
             foreach (var item in listItems)
             {
-                bool displayLine = false;
-                switch (item.Level)
-                {
-                    case LogLevel.Info:
-                        displayLine = checkBoxShowInfos.Checked;
-                        break;
-
-                    case LogLevel.Warning:
-                        displayLine = checkBoxShowWarnings.Checked;
-                        break;
-
-                    case LogLevel.Error:
-                        displayLine = checkBoxShowErrors.Checked;
-                        break;
-                }
-
-                if (displayLine)
-                {
-                    listBoxLog.Items.Add(item);
-                }
+                listBoxLog.Items.Add(item);
             }
 
             listBoxLog.EndUpdate();
@@ -167,20 +108,6 @@ namespace DialogueEditor
             var item = listBox.Items[e.Index] as LogItem;
 
             var color = Color.Black;
-            switch (item.Level)
-            {
-                case LogLevel.Info:
-                    color = Color.Black;
-                    break;
-
-                case LogLevel.Warning:
-                    color = Color.Chocolate;
-                    break;
-
-                case LogLevel.Error:
-                    color = Color.Red;
-                    break;
-            }
 
             e.DrawBackground();
 
@@ -236,26 +163,6 @@ namespace DialogueEditor
                     e.Handled = true;
                 }
             }
-        }
-
-        private void Log(LogLevel level, string message, string dialogue, int node)
-        {
-            WriteLine(level, message, dialogue, node);
-        }
-
-        public void LogInfo(string message, string dialogue, int node)
-        {
-            Log(LogLevel.Info, message, dialogue, node);
-        }
-
-        public void LogWarning(string message, string dialogue, int node)
-        {
-            Log(LogLevel.Warning, message, dialogue, node);
-        }
-
-        public void LogError(string message, string dialogue, int node)
-        {
-            Log(LogLevel.Error, message, dialogue, node);
         }
     }
 }

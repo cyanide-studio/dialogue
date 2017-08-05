@@ -1,6 +1,6 @@
 ﻿namespace DialogueEditor
 {
-    partial class OutputLog
+    partial class PanelOutputLog
     {
         /// <summary>
         /// Required designer variable.

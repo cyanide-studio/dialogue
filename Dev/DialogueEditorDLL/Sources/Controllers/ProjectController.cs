@@ -18,7 +18,8 @@ namespace DialogueEditor
         private static DocumentView ProjectView = null; // No point in caring about multiple project views
         private static PanelProjectExplorer ProjectExplorer = null;
         private static PanelProperties Properties = null;
-        private static OutputLog OutputLog = null;
+        private static PanelOutputLog OutputLog = null;
+        private static PanelSearchResults SearchResults = null;
         #endregion
 
         #region Dialogues management
@@ -278,7 +279,8 @@ namespace DialogueEditor
             MainWindow = new WindowMain();
             ProjectExplorer = new PanelProjectExplorer();
             Properties = new PanelProperties();
-            OutputLog = new OutputLog();
+            OutputLog = new PanelOutputLog();
+            SearchResults = new PanelSearchResults();
         }
 
         public static void ForcePropertiesFocus()
@@ -319,36 +321,53 @@ namespace DialogueEditor
                 Properties.Show(dockPanel, DockState.DockRight);
             if (!dockPanel.Contains(OutputLog))
                 OutputLog.Show(dockPanel, DockState.DockBottom);
+            if (!dockPanel.Contains(SearchResults))
+                SearchResults.Show(dockPanel, DockState.DockBottom);
+
+            SyncMenuItemFromPanel(ProjectExplorer);
+            SyncMenuItemFromPanel(Properties);
+            SyncMenuItemFromPanel(OutputLog);
+            SyncMenuItemFromPanel(SearchResults);
         }
 
         public static void ResetPanels(DockPanel dockPanel)
         {
             ProjectExplorer.Show(dockPanel, DockState.DockLeft);
             Properties.Show(dockPanel, DockState.DockRight);
+            SearchResults.Show(dockPanel, DockState.DockBottom);
             OutputLog.Show(dockPanel, DockState.DockBottom);
         }
 
-        private static void ShowDockContent(DockContent panel, bool hide = false)
+        private static void ShowDockContent(DockContent panel, bool show = true)
         {
-            if (hide && panel.Visible)
+            if (!show && (panel.Visible || !panel.IsHidden))
+            {
                 panel.Hide();
-            else if (!hide && !panel.Visible)
+            }
+            else if (show && (!panel.Visible || panel.IsHidden))
+            {
                 panel.Show();
+            }
         }
 
-        public static void ShowProperties(bool hide = false)
+        public static void ShowProjectExplorerPanel(bool show = true)
         {
-            ShowDockContent(Properties);
+            ShowDockContent(ProjectExplorer, show);
         }
 
-        public static void ShowOutputLog(bool hide = false)
+        public static void ShowPropertiesPanel(bool show = true)
         {
-            ShowDockContent(OutputLog);
+            ShowDockContent(Properties, show);
         }
 
-        public static void ShowProjectExplorer(bool hide = false)
+        public static void ShowOutputLogPanel(bool show = true)
         {
-            ShowDockContent(ProjectExplorer);
+            ShowDockContent(OutputLog, show);
+        }
+
+        public static void ShowSearchResultsPanel(bool show = true)
+        {
+            ShowDockContent(SearchResults, show);
         }
 
         public static void CreateCustomProperties(Form owner, bool show = true)
@@ -366,15 +385,19 @@ namespace DialogueEditor
             {
                 if (panel == ProjectExplorer)
                 {
-                    MainWindow.SetMenuItemProjectExplorer(panel.Visible);
+                    MainWindow.SetMenuItemProjectExplorer(!panel.IsHidden);   // panel.Visible means the panel is fully visible, IsHidden means it's closed
                 }
                 else if (panel == Properties)
                 {
-                    MainWindow.SetMenuItemProjectProperties(panel.Visible);
+                    MainWindow.SetMenuItemProjectProperties(!panel.IsHidden);
                 }
                 else if (panel == OutputLog)
                 {
-                    MainWindow.SetMenuItemOutputLog(panel.Visible);
+                    MainWindow.SetMenuItemOutputLog(!panel.IsHidden);
+                }
+                else if (panel == SearchResults)
+                {
+                    MainWindow.SetMenuItemSearchResults(!panel.IsHidden);
                 }
             }
         }
@@ -645,8 +668,10 @@ namespace DialogueEditor
                 return ProjectExplorer;
             else if (persistString == typeof(PanelProperties).ToString())
                 return Properties;
-            else if (persistString == typeof(OutputLog).ToString())
+            else if (persistString == typeof(PanelOutputLog).ToString())
                 return OutputLog;
+            else if (persistString == typeof(PanelSearchResults).ToString())
+                return SearchResults;
             return null;
         }
 

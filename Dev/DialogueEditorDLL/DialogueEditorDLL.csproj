@@ -179,6 +179,12 @@
     <Compile Include="Sources\Controllers\Exporters\ExporterStats.cs" />
     <Compile Include="Sources\Controllers\Exporters\ExporterVoicing.cs" />
     <Compile Include="Sources\Extensions.cs" />
+    <Compile Include="Sources\Views\Panels\PanelSearchResults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sources\Views\Panels\PanelSearchResults.Designer.cs">
+      <DependentUpon>PanelSearchResults.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sources\Views\Panels\PanelOutputLog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -329,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sources\Views\Documents\DocumentProjectView.resx">
       <DependentUpon>DocumentProjectView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\Views\Panels\PanelSearchResults.resx">
+      <DependentUpon>PanelSearchResults.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sources\Views\Panels\PanelOutputLog.resx">
       <DependentUpon>PanelOutputLog.cs</DependentUpon>
