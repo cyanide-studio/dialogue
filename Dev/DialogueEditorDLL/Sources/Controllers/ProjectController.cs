@@ -843,6 +843,26 @@ namespace DialogueEditor
             SetDirty();
             RefreshDirtyFlags();
         }
+
+        public static void ClearSearchResult()
+        {
+            SearchResults.Clear();
+        }
+
+        public static void StartSearchResult()
+        {
+            SearchResults.WriteStartSearch();
+        }
+
+        public static void EndSearchResult()
+        {
+            SearchResults.WriteEndSearch();
+        }
+
+        public static void AddSearchResult(string message, Dialogue dialogue, DialogueNode node)
+        {
+            SearchResults.WriteLine(message, dialogue.GetName(), node.ID);
+        }
         #endregion
     }
 }

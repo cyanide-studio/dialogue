@@ -46,6 +46,10 @@ namespace DialogueEditor
     {
     }
 
+    // Use this on searchable properties on nodes tags (conditions, actions, flags)
+    public class PropertySearchable : Attribute
+    { }
+
     //--------------------------------------------------------------------------------------------------------------
     // Type Converters (used by PropertyGrids)
 

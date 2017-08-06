@@ -11,10 +11,11 @@ namespace DemoBuild
         public int Min { get; set; }
         public int Max { get; set; }
 
+        [PropertySearchable]
         [PropertyCharacterName]
         [TypeConverter(typeof(PropertyCharacterNameConverter))]
         public string Character { get; set; }
-
+        
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
 

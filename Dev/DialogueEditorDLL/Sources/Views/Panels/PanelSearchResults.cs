@@ -29,6 +29,7 @@ namespace DialogueEditor
 
         private List<LogItem> listItems = new List<LogItem>();
         private Font font = null;
+        private string labelResultsCountText;
 
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
@@ -40,8 +41,35 @@ namespace DialogueEditor
             font = listBoxLog.Font;
             listBoxLog.DrawMode = DrawMode.OwnerDrawFixed;
             listBoxLog.DrawItem += listBox_DrawItem;
+
+            labelResultsCountText = labelResultsCount.Text;
+
+            RefreshResultsCount();
         }
-        
+
+        public void RefreshResultsCount()
+        {
+            labelResultsCount.Text = String.Format(labelResultsCountText, listItems.Count);
+        }
+
+        public void Clear()
+        {
+            listBoxLog.Items.Clear();
+            listItems.Clear();
+
+            RefreshResultsCount();
+        }
+
+        public void WriteStartSearch()
+        {
+            Clear();
+        }
+
+        public void WriteEndSearch()
+        {
+            RefreshResultsCount();
+        }
+
         public void WriteLine(string message, string dialogue, int node)
         {
             LogItem item = new LogItem();
@@ -77,26 +105,7 @@ namespace DialogueEditor
                 Show();
             }
         }
-
-        private void RefreshItems()
-        {
-            listBoxLog.BeginUpdate();
-
-            listBoxLog.Items.Clear();
-            foreach (var item in listItems)
-            {
-                listBoxLog.Items.Add(item);
-            }
-
-            listBoxLog.EndUpdate();
-
-            //Force scroll to bottom
-            if (listBoxLog.Items.Count > 0)
-            {
-                listBoxLog.TopIndex = listBoxLog.Items.Count - 1;
-            }
-        }
-
+        
         private void listBox_DrawItem(object sender, DrawItemEventArgs e)
         {
             var listBox = sender as ListBox;
@@ -131,8 +140,7 @@ namespace DialogueEditor
 
         private void OnClearClicked(object sender, EventArgs e)
         {
-            listBoxLog.Items.Clear();
-            listItems.Clear();
+            Clear();
         }
 
         private void OnDoubleClick(object sender, EventArgs e)
@@ -145,12 +153,7 @@ namespace DialogueEditor
                     ProjectController.MainWindow.OpenDocumentDialogue(item.Dialogue, item.Node);
             }
         }
-
-        private void OnCheckDisplayOptions(object sender, EventArgs e)
-        {
-            RefreshItems();
-        }
-
+        
         private void OnListKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.C)
