@@ -348,11 +348,6 @@ namespace DialogueEditor
                 OpenDocumentDialogue(lastClosedDialogue);
                 return true;
             }
-            else if (keyData == (Keys.Control | Keys.Shift | Keys.F))
-            {
-                DialogSearch dialog = new DialogSearch();
-                dialog.ShowDialog();
-            }
             else if (dockPanel.ActiveContent is PanelProjectExplorer)
             {
                 if (ProjectController.ProcessCmdKeyForProjectExplorer(keyData))
@@ -744,6 +739,15 @@ namespace DialogueEditor
                 {
                     document.DialogueController.UpdateActorID(dialog.ActorIDFrom, dialog.ActorIDTo);
                 }
+            }
+        }
+        
+        private void OnSearchAllFiles(object sender, EventArgs e)
+        {
+            if (ProjectController.Project != null)
+            {
+                DialogSearch dialog = new DialogSearch();
+                dialog.ShowDialog();
             }
         }
 

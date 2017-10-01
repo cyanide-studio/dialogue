@@ -669,7 +669,14 @@ namespace DialogueEditor
                 ResolvePendingDirty();
                 SelectedDialogueNode = nodeToSelect;
             }
-            ProjectController.ShowProperties(this, SelectedDialogueNode);   // Must be done anyway for the OnActiveDocumentChanged case
+
+            //TODO: Do something with main window GetActiveDocument() ? currently a full reload will randomly display a dialogue root properties
+            //TODO: Break + callstack here when using full reload shows too many calls, I need to investigate further
+            //if (originView != null && originView == originView.DockPanel.ActiveDocument)
+            {
+                ProjectController.ShowProperties(this, SelectedDialogueNode);   // Must be done anyway for the OnActiveDocumentChanged case
+            }
+
             if (doSelect)
             {
                 if (!bInternal)
