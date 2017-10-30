@@ -78,6 +78,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Sources\Controllers\DialogueController.cs" />
     <Compile Include="Sources\Controls\AutoComplete.cs" />
     <Compile Include="Sources\Dialogs\DialogAbout.cs">
       <SubType>Form</SubType>
@@ -145,6 +146,12 @@
     <Compile Include="Sources\Dialogs\DialogSaveOnClose.Designer.cs">
       <DependentUpon>DialogSaveOnClose.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sources\Dialogs\DialogSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sources\Dialogs\DialogSearch.Designer.cs">
+        <DependentUpon>DialogSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sources\Dialogs\DialogStats.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,128 +164,141 @@
     <Compile Include="Sources\Dialogs\DialogVoiceActors.Designer.cs">
       <DependentUpon>DialogVoiceActors.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sources\Documents\DocumentProject.cs">
+    <Compile Include="Sources\Views\Documents\DocumentDialogueView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sources\Documents\DocumentProject.Designer.cs">
-      <DependentUpon>DocumentProject.cs</DependentUpon>
+    <Compile Include="Sources\Views\Documents\DocumentProjectView.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sources\Documents\IDocument.cs" />
+    <Compile Include="Sources\Views\Documents\DocumentProjectView.Designer.cs">
+      <DependentUpon>DocumentProjectView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\Views\Documents\DocumentView.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Sources\EditorCore.cs" />
-    <Compile Include="Sources\Exporters\ExporterConstants.cs" />
-    <Compile Include="Sources\Exporters\ExporterCsv.cs" />
-    <Compile Include="Sources\Exporters\ExporterDialogues.cs" />
-    <Compile Include="Sources\Exporters\ExporterLipsync.cs" />
-    <Compile Include="Sources\Exporters\ExporterLocalization.cs" />
-    <Compile Include="Sources\Exporters\ExporterStats.cs" />
-    <Compile Include="Sources\Exporters\ExporterVoicing.cs" />
+    <Compile Include="Sources\Controllers\Exporters\ExporterConstants.cs" />
+    <Compile Include="Sources\Controllers\Exporters\ExporterCsv.cs" />
+    <Compile Include="Sources\Controllers\Exporters\ExporterDialogues.cs" />
+    <Compile Include="Sources\Controllers\Exporters\ExporterLipsync.cs" />
+    <Compile Include="Sources\Controllers\Exporters\ExporterLocalization.cs" />
+    <Compile Include="Sources\Controllers\Exporters\ExporterStats.cs" />
+    <Compile Include="Sources\Controllers\Exporters\ExporterVoicing.cs" />
     <Compile Include="Sources\Extensions.cs" />
-    <Compile Include="Sources\Panels\PanelOutputLog.cs">
+    <Compile Include="Sources\Views\Panels\PanelSearchResults.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sources\Panels\PanelOutputLog.Designer.cs">
+    <Compile Include="Sources\Views\Panels\PanelSearchResults.Designer.cs">
+      <DependentUpon>PanelSearchResults.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sources\Views\Panels\PanelOutputLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sources\Views\Panels\PanelOutputLog.Designer.cs">
       <DependentUpon>PanelOutputLog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sources\Panels\Properties\FormPropertiesBranch.cs">
+    <Compile Include="Sources\Views\Panels\Properties\FormPropertiesBranch.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sources\Panels\Properties\FormPropertiesBranch.Designer.cs">
+    <Compile Include="Sources\Views\Panels\Properties\FormPropertiesBranch.Designer.cs">
       <DependentUpon>FormPropertiesBranch.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sources\Panels\Properties\IFormProperties.cs" />
-    <Compile Include="Sources\Resources\Actor.cs" />
-    <Compile Include="Sources\Resources\DialogueNodeBranch.cs" />
-    <Compile Include="Sources\Resources\Language.cs" />
-    <Compile Include="Sources\Resources\NodeAction.cs" />
-    <Compile Include="Sources\Resources\NodeCondition.cs" />
-    <Compile Include="Sources\EditorSettings.cs" />
-    <Compile Include="Sources\Panels\Properties\FormPropertiesReply.cs">
+    <Compile Include="Sources\Views\Panels\Properties\FormProperties.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sources\Panels\Properties\FormPropertiesReply.Designer.cs">
+    <Compile Include="Sources\Models\Actor.cs" />
+    <Compile Include="Sources\Models\DialogueNodeBranch.cs" />
+    <Compile Include="Sources\Models\Language.cs" />
+    <Compile Include="Sources\Models\NodeAction.cs" />
+    <Compile Include="Sources\Models\NodeCondition.cs" />
+    <Compile Include="Sources\EditorSettings.cs" />
+    <Compile Include="Sources\Views\Panels\Properties\FormPropertiesReply.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Sources\Views\Panels\Properties\FormPropertiesReply.Designer.cs">
       <DependentUpon>FormPropertiesReply.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sources\Exporters\ExporterJson.cs" />
+    <Compile Include="Sources\Controllers\Exporters\ExporterJson.cs" />
     <Compile Include="Sources\EditorHelper.cs" />
-    <Compile Include="Sources\Panels\Properties\FormPropertiesSentence.cs">
+    <Compile Include="Sources\Views\Panels\Properties\FormPropertiesSentence.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sources\Panels\Properties\FormPropertiesSentence.Designer.cs">
+    <Compile Include="Sources\Views\Panels\Properties\FormPropertiesSentence.Designer.cs">
       <DependentUpon>FormPropertiesSentence.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sources\Panels\PanelProperties.cs">
+    <Compile Include="Sources\Views\Panels\PanelProperties.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sources\Panels\PanelProperties.Designer.cs">
+    <Compile Include="Sources\Views\Panels\PanelProperties.Designer.cs">
       <DependentUpon>PanelProperties.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sources\Panels\Properties\FormPropertiesChoice.cs">
+    <Compile Include="Sources\Views\Panels\Properties\FormPropertiesChoice.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sources\Panels\Properties\FormPropertiesChoice.Designer.cs">
+    <Compile Include="Sources\Views\Panels\Properties\FormPropertiesChoice.Designer.cs">
       <DependentUpon>FormPropertiesChoice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sources\Panels\Properties\FormPropertiesCommon.cs">
+    <Compile Include="Sources\Views\Panels\Properties\FormPropertiesCommon.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sources\Panels\Properties\FormPropertiesCommon.Designer.cs">
+    <Compile Include="Sources\Views\Panels\Properties\FormPropertiesCommon.Designer.cs">
       <DependentUpon>FormPropertiesCommon.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sources\Panels\Properties\FormPropertiesGoto.cs">
+    <Compile Include="Sources\Views\Panels\Properties\FormPropertiesGoto.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sources\Panels\Properties\FormPropertiesGoto.Designer.cs">
+    <Compile Include="Sources\Views\Panels\Properties\FormPropertiesGoto.Designer.cs">
       <DependentUpon>FormPropertiesGoto.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sources\Panels\Properties\FormPropertiesRoot.cs">
+    <Compile Include="Sources\Views\Panels\Properties\FormPropertiesRoot.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sources\Panels\Properties\FormPropertiesRoot.Designer.cs">
+    <Compile Include="Sources\Views\Panels\Properties\FormPropertiesRoot.Designer.cs">
       <DependentUpon>FormPropertiesRoot.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sources\Resources\Dialogue.cs" />
-    <Compile Include="Sources\Resources\DialogueNodeChoice.cs" />
-    <Compile Include="Sources\Resources\DialogueNodeGoto.cs" />
-    <Compile Include="Sources\Resources\DialogueNodeReply.cs" />
-    <Compile Include="Sources\Resources\DialogueNodeRoot.cs" />
-    <Compile Include="Sources\Resources\DialogueNodeSentence.cs" />
-    <Compile Include="Sources\Resources\NodeFlag.cs" />
-    <Compile Include="Sources\Resources\Package.cs" />
-    <Compile Include="Sources\Resources\Project.cs" />
-    <Compile Include="Sources\ResourcesHandler.cs" />
-    <Compile Include="Sources\Resources\DialogueNode.cs" />
-    <Compile Include="Sources\Documents\DocumentDialogue.cs">
+    <Compile Include="Sources\Models\Dialogue.cs" />
+    <Compile Include="Sources\Models\DialogueNodeChoice.cs" />
+    <Compile Include="Sources\Models\DialogueNodeGoto.cs" />
+    <Compile Include="Sources\Models\DialogueNodeReply.cs" />
+    <Compile Include="Sources\Models\DialogueNodeRoot.cs" />
+    <Compile Include="Sources\Models\DialogueNodeSentence.cs" />
+    <Compile Include="Sources\Models\NodeFlag.cs" />
+    <Compile Include="Sources\Models\Package.cs" />
+    <Compile Include="Sources\Models\Project.cs" />
+    <Compile Include="Sources\Controllers\ProjectController.cs" />
+    <Compile Include="Sources\Models\DialogueNode.cs" />
+    <Compile Include="Sources\Views\Documents\DocumentDialogueTreeView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sources\Documents\DocumentDialogue.Designer.cs">
-      <DependentUpon>DocumentDialogue.cs</DependentUpon>
+    <Compile Include="Sources\Views\Documents\DocumentDialogueTreeView.Designer.cs">
+      <DependentUpon>DocumentDialogueTreeView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sources\Resources\TranslationTable.cs" />
-    <Compile Include="Sources\Resources\VoiceActor.cs" />
+    <Compile Include="Sources\Models\TranslationTable.cs" />
+    <Compile Include="Sources\Models\VoiceActor.cs" />
     <Compile Include="Sources\Controls\TriStateTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Sources\Utility.cs" />
-    <Compile Include="Sources\Windows\WindowMain.cs">
+    <Compile Include="Sources\Views\Windows\WindowMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sources\Windows\WindowMain.Designer.cs">
+    <Compile Include="Sources\Views\Windows\WindowMain.Designer.cs">
       <DependentUpon>WindowMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sources\Panels\PanelProjectExplorer.cs">
+    <Compile Include="Sources\Views\Panels\PanelProjectExplorer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sources\Panels\PanelProjectExplorer.Designer.cs">
+    <Compile Include="Sources\Views\Panels\PanelProjectExplorer.Designer.cs">
       <DependentUpon>PanelProjectExplorer.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sources\EditorVersion.cs" />
     <Compile Include="Sources\WIN32.cs" />
-    <Compile Include="Sources\Windows\WindowViewer.cs">
+    <Compile Include="Sources\Views\Windows\WindowDialoguePlayer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Sources\Windows\WindowViewer.Designer.cs">
-      <DependentUpon>WindowViewer.cs</DependentUpon>
+    <Compile Include="Sources\Views\Windows\WindowDialoguePlayer.Designer.cs">
+      <DependentUpon>WindowDialoguePlayer.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Sources\Dialogs\DialogAbout.resx">
       <DependentUpon>DialogAbout.cs</DependentUpon>
@@ -313,50 +333,56 @@
     <EmbeddedResource Include="Sources\Dialogs\DialogSaveOnClose.resx">
       <DependentUpon>DialogSaveOnClose.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sources\Dialogs\DialogSearch.resx">
+        <DependentUpon>DialogSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sources\Dialogs\DialogStats.resx">
       <DependentUpon>DialogStats.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sources\Dialogs\DialogVoiceActors.resx">
       <DependentUpon>DialogVoiceActors.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Documents\DocumentProject.resx">
-      <DependentUpon>DocumentProject.cs</DependentUpon>
+    <EmbeddedResource Include="Sources\Views\Documents\DocumentProjectView.resx">
+      <DependentUpon>DocumentProjectView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Panels\PanelOutputLog.resx">
+    <EmbeddedResource Include="Sources\Views\Panels\PanelSearchResults.resx">
+      <DependentUpon>PanelSearchResults.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\Views\Panels\PanelOutputLog.resx">
       <DependentUpon>PanelOutputLog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Panels\Properties\FormPropertiesBranch.resx">
+    <EmbeddedResource Include="Sources\Views\Panels\Properties\FormPropertiesBranch.resx">
       <DependentUpon>FormPropertiesBranch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Panels\Properties\FormPropertiesReply.resx">
+    <EmbeddedResource Include="Sources\Views\Panels\Properties\FormPropertiesReply.resx">
       <DependentUpon>FormPropertiesReply.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Panels\Properties\FormPropertiesSentence.resx">
+    <EmbeddedResource Include="Sources\Views\Panels\Properties\FormPropertiesSentence.resx">
       <DependentUpon>FormPropertiesSentence.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Panels\PanelProperties.resx">
+    <EmbeddedResource Include="Sources\Views\Panels\PanelProperties.resx">
       <DependentUpon>PanelProperties.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Documents\DocumentDialogue.resx">
-      <DependentUpon>DocumentDialogue.cs</DependentUpon>
+    <EmbeddedResource Include="Sources\Views\Documents\DocumentDialogueTreeView.resx">
+      <DependentUpon>DocumentDialogueTreeView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Panels\Properties\FormPropertiesChoice.resx">
+    <EmbeddedResource Include="Sources\Views\Panels\Properties\FormPropertiesChoice.resx">
       <DependentUpon>FormPropertiesChoice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Panels\Properties\FormPropertiesCommon.resx">
+    <EmbeddedResource Include="Sources\Views\Panels\Properties\FormPropertiesCommon.resx">
       <DependentUpon>FormPropertiesCommon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Panels\Properties\FormPropertiesGoto.resx">
+    <EmbeddedResource Include="Sources\Views\Panels\Properties\FormPropertiesGoto.resx">
       <DependentUpon>FormPropertiesGoto.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Panels\Properties\FormPropertiesRoot.resx">
+    <EmbeddedResource Include="Sources\Views\Panels\Properties\FormPropertiesRoot.resx">
       <DependentUpon>FormPropertiesRoot.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Windows\WindowMain.resx">
+    <EmbeddedResource Include="Sources\Views\Windows\WindowMain.resx">
       <DependentUpon>WindowMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Panels\PanelProjectExplorer.resx">
+    <EmbeddedResource Include="Sources\Views\Panels\PanelProjectExplorer.resx">
       <DependentUpon>PanelProjectExplorer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -365,8 +391,8 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sources\Windows\WindowViewer.resx">
-      <DependentUpon>WindowViewer.cs</DependentUpon>
+    <EmbeddedResource Include="Sources\Views\Windows\WindowDialoguePlayer.resx">
+      <DependentUpon>WindowDialoguePlayer.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -516,6 +542,7 @@
   <ItemGroup>
     <None Include="Resources\group.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

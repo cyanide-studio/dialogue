@@ -1,20 +1,23 @@
 ﻿using System;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace DialogueEditor
 {
-    static public class WIN32
+    public static class WIN32
     {
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, Int32 wMsg, bool wParam, Int32 lParam);
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int wMsg, bool wParam, int lParam);
         private const int WM_SETREDRAW = 11;
 
-        static public void StopRedraw(Form form)
+        public static void StopRedraw(Form form)
         {
             SendMessage(form.Handle, WM_SETREDRAW, false, 0);
         }
 
-        static public void ResumeRedraw(Form form)
+        public static void ResumeRedraw(Form form)
         {
             SendMessage(form.Handle, WM_SETREDRAW, true, 0);
         }
@@ -26,16 +29,16 @@ namespace DialogueEditor
             if (SystemInformation.TerminalServerSession)
                 return;
 
-            System.Reflection.PropertyInfo property =
+            PropertyInfo property =
                   typeof(Control).GetProperty(
                         "DoubleBuffered",
-                        System.Reflection.BindingFlags.NonPublic |
-                        System.Reflection.BindingFlags.Instance);
+                        BindingFlags.NonPublic |
+                        BindingFlags.Instance);
 
             property.SetValue(c, true, null);
         }
 
-        static public void ShowCrashMessage(object sender, System.Threading.ThreadExceptionEventArgs t)
+        public static void ShowCrashMessage(object sender, ThreadExceptionEventArgs t)
         {
             string errorMsg = "A crash occurred...\nPlease send a screenshot of this message to the devs !\n\n";
             errorMsg = errorMsg + t.Exception.Message;
