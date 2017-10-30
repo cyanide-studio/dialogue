@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DialogueEditor
@@ -25,10 +19,10 @@ namespace DialogueEditor
         {
             InitializeComponent();
 
-            if (ResourcesHandler.Project.ListActors.Count > 0)
+            if (ProjectController.Project.ListActors.Count > 0)
             {
                 var actors = new Dictionary<string, string>();
-                foreach (Actor actor in ResourcesHandler.Project.ListActors)
+                foreach (Actor actor in ProjectController.Project.ListActors)
                 {
                     actors.Add(actor.ID, actor.Name);
                 }

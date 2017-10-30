@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DialogueEditor
@@ -51,7 +46,7 @@ namespace DialogueEditor
 
         private void populateDialogueTreeView(List<Dialogue> inCheckedDialogues)
         {
-            var project = ResourcesHandler.Project;
+            var project = ProjectController.Project;
 
             if (project == null)
                 return;
@@ -65,7 +60,7 @@ namespace DialogueEditor
                 EditorHelper.SetNodeIcon(nodePackage, ENodeIcon.Package);
             }
 
-            foreach (Dialogue dialogue in ResourcesHandler.GetAllDialogues())
+            foreach (Dialogue dialogue in ProjectController.GetAllDialogues())
             {
                 if (dialogue == null)
                     continue;
