@@ -196,13 +196,14 @@ namespace DialogueEditor
             }
         }
 
-        public void Save()
+        public void Save(bool force)
         {
             ResolvePendingDirty();
-            if (Dirty)
+            if (Dirty || force)
             {
                 ExporterJson.SaveDialogueFile(ProjectController.Project, Dialogue);
                 Dirty = false;
+
                 RefreshDirtyFlags();
                 PostSave();
             }
@@ -212,6 +213,7 @@ namespace DialogueEditor
         {
             ExporterJson.LoadDialogueFile(ProjectController.Project, Dialogue);
             Dirty = false;
+
             RefreshDirtyFlags();
         }
 

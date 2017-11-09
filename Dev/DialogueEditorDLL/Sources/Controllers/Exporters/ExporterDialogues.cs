@@ -680,7 +680,7 @@ namespace DialogueEditor
                         ProjectController.SetDirty(dialogue);
                     }
 
-                    ProjectController.SaveAllDirty();
+                    ProjectController.SaveAll();
                     ProjectController.ResyncAllFiles();
                 }
             }

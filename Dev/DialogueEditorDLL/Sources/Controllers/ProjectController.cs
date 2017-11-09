@@ -261,6 +261,7 @@ namespace DialogueEditor
         {
             ExporterJson.SaveProjectFile(Project);
             Dirty = false;
+
             RefreshDirtyFlags();
         }
 
@@ -622,6 +623,7 @@ namespace DialogueEditor
             Dirty = true;
         }
 
+        //TODO: This one seems called a bit too many times on SaveAll/ReloadAll processes, I need to have a look
         public static void RefreshDirtyFlags()
         {
             foreach (KeyValuePair<string, DialogueController> entry in DialogueControllers)
@@ -675,16 +677,6 @@ namespace DialogueEditor
             return null;
         }
 
-        public static void SaveAllFiles()
-        {
-            if (Dirty)
-                SaveProject();
-            foreach (var entry in DialogueControllers)
-            {
-                entry.Value.Save();
-            }
-        }
-
         public static bool CloseAllDocuments()
         {
             if (Project != null)
@@ -710,6 +702,21 @@ namespace DialogueEditor
             return true;
         }
 
+        public static void SaveAll()
+        {
+            if (Dirty)
+            {
+                SaveProject();
+            }
+
+            foreach (var kvp in DialogueControllers)
+            {
+                kvp.Value.Save(false);
+            }
+
+            RefreshDirtyFlags();
+        }
+
         public static void ForceSaveAll()
         {
             if (Project == null)
@@ -723,13 +730,23 @@ namespace DialogueEditor
             LogInfo("Checking all Dialogues - Begin");
             CheckAll();
             LogInfo("Checking all Dialogues - End");
-            SaveAll();
 
-            RefreshDirtyFlags();
+            ForceSaveAll_Impl();
+            
             LogInfo("All Project Files Saved");
         }
 
-        public static void ReloadAllFiles()
+        private static void ForceSaveAll_Impl()
+        {
+            SaveProject();
+
+            foreach (var kvp in DialogueControllers)
+            {
+                kvp.Value.Save(true);
+            }
+        }
+        
+        public static void ReloadAll()
         {
             if (Project == null)
                 return;
@@ -762,55 +779,24 @@ namespace DialogueEditor
 
             if (reloadOK)
             {
-                ReloadAll();
-
-                foreach (var entry in DialogueControllers)
-                {
-                    entry.Value.OnPostReload();
-                }
+                ReloadAll_Impl();
 
                 LogInfo("Reloaded all project files");
             }
         }
 
-        public static void SaveAllDirty()
-        {
-            if (Dirty)
-            {
-                ExporterJson.SaveProjectFile(Project);
-                Dirty = false;
-            }
-
-            foreach (var kvp in DialogueControllers)
-            {
-                kvp.Value.Save();
-            }
-
-            RefreshDirtyFlags();
-        }
-
-        public static void SaveAll()
-        {
-            ExporterJson.SaveProjectFile(Project);
-            Dirty = false;
-            SaveDialogues();
-        }
-
-        public static void SaveDialogues()
-        {
-            foreach (var kvp in DialogueControllers)
-            {
-                kvp.Value.Save();
-            }
-        }
-
-        public static void ReloadAll()
+        private static void ReloadAll_Impl()
         {
             ReloadProject();
 
             foreach (var kvp in DialogueControllers)
             {
                 kvp.Value.Reload();
+            }
+
+            foreach (var entry in DialogueControllers)
+            {
+                entry.Value.OnPostReload();
             }
         }
 

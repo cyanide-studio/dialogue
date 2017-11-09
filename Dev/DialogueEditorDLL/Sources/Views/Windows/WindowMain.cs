@@ -64,7 +64,7 @@ namespace DialogueEditor
 
 //#if DEBUG
 /*
-            //Debug code to generate 11250 dummy dialogues (337500 sentences, 6075000 words)
+            //Debug code to generate 11250 dummy dialogues (337,500 sentences, 6,075,000 words) (Bible is less than 800,000 words)
             //
             //  * USAGE
             //
@@ -82,6 +82,13 @@ namespace DialogueEditor
             // you can create a 'ProjectBig' folder to store this test project, its included in the git ignore file
             //
 
+            if (ProjectController.Project.ListActors.Count == 0)
+            {
+                ProjectController.AddActor(new Actor() { ID = ProjectController.Project.GenerateNewActorID(), Name = "Default Speaker" });
+            }
+
+            Actor defaultSpeaker = ProjectController.Project.ListActors[0];
+
             int indexFile = 0;
             for (int a = 1; a <= 15; ++a)
             {
@@ -96,22 +103,25 @@ namespace DialogueEditor
                         ++indexFile;
                         string file = string.Format("File_{0:000000}", indexFile);
                         Dialogue dialogue = ProjectController.CreateDialogueFile(Path.Combine(chapter, quest, file));
-
-                        DialogueNode current = dialogue.RootNode;
-                        for (int s = 1; s <= 30; ++s)
+                        if (dialogue != null)
                         {
-                            DialogueNodeSentence sentence = new DialogueNodeSentence();
-                            dialogue.AddNode(sentence);
-                            sentence.Sentence = "Hello, I'm a dialogue sentence. I'm just here to fill this void space. Please enjoy your day - " + indexFile + "_" + sentence.ID;
-                            current.Next = sentence;
+                            DialogueNode current = dialogue.RootNode;
+                            for (int s = 1; s <= 30; ++s)
+                            {
+                                DialogueNodeSentence sentence = new DialogueNodeSentence();
+                                dialogue.AddNode(sentence);
+                                sentence.SpeakerID = defaultSpeaker.ID;
+                                sentence.Sentence = "Hello, I'm a dialogue sentence. I'm just here to fill this void space. Please enjoy your day - " + indexFile + "_" + sentence.ID;
+                                current.Next = sentence;
 
-                            current = sentence;
+                                current = sentence;
+                            }
                         }
                     }
                 }
             }
 
-            ProjectController.SaveDialogues();
+            ProjectController.ForceSaveAll();
             ProjectController.ResyncAllFiles();
 */
 //#endif
@@ -250,7 +260,7 @@ namespace DialogueEditor
 
                     foreach (DialogueController dialogueController in dirtyDialogueControllers)
                     {
-                        dialogueController.Save();
+                        dialogueController.Save(false);
                     }
                 }
                 else    //DialogResult.Ignore > Close without saving
@@ -622,13 +632,13 @@ namespace DialogueEditor
             {
                 var document = dockPanel.ActiveDocument as DocumentDialogueView;
                 document.DialogueController.ResolvePendingDirty();
-                document.DialogueController.Save();
+                document.DialogueController.Save(false);
             }
         }
 
         private void OnSaveAllFiles(object sender, EventArgs e)
         {
-            ProjectController.SaveAllFiles();
+            ProjectController.SaveAll();
         }
 
         private void OnForceSaveAll(object sender, EventArgs e)
@@ -701,7 +711,7 @@ namespace DialogueEditor
 
         private void OnReloadAllFiles(object sender, EventArgs e)
         {
-            ProjectController.ReloadAllFiles();
+            ProjectController.ReloadAll();
         }
 
         private void OnShowHelp(object sender, EventArgs e)
