@@ -61,7 +61,7 @@ namespace DialogueEditor
             VersionProject = "";
             VersionEditor = "";
             PackageName = "";
-            LastIndex = 0;
+            LastIndex = DialogueNode.ID_NULL;
             SceneType = "";
             VoiceBank = "";
             Context = "";
@@ -236,6 +236,7 @@ namespace DialogueEditor
 
         public int GenerateID()
         {
+            // By default, LastIndex is DialogueNode.ID_NULL (-1), so the Root node should have an ID of 0, and the first "real" node an ID of 1.
             ++LastIndex;
             return LastIndex;
         }
