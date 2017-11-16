@@ -610,6 +610,16 @@ namespace DialogueEditor
                 e.Cancel = true;
             }*/
         }
+        
+        private void OnExpandAll(object sender, EventArgs e)
+        {
+            tree.SelectedNode.ExpandAll();
+        }
+
+        private void OnCollapseAll(object sender, EventArgs e)
+        {
+            tree.SelectedNode.Collapse(false);
+        }
 
         private void OnTextSearchChanged(object sender, EventArgs e)
         {
