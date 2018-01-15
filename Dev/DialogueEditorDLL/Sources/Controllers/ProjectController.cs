@@ -25,31 +25,25 @@ namespace DialogueEditor
         #region Dialogues management
         public static bool AddDialogue(Dialogue dialogue)
         {
-            string name = dialogue.GetName();
-            if (!DialogueControllers.ContainsKey(name))
+            DialogueController dc;
+            if (DialogueControllers.TryGetValue(dialogue.Name, out dc))
             {
-                DialogueControllers.Add(name, new DialogueController(dialogue));
-                return true;
+                LogError($"Dialogue {dialogue.Name} already exists at {dialogue.FullPath} and {dc.Dialogue.FullPath}, ignored");
+                return false;
             }
 
-            LogError("Dialogue already exists (ignored) : " + name + " at \"" + dialogue.GetFilePath() + "\" and \"" + DialogueControllers[name].Dialogue.GetFilePath() + "\"");
-            return false;
+            DialogueControllers.Add(dialogue.Name, new DialogueController(dialogue));
+            return true;
         }
 
         public static bool RemoveDialogue(Dialogue dialogue)
         {
-            string name = dialogue.GetName();
-            if (DialogueControllers.ContainsKey(name))
-            {
-                DialogueControllers.Remove(name);
-                return true;
-            }
-            return false;
+            return DialogueControllers.Remove(dialogue.Name);
         }
 
         public static Dialogue CreateDialogueFile(string path, Package package = null)
         {
-            string projectDirectory = Path.Combine(Environment.CurrentDirectory, Project.GetFilePath());
+            string projectDirectory = Path.Combine(Environment.CurrentDirectory, Project.Path);
             string filePath = "";
             try
             {
@@ -114,11 +108,8 @@ namespace DialogueEditor
 
         public static Dialogue GetDialogue(string name)
         {
-            if (DialogueControllers.ContainsKey(name))
-            {
-                return DialogueControllers[name].Dialogue;
-            }
-            return null;
+            DialogueController dc;
+            return DialogueControllers.TryGetValue(name, out dc) ? dc.Dialogue : null;
         }
 
         public static List<Dialogue> GetAllDialogues()
@@ -160,8 +151,7 @@ namespace DialogueEditor
             ExporterJson.SaveProjectFile(Project);
             LoadAllDialogues();
 
-            if (EditorCore.OnProjectLoad != null)
-                EditorCore.OnProjectLoad();
+            EditorCore.OnProjectLoad?.Invoke();
         }
 
         public static Project CreateProjectInstance(string name)
@@ -171,8 +161,7 @@ namespace DialogueEditor
             Project = new Project();
             Project.Init("", name);
 
-            if (EditorCore.OnProjectLoad != null)
-                EditorCore.OnProjectLoad();
+            EditorCore.OnProjectLoad?.Invoke();
 
             return Project;
         }
@@ -191,8 +180,7 @@ namespace DialogueEditor
             ExporterJson.LoadProjectFile(Project);
             LoadAllDialogues();
 
-            if (EditorCore.OnProjectLoad != null)
-                EditorCore.OnProjectLoad();
+            EditorCore.OnProjectLoad?.Invoke();
         }
 
         public static void ReloadProject()
@@ -208,7 +196,7 @@ namespace DialogueEditor
 
         public static void ParseProject()
         {
-            string projectDirectory = Path.Combine(Environment.CurrentDirectory, Project.GetFilePath());
+            string projectDirectory = Path.Combine(Environment.CurrentDirectory, Project.Path);
             DirectoryInfo rootDir = new DirectoryInfo(projectDirectory);
 
             ParseDirectory(rootDir);
@@ -234,11 +222,11 @@ namespace DialogueEditor
 
             if (files != null)
             {
-                string projectDirectory = Path.Combine(Environment.CurrentDirectory, Project.GetFilePath());
+                string projectDirectory = Path.Combine(Environment.CurrentDirectory, Project.Path);
 
                 foreach (FileInfo fi in files)
                 {
-                    if (fi.Extension == Dialogue.GetExtension())
+                    if (fi.Extension == Dialogue.Extension)
                     {
                         string filePath = Utility.GetRelativePath(fi.FullName, projectDirectory);
 
@@ -485,7 +473,7 @@ namespace DialogueEditor
             if (dialogueController == null)
             {
                 dialogueController = new DialogueController(dialogue);
-                DialogueControllers[dialogue.GetName()] = dialogueController;
+                DialogueControllers[dialogue.Name] = dialogueController;
             }
 
             DocumentDialogueView newDocument = (T) Activator.CreateInstance(typeof(T), dialogueController);
@@ -542,12 +530,12 @@ namespace DialogueEditor
 
         public static void LogInfo(string message, Dialogue dialogue)
         {
-            LogInfo(message, dialogue.GetName(), DialogueNode.ID_NULL);
+            LogInfo(message, dialogue.Name, DialogueNode.ID_NULL);
         }
 
         public static void LogInfo(string message, Dialogue dialogue, DialogueNode node)
         {
-            LogInfo(message, dialogue.GetName(), node.ID);
+            LogInfo(message, dialogue.Name, node.ID);
         }
 
         public static void LogWarning(string message)
@@ -562,12 +550,12 @@ namespace DialogueEditor
 
         public static void LogWarning(string message, Dialogue dialogue)
         {
-            LogWarning(message, dialogue.GetName(), DialogueNode.ID_NULL);
+            LogWarning(message, dialogue.Name, DialogueNode.ID_NULL);
         }
 
         public static void LogWarning(string message, Dialogue dialogue, DialogueNode node)
         {
-            LogWarning(message, dialogue.GetName(), node.ID);
+            LogWarning(message, dialogue.Name, node.ID);
         }
 
         public static void LogError(string message)
@@ -582,40 +570,40 @@ namespace DialogueEditor
 
         public static void LogError(string message, Dialogue dialogue)
         {
-            LogError(message, dialogue.GetName(), DialogueNode.ID_NULL);
+            LogError(message, dialogue.Name, DialogueNode.ID_NULL);
         }
 
         public static void LogError(string message, Dialogue dialogue, DialogueNode node)
         {
-            LogError(message, dialogue.GetName(), node.ID);
+            LogError(message, dialogue.Name, node.ID);
         }
-        #endregion 
+        #endregion
 
         #region Misc
         public static bool IsDirty(Dialogue dialogue)
         {
             if (dialogue != null)
-                return IsDirty(dialogue.GetName());
+                return IsDirty(dialogue.Name);
             return false;
         }
 
         public static bool IsDirty(string name)
         {
-            if (DialogueControllers.ContainsKey(name))
-                return DialogueControllers[name].Dirty;
-            return false;
+            DialogueController dc;
+            return DialogueControllers.TryGetValue(name, out dc) ? dc.Dirty : false;
         }
 
         public static void SetDirty(Dialogue dialogue)
         {
             if (dialogue != null)
-                SetDirty(dialogue.GetName());
+                SetDirty(dialogue.Name);
         }
 
         public static void SetDirty(string name)
         {
-            if (DialogueControllers.ContainsKey(name))
-                DialogueControllers[name].SetDirty();
+            DialogueController dc;
+            if (DialogueControllers.TryGetValue(name, out dc))
+                dc.SetDirty();
         }
 
         public static void SetDirty()
@@ -732,7 +720,7 @@ namespace DialogueEditor
             LogInfo("Checking all Dialogues - End");
 
             ForceSaveAll_Impl();
-            
+
             LogInfo("All Project Files Saved");
         }
 
@@ -745,7 +733,7 @@ namespace DialogueEditor
                 kvp.Value.Save(true);
             }
         }
-        
+
         public static void ReloadAll()
         {
             if (Project == null)
@@ -847,7 +835,7 @@ namespace DialogueEditor
 
         public static void AddSearchResult(string message, Dialogue dialogue, DialogueNode node)
         {
-            SearchResults.WriteLine(message, dialogue.GetName(), node.ID);
+            SearchResults.WriteLine(message, dialogue.Name, node.ID);
         }
         #endregion
     }

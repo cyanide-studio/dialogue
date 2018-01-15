@@ -51,11 +51,6 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
 
-        public static string GetExtension()
-        {
-            return ".dlg";
-        }
-
         public Dialogue()
         {
             VersionProject = "";
@@ -103,25 +98,16 @@ namespace DialogueEditor
             ListAdditionalActors = other.ListAdditionalActors;
         }
 
-        public string GetFilePath()
-        {
-            return path;
-        }
+        [JsonIgnore]
+        public string Name => name;
+        public static string Extension => ".dlg";
 
-        public string GetFilePathName()
-        {
-            return Path.Combine(path, GetFileName());
-        }
-
-        public string GetFileName()
-        {
-            return name + GetExtension();
-        }
-
-        public string GetName()
-        {
-            return name;
-        }
+        [JsonIgnore]
+        public string Path => path;
+        [JsonIgnore]
+        public string FullPath => System.IO.Path.Combine(path, FileName);
+        [JsonIgnore]
+        public string FileName => name + Extension;
 
         public void Init(string inPath, string inName)
         {
@@ -135,7 +121,7 @@ namespace DialogueEditor
             Package = project.GetPackage(PackageName);
             if (Package == null)
             {
-                ProjectController.LogError("Loading a Dialogue without Package (forcing default) : " + GetName(), this);
+                ProjectController.LogError($"Loading Dialogue {Name} without Package, forcing default", this);
                 Package = project.GetDefaultPackage();
             }
 
@@ -170,13 +156,13 @@ namespace DialogueEditor
 
         public void PreSave(Project project)
         {
-            //Prepare File
+            //Prepare Path
             VersionProject = EditorCore.VersionProject;
             VersionEditor = EditorVersion.GetVersion();
 
             if (Package == null)
             {
-                ProjectController.LogError("Saving a Dialogue without Package (forcing default) : " + GetName(), this);
+                ProjectController.LogError($"Saving Dialogue {Name} without Package, forcing default", this);
                 Package = project.GetDefaultPackage();
             }
 
@@ -404,7 +390,7 @@ namespace DialogueEditor
                     next = nextNext;
                 }
             }
-            
+
             foreach (DialogueNode node in ListNodes)
             {
                 //Link next node to previous node
@@ -507,3 +493,4 @@ namespace DialogueEditor
         }
     }
 }
+

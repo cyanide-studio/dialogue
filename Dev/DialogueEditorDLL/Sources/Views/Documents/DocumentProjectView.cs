@@ -117,7 +117,7 @@ namespace DialogueEditor
 
         public override void RefreshTitle()
         {
-            Text = "Project " + ProjectController.Project.GetName();
+            Text = "Project " + ProjectController.Project.Name;
             if (ProjectController.Dirty)
                 Text += "*";
         }
@@ -974,7 +974,7 @@ namespace DialogueEditor
 
             ready = setReady;
         }
-        
+
         public void RefreshActorVoiceKitList()
         {
             bool setReady = ready;  //only set ready to true if it was true when entering here

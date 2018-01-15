@@ -187,8 +187,8 @@ namespace DialogueEditor
             string configFile = EditorCore.PathPanelsConfig;
             //if (m_bSaveLayout)
             dockPanel.SaveAsXml(configFile);
-            // else if (File.Exists(configFile))
-            //     File.Delete(configFile);
+            // else if (Path.Exists(configFile))
+            //     Path.Delete(configFile);
         }
 
         private void EnsurePanels()
@@ -331,7 +331,7 @@ namespace DialogueEditor
                     ProjectController.ClearProperties();
                 }
 
-                lastClosedDialogue = document.DialogueController.Dialogue.GetName();
+                lastClosedDialogue = document.DialogueController.Dialogue.Name;
                 ProjectController.OnDocumentDialogueClosed(document);
                 return true;
             }
@@ -503,7 +503,7 @@ namespace DialogueEditor
 
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Title = "Create Dialogue";
-            dialog.Filter = "Dialogue Files|*" + Dialogue.GetExtension();
+            dialog.Filter = "Dialogue Files|*" + Dialogue.Extension;
             dialog.InitialDirectory = projectDirectory;
 
             DialogResult result = dialog.ShowDialog();
@@ -751,7 +751,7 @@ namespace DialogueEditor
                 }
             }
         }
-        
+
         private void OnSearchAllFiles(object sender, EventArgs e)
         {
             if (ProjectController.Project != null)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace DialogueEditor
 {
@@ -56,11 +57,6 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
 
-        public static string GetExtension()
-        {
-            return ".project";
-        }
-
         public Project()
         {
             VersionProject = "";
@@ -88,26 +84,17 @@ namespace DialogueEditor
             path = inPath;
             name = inName;
         }
-        
-        public string GetFilePath()
-        {
-            return path;
-        }
 
-        public string GetFilePathName()
-        {
-            return Path.Combine(path, GetFileName());
-        }
+        [JsonIgnore]
+        public string Name => name;
+        public static string Extension => ".project";
 
-        public string GetFileName()
-        {
-            return name + GetExtension();
-        }
-
-        public string GetName()
-        {
-            return name;
-        }
+        [JsonIgnore]
+        public string Path => path;
+        [JsonIgnore]
+        public string FileName => Name + Extension;
+        [JsonIgnore]
+        public string FullPath => System.IO.Path.Combine(path, FileName);
 
         public void PreSave()
         {

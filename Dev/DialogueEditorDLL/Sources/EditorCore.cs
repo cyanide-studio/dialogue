@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DialogueEditor
@@ -184,26 +185,22 @@ namespace DialogueEditor
 
         public static string GetCustomListKeyFromValue(string listName, string value)
         {
-            if (CustomLists.ContainsKey(listName))
+            Dictionary<string, string> list;
+            if (CustomLists.TryGetValue(listName, out list))
             {
-                foreach (KeyValuePair<string, string> kvp in CustomLists[listName])
-                {
+                foreach (KeyValuePair<string, string> kvp in list)
                     if (kvp.Value == value)
                         return kvp.Key;
-                }
             }
             return "";
         }
 
         public static string GetCustomListValueFromKey(string listName, string key)
         {
-            if (CustomLists.ContainsKey(listName))
-            {
-                if (CustomLists[listName].ContainsKey(key))
-                {
-                    return CustomLists[listName][key];
-                }
-            }
+            Dictionary<string, string> list;
+            string value;
+            if (CustomLists.TryGetValue(listName, out list) && list.TryGetValue(key, out value))
+                return value;
             return "";
         }
     }

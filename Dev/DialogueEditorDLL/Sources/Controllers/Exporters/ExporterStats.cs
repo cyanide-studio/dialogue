@@ -32,7 +32,7 @@ namespace DialogueEditor
 
             public void AddSentence(Dialogue dialogue, string actorID, string text)
             {
-                DialogueStats dialogueStats = Dialogues.GetOrAdd(dialogue.GetName(), (key) => new DialogueStats());
+                DialogueStats dialogueStats = Dialogues.GetOrAdd(dialogue.Name, (key) => new DialogueStats());
                 ActorStats actorStats = Actors.GetOrAdd(actorID, (key) => new ActorStats());
                 Packages.Add(dialogue.Package);
 
@@ -50,7 +50,7 @@ namespace DialogueEditor
 
             public void AddReply(Dialogue dialogue, string text)
             {
-                DialogueStats dialogueStats = Dialogues.GetOrAdd(dialogue.GetName(), (key) => new DialogueStats());
+                DialogueStats dialogueStats = Dialogues.GetOrAdd(dialogue.Name, (key) => new DialogueStats());
                 Packages.Add(dialogue.Package);
 
                 string[] split = text.Split(DelimiterChars, StringSplitOptions.RemoveEmptyEntries);
@@ -241,7 +241,7 @@ namespace DialogueEditor
             public int Words = 0;
             public int Sentences = 0;
         }
-        
+
         public static void WriteStats(TextWriter writer, ProjectStats projectStats, List<Language> languages, bool workstringOnly, bool workstringFallback)
         {
             var project = ProjectController.Project;

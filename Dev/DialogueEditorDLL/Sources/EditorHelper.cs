@@ -158,18 +158,18 @@ namespace DialogueEditor
         public static string GetProjectDirectory()
         {
             if (ProjectController.Project != null)
-                return Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, ProjectController.Project.GetFilePath()));
+                return Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, ProjectController.Project.Path));
             return "";
         }
 
         public static string GetPrettyNodeID(Dialogue dialogue, DialogueNode node)
         {
-            return string.Format("{0}_{1}", dialogue.GetName(), node.ID.ToString());
+            return $"{dialogue.Name}_{node.ID}";
         }
 
         public static string GetPrettyNodeVoicingID(Dialogue dialogue, DialogueNode node)
         {
-            return string.Format("VX_{0}_{1}", dialogue.GetName(), node.ID.ToString());
+            return $"VX_{dialogue.Name}_{node.ID}";
         }
 
         public static string SanitizeText(string text)
@@ -189,18 +189,14 @@ namespace DialogueEditor
                 //TODO: Better parsing of Constants, this seems highly inefficient !
                 foreach (var constant in ProjectController.Project.ListConstants)
                 {
-                    if (language == null || language == EditorCore.LanguageWorkstring)
-                    {
-                        text = text.Replace("{" + constant.ID + "}", constant.Workstring);
-                    }
-                    else
+                    string replacement = constant.Workstring;
+                    if (language != null && language != EditorCore.LanguageWorkstring)
                     {
                         var entry = ProjectController.Project.Translations.GetEntry(constant.ID, language);
                         if (entry != null)
-                        {
-                            text = text.Replace("{" + constant.ID + "}", entry.Text);
-                        }
+                            replacement = entry.Text;
                     }
+                    text = text.Replace($"{{constant.ID}}", replacement);
                 }
             }
             return text;
@@ -275,12 +271,12 @@ namespace DialogueEditor
 
             if (!EditorCore.CustomLists["SceneTypes"].ContainsKey(dialogue.SceneType))
             {
-                ProjectController.LogError(string.Format("{0} - Unknown Scene Type : {1}", dialogue.GetName(), dialogue.SceneType), dialogue);
+                ProjectController.LogError($"{dialogue.Name} - Unknown Scene Type {dialogue.SceneType}", dialogue);
             }
 
             if (!EditorCore.CustomLists["Cameras"].ContainsKey(dialogue.Camera))
             {
-                ProjectController.LogError(string.Format("{0} - Unknown Camera : {1}", dialogue.GetName(), dialogue.Camera), dialogue);
+                ProjectController.LogError($"{dialogue.Name} - Unknown Camera {dialogue.Camera}", dialogue);
             }
 
             var usedIDs = new HashSet<int>();
@@ -289,7 +285,7 @@ namespace DialogueEditor
             {
                 if (usedIDs.Contains(node.ID))
                 {
-                    ProjectController.LogError(string.Format("{0} - Identical ID between two nodes : {1}", dialogue.GetName(), node.ID), dialogue, node);
+                    ProjectController.LogError($"{dialogue.Name} - Identical ID between two nodes {node.ID}", dialogue, node);
                 }
                 else
                 {
@@ -303,13 +299,13 @@ namespace DialogueEditor
 
                     if (nodeSentence.SpeakerID == "")
                     {
-                        ProjectController.LogError(string.Format("{0} {1} - Sentence has no Speaker", dialogue.GetName(), node.ID), dialogue, node);
+                        ProjectController.LogError($"{dialogue.Name} {node.ID} - Sentence has no Speaker", dialogue, node);
                     }
                     else
                     {
                         if (project.GetActorFromID(nodeSentence.SpeakerID) == null)
                         {
-                            ProjectController.LogError(string.Format("{0} {1} - Sentence has an invalid Speaker : {2}", dialogue.GetName(), node.ID, nodeSentence.SpeakerID), dialogue, node);
+                            ProjectController.LogError($"{dialogue.Name} {nodeSentence.SpeakerID} - Sentence has invalid Speaker {nodeSentence.SpeakerID}", dialogue, node);
                         }
                         else
                         {
@@ -321,7 +317,7 @@ namespace DialogueEditor
                     {
                         if (project.GetActorFromID(nodeSentence.ListenerID) == null)
                         {
-                            ProjectController.LogError(string.Format("{0} {1} - Sentence has an invalid Listener : {2}", dialogue.GetName(), node.ID, nodeSentence.ListenerID), dialogue, node);
+                            ProjectController.LogError($"{dialogue.Name} {node.ID} - Sentence has invalid Listener {nodeSentence.ListenerID}", dialogue, node);
                         }
                         else if (validSpeaker)
                         {
@@ -330,7 +326,7 @@ namespace DialogueEditor
 
                             if (speaker == listener)
                             {
-                                ProjectController.LogError(string.Format("{0} {1} - Listener is also Speaker", dialogue.GetName(), node.ID), dialogue, node);
+                                ProjectController.LogError($"{dialogue.Name} {node.ID} - Listener is also Speaker", dialogue, node);
                             }
                             else
                             {
@@ -338,11 +334,11 @@ namespace DialogueEditor
                                 {
                                     if (speaker.VoiceKit == listener.VoiceKit)
                                     {
-                                        ProjectController.LogWarning(string.Format("{0} {1} - Speaker and Listener have the same Voice Kit", dialogue.GetName(), node.ID), dialogue, node);
+                                        ProjectController.LogWarning($"{dialogue.Name} {node.ID} - Speaker and Listener have the same Voice Kit", dialogue, node);
                                     }
                                     else if (project.GetVoiceActorNameFromKit(speaker.VoiceKit) == project.GetVoiceActorNameFromKit(listener.VoiceKit))
                                     {
-                                        ProjectController.LogWarning(string.Format("{0} {1} - Speaker and Listener have the same Voice Actor", dialogue.GetName(), node.ID), dialogue, node);
+                                        ProjectController.LogWarning($"{dialogue.Name} {node.ID} - Speaker and Listener have the same Voice Actor", dialogue, node);
                                     }
                                 }
                             }
@@ -351,7 +347,7 @@ namespace DialogueEditor
 
                     if (nodeSentence.Sentence.Length > project.MaxLengthSentence)
                     {
-                        ProjectController.LogWarning(string.Format("{0} {1} - Sentence has too many characters", dialogue.GetName(), node.ID), dialogue, node);
+                        ProjectController.LogWarning($"{dialogue.Name} {node.ID} - Sentence has too many characters", dialogue, node);
                     }
                 }
                 else if (node is DialogueNodeChoice)
@@ -360,7 +356,7 @@ namespace DialogueEditor
 
                     if (nodeChoice.Replies.Count == 0)
                     {
-                        ProjectController.LogError(string.Format("{0} {1} - Choice has no Reply", dialogue.GetName(), node.ID), dialogue, node);
+                        ProjectController.LogError($"{dialogue.Name} {node.ID} - Choice has no Reply", dialogue, node);
                     }
                 }
                 else if (node is DialogueNodeReply)
@@ -369,7 +365,7 @@ namespace DialogueEditor
 
                     if (nodeReply.Reply.Length > project.MaxLengthReply)
                     {
-                        ProjectController.LogWarning(string.Format("{0} {1} - Reply has too many characters", dialogue.GetName(), node.ID), dialogue, node);
+                        ProjectController.LogWarning($"{dialogue.Name} {node.ID} - Reply has too many characters", dialogue, node);
                     }
                 }
                 else if (node is DialogueNodeGoto)
@@ -378,7 +374,7 @@ namespace DialogueEditor
 
                     if (nodeGoto.Goto == null)
                     {
-                        ProjectController.LogError(string.Format("{0} {1} - Goto has no Target", dialogue.GetName(), node.ID), dialogue, node);
+                        ProjectController.LogError($"{dialogue.Name} {node.ID} - Goto has no Target", dialogue, node);
                     }
                 }
                 else if (node is DialogueNodeBranch)
@@ -387,13 +383,12 @@ namespace DialogueEditor
 
                     if (nodeBranch.Branch == null)
                     {
-                        ProjectController.LogError(string.Format("{0} {1} - Branch has no Target", dialogue.GetName(), node.ID), dialogue, node);
+                        ProjectController.LogError($"{dialogue.Name} {node.ID} - Branch has no Target", dialogue, node);
                     }
                 }
             }
 
-            if (EditorCore.OnCheckDialogueErrors != null)
-                EditorCore.OnCheckDialogueErrors(dialogue);
+            EditorCore.OnCheckDialogueErrors?.Invoke(dialogue);
         }
     }
 }

@@ -73,7 +73,7 @@ namespace DialogueEditor
                 {
                     TreeNode nodeParent = nodePackages[0];
 
-                    string path = dialogue.GetFilePath();
+                    string path = dialogue.Path;
                     string[] folders = path.Split(new char[] { Path.DirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries);
                     string folderPath = "";
                     foreach (string folder in folders)
@@ -93,7 +93,7 @@ namespace DialogueEditor
                         }
                     }
 
-                    TreeNode nodeDialogue = nodeParent.Nodes.Add(dialogue.GetFileName(), dialogue.GetName());
+                    TreeNode nodeDialogue = nodeParent.Nodes.Add(dialogue.FileName, dialogue.Name);
                     nodeDialogue.Checked = checkedDialogues.Contains(dialogue);
                     nodeDialogue.Tag = dialogue;
                     EditorHelper.SetNodeIcon(nodeDialogue, ENodeIcon.Dialogue);

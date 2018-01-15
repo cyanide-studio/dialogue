@@ -91,7 +91,7 @@ namespace DialogueEditor
 
         private void RefreshWordCount()
         {
-            labelWordCount.Text = "(" + dialogueNode.Reply.Length + " chars)";
+            labelWordCount.Text = $"({dialogueNode.Reply.Length} chars)";
 
             Color color = Color.FromArgb(255, 0, 0, 0);
             if (dialogueNode.Reply.Length > ProjectController.Project.MaxLengthReply)
@@ -119,7 +119,7 @@ namespace DialogueEditor
             if (constant != null)
             {
                 int position = textBoxWorkstring.SelectionStart;
-                textBoxWorkstring.Text = textBoxWorkstring.Text.Insert(position, "{" + constant.ID + "}");
+                textBoxWorkstring.Text = textBoxWorkstring.Text.Insert(position, $"{{constant.ID}}");
                 textBoxWorkstring.SelectionStart = position + constant.ID.Count() + 2;    //size of ID + braces
 
                 CloseAutoComplete();
@@ -129,7 +129,7 @@ namespace DialogueEditor
         private string DrawItemAutoComplete(object item)
         {
             var constant = item as Constant;
-            return string.Format("{0}  ({1})", constant.ID, constant.Workstring);
+            return $"{constant.ID}  ({constant.Workstring})";
         }
 
         private void OnWorkstringKeyDown(object sender, KeyEventArgs e)
@@ -170,7 +170,7 @@ namespace DialogueEditor
 
             dialogueController.ResolvePendingDirty();
         }
-        
+
         private void OnCheckBoxChanged(object sender, EventArgs e)
         {
             UpdateBools(false);

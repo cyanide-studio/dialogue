@@ -38,7 +38,7 @@ namespace DialogueEditor
             public override void BindToName(Type type, out string assemblyName, out string typeName)
             {
                 if (!Bindings.Values.Contains(type))
-                    ProjectController.LogError("Unknown type on serialization : " + type);
+                    ProjectController.LogError($"Unknown type {type} on serialization");
 
                 assemblyName = null;
                 typeName = Bindings.Single(item => item.Value == type).Key;
@@ -46,10 +46,11 @@ namespace DialogueEditor
 
             public override Type BindToType(string assemblyName, string typeName)
             {
-                if (Bindings.ContainsKey(typeName))
-                    return Bindings[typeName];
+                Type binding;
+                if (Bindings.TryGetValue(typeName, out binding))
+                    return binding;
 
-                ProjectController.LogError("Unknown type on deserialization : " + typeName);
+                ProjectController.LogError($"Unknown type {typeName} on deserialization");
                 return null;
             }
         }
@@ -105,7 +106,7 @@ namespace DialogueEditor
             project.PreSave();
 
             //Serialize
-            string path = Path.Combine(EditorHelper.GetProjectDirectory(), project.GetFileName());
+            string path = Path.Combine(EditorHelper.GetProjectDirectory(), project.FileName);
             SerializeToFile(path, project);
 
             ExporterConstants.ExportToUnreal4();
@@ -117,7 +118,7 @@ namespace DialogueEditor
             dialogue.PreSave(project);
 
             //Serialize
-            string path = Path.Combine(EditorHelper.GetProjectDirectory(), dialogue.GetFilePathName());
+            string path = Path.Combine(EditorHelper.GetProjectDirectory(), dialogue.FullPath);
             SerializeToFile(path, dialogue);
         }
 
@@ -136,14 +137,14 @@ namespace DialogueEditor
         public static void LoadProjectFile(Project project)
         {
             //Deserialize
-            string path = Path.Combine(EditorHelper.GetProjectDirectory(), project.GetFileName());
+            string path = Path.Combine(EditorHelper.GetProjectDirectory(), project.FileName);
             DeserializeFromFile(path, project);
         }
 
         public static bool LoadDialogueFile(Project project, Dialogue dialogue)
         {
             //Deserialize
-            string path = Path.Combine(EditorHelper.GetProjectDirectory(), dialogue.GetFilePathName());
+            string path = Path.Combine(EditorHelper.GetProjectDirectory(), dialogue.FullPath);
             if (!DeserializeFromFile(path, dialogue))
                 return false;
 
@@ -206,7 +207,7 @@ namespace DialogueEditor
 
         private static bool DeserializeFromFile<T>(string path, T value)
         {
-            //var jObject = Newtonsoft.Json.Linq.JObject.Parse(File.ReadAllText(path));
+            //var jObject = Newtonsoft.Json.Linq.JObject.Parse(Path.ReadAllText(path));
             //int version = jObject.GetValue("Version");
 
             try
@@ -223,16 +224,16 @@ namespace DialogueEditor
             }
             catch (JsonReaderException e)
             {
-                ProjectController.LogError("A malformed file could not be loaded : " + path);
-                ProjectController.LogError("> exception : " + e.Message);
+                ProjectController.LogError("A malformed file could not be loaded: " + path);
+                ProjectController.LogError("> exception: " + e.Message);
                 return false;
             }
             catch (JsonSerializationException e)
             {
                 //TODO: Here I could plug additionnal handlers with older versions of the SerializationBinder
 
-                ProjectController.LogError("A file containing unknown serialization bindings could not be loaded : " + path);
-                ProjectController.LogError("> exception : " + e.Message);
+                ProjectController.LogError("A file containing unknown serialization bindings could not be loaded: " + path);
+                ProjectController.LogError("> exception: " + e.Message);
                 return false;
             }
 

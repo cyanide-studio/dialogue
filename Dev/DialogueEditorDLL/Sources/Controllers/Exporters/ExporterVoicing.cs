@@ -33,7 +33,7 @@ namespace DialogueEditor
             DateTime dateNow = Utility.GetCurrentTime();
             project.LastVoicingExportDate = dateNow;
             ProjectController.Dirty = true;
-            
+
             exportDirectory = dialog.ExportPath;
             if (dialog.UseDateDirectory)
                 exportDirectory = Path.Combine(exportDirectory, Utility.GetDateAsString(dateNow));
@@ -95,7 +95,7 @@ namespace DialogueEditor
 
         public static void ExportLocasToCSVFile(string directory, Project project, List<Dialogue> dialogues, Language language, bool workstringOnly, bool workstringFallback, DateTime dateFrom, ExporterStats.ProjectStats projectStats)
         {
-            string path = Path.Combine(directory, "Loca_" + project.GetName() + "_" + language.VoicingCode + ".csv");
+            string path = Path.Combine(directory, $"Loca_{project.Name}_{language.VoicingCode}.csv");
             using (StreamWriter file = new StreamWriter(path, false, Encoding.UTF8))
             {
                 //status, scene, voicing id, index, speaker, context, voicing comments, intensity, sentence, comments
@@ -132,7 +132,7 @@ namespace DialogueEditor
 
                             string nodeID = EditorHelper.GetPrettyNodeVoicingID(dialogue, dialogueNodeSentence);
                             string speaker = project.GetActorName(dialogueNodeSentence.SpeakerID);
-                            string scene = dialogue.GetName();
+                            string scene = dialogue.Name;
                             string context = dialogueNodeSentence.Context;
                             string comment = dialogueNodeSentence.Comment;
                             string intensity = dialogueNodeSentence.VoiceIntensity;
@@ -190,7 +190,7 @@ namespace DialogueEditor
 
         public static void ExportDialoguesToCSVFile(string directory, Project project, List<Dialogue> dialogues, Language language, DateTime dateFrom)
         {
-            string path = Path.Combine(directory, "Dialogues_" + project.GetName() + "_" + language.VoicingCode + ".csv");
+            string path = Path.Combine(directory, $"Dialogues_{project.Name}_{language.VoicingCode}.csv");
             using (StreamWriter file = new StreamWriter(path, false, Encoding.UTF8))
             {
                 //Scene, Scene Type, Voicing Context, Voicing Comments, Comments
@@ -205,7 +205,7 @@ namespace DialogueEditor
 
                 foreach (Dialogue dialogue in dialogues)
                 {
-                    string name = dialogue.GetName();
+                    string name = dialogue.Name;
                     string context = dialogue.Context;
                     string sceneType = dialogue.SceneType;
 
@@ -222,7 +222,7 @@ namespace DialogueEditor
 
         public static void ExportActorsToCSVFile(string directory, Project project, List<Dialogue> dialogues, Language language, DateTime dateFrom)
         {
-            string path = Path.Combine(directory, "Actors_" + project.GetName() + "_" + language.VoicingCode + ".csv");
+            string path = Path.Combine(directory, $"Actors_{project.Name}_{language.VoicingCode}.csv");
             using (StreamWriter file = new StreamWriter(path, false, Encoding.UTF8))
             {
                 //Name, Voice Actor, Species, Gender, Build, Age, Height, Personality, Voice Kit, ID
@@ -276,7 +276,7 @@ namespace DialogueEditor
 
         public static void ExportDialoguesToWwiseTextFile(string directory, Project project, List<Dialogue> dialogues, Language language, DateTime dateFrom)
         {
-            string path = Path.Combine(directory, "Wwise_" + project.GetName() + "_" + language.VoicingCode + ".txt");
+            string path = Path.Combine(directory, $"Wwise_{project.Name}_{language.VoicingCode}.txt");
             using (StreamWriter file = new StreamWriter(path, false, Encoding.Unicode))
             {
                 file.WriteLine("Filename\tContainer\tSVComment\tComment");

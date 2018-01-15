@@ -105,7 +105,7 @@ namespace DialogueEditor
             bool isDefault = workstringOnly || project.GetDefaultLanguage() == language;
 
             //Fill existing locas
-            /*if (File.Exists(path))
+            /*if (Path.Exists(path))
             {
                 using (System.IO.StreamReader file = new System.IO.StreamReader(path, Encoding.UTF8))
                 {

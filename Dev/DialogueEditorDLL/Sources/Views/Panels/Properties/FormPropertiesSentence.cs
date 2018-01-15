@@ -30,7 +30,7 @@ namespace DialogueEditor
         {
             dialogueController = inDialogueController;
             dialogueNode = inDialogueNode;
-        
+
             Project project = ProjectController.Project;
 
             //Text
@@ -234,17 +234,18 @@ namespace DialogueEditor
             string animset = comboBoxMood.SelectedValue as string;
 
             var anims = new Dictionary<string, string>();
-            if (EditorCore.Animations.ContainsKey(animset))
+            List<string> animationList;
+            if (EditorCore.Animations.TryGetValue(animset, out animationList))
             {
                 try
                 {
                     anims.Add("", "<Auto>");
-                    anims = anims.Concat(EditorCore.Animations[animset].ToDictionary(item => item))
+                    anims = anims.Concat(animationList.ToDictionary(item => item))
                                  .ToDictionary(item => item.Key, item => item.Value);
                 }
                 catch (ArgumentException)
                 {
-                    ProjectController.LogError(string.Format("Animset \"{0}\" contains duplicate animation names", animset));
+                    ProjectController.LogError($"Animset \"{animset}\" contains duplicate animation names");
                 }
 
                 comboBoxAnim.DataSource = new BindingSource(anims, null);
@@ -276,7 +277,7 @@ namespace DialogueEditor
             if (constant != null)
             {
                 int position = textBoxWorkstring.SelectionStart;
-                textBoxWorkstring.Text = textBoxWorkstring.Text.Insert(position, "{" + constant.ID + "}");
+                textBoxWorkstring.Text = textBoxWorkstring.Text.Insert(position, $"{{constant.ID}}");
                 textBoxWorkstring.SelectionStart = position + constant.ID.Count() + 2;    //size of ID + braces
 
                 CloseAutoComplete();
@@ -286,7 +287,7 @@ namespace DialogueEditor
         private string DrawItemAutoComplete(object item)
         {
             var constant = item as Constant;
-            return string.Format("{0}  ({1})", constant.ID, constant.Workstring);
+            return $"{constant.ID}  ({constant.Workstring})";
         }
 
         private void OnWorkstringKeyDown(object sender, KeyEventArgs e)

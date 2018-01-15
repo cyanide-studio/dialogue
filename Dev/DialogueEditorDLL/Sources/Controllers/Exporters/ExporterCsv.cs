@@ -143,15 +143,9 @@ namespace DialogueEditor
             //Get a cell value from the current line, considering headers redirection
             public string GetCell(string header)
             {
-                if (redirectors.ContainsKey(header))
-                {
-                    header = redirectors[header];
-                }
-                if (lineCells.ContainsKey(header))
-                {
-                    return lineCells[header];
-                }
-                return string.Empty;
+                redirectors.TryGetValue(header, out header);
+                string cell;
+                return lineCells.TryGetValue(header, out cell) ? cell : string.Empty;
             }
 
             //GetCell variant for DateTime

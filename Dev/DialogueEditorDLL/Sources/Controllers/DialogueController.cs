@@ -109,7 +109,7 @@ namespace DialogueEditor
             }
             if (originView != null)
             {
-                // Meaning that the change has been triggered by a DocumentDialogueView, so Properties need to be refreshed 
+                // Meaning that the change has been triggered by a DocumentDialogueView, so Properties need to be refreshed
                 ProjectController.UpdateProperties(this, dialogueNode, preciseElements);
             }
         }
@@ -124,11 +124,11 @@ namespace DialogueEditor
             }
             if (originView != null)
             {
-                // Meaning that the change has been triggered by a DocumentDialogueView, so Properties need to be refreshed 
+                // Meaning that the change has been triggered by a DocumentDialogueView, so Properties need to be refreshed
                 ProjectController.UpdateProperties(this, Dialogue.RootNode, preciseElements);
             }
         }
-        
+
         private void RefreshViews(DocumentDialogueView originView = null)
         {
             // Tell the views to fully refresh
@@ -360,12 +360,12 @@ namespace DialogueEditor
                 var tempDialogue = new Dialogue(Dialogue);
                 tempDialogue.RootNode = dialogueNode.Clone() as DialogueNodeRoot;
                 EditorHelper.Clipboard = tempDialogue;
-                EditorHelper.ClipboardInfos = new ClipboardInfos() { sourceDialogue = Dialogue.GetName() };
+                EditorHelper.ClipboardInfos = new ClipboardInfos() { sourceDialogue = Dialogue.Name };
             }
             else
             {
                 EditorHelper.Clipboard = dialogueNode.Clone();
-                EditorHelper.ClipboardInfos = new ClipboardInfos() { sourceDialogue = Dialogue.GetName(), sourceNodeID = dialogueNode.ID };
+                EditorHelper.ClipboardInfos = new ClipboardInfos() { sourceDialogue = Dialogue.Name, sourceNodeID = dialogueNode.ID };
             }
             return true;
         }
@@ -379,7 +379,7 @@ namespace DialogueEditor
                 // Special paste mode, when pasting to branch or goto nodes
                 if (nodeTo is DialogueNodeGoto)
                 {
-                    if (EditorHelper.Clipboard is DialogueNode && EditorHelper.ClipboardInfos?.sourceDialogue == Dialogue.GetName())
+                    if (EditorHelper.Clipboard is DialogueNode && EditorHelper.ClipboardInfos?.sourceDialogue == Dialogue.Name)
                     {
                         DialogueNode nodeTarget = Dialogue.GetNodeByID(EditorHelper.ClipboardInfos.sourceNodeID);
                         if (nodeTarget != null)

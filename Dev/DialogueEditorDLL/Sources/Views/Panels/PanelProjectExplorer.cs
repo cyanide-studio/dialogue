@@ -74,9 +74,9 @@ namespace DialogueEditor
                 menuItem.Text = slot.Text;
                 menuItem.Click += delegate
                 {
-                    // Unfortunately "clever" code to perform the transition 
-                    // from reflection (the type of the desired view is known) 
-                    // to generic (we want to call OpenDocument<desiredView>) 
+                    // Unfortunately "clever" code to perform the transition
+                    // from reflection (the type of the desired view is known)
+                    // to generic (we want to call OpenDocument<desiredView>)
                     var genericOpenDocumentMethod = typeof(PanelProjectExplorer).GetMethods(BindingFlags.Instance | BindingFlags.NonPublic)
                         .Where(m => m.Name == "OpenDocument")
                         .Select(m => new
@@ -135,7 +135,7 @@ namespace DialogueEditor
 
             tree.BeginUpdate();
 
-            TreeNode nodeProject = tree.Nodes.Add("Project", string.Format("Project {0}", project.GetName()));
+            TreeNode nodeProject = tree.Nodes.Add("Project", $"Project {project.Name}");
             nodeProject.Tag = project;
             EditorHelper.SetNodeIcon(nodeProject, ENodeIcon.Project);
 
@@ -183,7 +183,7 @@ namespace DialogueEditor
                 {
                     TreeNode nodeParent = nodePackages[0];
 
-                    TreeNode[] nodeChildren = nodeParent.Nodes.Find(dialogue.GetFileName(), true);
+                    TreeNode[] nodeChildren = nodeParent.Nodes.Find(dialogue.FileName, true);
                     if (nodeChildren.Count() > 0)
                     {
                         TreeNode nodeDialogue = nodeChildren[0];
@@ -195,7 +195,7 @@ namespace DialogueEditor
                 }
                 else
                 {
-                    ProjectController.LogError("Unable to update a Dialogue with unknown Package in project explorer : " + dialogue.GetName() + " in " + previousPackage.Name);
+                    ProjectController.LogError($"Unable to update Dialogue {dialogue.Name} with unknown Package {previousPackage.Name} in project explorer");
                 }
             }
 
@@ -209,7 +209,7 @@ namespace DialogueEditor
 
             if (dialogue.Package == null)
             {
-                ProjectController.LogError("Unable to show a Dialogue without Package in project explorer : " + dialogue.GetName());
+                ProjectController.LogError($"Unable to show Dialogue {dialogue.Name} without Package in project explorer");
                 return;
             }
 
@@ -218,7 +218,7 @@ namespace DialogueEditor
             {
                 TreeNode nodeParent = nodePackages[0];
 
-                string path = dialogue.GetFilePath();
+                string path = dialogue.Path;
                 string[] folders = path.Split(new char[] { Path.DirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries);
                 string folderPath = "";
                 foreach (string folder in folders)
@@ -239,7 +239,7 @@ namespace DialogueEditor
                     }
                 }
 
-                TreeNode nodeDialogue = nodeParent.Nodes.Add(dialogue.GetFileName(), dialogue.GetName());
+                TreeNode nodeDialogue = nodeParent.Nodes.Add(dialogue.FileName, dialogue.Name);
                 nodeDialogue.ContextMenuStrip = menuDocument;
                 EditorHelper.SetNodeIcon(nodeDialogue, ENodeIcon.Dialogue);
 
@@ -250,7 +250,7 @@ namespace DialogueEditor
             }
             else
             {
-                ProjectController.LogError("Unable to show a Dialogue with unknown Package in project explorer : " + dialogue.GetName() + " in " + dialogue.Package.Name);
+                ProjectController.LogError($"Unable to show Dialogue {dialogue.Name} with unknown Package {dialogue.Package.Name} in project explorer");
             }
         }
 
@@ -312,11 +312,11 @@ namespace DialogueEditor
                     }
                 }
 
-                if ((fileName == string.Empty || dialogue.GetName().ContainsIgnoreCase(fileName))
-                && (sceneType == string.Empty || dialogue.SceneType == sceneType)
-                && validActor)
+                if ((fileName == string.Empty || dialogue.Name.ContainsIgnoreCase(fileName))
+                 && (string.IsNullOrEmpty(sceneType) || dialogue.SceneType == sceneType)
+                 && validActor)
                 {
-                    listBoxSearchResults.Items.Add(dialogue.GetName());
+                    listBoxSearchResults.Items.Add(dialogue.Name);
                 }
             }
 
@@ -365,9 +365,7 @@ namespace DialogueEditor
             string sceneType = comboBoxSearchSceneType.SelectedValue as string;
             string actor = comboBoxSearchActor.SelectedValue as string;
 
-            if (fileName != null && fileName != string.Empty
-            ||  sceneType != null && sceneType != string.Empty
-            ||  actor != null && actor != string.Empty)
+            if (!string.IsNullOrEmpty(fileName) || !string.IsNullOrEmpty(sceneType) || !string.IsNullOrEmpty(actor))
             {
                 timerSearch.Stop();
                 if (tickNow)
@@ -426,7 +424,7 @@ namespace DialogueEditor
             bool forceOpenNewView = false;
 #if DEBUG
             forceOpenNewView = (ModifierKeys & Keys.Shift) != 0;
-            // NB: due to architecture changes, I can't summon Hollywood view from here anymore 
+            // NB: due to architecture changes, I can't summon Hollywood view from here anymore
             // (I used to do it for Keys.Control)
 #endif
             OpenDocument(e.Node, false, forceOpenNewView);
@@ -443,13 +441,13 @@ namespace DialogueEditor
             if (folder != null)
             {
                 var root = tree.SelectedNode.GetRootNode();
-                
+
                 Package package = root.Tag as Package;
                 if (package != null)
                 {
                     SaveFileDialog dialog = new SaveFileDialog();
                     dialog.Title = "Create Dialogue";
-                    dialog.Filter = "Dialogue Files|*" + Dialogue.GetExtension();
+                    dialog.Filter = "Dialogue Files|*" + Dialogue.Extension;
                     dialog.InitialDirectory = Path.Combine(EditorHelper.GetProjectDirectory(), folder.Path);
 
                     DialogResult result = dialog.ShowDialog();
@@ -474,7 +472,7 @@ namespace DialogueEditor
             {
                 SaveFileDialog dialog = new SaveFileDialog();
                 dialog.Title = "Create Dialogue";
-                dialog.Filter = "Dialogue Files|*" + Dialogue.GetExtension();
+                dialog.Filter = "Dialogue Files|*" + Dialogue.Extension;
                 dialog.InitialDirectory = EditorHelper.GetProjectDirectory();
 
                 DialogResult result = dialog.ShowDialog();
@@ -496,7 +494,7 @@ namespace DialogueEditor
             Dialogue dialogue = tree.SelectedNode.Tag as Dialogue;
             if (dialogue != null)
             {
-                Process.Start(Path.Combine(EditorHelper.GetProjectDirectory(), dialogue.GetFilePath()));
+                Process.Start(Path.Combine(EditorHelper.GetProjectDirectory(), dialogue.Path));
             }
         }
 
@@ -568,7 +566,7 @@ namespace DialogueEditor
             Dialogue dialogue = tree.SelectedNode.Tag as Dialogue;
             if (dialogue != null)
             {
-                Clipboard.SetText(dialogue.GetName());
+                Clipboard.SetText(dialogue.Name);
             }
         }
 
@@ -596,7 +594,7 @@ namespace DialogueEditor
 
                 ProjectController.RemoveDialogue(dialogue);
 
-                string filePathName = Path.Combine(EditorHelper.GetProjectDirectory(), dialogue.GetFilePathName());
+                string filePathName = Path.Combine(EditorHelper.GetProjectDirectory(), dialogue.FullPath);
                 if (File.Exists(filePathName))
                     File.Delete(filePathName);
             }
@@ -610,7 +608,7 @@ namespace DialogueEditor
                 e.Cancel = true;
             }*/
         }
-        
+
         private void OnExpandAll(object sender, EventArgs e)
         {
             tree.SelectedNode.ExpandAll();

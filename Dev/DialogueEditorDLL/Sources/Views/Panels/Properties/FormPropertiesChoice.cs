@@ -29,9 +29,10 @@ namespace DialogueEditor
             textBoxTimer.Text = dialogueNode.Timer.ToString();
 
             //TODO: Unreal Specific
-            if (EditorCore.CustomLists.ContainsKey("DialogueChoices"))
+            Dictionary<string, string> list;
+            if (EditorCore.CustomLists.TryGetValue("DialogueChoices", out list))
             {
-                comboBoxBlueprint.DataSource = new BindingSource(EditorCore.CustomLists["DialogueChoices"], null);
+                comboBoxBlueprint.DataSource = new BindingSource(list, null);
                 comboBoxBlueprint.ValueMember = "Key";
                 comboBoxBlueprint.DisplayMember = "Value";
                 comboBoxBlueprint.SelectedValue = dialogueNode.Blueprint;

@@ -11,7 +11,7 @@ namespace DialogueEditor
         {
             InitializeComponent();
 
-            labelInfos.Text = string.Format(labelInfos.Text, dialogue.GetName());
+            labelInfos.Text = string.Format(labelInfos.Text, dialogue.Name);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

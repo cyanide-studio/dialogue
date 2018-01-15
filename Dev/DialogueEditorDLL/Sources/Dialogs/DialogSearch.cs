@@ -37,14 +37,14 @@ namespace DialogueEditor
                 return result;
             }
         }
-        
+
         public DialogSearch()
         {
             InitializeComponent();
 
             checkedListBoxCommonProperties.Items.Clear();
             foreach (var conditionSlot in EditorCore.ConditionSlots)
-            {                
+            {
                 checkedListBoxCommonProperties.Items.Add(conditionSlot.Text, false);
                 nodes.Add(Node.BuildNode(conditionSlot.ConditionType));
             }
@@ -61,7 +61,7 @@ namespace DialogueEditor
 
             SelectedIndexChanged(checkedListBoxCommonProperties, null);
         }
-        
+
         private void SelectedIndexChanged(object sender, EventArgs args)
         {
             if (checkedListBoxCommonProperties.SelectedIndex >= 0)
@@ -85,17 +85,17 @@ namespace DialogueEditor
                     foreach (var condition in node.Conditions)
                     {
                         if (Check(condition))
-                            results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.GetName(), node.ID, (condition as NodeCondition).GetDisplayText()), dialogue, node));
+                            results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.Name, node.ID, (condition as NodeCondition).GetDisplayText()), dialogue, node));
                     }
                     foreach (var action in node.Actions)
                     {
                         if (Check(action))
-                            results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.GetName(), node.ID, (action as NodeAction).GetDisplayText()), dialogue, node));
+                            results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.Name, node.ID, (action as NodeAction).GetDisplayText()), dialogue, node));
                     }
                     foreach (var flag in node.Flags)
                     {
                         if (Check(flag))
-                            results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.GetName(), node.ID, (flag as NodeFlag).GetDisplayText()), dialogue, node));
+                            results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.Name, node.ID, (flag as NodeFlag).GetDisplayText()), dialogue, node));
                     }
 
                     if (workstring.Length > 0)
@@ -104,21 +104,21 @@ namespace DialogueEditor
                         {
                             var sentence = node as DialogueNodeSentence;
                             if (sentence != null && sentence.Sentence.IndexOf(workstring, StringComparison.CurrentCultureIgnoreCase) >= 0)
-                                results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.GetName(), node.ID, FormatText(sentence.Sentence)), dialogue, node));
+                                results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.Name, node.ID, FormatText(sentence.Sentence)), dialogue, node));
                         }
 
                         if (searchReplies)
                         {
                             var reply = node as DialogueNodeReply;
                             if (reply != null && reply.Reply.IndexOf(workstring, StringComparison.CurrentCultureIgnoreCase) >= 0)
-                                results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.GetName(), node.ID, FormatText(reply.Reply)), dialogue, node));
+                                results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.Name, node.ID, FormatText(reply.Reply)), dialogue, node));
                         }
 
                         if (searchChoices)
                         {
                             var choice = node as DialogueNodeChoice;
                             if (choice != null && choice.Choice.IndexOf(workstring, StringComparison.CurrentCultureIgnoreCase) >= 0)
-                                results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.GetName(), node.ID, FormatText(choice.Choice)), dialogue, node));
+                                results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.Name, node.ID, FormatText(choice.Choice)), dialogue, node));
                         }
                     }
                 }
@@ -146,7 +146,7 @@ namespace DialogueEditor
             if (component == null)
                 return false;
             Type type = component.GetType();
-            int index = nodes.FindIndex((node) => node.type == type);            
+            int index = nodes.FindIndex((node) => node.type == type);
             if (index >= 0 && checkedListBoxCommonProperties.GetItemChecked(index))
             {
                 var node = nodes[index];

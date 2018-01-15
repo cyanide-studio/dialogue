@@ -7,6 +7,8 @@
   "VoiceBank": "",
   "Context": "",
   "Comment": "",
+  "Camera": "",
+  "CameraBlendTime": -1.0,
   "RootNodeID": 1,
   "ListNodes": [
     {
@@ -32,6 +34,10 @@
       "ListenerAnimset": "",
       "SpeakerAnim": "",
       "ListenerAnim": "",
+      "PreDelay": 0.0,
+      "PostDelay": 0.0,
+      "Camera": "",
+      "CameraBlendTime": -1.0,
       "ID": 2,
       "NextID": 3,
       "Conditions": [],
@@ -42,7 +48,7 @@
       "$type": "NodeSentence",
       "Sentence": "Doge intensifies !",
       "SpeakerID": "ActorID_1",
-      "ListenerID": "",
+      "ListenerID": "ActorID_1",
       "VoicingID": "VX_Introduction_3",
       "LastEditDate": "2016-04-14T16:24:19.592239Z",
       "HideSubtitle": false,
@@ -53,6 +59,10 @@
       "ListenerAnimset": "",
       "SpeakerAnim": "",
       "ListenerAnim": "",
+      "PreDelay": 0.0,
+      "PostDelay": 0.0,
+      "Camera": "",
+      "CameraBlendTime": -1.0,
       "ID": 3,
       "NextID": -1,
       "Conditions": [],
@@ -63,5 +73,9 @@
   "ListAdditionalActors": [],
   "Translations": {
     "Entries": {}
-  }
+  },
+  "Name": "Introduction",
+  "Path": "Dialogues",
+  "FullPath": "Dialogues\\Introduction.dlg",
+  "FileName": "Introduction.dlg"
 }

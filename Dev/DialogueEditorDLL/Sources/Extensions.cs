@@ -22,16 +22,11 @@ namespace DialogueEditor
         //exemple : DialogueStats stats = Dialogues.GetOrAdd(dialogue.GetName(), (key) => new DialogueStats());
         public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key, Func<TKey, TValue> valueFactory)
         {
-            if (dict.ContainsKey(key))
-            {
-                return dict[key];
-            }
-            else
-            {
-                TValue value = valueFactory(key);
-                dict.Add(key, value);
+            TValue value;
+            if (dict.TryGetValue(key, out value))
                 return value;
-            }
+
+            return dict[key] = valueFactory(key);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -47,7 +42,7 @@ namespace DialogueEditor
 
         public static void RefreshItems(this ListBox list)
         {
-            typeof(ListBox).InvokeMember("RefreshItems", 
+            typeof(ListBox).InvokeMember("RefreshItems",
                 BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.InvokeMethod,
                 null, list, new object[] { }
             );

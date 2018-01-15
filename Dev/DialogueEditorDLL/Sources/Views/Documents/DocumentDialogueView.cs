@@ -10,27 +10,26 @@
         public DocumentDialogueView(DialogueController inDialogueController)
         {
             DialogueController = inDialogueController;
-            Name = DialogueController.Dialogue.GetName();
+            Name = DialogueController.Dialogue.Name;
         }
 
         [System.Obsolete("Designer only", true)]
         private DocumentDialogueView()
         {
-            
         }
         #endregion
 
         #region Init
         public virtual void InitView()
         {
-            
+
         }
         #endregion
 
         #region DocumentView overrides
         public override void RefreshTitle()
         {
-            Text = DialogueController.Dialogue.GetName();
+            Text = DialogueController.Dialogue.Name;
             if (DialogueController.Dirty)
                 Text += "*";
         }

@@ -53,7 +53,7 @@ namespace DialogueEditor
                 }
             }
         }
-        
+
         #endregion
 
         #region Variables
@@ -148,9 +148,10 @@ namespace DialogueEditor
             if (treeMemo == null)
                 return true;
             DialogueNode dialogueNode = GetDialogueNode(treeNode);
-            if (dialogueNode == null || !treeMemo.NodeMemoList.ContainsKey(dialogueNode.ID))
+            NodeMemo memo;
+            if (dialogueNode == null || !treeMemo.NodeMemoList.TryGetValue(dialogueNode.ID, out memo))
                 return true;
-            return treeMemo[dialogueNode.ID].isExpanded;
+            return memo.isExpanded;
         }
 
         public void RebuildTree(bool redraw = true)
@@ -193,35 +194,23 @@ namespace DialogueEditor
 
         protected TreeNode InsertTreeNode(DialogueNode node, ENodeIcon nodeIcon, TreeNode parentTreeNode = null, int insertIndex = -1)
         {
-            TreeNode newTreeNode = null;
-            if (treeMap.ContainsKey(node.ID))
+            Tuple<TreeNode, int> treeNode;
+            if (treeMap.TryGetValue(node.ID, out treeNode))
             {
-                string nodeKey = $"Cycle_{treeMap[node.ID].Item2}_to_{GetNodeKey(node.ID)}";
-                if (parentTreeNode == null)
-                {
-                    newTreeNode = tree.Nodes.Add(nodeKey, "");
-                }
-                else
-                {
-                    newTreeNode = parentTreeNode.Nodes.Insert(insertIndex, nodeKey, "");
-                }
+                string nodeKey = $"Cycle_{treeNode.Item2}_to_{GetNodeKey(node.ID)}";
+                TreeNode newTreeNode = (parentTreeNode == null) ? tree.Nodes.Add(nodeKey, "")
+                                                                : parentTreeNode.Nodes.Insert(insertIndex, nodeKey, "");
                 newTreeNode.Tag = new NodeWrap(node);
                 newTreeNode.ContextMenuStrip = null; // keeping interactivity minimal for those "virtual goto" nodes
                 EditorHelper.SetNodeIcon(newTreeNode, nodeIcon);
-                treeMap[node.ID] = new Tuple<TreeNode, int>(treeMap[node.ID].Item1, treeMap[node.ID].Item2 + 1);
+                treeMap[node.ID] = new Tuple<TreeNode, int>(treeNode.Item1, treeNode.Item2 + 1);
                 return newTreeNode;
             }
             else
             {
                 string nodeKey = GetNodeKey(node.ID);
-                if (parentTreeNode == null)
-                {
-                    newTreeNode = tree.Nodes.Add(nodeKey, "");
-                }
-                else
-                {
-                    newTreeNode = parentTreeNode.Nodes.Insert(insertIndex, nodeKey, "");
-                }
+                TreeNode newTreeNode = (parentTreeNode == null) ? tree.Nodes.Add(nodeKey, "")
+                                                                : parentTreeNode.Nodes.Insert(insertIndex, nodeKey, "");
                 newTreeNode.Tag = new NodeWrap(node);
                 newTreeNode.ContextMenuStrip = contextMenu;
                 EditorHelper.SetNodeIcon(newTreeNode, nodeIcon);
@@ -625,9 +614,9 @@ namespace DialogueEditor
                     // Or using a special drop to force the branch target
                     asBranch = true;
                 }
-            } 
+            }
 
-            bool moved = DialogueController.MoveNode(GetDialogueNode(nodeMoved), GetDialogueNode(nodeTo), 
+            bool moved = DialogueController.MoveNode(GetDialogueNode(nodeMoved), GetDialogueNode(nodeTo),
                                                      GetDialogueNode(nodeMoved?.Parent), GetDialogueNode(nodeTo?.Parent),
                                                      GetDialogueNode(nodeMoved?.PrevNode),
                                                      asBranch, this);
@@ -750,7 +739,7 @@ namespace DialogueEditor
         {
             if (tree.SelectedNode == null)
                 return;
-            
+
             UnHighlightAll();
 
             DialogueNodeGoto nodeGoto = GetSelectedDialogueNode() as DialogueNodeGoto;
@@ -827,9 +816,9 @@ namespace DialogueEditor
                 treeNode.ForeColor = GetTreeNodeColorContent(dialogueNode);
                 treeNode.BackColor = tree.BackColor;
                 if (EditorCore.Settings.DisplayID)
-                    treeNode.Text = string.Format("Direct/virtual Goto > [{0}] {1}", dialogueNode.ID, GetTreeNodeTextContent(dialogueNode));
+                    treeNode.Text = $"Direct/virtual Goto > [{dialogueNode.ID}] {GetTreeNodeTextContent(dialogueNode)}";
                 else
-                    treeNode.Text = string.Format("Direct/virtual Goto > {0}", GetTreeNodeTextContent(dialogueNode));
+                    treeNode.Text = $"Direct/virtual Goto > {GetTreeNodeTextContent(dialogueNode)}";
             }
             else
             {
@@ -956,7 +945,7 @@ namespace DialogueEditor
             //    return "";
 
             if (EditorCore.Settings.DisplayID)
-                return string.Format("[{0}] ", dialogueNode.ID);
+                return $"[{dialogueNode.ID}]";
 
             return "";
         }
@@ -1040,7 +1029,7 @@ namespace DialogueEditor
             else if (dialogueNode is DialogueNodeChoice)
             {
                 DialogueNodeChoice nodeChoice = dialogueNode as DialogueNodeChoice;
-                return string.Format("Choice > {0}", nodeChoice.Choice);
+                return $"Choice > {nodeChoice.Choice}";
             }
             else if (dialogueNode is DialogueNodeReply)
             {
@@ -1070,14 +1059,14 @@ namespace DialogueEditor
                 if (nodeGoto.Goto == null)
                     return "Goto > Undefined";
                 else if (EditorCore.Settings.DisplayID)
-                    return string.Format("Goto > [{0}] {1}", nodeGoto.Goto.ID, GetTreeNodeTextContent(nodeGoto.Goto));
+                    return $"Goto > [{nodeGoto.Goto.ID}] {GetTreeNodeTextContent(nodeGoto.Goto)}";
                 else
-                    return string.Format("Goto > {0}", GetTreeNodeTextContent(nodeGoto.Goto));
+                    return $"Goto > {GetTreeNodeTextContent(nodeGoto.Goto)}";
             }
             else if (dialogueNode is DialogueNodeBranch)
             {
                 DialogueNodeBranch nodeBranch = dialogueNode as DialogueNodeBranch;
-                return string.Format("Branch > {0}", nodeBranch.Workstring);
+                return $"Branch > {nodeBranch.Workstring}";
             }
 
             return "";
@@ -1107,9 +1096,9 @@ namespace DialogueEditor
                 node.ForeColor = GetTreeNodeColorContent(dialogueNode);
                 node.BackColor = tree.BackColor;
                 if (EditorCore.Settings.DisplayID)
-                    textContent = string.Format("Direct/virtual Goto > [{0}] {1}", dialogueNode.ID, GetTreeNodeTextContent(dialogueNode));
+                    textContent = $"Direct/virtual Goto > [{dialogueNode.ID}] {GetTreeNodeTextContent(dialogueNode)}";
                 else
-                    textContent = string.Format("Direct/virtual Goto > {0}", GetTreeNodeTextContent(dialogueNode));
+                    textContent = $"Direct/virtual Goto > {GetTreeNodeTextContent(dialogueNode)}";
             }
             else
             {
@@ -1197,7 +1186,7 @@ namespace DialogueEditor
                 tree.Font = font;
             }
 
-            labelFont.Text = string.Format("{0} {1}", font.Name, font.Size);
+            labelFont.Text = $"{font.Name} {font.Size}";
         }
 
         private void OnChangeFont(object sender, EventArgs e)
@@ -1238,7 +1227,7 @@ namespace DialogueEditor
         {
             Highlight(GetTreeNode(node), color);
         }
-        
+
         public void Highlight(List<DialogueNode> nodes, Color color)
         {
             foreach (DialogueNode node in nodes)
@@ -1372,12 +1361,12 @@ namespace DialogueEditor
 
         private void OnOpenDirectory(object sender, EventArgs e)
         {
-            Process.Start(Path.Combine(EditorHelper.GetProjectDirectory(), DialogueController.Dialogue.GetFilePath()));
+            Process.Start(Path.Combine(EditorHelper.GetProjectDirectory(), DialogueController.Dialogue.Path));
         }
 
         private void OnCopyName(object sender, EventArgs e)
         {
-            Clipboard.SetText(DialogueController.Dialogue.GetName());
+            Clipboard.SetText(DialogueController.Dialogue.Name);
         }
         #endregion
 

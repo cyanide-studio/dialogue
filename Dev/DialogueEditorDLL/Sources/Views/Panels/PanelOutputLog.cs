@@ -67,25 +67,25 @@ namespace DialogueEditor
             bool displayLine = false;
             bool showPanel = false;
 
-            stringBuilder.Append(string.Format("[{0}]  ", Utility.GetCurrentTimeAsString()));
+            stringBuilder.Append($"[{Utility.GetCurrentTimeAsString()}  ");
 
             switch (level)
             {
                 case LogLevel.Info:
                     displayLine = checkBoxShowInfos.Checked;
-                    stringBuilder.Append("Info : ");
+                    stringBuilder.Append("Info: ");
                     break;
 
                 case LogLevel.Warning:
                     displayLine = checkBoxShowWarnings.Checked;
                     showPanel = true;
-                    stringBuilder.Append("Warning : "); 
+                    stringBuilder.Append("Warning: ");
                     break;
 
                 case LogLevel.Error:
                     displayLine = checkBoxShowErrors.Checked;
                     showPanel = true;
-                    stringBuilder.Append("Error : "); 
+                    stringBuilder.Append("Error: ");
                     break;
             }
 

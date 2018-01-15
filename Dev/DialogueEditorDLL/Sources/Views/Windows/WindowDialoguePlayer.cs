@@ -44,7 +44,7 @@ namespace DialogueEditor
 
             checkBoxOptionConstants.Checked = true; // EditorCore.Settings.UseConstants;
 
-            
+
             currentDialogueController = dialogueController;
 
             Play(wholeDialog ? null : dialogueController.SelectedDialogueNode);
@@ -181,7 +181,7 @@ namespace DialogueEditor
             currentDialogueController.SelectNode(currentNode);
 
             ResetGroups();
-            
+
             if (currentNode.Conditions.Count > 0 && GetCurrentOptionConditions() == EOptionConditions.AlwaysFalse)
             {
                 PlayNode(currentNode.Next);
@@ -222,9 +222,9 @@ namespace DialogueEditor
             else if (currentNode is DialogueNodeChoice)
             {
                 var choice = currentNode as DialogueNodeChoice;
-                
+
                 groupBoxChoice.Visible = true;
-                labelChoice.Text = string.Format("Choice : {0}", choice.Choice);
+                labelChoice.Text = $"Choice: {choice.Choice}";
                 listBoxReplies.DataSource = new BindingSource(choice.Replies, null);
 
                 checkBoxShowReplyConditions.Checked = false;
@@ -254,7 +254,7 @@ namespace DialogueEditor
                 if (nodeGoto.Conditions.Count > 0 && GetCurrentOptionConditions() == EOptionConditions.AskEveryTime)
                 {
                     groupBoxGoto.Visible = true;
-                    labelGoto.Text = string.Format("Goto > \"{0}\"", GetGotoText(nodeGoto.Goto));
+                    labelGoto.Text = $"Goto > \"{GetGotoText(nodeGoto.Goto)}\"";
 
                     ShowConditions(nodeGoto);
                 }
@@ -270,7 +270,7 @@ namespace DialogueEditor
                 if (nodeBranch.Conditions.Count > 0 && GetCurrentOptionConditions() == EOptionConditions.AskEveryTime)
                 {
                     groupBoxGoto.Visible = true;
-                    labelGoto.Text = string.Format("Branch > \"{0}\"", GetGotoText(nodeBranch.Branch));
+                    labelGoto.Text = $"Branch > \"{GetGotoText(nodeBranch.Branch)}\"";
 
                     ShowConditions(nodeBranch);
                 }

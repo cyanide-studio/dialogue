@@ -16,12 +16,12 @@ namespace DialogueEditor
 
             if (dirtyProject != null)
             {
-                items.Add(dirtyProject.GetName(), "Project File " + dirtyProject.GetName());
+                items.Add(dirtyProject.Name, "Project File " + dirtyProject.Name);
             }
 
             foreach (Dialogue dialogue in dirtyDialogues)
             {
-                items.Add(dialogue.GetName(), dialogue.GetName());
+                items.Add(dialogue.Name, dialogue.Name);
             }
 
             listBox.DataSource = new BindingSource(items, null);

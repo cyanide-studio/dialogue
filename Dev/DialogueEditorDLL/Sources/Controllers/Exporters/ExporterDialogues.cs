@@ -90,7 +90,7 @@ namespace DialogueEditor
             //Ensure no export of a Workstring language
             //languages.Remove(EditorCore.LanguageWorkstring);
 
-            string path = Path.Combine(directory, "Constants_" + project.GetName() + ".csv");
+            string path = Path.Combine(directory, $"Constants_{project.Name}.csv");
             using (StreamWriter file = new StreamWriter(path, false, Encoding.UTF8))
             {
                 //ID, Timestamp, Comment, Workstring, ...Languages...
@@ -150,7 +150,7 @@ namespace DialogueEditor
             //Ensure no export of a Workstring language
             //languages.Remove(EditorCore.LanguageWorkstring);
 
-            string path = Path.Combine(directory, "Loca_" + project.GetName() + ".csv");
+            string path = Path.Combine(directory, $"Loca_{project.Name}.csv");
             using (StreamWriter file = new StreamWriter(path, false, Encoding.UTF8))
             {
                 //Dialogue, Node ID, Timestamp, Voicing ID, Index, Package, SceneType, Context, Voicing, Voice Intensity, Speaker, Workstring Text, Words, ...Languages..., comments
@@ -199,7 +199,7 @@ namespace DialogueEditor
 
                         ExporterCsv.CsvLineWriter line = new ExporterCsv.CsvLineWriter();
                         //Dialogue, Node ID, Timestamp, Voicing ID, Index, Package, SceneType, Context, Voicing, Voicing Intensity, Speaker, Workstring Text, Words, ...Languages..., comments
-                        line.AddField(dialogue.GetName());
+                        line.AddField(dialogue.Name);
                         line.AddField(TranslationTable.DialogueNodePrefix + dialogue.RootNodeID);
                         line.AddEmptyField();
                         line.AddEmptyField();
@@ -271,7 +271,7 @@ namespace DialogueEditor
 
                             //Dialogue, Node ID, Timestamp, Voicing ID, Index, Package, SceneType, Context, Voicing, Voicing Intensity, Speaker, Workstring Text, Words, ...Languages..., comments
                             ExporterCsv.CsvLineWriter line = new ExporterCsv.CsvLineWriter();
-                            line.AddField(dialogue.GetName());
+                            line.AddField(dialogue.Name);
                             line.AddField(TranslationTable.DialogueNodePrefix + dialogueNode.ID);
                             line.AddField(workstringTimestamp);
                             line.AddField(voicingID);
@@ -377,19 +377,19 @@ namespace DialogueEditor
 
             if (importPath == string.Empty)
             {
-                ProjectController.LogError("Import Constants failed : no file specified");
+                ProjectController.LogError("Import Constants failed: no file specified");
                 return false;
             }
 
             if (!File.Exists(importPath))
             {
-                ProjectController.LogError("Import Constants failed : file not found");
+                ProjectController.LogError("Import Constants failed: file not found");
                 return false;
             }
 
             while (Utility.IsFileLocked(importPath))
             {
-                ProjectController.LogError("Import Constants failed : file is locked");
+                ProjectController.LogError("Import Constants failed: file is locked");
 
                 var dialogLocked = new DialogLockedFile(importPath);
                 DialogResult eResult = dialogLocked.ShowDialog();
@@ -461,7 +461,7 @@ namespace DialogueEditor
                                         }
                                         else
                                         {
-                                            //ProjectController.LogInfo(String.Format("{0} {1} - Translation accepted", dialogue.GetName(), id), dialogue.GetName(), id);
+                                            //ProjectController.LogInfo(String.Format("{0} {1} - Translation accepted", dialogue.Name), id), dialogue.Name, id);
                                         }
                                     }
 
@@ -475,11 +475,11 @@ namespace DialogueEditor
                                     }
                                     else if (translationResult == ETranslationResult.Refused_EmptyText)
                                     {
-                                        ProjectController.LogWarning(string.Format("Constant {0} - [{1}] Translation refused : empty text", id, language.Name));
+                                        ProjectController.LogWarning(string.Format("Constant {0} - [{1}] Translation refused: empty text", id, language.Name));
                                     }
                                     else if (translationResult == ETranslationResult.Refused_Outdated)
                                     {
-                                        ProjectController.LogWarning(string.Format("Constant {0} - [{1}] Translation refused : outdated timestamp", id, language.Name));
+                                        ProjectController.LogWarning(string.Format("Constant {0} - [{1}] Translation refused: outdated timestamp", id, language.Name));
                                     }
                                     else if (translationResult == ETranslationResult.Refused_Identical)
                                     {
@@ -508,19 +508,19 @@ namespace DialogueEditor
 
             if (importPath == string.Empty)
             {
-                ProjectController.LogError("Import Localization failed : no file specified");
+                ProjectController.LogError("Import Localization failed: no file specified");
                 return false;
             }
 
             if (!File.Exists(importPath))
             {
-                ProjectController.LogError("Import Localization failed : file not found");
+                ProjectController.LogError("Import Localization failed: file not found");
                 return false;
             }
 
             while (Utility.IsFileLocked(importPath))
             {
-                ProjectController.LogError("Import Localization failed : file is locked");
+                ProjectController.LogError("Import Localization failed: file is locked");
 
                 var dialogLocked = new DialogLockedFile(importPath);
                 DialogResult eResult = dialogLocked.ShowDialog();
@@ -577,7 +577,7 @@ namespace DialogueEditor
                                         if (dialogueNodeSentence.LastEditDate > timestampLoca)
                                         {
                                             //TODO: popup or option to choose what to do here
-                                            ProjectController.LogWarning(string.Format("{0} {1} - New workstring older than currently registered workstring, but updated anyway", dialogue.GetName(), id), dialogue, node);
+                                            ProjectController.LogWarning(string.Format("{0} {1} - New workstring older than currently registered workstring, but updated anyway", dialogue.Name, id), dialogue, node);
                                         }
 
                                         dialogueNodeSentence.Sentence = reader.GetCell("Workstring");
@@ -613,7 +613,7 @@ namespace DialogueEditor
                                         if (dialogueNodeReply.LastEditDate > timestampLoca)
                                         {
                                             //TODO: popup or option to choose what to do here
-                                            ProjectController.LogWarning(string.Format("{0} {1} - New workstring older than currently registered workstring, but updated anyway", dialogue.GetName(), id), dialogue, node);
+                                            ProjectController.LogWarning(string.Format("{0} {1} - New workstring older than currently registered workstring, but updated anyway", dialogue.Name, id), dialogue, node);
                                         }
 
                                         dialogueNodeReply.Reply = reader.GetCell("Workstring");
@@ -644,29 +644,29 @@ namespace DialogueEditor
                                             //The current workstring is more recent than the localized entry
                                             if (timestampWorkstring > timestampLoca)
                                             {
-                                                ProjectController.LogWarning(string.Format("{0} {1} - [{2}] Translation accepted but based on an outdated workstring, will be re-exported", dialogue.GetName(), id, language.Name), dialogue, node);
+                                                ProjectController.LogWarning(string.Format("{0} {1} - [{2}] Translation accepted but based on an outdated workstring, will be re-exported", dialogue.Name, id, language.Name), dialogue, node);
                                             }
                                             else
                                             {
-                                                //ProjectController.LogInfo(String.Format("{0} {1} - Translation accepted", dialogue.GetName(), id), dialogue.GetName(), id);
+                                                //ProjectController.LogInfo(String.Format("{0} {1} - Translation accepted", dialogue.Name, id), dialogue.Name, id);
                                             }
                                         }
 
                                         if (translationResult == ETranslationResult.Accepted_IdenticalTimestamp)
                                         {
-                                            ProjectController.LogWarning(string.Format("{0} {1} - [{2}] Translation accepted but with an identical timestamp as the previous entry", dialogue.GetName(), id, language.Name), dialogue, node);
+                                            ProjectController.LogWarning(string.Format("{0} {1} - [{2}] Translation accepted but with an identical timestamp as the previous entry", dialogue.Name, id, language.Name), dialogue, node);
                                         }
                                         else if (translationResult == ETranslationResult.Accepted_IdenticalText)
                                         {
-                                            ProjectController.LogWarning(string.Format("{0} {1} - [{2}] Translation accepted but with an identical text as the previous entry", dialogue.GetName(), id, language.Name), dialogue, node);
+                                            ProjectController.LogWarning(string.Format("{0} {1} - [{2}] Translation accepted but with an identical text as the previous entry", dialogue.Name, id, language.Name), dialogue, node);
                                         }
                                         else if (translationResult == ETranslationResult.Refused_EmptyText)
                                         {
-                                            ProjectController.LogWarning(string.Format("{0} {1} - [{2}] Translation refused : empty text", dialogue.GetName(), id, language.Name), dialogue, node);
+                                            ProjectController.LogWarning(string.Format("{0} {1} - [{2}] Translation refused: empty text", dialogue.Name, id, language.Name), dialogue, node);
                                         }
                                         else if (translationResult == ETranslationResult.Refused_Outdated)
                                         {
-                                            ProjectController.LogWarning(string.Format("{0} {1} - [{2}] Translation refused : outdated timestamp", dialogue.GetName(), id, language.Name), dialogue, node);
+                                            ProjectController.LogWarning(string.Format("{0} {1} - [{2}] Translation refused: outdated timestamp", dialogue.Name, id, language.Name), dialogue, node);
                                         }
                                         else if (translationResult == ETranslationResult.Refused_Identical)
                                         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DialogueEditor
 {
@@ -56,10 +57,10 @@ namespace DialogueEditor
 
         public TranslationEntry GetEntry(string key, Language language)
         {
-            if (Entries.ContainsKey(key) && language != null)
+            List<TranslationEntry> entryList;
+            if (language != null && Entries.TryGetValue(key, out entryList))
             {
-                var entry = Entries[key].Find(item => item.LanguageName == language.Name);
-                return entry;
+                return entryList.Find(x => x.LanguageName == language.Name);
             }
             return null;
         }
@@ -91,20 +92,19 @@ namespace DialogueEditor
             entry.LanguageName = language.Name;
             entry.SourceDate = DateTime.MinValue;
 
-            if (!Entries.ContainsKey(key))
+            List<TranslationEntry> entryList;
+            if (!Entries.TryGetValue(key, out entryList))
             {
                 Entries.Add(key, new List<TranslationEntry>() { entry });
                 return true;
             }
-            else
+
+            if (entryList.FirstOrDefault(x => x.LanguageName == entry.LanguageName) == null)
             {
-                int index = Entries[key].FindIndex(item => item.LanguageName == entry.LanguageName);
-                if (index == -1)
-                {
-                    Entries[key].Add(entry);
-                    return true;
-                }
+                entryList.Add(entry);
+                return true;
             }
+
             return false;
         }
 
@@ -120,33 +120,32 @@ namespace DialogueEditor
             entry.SourceDate = timestampLoca;
 
             ETranslationResult result = ETranslationResult.Accepted;
-            if (!Entries.ContainsKey(key))
+            List<TranslationEntry> entryList;
+            if (!Entries.TryGetValue(key, out entryList))
             {
                 Entries.Add(key, new List<TranslationEntry>() { entry });
+                return ETranslationResult.Accepted;
             }
-            else
+
+            TranslationEntry existing = entryList.FirstOrDefault(x => x.LanguageName == entry.LanguageName);
+            if (existing == null)
             {
-                int index = Entries[key].FindIndex(item => item.LanguageName == entry.LanguageName);
-                if (index == -1)
-                {
-                    Entries[key].Add(entry);
-                }
-                else
-                {
-                    if (Entries[key][index].SourceDate > entry.SourceDate)
-                        return ETranslationResult.Refused_Outdated;
-
-                    if (Entries[key][index].SourceDate == entry.SourceDate && Entries[key][index].Text == entry.Text)
-                        return ETranslationResult.Refused_Identical;
-
-                    if (Entries[key][index].SourceDate == entry.SourceDate)
-                        result = ETranslationResult.Accepted_IdenticalTimestamp;
-                    else if (Entries[key][index].Text == entry.Text)
-                        result = ETranslationResult.Accepted_IdenticalText;
-
-                    Entries[key][index] = entry;
-                }
+                entryList.Add(entry);
+                return ETranslationResult.Accepted;
             }
+
+            if (existing.SourceDate > entry.SourceDate)
+                return ETranslationResult.Refused_Outdated;
+
+            if (existing.SourceDate == entry.SourceDate && existing.Text == entry.Text)
+                return ETranslationResult.Refused_Identical;
+
+            if (existing.SourceDate == entry.SourceDate)
+                result = ETranslationResult.Accepted_IdenticalTimestamp;
+            else if (existing.Text == entry.Text)
+                result = ETranslationResult.Accepted_IdenticalText;
+
+            existing = entry;
 
             return result;
         }
