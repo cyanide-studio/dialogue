@@ -499,6 +499,11 @@ namespace DialogueEditor
                 OpenDocumentDialogue(lastClosedDialogue);
                 return true;
             }
+            else if (keyData == (Keys.Control | Keys.Shift | Keys.F))
+            {
+                DialogSearch dialog = new DialogSearch();
+                dialog.ShowDialog();
+            }
             else if (dockPanel.ActiveContent is PanelProjectExplorer && EditorCore.ProjectExplorer != null)
             {
                 if (EditorCore.ProjectExplorer.ProcessCmdKey_Impl(keyData))

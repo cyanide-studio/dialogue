@@ -246,6 +246,26 @@ namespace DialogueEditor
                 OutputLog.WriteLine(LogLevel.Error, message, dialogue, node);
         }
 
+        static public void ClearSearchResult()
+        {
+            SearchResults.Clear();
+        }
+
+        static public void StartSearchResult()
+        {
+            SearchResults.WriteStartSearch();
+        }
+
+        static public void EndSearchResult()
+        {
+            SearchResults.WriteEndSearch();
+        }
+
+        public static void AddSearchResult(string message, Dialogue dialogue, DialogueNode node)
+        {
+            SearchResults.WriteLine(message, dialogue.GetName(), node.ID);
+        }
+
         static public string GetCustomListKeyFromValue(string listName, string value)
         {
             if (CustomLists.ContainsKey(listName))

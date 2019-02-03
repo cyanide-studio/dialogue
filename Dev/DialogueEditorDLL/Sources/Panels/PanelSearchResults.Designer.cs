@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.Button buttonClear;
             this.listBoxLog = new System.Windows.Forms.ListBox();
+            this.labelResultsCount = new System.Windows.Forms.Label();
             buttonClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -58,12 +59,22 @@
             this.listBoxLog.DoubleClick += new System.EventHandler(this.OnDoubleClick);
             this.listBoxLog.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnListKeyDown);
             // 
+            // labelResultsCount
+            // 
+            this.labelResultsCount.AutoSize = true;
+            this.labelResultsCount.Location = new System.Drawing.Point(105, 7);
+            this.labelResultsCount.Name = "labelResultsCount";
+            this.labelResultsCount.Size = new System.Drawing.Size(65, 13);
+            this.labelResultsCount.TabIndex = 2;
+            this.labelResultsCount.Text = "Results : {0}";
+            // 
             // PanelSearchResults
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(584, 182);
+            this.Controls.Add(this.labelResultsCount);
             this.Controls.Add(buttonClear);
             this.Controls.Add(this.listBoxLog);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -72,11 +83,13 @@
             this.Text = "Search Results";
             this.VisibleChanged += new System.EventHandler(this.OnVisibleChanged);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.ListBox listBoxLog;
+        private System.Windows.Forms.Label labelResultsCount;
     }
 }

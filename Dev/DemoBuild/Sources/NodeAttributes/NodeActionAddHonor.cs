@@ -15,6 +15,7 @@ namespace DemoBuild
 
         public int Value { get; set; }
 
+        [PropertySearchable]
         [PropertyCharacterName]
         [TypeConverter(typeof(PropertyCharacterNameConverter))]
         public string Character { get; set; }

@@ -145,6 +145,12 @@
     <Compile Include="Sources\Dialogs\DialogSaveOnClose.Designer.cs">
       <DependentUpon>DialogSaveOnClose.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sources\Dialogs\DialogSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sources\Dialogs\DialogSearch.Designer.cs">
+      <DependentUpon>DialogSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sources\Dialogs\DialogStats.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -318,6 +324,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Sources\Dialogs\DialogSaveOnClose.resx">
       <DependentUpon>DialogSaveOnClose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sources\Dialogs\DialogSearch.resx">
+      <DependentUpon>DialogSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sources\Dialogs\DialogStats.resx">
       <DependentUpon>DialogStats.cs</DependentUpon>
