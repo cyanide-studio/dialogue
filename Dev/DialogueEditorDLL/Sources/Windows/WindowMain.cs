@@ -74,7 +74,7 @@ namespace DialogueEditor
 
 //#if DEBUG
 /*
-            //Debug code to generate 11250 dummy dialogues (337500 sentences, 6075000 words)
+            //Debug code to generate 11250 dummy dialogues (337,500 sentences, 6,075,000 words) (Bible is less than 800,000 words)
             //
             //  * USAGE
             //
@@ -91,6 +91,13 @@ namespace DialogueEditor
             // you must have a project already opened previously (LastProject != null)
             // you can create a 'ProjectBig' folder to store this test project, its included in the git ignore file
             //
+            
+            if (ResourcesHandler.Project.ListActors.Count == 0)
+            {
+                ResourcesHandler.Project.AddActor(new Actor() { ID = ResourcesHandler.Project.GenerateNewActorID(), Name = "Default Speaker" });
+            }
+
+            Actor defaultSpeaker = ResourcesHandler.Project.ListActors[0];
 
             int indexFile = 0;
             for (int a = 1; a <= 15; ++a)
@@ -106,19 +113,22 @@ namespace DialogueEditor
                         ++indexFile;
                         string file = string.Format("File_{0:000000}", indexFile);
                         Dialogue dialogue = ResourcesHandler.CreateDialogueFile(Path.Combine(chapter, quest, file));
-
-                        DialogueNode current = dialogue.RootNode;
-                        for (int s = 1; s <= 30; ++s)
+                        if (dialogue != null)
                         {
-                            DialogueNodeSentence sentence = new DialogueNodeSentence();
-                            dialogue.AddNode(sentence);
-                            sentence.Sentence = "Hello, I'm a dialogue sentence. I'm just here to fill this void space. Please enjoy your day - " + indexFile + "_" + sentence.ID;
-                            current.Next = sentence;
+                            DialogueNode current = dialogue.RootNode;
+                            for (int s = 1; s <= 30; ++s)
+                            {
+                                DialogueNodeSentence sentence = new DialogueNodeSentence();
+                                dialogue.AddNode(sentence);
+                                sentence.SpeakerID = defaultSpeaker.ID;
+                                sentence.Sentence = "Hello, I'm a dialogue sentence. I'm just here to fill this void space. Please enjoy your day - " + indexFile + "_" + sentence.ID;
+                                current.Next = sentence;
 
-                            current = sentence;
+                                current = sentence;
+                            }
+
+                            ResourcesHandler.SaveDialogue(dialogue);
                         }
-
-                        ResourcesHandler.SaveDialogue(dialogue);
                     }
                 }
             }
