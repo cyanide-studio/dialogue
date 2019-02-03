@@ -70,6 +70,11 @@ namespace DialogueEditor
 
         private void SearchClick(object sender, EventArgs e)
         {
+            string workstring = textBoxWorkstring.Text;
+            bool searchSentences = checkBoxSentences.Checked;
+            bool searchReplies = checkBoxReplies.Checked;
+            bool searchChoices = checkBoxChoices.Checked;
+
             List<Result> results = new List<Result>();
 
             var dialogues = ResourcesHandler.GetAllDialogues();
@@ -92,17 +97,29 @@ namespace DialogueEditor
                         if (Check(flag))
                             results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.GetName(), node.ID, (flag as NodeFlag).GetDisplayText()), dialogue, node));
                     }
-                    if (textBoxSentence.Text.Length > 0)
+
+                    if (workstring.Length > 0)
                     {
-                        var sentence = node as DialogueNodeSentence;
-                        if (sentence != null && sentence.Sentence.IndexOf(textBoxSentence.Text, StringComparison.CurrentCultureIgnoreCase) >= 0)
-                            results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.GetName(), node.ID, FormatText(sentence.Sentence)), dialogue, node));
-                    }
-                    if (textBoxReply.Text.Length > 0)
-                    {
-                        var reply = node as DialogueNodeReply;
-                        if (reply != null && reply.Reply.IndexOf(textBoxReply.Text, StringComparison.CurrentCultureIgnoreCase) >= 0)
-                            results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.GetName(), node.ID, FormatText(reply.Reply)), dialogue, node));
+                        if (searchSentences)
+                        {
+                            var sentence = node as DialogueNodeSentence;
+                            if (sentence != null && sentence.Sentence.IndexOf(workstring, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                                results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.GetName(), node.ID, FormatText(sentence.Sentence)), dialogue, node));
+                        }
+
+                        if (searchReplies)
+                        {
+                            var reply = node as DialogueNodeReply;
+                            if (reply != null && reply.Reply.IndexOf(workstring, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                                results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.GetName(), node.ID, FormatText(reply.Reply)), dialogue, node));
+                        }
+
+                        if (searchChoices)
+                        {
+                            var choice = node as DialogueNodeChoice;
+                            if (choice != null && choice.Choice.IndexOf(workstring, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                                results.Add(Result.BuildResult(String.Format("{0} {1} - {2}", dialogue.GetName(), node.ID, FormatText(choice.Choice)), dialogue, node));
+                        }
                     }
                 }
             }

@@ -36,7 +36,7 @@
             // 
             // buttonClear
             // 
-            buttonClear.Location = new System.Drawing.Point(12, 2);
+            buttonClear.Location = new System.Drawing.Point(154, 4);
             buttonClear.Name = "buttonClear";
             buttonClear.Size = new System.Drawing.Size(75, 23);
             buttonClear.TabIndex = 1;
@@ -62,7 +62,7 @@
             // labelResultsCount
             // 
             this.labelResultsCount.AutoSize = true;
-            this.labelResultsCount.Location = new System.Drawing.Point(105, 7);
+            this.labelResultsCount.Location = new System.Drawing.Point(12, 9);
             this.labelResultsCount.Name = "labelResultsCount";
             this.labelResultsCount.Size = new System.Drawing.Size(65, 13);
             this.labelResultsCount.TabIndex = 2;

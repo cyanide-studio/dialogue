@@ -499,11 +499,6 @@ namespace DialogueEditor
                 OpenDocumentDialogue(lastClosedDialogue);
                 return true;
             }
-            else if (keyData == (Keys.Control | Keys.Shift | Keys.F))
-            {
-                DialogSearch dialog = new DialogSearch();
-                dialog.ShowDialog();
-            }
             else if (dockPanel.ActiveContent is PanelProjectExplorer && EditorCore.ProjectExplorer != null)
             {
                 if (EditorCore.ProjectExplorer.ProcessCmdKey_Impl(keyData))
@@ -1009,6 +1004,15 @@ namespace DialogueEditor
                     }
                 }
             }
+        }
+
+        private void OnSearchAllFiles(object sender, EventArgs e)
+        {
+            if (ResourcesHandler.Project == null)
+                return;
+
+            DialogSearch dialog = new DialogSearch();
+            dialog.ShowDialog();
         }
 
         private void OnExportConstantsUnreal4(object sender, EventArgs e)
