@@ -41,6 +41,8 @@
             this.separatorRoot = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemAddReply = new System.Windows.Forms.ToolStripMenuItem();
             this.separatorReply = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemBranch = new System.Windows.Forms.ToolStripMenuItem();
+            this.separatorBranch = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemAddSentence = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAddChoice = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAddGoto = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,14 +70,40 @@
             this.button1 = new System.Windows.Forms.Button();
             this.labelFont = new System.Windows.Forms.Label();
             this.checkBoxUseConstants = new System.Windows.Forms.CheckBox();
-            this.separatorBranch = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemBranch = new System.Windows.Forms.ToolStripMenuItem();
             addSentenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             addChoiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             addGotoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             addBranchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenu.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // addSentenceToolStripMenuItem
+            // 
+            addSentenceToolStripMenuItem.Name = "addSentenceToolStripMenuItem";
+            addSentenceToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            addSentenceToolStripMenuItem.Text = "Add Sentence";
+            addSentenceToolStripMenuItem.Click += new System.EventHandler(this.OnBranchNodeSentence);
+            // 
+            // addChoiceToolStripMenuItem
+            // 
+            addChoiceToolStripMenuItem.Name = "addChoiceToolStripMenuItem";
+            addChoiceToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            addChoiceToolStripMenuItem.Text = "Add Choice";
+            addChoiceToolStripMenuItem.Click += new System.EventHandler(this.OnBranchNodeChoice);
+            // 
+            // addGotoToolStripMenuItem
+            // 
+            addGotoToolStripMenuItem.Name = "addGotoToolStripMenuItem";
+            addGotoToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            addGotoToolStripMenuItem.Text = "Add Goto";
+            addGotoToolStripMenuItem.Click += new System.EventHandler(this.OnBranchNodeGoto);
+            // 
+            // addBranchToolStripMenuItem
+            // 
+            addBranchToolStripMenuItem.Name = "addBranchToolStripMenuItem";
+            addBranchToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            addBranchToolStripMenuItem.Text = "Add Branch";
+            addBranchToolStripMenuItem.Click += new System.EventHandler(this.OnBranchNodeBranch);
             // 
             // tree
             // 
@@ -87,10 +115,10 @@
             this.tree.HideSelection = false;
             this.tree.Location = new System.Drawing.Point(-1, 44);
             this.tree.Name = "tree";
-            this.tree.ShowPlusMinus = false;
             this.tree.ShowRootLines = false;
             this.tree.Size = new System.Drawing.Size(777, 419);
             this.tree.TabIndex = 0;
+            this.tree.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.OnNodeCollapse);
             this.tree.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.OnTreeItemDrag);
             this.tree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.OnNodeSelect);
             this.tree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.OnNodeMouseClick);
@@ -123,7 +151,7 @@
             this.separatorDelete,
             this.menuItemDelete});
             this.contextMenu.Name = "m_pContextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(158, 370);
+            this.contextMenu.Size = new System.Drawing.Size(158, 348);
             this.contextMenu.Opened += new System.EventHandler(this.OnContextMenuOpened);
             // 
             // menuItemOpenDirectory
@@ -156,6 +184,22 @@
             // 
             this.separatorReply.Name = "separatorReply";
             this.separatorReply.Size = new System.Drawing.Size(154, 6);
+            // 
+            // menuItemBranch
+            // 
+            this.menuItemBranch.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            addSentenceToolStripMenuItem,
+            addChoiceToolStripMenuItem,
+            addGotoToolStripMenuItem,
+            addBranchToolStripMenuItem});
+            this.menuItemBranch.Name = "menuItemBranch";
+            this.menuItemBranch.Size = new System.Drawing.Size(157, 22);
+            this.menuItemBranch.Text = "Branch";
+            // 
+            // separatorBranch
+            // 
+            this.separatorBranch.Name = "separatorBranch";
+            this.separatorBranch.Size = new System.Drawing.Size(154, 6);
             // 
             // menuItemAddSentence
             // 
@@ -385,50 +429,6 @@
             this.checkBoxUseConstants.Text = "Constants";
             this.checkBoxUseConstants.UseVisualStyleBackColor = true;
             this.checkBoxUseConstants.CheckedChanged += new System.EventHandler(this.OnCheckDisplayOptions);
-            // 
-            // separatorBranch
-            // 
-            this.separatorBranch.Name = "separatorBranch";
-            this.separatorBranch.Size = new System.Drawing.Size(154, 6);
-            // 
-            // menuItemBranch
-            // 
-            this.menuItemBranch.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            addSentenceToolStripMenuItem,
-            addChoiceToolStripMenuItem,
-            addGotoToolStripMenuItem,
-            addBranchToolStripMenuItem});
-            this.menuItemBranch.Name = "menuItemBranch";
-            this.menuItemBranch.Size = new System.Drawing.Size(157, 22);
-            this.menuItemBranch.Text = "Branch";
-            // 
-            // addSentenceToolStripMenuItem
-            // 
-            addSentenceToolStripMenuItem.Name = "addSentenceToolStripMenuItem";
-            addSentenceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            addSentenceToolStripMenuItem.Text = "Add Sentence";
-            addSentenceToolStripMenuItem.Click += new System.EventHandler(this.OnBranchNodeSentence);
-            // 
-            // addChoiceToolStripMenuItem
-            // 
-            addChoiceToolStripMenuItem.Name = "addChoiceToolStripMenuItem";
-            addChoiceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            addChoiceToolStripMenuItem.Text = "Add Choice";
-            addChoiceToolStripMenuItem.Click += new System.EventHandler(this.OnBranchNodeChoice);
-            // 
-            // addGotoToolStripMenuItem
-            // 
-            addGotoToolStripMenuItem.Name = "addGotoToolStripMenuItem";
-            addGotoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            addGotoToolStripMenuItem.Text = "Add Goto";
-            addGotoToolStripMenuItem.Click += new System.EventHandler(this.OnBranchNodeGoto);
-            // 
-            // addBranchToolStripMenuItem
-            // 
-            addBranchToolStripMenuItem.Name = "addBranchToolStripMenuItem";
-            addBranchToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            addBranchToolStripMenuItem.Text = "Add Branch";
-            addBranchToolStripMenuItem.Click += new System.EventHandler(this.OnBranchNodeBranch);
             // 
             // DocumentDialogue
             // 

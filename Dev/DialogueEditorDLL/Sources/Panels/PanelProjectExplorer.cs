@@ -573,10 +573,10 @@ namespace DialogueEditor
         private void OnNodeCollapse(object sender, TreeViewCancelEventArgs e)
         {
             //Forbid the collapsing of desired nodes
-            /*if (e.Node.Tag is Package)
+            if (e.Node.Tag is Package)
             {
                 e.Cancel = true;
-            }*/
+            }
         }
 
         private void OnExpandAll(object sender, EventArgs e)

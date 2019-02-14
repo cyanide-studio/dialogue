@@ -1664,6 +1664,15 @@ namespace DialogueEditor
             }
         }
 
+        private void OnNodeCollapse(object sender, TreeViewCancelEventArgs e)
+        {
+            //Forbid the collapsing of desired nodes
+            if (((NodeWrap)e.Node.Tag).DialogueNode is DialogueNodeRoot)
+            {
+                e.Cancel = true;
+            }
+        }
+
         private void OnContextMenuOpened(object sender, EventArgs e)
         {
             separatorRoot.Visible = false;

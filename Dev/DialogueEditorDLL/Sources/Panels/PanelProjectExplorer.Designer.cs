@@ -130,6 +130,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tree.Location = new System.Drawing.Point(-1, 86);
             this.tree.Name = "tree";
+            this.tree.ShowRootLines = false;
             this.tree.Size = new System.Drawing.Size(231, 330);
             this.tree.TabIndex = 0;
             this.tree.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.OnNodeCollapse);
