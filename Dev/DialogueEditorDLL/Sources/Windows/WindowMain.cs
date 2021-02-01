@@ -371,6 +371,31 @@ namespace DialogueEditor
 
             return true;
         }
+        
+        public bool TryToReloadOrSaveDialogueIfDirty(Dialogue dialogue)
+        {
+            if (!ResourcesHandler.IsDirty(dialogue))
+            {
+                return true;
+            }
+            else if (ShowPopupCloseDocuments(null, new List<Dialogue>() { dialogue }))
+            {
+                // Just in case, force a reload of the whole document to ensure we leave in a valid state
+                foreach (DocumentDialogue document in documentDialogues)
+                {
+                    if (document.Dialogue == dialogue)
+                    {
+                        ResourcesHandler.ReloadDialogue(dialogue);
+                        document.OnPostReload();
+                        break;
+                    }
+                }
+
+                return true;
+            }
+
+            return false;
+        }
 
         private bool ShowPopupCloseDocuments(Project dirtyProject, List<Dialogue> dirtyDialogues)
         {

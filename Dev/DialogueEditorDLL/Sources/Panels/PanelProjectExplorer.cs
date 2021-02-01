@@ -540,6 +540,46 @@ namespace DialogueEditor
             }
         }
 
+        private void OnDocumentRename(object sender, EventArgs e)
+        {
+            Dialogue dialogue = tree.SelectedNode.Tag as Dialogue;
+            if (dialogue != null)
+            {
+                bool proceed = false;
+                if (EditorCore.MainWindow != null)
+                    proceed = EditorCore.MainWindow.TryToReloadOrSaveDialogueIfDirty(dialogue);
+
+                if (proceed)
+                {
+                    SaveFileDialog dialog = new SaveFileDialog();
+                    dialog.Title = "Rename Dialogue";
+                    dialog.Filter = "Dialogue Files|*" + Dialogue.GetExtension();
+                    dialog.InitialDirectory = Path.Combine(EditorHelper.GetProjectDirectory(), dialogue.GetFilePath());
+
+                    DialogResult result = dialog.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        if (EditorCore.MainWindow != null)
+                             EditorCore.MainWindow.CloseDocumentDialogue(dialogue, true);
+
+                        TreeNode nodeFolder = tree.SelectedNode.Parent;
+
+                        tree.Nodes.Remove(tree.SelectedNode);
+                        tree.SelectedNode = null;
+
+                        DeleteIfEmptyFolder(nodeFolder);
+
+                        ResourcesHandler.RenameDialogueFile(dialogue, dialog.FileName);
+
+                        ResyncFile(dialogue, true);
+
+                        if (EditorCore.MainWindow != null)
+                            EditorCore.MainWindow.OpenDocumentDialogue(dialogue);
+                    }
+                }
+            }
+        }
+
         private void OnDocumentDelete(object sender, EventArgs e)
         {
             Dialogue dialogue = tree.SelectedNode.Tag as Dialogue;
@@ -562,11 +602,7 @@ namespace DialogueEditor
 
                 DeleteIfEmptyFolder(nodeFolder);
 
-                ResourcesHandler.RemoveDialogue(dialogue);
-
-                string filePathName = Path.Combine(EditorHelper.GetProjectDirectory(), dialogue.GetFilePathName());
-                if (File.Exists(filePathName))
-                    File.Delete(filePathName);
+                ResourcesHandler.RemoveDialogueFile(dialogue);
             }
         }
 

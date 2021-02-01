@@ -127,7 +127,7 @@ namespace DialogueEditor
             return name;
         }
 
-        public void Init(string inPath, string inName)
+        public void ResetFilePathName(string inPath, string inName)
         {
             path = inPath;
             name = inName;

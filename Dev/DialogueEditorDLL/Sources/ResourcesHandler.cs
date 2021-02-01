@@ -95,20 +95,34 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // 
 
-        static public bool AddDialogue(Dialogue dialogue)
+        static private bool CheckDialogueNameAvailable(string path, string name, bool logErrorIfNotAvailable)
+        {
+            if (!dialogues.ContainsKey(name))
+            {
+                return true;
+            }
+
+            if (logErrorIfNotAvailable)
+            {
+                EditorCore.LogError("Dialogue already exists (ignored) : " + name + " at \"" + path + "\" and \"" + dialogues[name].Dialogue.GetFilePath() + "\"");
+            }
+
+            return false;
+        }
+
+        static private bool AddDialogue(Dialogue dialogue)
         {
             string name = dialogue.GetName();
-            if (!dialogues.ContainsKey(name))
+            if (CheckDialogueNameAvailable(dialogue.GetFilePath(), name, true))
             {
                 dialogues.Add(name, new ResourceHolder { Dialogue=dialogue });
                 return true;
             }
 
-            EditorCore.LogError("Dialogue already exists (ignored) : " + name + " at \"" + dialogue.GetFilePath() + "\" and \"" + dialogues[name].Dialogue.GetFilePath() + "\"");
             return false;
         }
 
-        static public bool RemoveDialogue(Dialogue dialogue)
+        static private bool RemoveDialogue(Dialogue dialogue)
         {
             string name = dialogue.GetName();
             if (dialogues.ContainsKey(name))
@@ -185,7 +199,7 @@ namespace DialogueEditor
             }
 
             Dialogue dialogue = new Dialogue();
-            dialogue.Init(Path.GetDirectoryName(filePath), Path.GetFileNameWithoutExtension(filePath));
+            dialogue.ResetFilePathName(Path.GetDirectoryName(filePath), Path.GetFileNameWithoutExtension(filePath));
             dialogue.Package = (package != null) ? package : Project.GetDefaultPackage();
             if (AddDialogue(dialogue))
             {
@@ -203,7 +217,7 @@ namespace DialogueEditor
         static public Dialogue CreateDialogueInstance(string name)
         {
             Dialogue dialogue = new Dialogue();
-            dialogue.Init("", name);
+            dialogue.ResetFilePathName("", name);
             dialogue.Package = Project.GetDefaultPackage();
             if (AddDialogue(dialogue))
             {
@@ -219,13 +233,56 @@ namespace DialogueEditor
         static public Dialogue CreateEmptyDialogueInstance(string name)
         {
             Dialogue dialogue = new Dialogue();
-            dialogue.Init("", name);
+            dialogue.ResetFilePathName("", name);
             dialogue.Package = Project.GetDefaultPackage();
             if (AddDialogue(dialogue))
             {
                 return dialogue;
             }
             return null;
+        }
+
+        static public bool RenameDialogueFile(Dialogue dialogue, string path)
+        {
+            string projectDirectory = Path.Combine(System.Environment.CurrentDirectory, Project.GetFilePath());
+            string filePath = "";
+            try
+            {
+                filePath = Utility.GetRelativePath(path, projectDirectory);
+            }
+            catch (System.UriFormatException)
+            {
+                filePath = path;    //In case the given path is already relative (or consider it as relative if it's invalid)
+            }
+
+            string newPath = Path.GetDirectoryName(filePath);
+            string newName = Path.GetFileNameWithoutExtension(filePath);
+            if (CheckDialogueNameAvailable(newPath, newName, true))
+            {
+                RemoveDialogueFile(dialogue);
+
+                dialogue.ResetFilePathName(newPath, newName);
+
+                AddDialogue(dialogue);
+                ExporterJson.SaveDialogueFile(Project, dialogue);
+                return true;
+            }
+
+            return false;
+        }
+
+        static public bool RemoveDialogueFile(Dialogue dialogue)
+        {
+            if (RemoveDialogue(dialogue))
+            {
+                string filePathName = Path.Combine(EditorHelper.GetProjectDirectory(), dialogue.GetFilePathName());
+                if (File.Exists(filePathName))
+                    File.Delete(filePathName);
+
+                return true;
+            }
+
+            return false;
         }
 
         static public void LoadAllDialogues()
@@ -317,7 +374,7 @@ namespace DialogueEditor
                         string filePath = Utility.GetRelativePath(fi.FullName, projectDirectory);
 
                         Dialogue dialogue = new Dialogue();
-                        dialogue.Init(Path.GetDirectoryName(filePath), Path.GetFileNameWithoutExtension(filePath));
+                        dialogue.ResetFilePathName(Path.GetDirectoryName(filePath), Path.GetFileNameWithoutExtension(filePath));
                         AddDialogue(dialogue);
                     }
                 }
