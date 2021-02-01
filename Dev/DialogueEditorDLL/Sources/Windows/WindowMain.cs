@@ -74,7 +74,10 @@ namespace DialogueEditor
 
 //#if DEBUG
 /*
-            //Debug code to generate 11250 dummy dialogues (337,500 sentences, 6,075,000 words) (Bible is less than 800,000 words)
+            // * INTENT
+            //
+            // Debug code to generate 5000 dummy dialogues (150,000 sentences, 2,700,000 words) (Bible is less than 800,000 words)
+            // -> 10 chapters, 10 quest each, 50 files each, 30 sentences each.
             //
             //  * USAGE
             //
@@ -100,11 +103,11 @@ namespace DialogueEditor
             Actor defaultSpeaker = ResourcesHandler.Project.ListActors[0];
 
             int indexFile = 0;
-            for (int a = 1; a <= 15; ++a)
+            for (int a = 1; a <= 10; ++a)
             {
                 string chapter = string.Format("Chapter_{0:000000}", a);
 
-                for (int b = 1; b <= 15; ++b)
+                for (int b = 1; b <= 10; ++b)
                 {
                     string quest = string.Format("Quest_{0:000000}", b);
 
