@@ -932,17 +932,21 @@ namespace DialogueEditor
             {
                 var document = dockPanel.ActiveDocument as DocumentDialogue;
                 document.ResolvePendingDirty();
+
+                bool proceed = true;
                 if (ResourcesHandler.IsDirty(document.Dialogue))
                 {
                     var dialog = new DialogConfirmReload(null, new List<Dialogue>() { document.Dialogue });
                     DialogResult result = dialog.ShowDialog();
-                    if (result == DialogResult.OK)
-                    {
-                        ResourcesHandler.ReloadDialogue(document.Dialogue);
-                        document.OnPostReload();
+                    proceed = (result == DialogResult.OK);
+                }
 
-                        EditorCore.LogInfo("Reloaded current dialogue file");
-                    }
+                if (proceed)
+                {
+                    ResourcesHandler.ReloadDialogue(document.Dialogue);
+                    document.OnPostReload();
+
+                    EditorCore.LogInfo("Reloaded current dialogue file");
                 }
             }
         }
