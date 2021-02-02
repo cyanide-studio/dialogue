@@ -952,46 +952,26 @@ namespace DialogueEditor
             if (ResourcesHandler.Project == null)
                 return;
 
-            Project project = null;
-            var dialogues = new List<Dialogue>();
-
-            if (documentProject != null && ResourcesHandler.Project.Dirty)
+            // Backup opened dialogues names.
+            List<string> openedDialogues = new List<string>();
+            foreach (DocumentDialogue document in documentDialogues)
             {
-                project = ResourcesHandler.Project;
+                openedDialogues.Add(document.Dialogue.GetName());
             }
 
-            if (documentDialogues.Count > 0)
+            if (CloseAllDocuments())
             {
-                foreach (DocumentDialogue document in documentDialogues)
-                {
-                    var documentDialogue = document as DocumentDialogue;
-                    documentDialogue.ResolvePendingDirty();
-                    if (ResourcesHandler.IsDirty(documentDialogue.Dialogue))
-                        dialogues.Add(documentDialogue.Dialogue);
-                }
-            }
+                EditorCore.Properties.Clear();
+                EditorCore.ProjectExplorer.Clear();
 
-            bool reloadOK = true;
-            if (project != null || dialogues.Count > 0)
-            {
-                var dialog = new DialogConfirmReload(project, dialogues);
-                DialogResult result = dialog.ShowDialog();
-                reloadOK = (result == DialogResult.OK);
-            }
-
-            if (reloadOK)
-            {
                 ResourcesHandler.ReloadAll();
 
-                if (documentProject != null)
-                {
-                    documentProject.OnPostReload();
-                }
+                EditorCore.ProjectExplorer.ResyncAllFiles();
 
-                foreach (DocumentDialogue document in documentDialogues)
+                // Re-open dialogues if possible.
+                foreach (string name in openedDialogues)
                 {
-                    var documentDialogue = document as DocumentDialogue;
-                    documentDialogue.OnPostReload();
+                    OpenDocumentDialogue(name);
                 }
 
                 EditorCore.LogInfo("Reloaded all project files");

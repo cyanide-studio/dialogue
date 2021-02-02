@@ -439,12 +439,11 @@ namespace DialogueEditor
 
         static public void ReloadAll()
         {
-            ReloadProject();
+            dialogues.Clear();
 
-            foreach (var kvp in dialogues)
-            {
-                ReloadDialogue(kvp.Value.Dialogue);
-            }
+            ReloadProject();
+            ParseProject();
+            LoadAllDialogues();
         }
 
         static public void Clear()
