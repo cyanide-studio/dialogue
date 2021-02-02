@@ -1,5 +1,7 @@
-# Dialogue Editor 1.0
-A Dialogue Editor for branching dialogues, built with C# and WinForms.  
+# ![Icon](/Icons/led24/bookmark_book.png) Dialogue Editor 1.0 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+A Dialogue Editor for branching dialogues, built in C# and mainly based on WinForms.  
 
 The Editor is designed for large scale production, primarily targeting the needs of writers and game designers.  
 It is based on individual Json files for easy integration in any game engine, and provides import/export pipelines for localization and voicing.  
@@ -28,9 +30,10 @@ It is mostly inspired by the tools used on Cyanide's Game of Thrones RPG, and th
 ## Dependencies
 - Newtonsoft.Json, A Json serializer library : https://github.com/JamesNK/Newtonsoft.Json
 - WeifenLuo.WinFormsUI.Docking, A docking library : https://github.com/dockpanelsuite/dockpanelsuite
+- Icons from [led24.de](http://www.led24.de/)
 
 ## Documentation
 - [User Documentation](/Docs/UserDocumentation.pdf)
 - [Technical Documentation](/Docs/TechnicalDocumentation.pdf)
 
-You can reach the author here : [twitter/Legulysse](https://twitter.com/legulysse)
+You can reach the author here : [twitter/Legulysse](https://twitter.com/legulysse) or here : [github/Legulysse](https://github.com/Legulysse)
