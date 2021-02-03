@@ -18,6 +18,8 @@ It is mostly inspired by the tools used on Cyanide's Game of Thrones RPG, and th
 ![Screenshot](/Docs/DemoScreenshot.png)
 
 ## Features
+(You can check the last updates in the [Changelog](/Docs/Changelog.md))
+
 - Individual Json files for each dialogue.
 - Edition of narrative flows through a node hierarchy.
 - Branching flows, either through interactive choices, conditional branching, and go-to nodes.
@@ -35,5 +37,6 @@ It is mostly inspired by the tools used on Cyanide's Game of Thrones RPG, and th
 ## Documentation
 - [User Documentation](/Docs/UserDocumentation.pdf)
 - [Technical Documentation](/Docs/TechnicalDocumentation.pdf)
+- [Changelog](/Docs/Changelog.md)
 
 You can reach the author here : [twitter/Legulysse](https://twitter.com/legulysse) or here : [github/Legulysse](https://github.com/Legulysse)
