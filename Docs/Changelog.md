@@ -8,7 +8,7 @@
 - Disable root nodes collapsing (dialogue roots + project packages).
 - Display +/- icons on collapsed branches.
 - Fix the "Reload file" operation not working if a file is not dirty.
-- Fix crash when reloading the whole project, while some files have been moved outside of the editor.
+- Fix crash when reloading the whole project while some files have been moved outside of the editor.
 - Start dialogue nodes IDs at 0 instead of 1 (root node will have ID 0).
 - Use Nuget to retrieve dependencies dlls.
 - Remove binaries from the repository.
