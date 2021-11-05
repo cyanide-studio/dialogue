@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DialogueEditor", "DialogueEditor\DialogueEditor.csproj", "{1D347AEF-C5EC-455D-B8D3-4FBC9F12156A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1B0B8882-E67C-45BB-8B5D-8AA43FB27876} = {1B0B8882-E67C-45BB-8B5D-8AA43FB27876}
+		{6EE706EC-D9AC-45DD-ABCD-776A784C7A5B} = {6EE706EC-D9AC-45DD-ABCD-776A784C7A5B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DialogueEditorDLL", "DialogueEditorDLL\DialogueEditorDLL.csproj", "{3E9E660C-96FD-4EB3-8643-C072CFA7B3B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSingleWindow", "TestSingleWindow\TestSingleWindow.csproj", "{46D21066-F264-4A7F-9F6D-95F6ACDA38AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{E4E93748-A937-49D0-BB55-159BA593959A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoProjectPlugin", "Plugins\DemoProjectPlugin\DemoProjectPlugin.csproj", "{6EE706EC-D9AC-45DD-ABCD-776A784C7A5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamplePlugin", "Plugins\ExamplePlugin\ExamplePlugin.csproj", "{1B0B8882-E67C-45BB-8B5D-8AA43FB27876}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D347AEF-C5EC-455D-B8D3-4FBC9F12156A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D347AEF-C5EC-455D-B8D3-4FBC9F12156A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D347AEF-C5EC-455D-B8D3-4FBC9F12156A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D347AEF-C5EC-455D-B8D3-4FBC9F12156A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E9E660C-96FD-4EB3-8643-C072CFA7B3B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E9E660C-96FD-4EB3-8643-C072CFA7B3B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E9E660C-96FD-4EB3-8643-C072CFA7B3B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E9E660C-96FD-4EB3-8643-C072CFA7B3B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46D21066-F264-4A7F-9F6D-95F6ACDA38AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46D21066-F264-4A7F-9F6D-95F6ACDA38AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46D21066-F264-4A7F-9F6D-95F6ACDA38AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46D21066-F264-4A7F-9F6D-95F6ACDA38AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EE706EC-D9AC-45DD-ABCD-776A784C7A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EE706EC-D9AC-45DD-ABCD-776A784C7A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EE706EC-D9AC-45DD-ABCD-776A784C7A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EE706EC-D9AC-45DD-ABCD-776A784C7A5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B0B8882-E67C-45BB-8B5D-8AA43FB27876}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B0B8882-E67C-45BB-8B5D-8AA43FB27876}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B0B8882-E67C-45BB-8B5D-8AA43FB27876}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B0B8882-E67C-45BB-8B5D-8AA43FB27876}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6EE706EC-D9AC-45DD-ABCD-776A784C7A5B} = {E4E93748-A937-49D0-BB55-159BA593959A}
+		{1B0B8882-E67C-45BB-8B5D-8AA43FB27876} = {E4E93748-A937-49D0-BB55-159BA593959A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B9746328-3C72-45EC-8CAA-3DBA8725F077}
+	EndGlobalSection
+EndGlobal
