@@ -14,7 +14,7 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // Binding
 
-        public class TypeNameSerializationBinder : System.Runtime.Serialization.SerializationBinder
+        public class TypeNameSerializationBinder : Newtonsoft.Json.Serialization.ISerializationBinder
         {
             private Dictionary<string, Type> Bindings = new Dictionary<string, Type>();
 
@@ -37,7 +37,7 @@ namespace DialogueEditor
                 Bindings.Add(typeName, type);
             }
 
-            public override void BindToName(Type type, out string assemblyName, out string typeName)
+            public void BindToName(Type type, out string assemblyName, out string typeName)
             {
                 if (!Bindings.Values.Contains(type))
                     EditorCore.LogError("Unknown type on serialization : " + type);
@@ -46,7 +46,7 @@ namespace DialogueEditor
                 typeName = Bindings.Single(item => item.Value == type).Key;
             }
 
-            public override Type BindToType(string assemblyName, string typeName)
+            public Type BindToType(string assemblyName, string typeName)
             {
                 if (Bindings.ContainsKey(typeName))
                     return Bindings[typeName];
@@ -180,7 +180,7 @@ namespace DialogueEditor
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Formatting = Formatting.Indented;
                 serializer.TypeNameHandling = TypeNameHandling.Auto;
-                serializer.Binder = EditorCore.SerializationBinder;
+                serializer.SerializationBinder = EditorCore.SerializationBinder;
                 serializer.Serialize(file, value);
             }
         }
@@ -194,7 +194,7 @@ namespace DialogueEditor
                     JsonSerializer serializer = new JsonSerializer();
                     serializer.Formatting = Formatting.Indented;
                     serializer.TypeNameHandling = TypeNameHandling.Auto;
-                    serializer.Binder = EditorCore.SerializationBinder;
+                    serializer.SerializationBinder = EditorCore.SerializationBinder;
                     serializer.Serialize(writer, value);
 
                     writer.Flush();
@@ -219,7 +219,7 @@ namespace DialogueEditor
                 settings.ObjectCreationHandling = ObjectCreationHandling.Replace;       //not default
                 settings.PreserveReferencesHandling = PreserveReferencesHandling.None;  //default
 
-                settings.Binder = EditorCore.SerializationBinder;
+                settings.SerializationBinder = EditorCore.SerializationBinder;
 
                 JsonConvert.PopulateObject(File.ReadAllText(path), value, settings);
             }
@@ -251,7 +251,7 @@ namespace DialogueEditor
                 settings.ObjectCreationHandling = ObjectCreationHandling.Replace;       //not default
                 settings.PreserveReferencesHandling = PreserveReferencesHandling.None;  //default
 
-                settings.Binder = EditorCore.SerializationBinder;
+                settings.SerializationBinder = EditorCore.SerializationBinder;
 
                 JsonConvert.PopulateObject(content, value, settings);
             }

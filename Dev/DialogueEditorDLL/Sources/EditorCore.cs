@@ -163,21 +163,22 @@ namespace DialogueEditor
             if (type.IsSubclassOf(typeof(NodeCondition)))
             {
                 ConditionSlots.Add(new ConditionSlot() { Text = textMenu, ConditionType = type });
+                SerializationBinder.AddBinding(serializedName, type);
             }
             else if (type.IsSubclassOf(typeof(NodeAction)))
             {
                 ActionSlots.Add(new ActionSlot() { Text = textMenu, ActionType = type });
+                SerializationBinder.AddBinding(serializedName, type);
             }
             else if (type.IsSubclassOf(typeof(NodeFlag)))
             {
                 FlagSlots.Add(new FlagSlot() { Text = textMenu, FlagType = type });
+                SerializationBinder.AddBinding(serializedName, type);
             }
             else
             {
                 System.Diagnostics.Debug.Fail("BindAttribute : Invalid type provided, please use a subclass of NodeCondition, NodeAction or NodeFlag.");
             }
-
-            SerializationBinder.AddBinding(serializedName, type);
         }
 
         static public void LogInfo(string message)

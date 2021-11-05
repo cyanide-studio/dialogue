@@ -38,7 +38,7 @@ namespace DialogueEditor
                 JsonSerializer serializer = new JsonSerializer();
                 serializer.Formatting = Formatting.Indented;
                 serializer.TypeNameHandling = TypeNameHandling.Auto;
-                serializer.Binder = EditorCore.SerializationBinder;
+                serializer.SerializationBinder = EditorCore.SerializationBinder;
                 serializer.Serialize(file, constants);
             }
 
