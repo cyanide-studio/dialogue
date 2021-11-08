@@ -101,8 +101,10 @@ namespace DialogueEditor
 
         private void OnVisibleChanged(object sender, EventArgs e)
         {
-            if (EditorCore.MainWindow != null)
-                EditorCore.MainWindow.SyncMenuItemFromPanel(this);
+            // I prefer to avoid a dedicated checkbox for custom panels for now.
+            // Instead, the standard Properties checkbox will affect all properties panels.
+            //if (EditorCore.MainWindow != null)
+            //    EditorCore.MainWindow.SyncMenuItemFromPanel(this);
         }
     }
 }

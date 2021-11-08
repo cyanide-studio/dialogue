@@ -658,6 +658,11 @@ namespace DialogueEditor
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
             SyncPanelFromMenuItem(EditorCore.Properties, menuItem);
 
+            if (EditorCore.CustomProperties != null)
+            {
+                SyncPanelFromMenuItem(EditorCore.CustomProperties, menuItem);
+            }
+
             ignoreMenuItemEvents = false;
         }
 
