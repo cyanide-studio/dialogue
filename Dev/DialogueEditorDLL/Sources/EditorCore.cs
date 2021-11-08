@@ -29,6 +29,12 @@ namespace DialogueEditor
         public Type FlagType;
     };
 
+    public struct CustomPropertiesSlot
+    {
+        public Type DialogueNodeType;
+        public Type FormType;
+    };
+
     //--------------------------------------------------------------------------------------------------------------
     // Helper delegates
 
@@ -64,6 +70,7 @@ namespace DialogueEditor
         static public WindowMain MainWindow = null;
         static public PanelProjectExplorer ProjectExplorer = null;
         static public PanelProperties Properties = null;
+        static public PanelCustomProperties CustomProperties = null;
         static public PanelOutputLog OutputLog = null;
         static public PanelSearchResults SearchResults = null;
 
@@ -71,6 +78,9 @@ namespace DialogueEditor
         static public List<ConditionSlot> ConditionSlots = new List<ConditionSlot>();
         static public List<ActionSlot> ActionSlots = new List<ActionSlot>();
         static public List<FlagSlot> FlagSlots = new List<FlagSlot>();
+
+        // Custom properties
+        static public List<CustomPropertiesSlot> CustomPropertiesSlots = new List<CustomPropertiesSlot>();
 
         // Project specific stats
         static public DelegateProjectStats ProjectStats = null;
@@ -179,6 +189,31 @@ namespace DialogueEditor
             {
                 System.Diagnostics.Debug.Fail("BindAttribute : Invalid type provided, please use a subclass of NodeCondition, NodeAction or NodeFlag.");
             }
+        }
+
+        static public void BindCustomProperty(Type dialogueNodeType, Type formType)
+        {
+            if (!dialogueNodeType.IsSubclassOf(typeof(DialogueNode)))
+            {
+                System.Diagnostics.Debug.Fail("BindCustomProperty : Invalid dialogue node type provided, please use a subclass of DialogueNode.");
+                return;
+            }
+
+            if (!typeof(IFormProperties).IsAssignableFrom(formType) || !formType.IsSubclassOf(typeof(UserControl)))
+            {
+                System.Diagnostics.Debug.Fail("BindCustomProperty : Invalid properties form type provided, please use a subclass of IFormProperties + UserControl.");
+                return;
+            }
+
+            if (EditorCore.CustomProperties == null)
+            {
+                EditorCore.CustomProperties = new PanelCustomProperties();
+            }
+
+            CustomPropertiesSlot slot = new CustomPropertiesSlot();
+            slot.DialogueNodeType = dialogueNodeType;
+            slot.FormType = formType;
+            CustomPropertiesSlots.Add(slot);
         }
 
         static public void LogInfo(string message)

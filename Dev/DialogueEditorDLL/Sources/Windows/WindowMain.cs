@@ -207,22 +207,29 @@ namespace DialogueEditor
 
         private void EnsurePanels()
         {
-            if (!dockPanel.Contains(EditorCore.ProjectExplorer))
+            if (EditorCore.ProjectExplorer != null && !dockPanel.Contains(EditorCore.ProjectExplorer))
                 EditorCore.ProjectExplorer.Show(dockPanel, DockState.DockLeft);
-            if (!dockPanel.Contains(EditorCore.Properties))
+
+            if (EditorCore.Properties != null && !dockPanel.Contains(EditorCore.Properties))
                 EditorCore.Properties.Show(dockPanel, DockState.DockRight);
-            if (!dockPanel.Contains(EditorCore.OutputLog))
+
+            if (EditorCore.CustomProperties != null && !dockPanel.Contains(EditorCore.CustomProperties))
+                EditorCore.CustomProperties.Show(dockPanel, DockState.DockRight);
+
+            if (EditorCore.OutputLog != null && !dockPanel.Contains(EditorCore.OutputLog))
                 EditorCore.OutputLog.Show(dockPanel, DockState.DockBottom);
-            if (!dockPanel.Contains(EditorCore.SearchResults))
+
+            if (EditorCore.SearchResults != null && !dockPanel.Contains(EditorCore.SearchResults))
                 EditorCore.SearchResults.Show(dockPanel, DockState.DockBottom);
         }
 
         private void ResetPanels()
         {
-            EditorCore.ProjectExplorer.Show(dockPanel, DockState.DockLeft);
-            EditorCore.Properties.Show(dockPanel, DockState.DockRight);
-            EditorCore.SearchResults.Show(dockPanel, DockState.DockBottom);
-            EditorCore.OutputLog.Show(dockPanel, DockState.DockBottom);
+            EditorCore.ProjectExplorer?.Show(dockPanel, DockState.DockLeft);
+            EditorCore.Properties?.Show(dockPanel, DockState.DockRight);
+            EditorCore.CustomProperties?.Show(dockPanel, DockState.DockRight);
+            EditorCore.SearchResults?.Show(dockPanel, DockState.DockBottom);
+            EditorCore.OutputLog?.Show(dockPanel, DockState.DockBottom);
         }
 
         private IDockContent GetContentFromPersistString(string persistString)
@@ -231,6 +238,8 @@ namespace DialogueEditor
                 return EditorCore.ProjectExplorer;
             else if (persistString == typeof(PanelProperties).ToString())
                 return EditorCore.Properties;
+            else if (persistString == typeof(PanelCustomProperties).ToString())
+                return EditorCore.CustomProperties;
             else if (persistString == typeof(PanelOutputLog).ToString())
                 return EditorCore.OutputLog;
             else if (persistString == typeof(PanelSearchResults).ToString())
@@ -436,8 +445,9 @@ namespace DialogueEditor
         {
             if (CloseAllDocuments())
             {
-                EditorCore.Properties.Clear();
-                EditorCore.ProjectExplorer.Clear();
+                EditorCore.Properties?.Clear();
+                EditorCore.CustomProperties?.Clear();
+                EditorCore.ProjectExplorer?.Clear();
                 ResourcesHandler.Clear();
                 return true;
             }
@@ -506,8 +516,8 @@ namespace DialogueEditor
             {
                 if (document == dockPanel.ActiveContent)
                 {
-                    if (EditorCore.Properties != null)
-                        EditorCore.Properties.Clear();
+                    EditorCore.Properties?.Clear();
+                    EditorCore.CustomProperties?.Clear();
                 }
 
                 lastClosedDialogue = document.Dialogue.GetName();
@@ -965,8 +975,9 @@ namespace DialogueEditor
 
             if (CloseAllDocuments())
             {
-                EditorCore.Properties.Clear();
-                EditorCore.ProjectExplorer.Clear();
+                EditorCore.Properties?.Clear();
+                EditorCore.CustomProperties?.Clear();
+                EditorCore.ProjectExplorer?.Clear();
 
                 ResourcesHandler.ReloadAll();
 

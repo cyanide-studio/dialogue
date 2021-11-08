@@ -75,11 +75,11 @@ namespace DialogueEditor
             }
         }
 
-        public void Init(DocumentDialogue inDocument, TreeNode inTreeNode, DialogueNodeReply inDialogueNode)
+        public void Init(DocumentDialogue inDocument, TreeNode inTreeNode, DialogueNode inDialogueNode)
         {
             document = inDocument;
             treeNode = inTreeNode;
-            dialogueNode = inDialogueNode;
+            dialogueNode = inDialogueNode as DialogueNodeReply;
 
             Project project = ResourcesHandler.Project;
 

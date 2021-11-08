@@ -53,11 +53,11 @@ namespace DialogueEditor
         {
         }
 
-        public void Init(DocumentDialogue inDocument, TreeNode inTreeNode, DialogueNodeChoice inDialogueNode)
+        public void Init(DocumentDialogue inDocument, TreeNode inTreeNode, DialogueNode inDialogueNode)
         {
             document = inDocument;
             treeNode = inTreeNode;
-            dialogueNode = inDialogueNode;
+            dialogueNode = inDialogueNode as DialogueNodeChoice;
 
             textBoxWorkstring.Text = dialogueNode.Choice;
             textBoxTimer.Text = dialogueNode.Timer.ToString();

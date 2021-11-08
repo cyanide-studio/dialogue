@@ -101,8 +101,8 @@ namespace DialogueEditor
         {
             if (pendingDirty)
             {
-                if (EditorCore.Properties != null)
-                    EditorCore.Properties.OnResolvePendingDirty();
+                EditorCore.Properties?.OnResolvePendingDirty();
+                EditorCore.CustomProperties?.OnResolvePendingDirty();
 
                 if (pendingDirty)   //OnResolvePendingDirty may call CancelPendingDirty
                 {
@@ -746,8 +746,8 @@ namespace DialogueEditor
                 }
             }
 
-            if (EditorCore.Properties != null)
-                EditorCore.Properties.ShowDialogueNodeProperties(this, tree.SelectedNode, ((NodeWrap)tree.SelectedNode.Tag).DialogueNode);
+            EditorCore.Properties?.ShowDialogueNodeProperties(this, tree.SelectedNode, ((NodeWrap)tree.SelectedNode.Tag).DialogueNode);
+            EditorCore.CustomProperties?.ShowDialogueNodeProperties(this, tree.SelectedNode, ((NodeWrap)tree.SelectedNode.Tag).DialogueNode);
 
             //tree.EndUpdate();
         }

@@ -124,8 +124,8 @@ namespace DialogueEditor
 
         public void RefreshDocument()
         {
-            if (EditorCore.Properties != null)
-                EditorCore.Properties.Clear();
+            EditorCore.Properties?.Clear();
+            EditorCore.CustomProperties?.Clear();
         }
 
         public void RefreshTitle()
