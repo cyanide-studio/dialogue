@@ -40,7 +40,12 @@ namespace DialogueEditor
             public void BindToName(Type type, out string assemblyName, out string typeName)
             {
                 if (!Bindings.Values.Contains(type))
+                {
                     EditorCore.LogError("Unknown type on serialization : " + type);
+                    assemblyName = null;
+                    typeName = null;
+                    return;
+                }
 
                 assemblyName = null;
                 typeName = Bindings.Single(item => item.Value == type).Key;
@@ -48,11 +53,13 @@ namespace DialogueEditor
 
             public Type BindToType(string assemblyName, string typeName)
             {
-                if (Bindings.ContainsKey(typeName))
-                    return Bindings[typeName];
+                if (!Bindings.ContainsKey(typeName))
+                {
+                    EditorCore.LogError("Unknown type on deserialization : " + typeName);
+                    return null;
+                }
 
-                EditorCore.LogError("Unknown type on deserialization : " + typeName);
-                return null;
+                return Bindings[typeName];
             }
         }
 
