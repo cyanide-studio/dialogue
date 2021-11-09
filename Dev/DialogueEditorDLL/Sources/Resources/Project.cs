@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace DialogueEditor
 {
@@ -49,6 +50,9 @@ namespace DialogueEditor
 
         public List<Constant> ListConstants { get; set; }
         public TranslationTable Translations { get; set; }
+
+        [JsonExtensionData]
+        public IDictionary<string, JToken> ExtensionData { get; set; }
 
         //--------------------------------------------------------------------------------------------------------------
         // Public vars
