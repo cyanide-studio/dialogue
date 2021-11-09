@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace DialogueEditor
 {
@@ -29,6 +30,9 @@ namespace DialogueEditor
         public List<NodeFlag> Flags { get; set; }
 
         public List<NodeCustomProperties> CustomProperties { get; set; }
+
+        [JsonExtensionData]
+        public IDictionary<string, JToken> ExtensionData { get; set; }
 
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods

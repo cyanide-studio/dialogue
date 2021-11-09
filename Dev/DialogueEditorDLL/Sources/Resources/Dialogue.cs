@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace DialogueEditor
 {
@@ -45,6 +46,9 @@ namespace DialogueEditor
         public List<string> ListAdditionalActors { get; set; }
 
         public TranslationTable Translations { get; set; }
+
+        [JsonExtensionData]
+        public IDictionary<string, JToken> ExtensionData { get; set; }
 
         //--------------------------------------------------------------------------------------------------------------
         // Internal vars
@@ -168,6 +172,8 @@ namespace DialogueEditor
                     nodebranch.Branch = GetNodeByID(nodebranch.BranchID);
                 }
             }
+
+            EditorCore.OnDialoguePostLoad?.Invoke(this);
         }
 
         public void PreSave(Project project)

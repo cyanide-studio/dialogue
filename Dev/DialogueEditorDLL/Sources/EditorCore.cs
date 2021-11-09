@@ -40,6 +40,7 @@ namespace DialogueEditor
     // Helper delegates
 
     public delegate void DelegateProjectLoad();
+    public delegate void DelegateDialoguePostLoad(Dialogue dialogue);
     public delegate List<string> DelegateActorAnimsets(string ActorID);
     public delegate void DelegateCheckDialogueErrors(Dialogue dialogue);
     public delegate string DelegateProjectStats(ExporterStats.ProjectStats Stats);
@@ -97,6 +98,9 @@ namespace DialogueEditor
 
         ///<summary> Custom callback used when the Project is loaded </summary>
         static public DelegateProjectLoad OnProjectLoad = null;
+
+        ///<summary> Custom callback used when a Dialogue is loaded, can be used for data migration between versions </summary>
+        static public DelegateDialoguePostLoad OnDialoguePostLoad = null;
 
         ///<summary> Custom callback used to retrieve Animsets usable by the specified Actor </summary>
         public static DelegateActorAnimsets GetActorAnimsets = null;

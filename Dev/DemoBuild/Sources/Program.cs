@@ -62,6 +62,24 @@ namespace DemoBuild
                 //...
             };
 
+            // Delegate post-load dialogue, should be used when data needs to migrate between versions
+            EditorCore.OnDialoguePostLoad = delegate (Dialogue dialogue)
+            {
+                //...
+                // Here you can handle data migration and properties update, using serialized data from ExtensionData dictionnaries
+                //...
+
+                //...
+                // Here you can flush all ExtensionData to remove them from serialization once migration is complete
+                //foreach (DialogueNode node in dialogue.ListNodes)
+                //{
+                //    node.ExtensionData?.Clear();
+                //}
+
+                //dialogue.ExtensionData?.Clear();
+                //...
+            };
+
             // Delegate to check custom errors
             EditorCore.OnCheckDialogueErrors = delegate (Dialogue dialogue)
             {
