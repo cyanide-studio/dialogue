@@ -947,6 +947,7 @@ namespace DialogueEditor
             if (e.KeyData == (Keys.Enter))
             {
                 e.Handled = true;
+                e.SuppressKeyPress = true;
 
                 textBoxPackage.Parent.Focus();
             }

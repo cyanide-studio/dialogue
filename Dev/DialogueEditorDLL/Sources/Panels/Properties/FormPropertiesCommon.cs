@@ -411,6 +411,7 @@ namespace DialogueEditor
             if (e.KeyCode == Keys.Delete)
             {
                 e.Handled = true;
+                e.SuppressKeyPress = true;
 
                 propertyGridAttributes.SelectedObject = null;
                 RemoveTreeNode(selectedTreeNode);
@@ -423,6 +424,7 @@ namespace DialogueEditor
             else if (e.Control && (e.KeyCode == Keys.C || e.KeyCode == Keys.X))
             {
                 e.Handled = true;
+                e.SuppressKeyPress = true;
 
                 if (selectedTreeNode.Tag is NodeCondition)
                 {
@@ -469,6 +471,7 @@ namespace DialogueEditor
             else if (e.Control && e.KeyCode == Keys.V)
             {
                 e.Handled = true;
+                e.SuppressKeyPress = true;
 
                 if ((selectedTreeNode == treeNodeRootConditions || selectedTreeNode.Tag is NodeConditionGroup) && EditorHelper.Clipboard is NodeCondition)
                 {

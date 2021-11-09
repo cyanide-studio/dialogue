@@ -239,6 +239,7 @@ namespace DialogueEditor
                     Clipboard.SetText(item.Text);
 
                     e.Handled = true;
+                    e.SuppressKeyPress = true;
                 }
             }
         }

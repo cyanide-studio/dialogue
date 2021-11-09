@@ -1463,6 +1463,7 @@ namespace DialogueEditor
             if (e.Control && (e.KeyCode == Keys.C || e.KeyCode == Keys.X))
             {
                 e.Handled = true;
+                e.SuppressKeyPress = true;
 
                 if (dialogueNode is DialogueNodeRoot)
                 {
@@ -1492,6 +1493,7 @@ namespace DialogueEditor
             else if (e.Control && e.KeyCode == Keys.V)
             {
                 e.Handled = true;
+                e.SuppressKeyPress = true;
 
                 bool asBranch = false;
 
@@ -1628,18 +1630,21 @@ namespace DialogueEditor
             else if (e.Control && e.KeyCode == Keys.Z)
             {
                 e.Handled = true;
+                e.SuppressKeyPress = true;
 
                 UndoState();
             }
             else if (e.Control && e.KeyCode == Keys.Y)
             {
                 e.Handled = true;
+                e.SuppressKeyPress = true;
 
                 RedoState();
             }
             else if (e.KeyCode == Keys.Delete)
             {
                 e.Handled = true;
+                e.SuppressKeyPress = true;
 
                 RemoveNode(dialogueNode, tree.SelectedNode);
             }
