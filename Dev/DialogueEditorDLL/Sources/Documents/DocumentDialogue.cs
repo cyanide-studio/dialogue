@@ -69,6 +69,9 @@ namespace DialogueEditor
             tree.DrawMode = TreeViewDrawMode.OwnerDrawText;
             tree.DrawNode += OnTreeViewDrawNode;
 
+            //Ensure custom properties were generated for this dialogue
+            Dialogue.GenerateCustomProperties();
+
             SaveState();
 
             ResyncDisplayOptions();

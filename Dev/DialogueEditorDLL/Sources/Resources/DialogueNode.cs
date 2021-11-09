@@ -15,7 +15,7 @@ namespace DialogueEditor
 
         [JsonIgnore]
         public const int ID_NULL = -1;
-        public int ID { get; set;}
+        public int ID { get; set; }
 
         /// <summary>
         /// Next node to play in normal flow
@@ -28,9 +28,11 @@ namespace DialogueEditor
         public List<NodeAction> Actions { get; set; }
         public List<NodeFlag> Flags { get; set; }
 
+        public List<NodeCustomProperties> CustomProperties { get; set; }
+
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
-        
+
         public DialogueNode()
         {
             ID = ID_NULL;
@@ -40,6 +42,8 @@ namespace DialogueEditor
             Conditions = new List<NodeCondition>();
             Actions = new List<NodeAction>();
             Flags = new List<NodeFlag>();
+
+            CustomProperties = new List<NodeCustomProperties>();
         }
 
         public DialogueNode(DialogueNode other)
@@ -51,8 +55,23 @@ namespace DialogueEditor
             Conditions = other.Conditions.Clone() as List<NodeCondition>;
             Actions = other.Actions.Clone() as List<NodeAction>;
             Flags = other.Flags.Clone() as List<NodeFlag>;
+
+            CustomProperties = other.CustomProperties.Clone() as List<NodeCustomProperties>;
         }
 
         public abstract object Clone();
+
+        public NodeCustomProperties GetCustomProperties(Type customPropertiesType)
+        {
+            foreach (NodeCustomProperties properties in CustomProperties)
+            {
+                if (properties.GetType().Equals(customPropertiesType))
+                {
+                    return properties;
+                }
+            }
+
+            return null;
+        }
     }
 }

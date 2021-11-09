@@ -50,9 +50,12 @@ namespace DialogueEditor
 
             foreach (CustomPropertiesSlot slot in EditorCore.CustomPropertiesSlots)
             {
-                IFormProperties form = Activator.CreateInstance(slot.FormType) as IFormProperties;
-                form.Init(document, treeNode, dialogueNode);
-                layoutPanel.Controls.Add(form as UserControl);
+                if (slot.FormType != null && slot.DialogueNodeType.IsAssignableFrom(dialogueNode.GetType()))
+                {
+                    IFormProperties form = Activator.CreateInstance(slot.FormType) as IFormProperties;
+                    form.Init(document, treeNode, dialogueNode);
+                    layoutPanel.Controls.Add(form as UserControl);
+                }
             }
 
             layoutPanel.VerticalScroll.Value = 0;

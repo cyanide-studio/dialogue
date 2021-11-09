@@ -32,6 +32,7 @@ namespace DialogueEditor
     public struct CustomPropertiesSlot
     {
         public Type DialogueNodeType;
+        public Type CustomPropertiesType;
         public Type FormType;
     };
 
@@ -191,17 +192,29 @@ namespace DialogueEditor
             }
         }
 
-        static public void BindCustomProperty(Type dialogueNodeType, Type formType)
+        static public void BindCustomProperties(Type dialogueNodeType, string customPropertiesName, Type customPropertiesType, Type formType)
         {
             if (!dialogueNodeType.IsSubclassOf(typeof(DialogueNode)))
             {
-                System.Diagnostics.Debug.Fail("BindCustomProperty : Invalid dialogue node type provided, please use a subclass of DialogueNode.");
+                System.Diagnostics.Debug.Fail("BindCustomProperties : Invalid dialogue node type provided, please use a subclass of DialogueNode.");
                 return;
             }
 
-            if (!typeof(IFormProperties).IsAssignableFrom(formType) || !formType.IsSubclassOf(typeof(UserControl)))
+            if (customPropertiesType != null && !customPropertiesType.IsSubclassOf(typeof(NodeCustomProperties)))
             {
-                System.Diagnostics.Debug.Fail("BindCustomProperty : Invalid properties form type provided, please use a subclass of IFormProperties + UserControl.");
+                System.Diagnostics.Debug.Fail("BindCustomProperties : Invalid custom properties type provided, please use a subclass of NodeCustomProperties.");
+                return;
+            }
+
+            if (formType != null && (!typeof(IFormProperties).IsAssignableFrom(formType) || !formType.IsSubclassOf(typeof(UserControl))))
+            {
+                System.Diagnostics.Debug.Fail("BindCustomProperties : Invalid properties form type provided, please use a subclass of IFormProperties + UserControl.");
+                return;
+            }
+
+            if (customPropertiesType == null && formType == null)
+            {
+                System.Diagnostics.Debug.Fail("BindCustomProperties : Please provide either a CustomProperties type or a Form type.");
                 return;
             }
 
@@ -210,8 +223,14 @@ namespace DialogueEditor
                 EditorCore.CustomProperties = new PanelCustomProperties();
             }
 
+            if (customPropertiesType != null)
+            {
+                SerializationBinder.AddBinding(customPropertiesName, customPropertiesType);
+            }
+
             CustomPropertiesSlot slot = new CustomPropertiesSlot();
             slot.DialogueNodeType = dialogueNodeType;
+            slot.CustomPropertiesType = customPropertiesType;
             slot.FormType = formType;
             CustomPropertiesSlots.Add(slot);
         }

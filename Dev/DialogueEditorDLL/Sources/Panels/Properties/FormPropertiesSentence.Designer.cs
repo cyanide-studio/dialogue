@@ -41,6 +41,7 @@
             System.Windows.Forms.Label label9;
             System.Windows.Forms.Label label11;
             this.groupBoxProperties = new System.Windows.Forms.GroupBox();
+            this.textBoxCameraBlendTime = new System.Windows.Forms.TextBox();
             this.comboBoxCamera = new System.Windows.Forms.ComboBox();
             this.labelPostDelay = new System.Windows.Forms.Label();
             this.labelPreDelay = new System.Windows.Forms.Label();
@@ -60,7 +61,6 @@
             this.comboBoxListener = new System.Windows.Forms.ComboBox();
             this.comboBoxSpeaker = new System.Windows.Forms.ComboBox();
             this.picturePortraitListener = new System.Windows.Forms.PictureBox();
-            this.textBoxCameraBlendTime = new System.Windows.Forms.TextBox();
             label5 = new System.Windows.Forms.Label();
             label8 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
@@ -179,6 +179,15 @@
             label9.TabIndex = 36;
             label9.Text = "Camera :";
             // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new System.Drawing.Point(5, 331);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(100, 13);
+            label11.TabIndex = 39;
+            label11.Text = "Camera blend time :";
+            // 
             // groupBoxProperties
             // 
             this.groupBoxProperties.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -221,6 +230,15 @@
             this.groupBoxProperties.TabIndex = 16;
             this.groupBoxProperties.TabStop = false;
             this.groupBoxProperties.Text = "Sentence Properties";
+            // 
+            // textBoxCameraBlendTime
+            // 
+            this.textBoxCameraBlendTime.Location = new System.Drawing.Point(111, 328);
+            this.textBoxCameraBlendTime.Name = "textBoxCameraBlendTime";
+            this.textBoxCameraBlendTime.Size = new System.Drawing.Size(199, 20);
+            this.textBoxCameraBlendTime.TabIndex = 38;
+            this.textBoxCameraBlendTime.TextChanged += new System.EventHandler(this.OnCameraBlendTimeChanged);
+            this.textBoxCameraBlendTime.Validated += new System.EventHandler(this.OnCameraBlendTimeValidated);
             // 
             // comboBoxCamera
             // 
@@ -429,24 +447,6 @@
             this.picturePortraitListener.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picturePortraitListener.TabIndex = 11;
             this.picturePortraitListener.TabStop = false;
-            // 
-            // textBoxCameraBlendTime
-            // 
-            this.textBoxCameraBlendTime.Location = new System.Drawing.Point(111, 328);
-            this.textBoxCameraBlendTime.Name = "textBoxCameraBlendTime";
-            this.textBoxCameraBlendTime.Size = new System.Drawing.Size(199, 20);
-            this.textBoxCameraBlendTime.TabIndex = 38;
-            this.textBoxCameraBlendTime.TextChanged += new System.EventHandler(this.OnCameraBlendTimeChanged);
-            this.textBoxCameraBlendTime.Validated += new System.EventHandler(this.OnCameraBlendTimeValidated);
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Location = new System.Drawing.Point(5, 331);
-            label11.Name = "label11";
-            label11.Size = new System.Drawing.Size(100, 13);
-            label11.TabIndex = 39;
-            label11.Text = "Camera blend time :";
             // 
             // FormPropertiesSentence
             // 

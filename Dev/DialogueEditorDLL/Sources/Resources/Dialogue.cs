@@ -49,8 +49,9 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // Internal vars
 
-        protected string path { get; set; }
-        protected string name { get; set; }
+        protected string path = "";
+        protected string name = "";
+        protected bool generatedCustomProperties = false;
 
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
@@ -76,9 +77,6 @@ namespace DialogueEditor
 
             ListNodes = new List<DialogueNode>();
             ListAdditionalActors = new List<string>();
-
-            path = "";
-            name = "";
 
             Translations = new TranslationTable();
 
@@ -189,6 +187,9 @@ namespace DialogueEditor
                 PackageName = Package.Name;
             }
 
+            //Ensure custom properties
+            GenerateCustomProperties();
+
             //Sanitize texts
             //dialogue.Comment = EditorCore.SanitizeText(dialogue.Comment);
 
@@ -234,6 +235,44 @@ namespace DialogueEditor
                 {
                     DialogueNodeBranch nodeBranch = node as DialogueNodeBranch;
                     nodeBranch.BranchID = (nodeBranch.Branch != null) ? nodeBranch.Branch.ID : DialogueNode.ID_NULL;
+                }
+            }
+        }
+
+        public void GenerateCustomProperties()
+        {
+            if (!generatedCustomProperties)
+            {
+                generatedCustomProperties = true;
+
+                if (EditorCore.CustomPropertiesSlots.Count > 0)
+                {
+                    foreach (DialogueNode node in ListNodes)
+                    {
+                        GenerateCustomProperties(node);
+                    }
+                }
+            }
+        }
+
+        protected void GenerateCustomProperties(DialogueNode node)
+        {
+            foreach (CustomPropertiesSlot slot in EditorCore.CustomPropertiesSlots)
+            {
+                if (slot.CustomPropertiesType != null && slot.DialogueNodeType.IsAssignableFrom(node.GetType()))
+                {
+                    bool hasProperties = false;
+
+                    foreach (NodeCustomProperties properties in node.CustomProperties)
+                    {
+                        hasProperties |= slot.CustomPropertiesType.Equals(properties.GetType());
+                    }
+
+                    if (!hasProperties)
+                    {
+                        NodeCustomProperties newProperties = Activator.CreateInstance(slot.CustomPropertiesType) as NodeCustomProperties;
+                        node.CustomProperties.Add(newProperties);
+                    }
                 }
             }
         }
@@ -319,6 +358,12 @@ namespace DialogueEditor
             {
                 node.ID = GenerateID();
                 ListNodes.Add(node);
+            }
+
+            //Generate custom properties for all new nodes
+            foreach (var node in newListNodes)
+            {
+                GenerateCustomProperties(node);
             }
         }
 

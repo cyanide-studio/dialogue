@@ -39,9 +39,20 @@ namespace DemoBuild
             // Additional lists items
             EditorCore.CustomLists["Builds"].Add("Dwarf", "Dwarf");
 
+            // Cameras
+            var cameras = new Dictionary<string, string>();
+            cameras.Add("", "");
+            cameras.Add("CloseUp", "Close Up");
+            cameras.Add("MediumShot", "Medium Shot");
+            cameras.Add("FullShot", "Full Shot");
+            EditorCore.CustomLists["Cameras"] = cameras;
+
             // Bind Nodes Attributes
             EditorCore.BindAttribute(typeof(NodeConditionHasHonor), "ConditionHasHonor", "Has Honor");
             EditorCore.BindAttribute(typeof(NodeActionAddHonor), "ActionAddHonor", "Add Honor");
+
+            // Bind Nodes Properties Panels
+            EditorCore.BindCustomProperties(typeof(DialogueNodeSentence), "DirectingProperties", typeof(DirectingProperties), typeof(FormPropertiesDirecting));
 
             // Delegate post-load project
             EditorCore.OnProjectLoad = delegate
