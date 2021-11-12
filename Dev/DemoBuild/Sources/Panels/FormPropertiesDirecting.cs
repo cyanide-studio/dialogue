@@ -79,15 +79,35 @@ namespace DemoBuild
 
         private void OnCameraChanged(object sender, EventArgs e)
         {
+            if (!ready)
+                return;
 
+            directingProperties.Camera = (sender as ComboBox).SelectedValue as string;
+            document.SetDirty();
+        }
+
+        private void OnBlendTimeChanged(object sender, EventArgs e)
+        {
+            if (!ready)
+                return;
+
+            float value = 0.0f;
+            float.TryParse(textBoxCameraBlendTime.Text, out value);
+
+            if (directingProperties.CameraBlendTime != value)
+            {
+                directingProperties.CameraBlendTime = value;
+                document.SetPendingDirty();
+            }
         }
 
         private void OnBlendTimeValidated(object sender, EventArgs e)
         {
-
+            textBoxCameraBlendTime.Text = directingProperties.CameraBlendTime.ToString();
+            document.ResolvePendingDirty();
         }
 
-        private void OnPreDelayValidated(object sender, EventArgs e)
+        private void OnPreDelayChanged(object sender, EventArgs e)
         {
             if (!ready)
                 return;
@@ -98,11 +118,17 @@ namespace DemoBuild
             if (directingProperties.PreDelay != value)
             {
                 directingProperties.PreDelay = value;
-                document.SetDirty();
+                document.SetPendingDirty();
             }
         }
 
-        private void OnPostDelayValidated(object sender, EventArgs e)
+        private void OnPreDelayValidated(object sender, EventArgs e)
+        {
+            textBoxPreDelay.Text = directingProperties.PreDelay.ToString();
+            document.ResolvePendingDirty();
+        }
+
+        private void OnPostDelayChanged(object sender, EventArgs e)
         {
             if (!ready)
                 return;
@@ -113,8 +139,14 @@ namespace DemoBuild
             if (directingProperties.PostDelay != value)
             {
                 directingProperties.PostDelay = value;
-                document.SetDirty();
+                document.SetPendingDirty();
             }
+        }
+
+        private void OnPostDelayValidated(object sender, EventArgs e)
+        {
+            textBoxPostDelay.Text = directingProperties.PostDelay.ToString();
+            document.ResolvePendingDirty();
         }
     }
 }

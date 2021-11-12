@@ -75,7 +75,7 @@ namespace DemoBuild
             this.groupBoxProperties.Controls.Add(this.textBoxPreDelay);
             this.groupBoxProperties.Location = new System.Drawing.Point(3, 3);
             this.groupBoxProperties.Name = "groupBoxProperties";
-            this.groupBoxProperties.Size = new System.Drawing.Size(316, 247);
+            this.groupBoxProperties.Size = new System.Drawing.Size(316, 169);
             this.groupBoxProperties.TabIndex = 0;
             this.groupBoxProperties.TabStop = false;
             this.groupBoxProperties.Text = "Directing Properties";
@@ -88,6 +88,7 @@ namespace DemoBuild
             this.textBoxCameraBlendTime.Name = "textBoxCameraBlendTime";
             this.textBoxCameraBlendTime.Size = new System.Drawing.Size(199, 20);
             this.textBoxCameraBlendTime.TabIndex = 42;
+            this.textBoxCameraBlendTime.TextChanged += new System.EventHandler(this.OnBlendTimeChanged);
             this.textBoxCameraBlendTime.Validated += new System.EventHandler(this.OnBlendTimeValidated);
             // 
             // comboBoxCamera
@@ -128,6 +129,7 @@ namespace DemoBuild
             this.textBoxPostDelay.Name = "textBoxPostDelay";
             this.textBoxPostDelay.Size = new System.Drawing.Size(236, 20);
             this.textBoxPostDelay.TabIndex = 44;
+            this.textBoxPostDelay.TextChanged += new System.EventHandler(this.OnPostDelayChanged);
             this.textBoxPostDelay.Validated += new System.EventHandler(this.OnPostDelayValidated);
             // 
             // textBoxPreDelay
@@ -138,6 +140,7 @@ namespace DemoBuild
             this.textBoxPreDelay.Name = "textBoxPreDelay";
             this.textBoxPreDelay.Size = new System.Drawing.Size(236, 20);
             this.textBoxPreDelay.TabIndex = 43;
+            this.textBoxPreDelay.TextChanged += new System.EventHandler(this.OnPreDelayChanged);
             this.textBoxPreDelay.Validated += new System.EventHandler(this.OnPreDelayValidated);
             // 
             // FormPropertiesDirecting
@@ -146,7 +149,7 @@ namespace DemoBuild
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBoxProperties);
             this.Name = "FormPropertiesDirecting";
-            this.Size = new System.Drawing.Size(322, 311);
+            this.Size = new System.Drawing.Size(322, 175);
             this.groupBoxProperties.ResumeLayout(false);
             this.groupBoxProperties.PerformLayout();
             this.ResumeLayout(false);
