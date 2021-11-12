@@ -148,7 +148,7 @@ namespace DialogueEditor
 
             var builds = new Dictionary<string, string>();
             builds.Add("Undefined", "Undefined");
-            builds.Add("Normal", "Normal");
+            builds.Add("Average", "Average");
             builds.Add("Slender", "Slender");
             builds.Add("Athletic", "Athletic");
             builds.Add("Curvy", "Curvy");
@@ -162,10 +162,6 @@ namespace DialogueEditor
             intensities.Add("Loud", "Loud");
             intensities.Add("Onomatopoeia", "Onomatopoeia");
             CustomLists["Intensities"] = intensities;
-
-            var cameras = new Dictionary<string, string>();
-            cameras.Add("", "");
-            CustomLists["Cameras"] = cameras;
         }
 
         static public void FillDefaultImageList()
