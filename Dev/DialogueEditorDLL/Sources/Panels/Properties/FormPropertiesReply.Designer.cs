@@ -31,9 +31,6 @@
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label1;
             this.groupBoxProperties = new System.Windows.Forms.GroupBox();
-            this.checkBoxAutoSelect = new System.Windows.Forms.CheckBox();
-            this.checkBoxDeduction = new System.Windows.Forms.CheckBox();
-            this.checkBoxRepeat = new System.Windows.Forms.CheckBox();
             this.labelWordCount = new System.Windows.Forms.Label();
             this.textBoxWorkstring = new System.Windows.Forms.RichTextBox();
             label3 = new System.Windows.Forms.Label();
@@ -63,55 +60,16 @@
             // 
             this.groupBoxProperties.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxProperties.Controls.Add(this.checkBoxAutoSelect);
-            this.groupBoxProperties.Controls.Add(this.checkBoxDeduction);
-            this.groupBoxProperties.Controls.Add(this.checkBoxRepeat);
             this.groupBoxProperties.Controls.Add(this.labelWordCount);
             this.groupBoxProperties.Controls.Add(this.textBoxWorkstring);
             this.groupBoxProperties.Controls.Add(label1);
             this.groupBoxProperties.Controls.Add(label3);
             this.groupBoxProperties.Location = new System.Drawing.Point(3, 3);
             this.groupBoxProperties.Name = "groupBoxProperties";
-            this.groupBoxProperties.Size = new System.Drawing.Size(363, 209);
+            this.groupBoxProperties.Size = new System.Drawing.Size(363, 139);
             this.groupBoxProperties.TabIndex = 22;
             this.groupBoxProperties.TabStop = false;
             this.groupBoxProperties.Text = "Reply Properties";
-            // 
-            // checkBoxAutoSelect
-            // 
-            this.checkBoxAutoSelect.AutoSize = true;
-            this.checkBoxAutoSelect.Location = new System.Drawing.Point(9, 175);
-            this.checkBoxAutoSelect.Name = "checkBoxAutoSelect";
-            this.checkBoxAutoSelect.Size = new System.Drawing.Size(79, 17);
-            this.checkBoxAutoSelect.TabIndex = 25;
-            this.checkBoxAutoSelect.Text = "Auto select";
-            this.checkBoxAutoSelect.UseVisualStyleBackColor = true;
-            this.checkBoxAutoSelect.CheckedChanged += new System.EventHandler(this.OnCheckBoxChanged);
-            this.checkBoxAutoSelect.Validated += new System.EventHandler(this.OnCheckBoxValidated);
-            // 
-            // checkBoxDeduction
-            // 
-            this.checkBoxDeduction.AutoSize = true;
-            this.checkBoxDeduction.Location = new System.Drawing.Point(9, 152);
-            this.checkBoxDeduction.Name = "checkBoxDeduction";
-            this.checkBoxDeduction.Size = new System.Drawing.Size(75, 17);
-            this.checkBoxDeduction.TabIndex = 24;
-            this.checkBoxDeduction.Text = "Deduction";
-            this.checkBoxDeduction.UseVisualStyleBackColor = true;
-            this.checkBoxDeduction.CheckedChanged += new System.EventHandler(this.OnCheckBoxChanged);
-            this.checkBoxDeduction.Validated += new System.EventHandler(this.OnCheckBoxValidated);
-            // 
-            // checkBoxRepeat
-            // 
-            this.checkBoxRepeat.AutoSize = true;
-            this.checkBoxRepeat.Location = new System.Drawing.Point(9, 129);
-            this.checkBoxRepeat.Name = "checkBoxRepeat";
-            this.checkBoxRepeat.Size = new System.Drawing.Size(78, 17);
-            this.checkBoxRepeat.TabIndex = 23;
-            this.checkBoxRepeat.Text = "Can repeat";
-            this.checkBoxRepeat.UseVisualStyleBackColor = true;
-            this.checkBoxRepeat.CheckedChanged += new System.EventHandler(this.OnCheckBoxChanged);
-            this.checkBoxRepeat.Validated += new System.EventHandler(this.OnCheckBoxValidated);
             // 
             // labelWordCount
             // 
@@ -142,7 +100,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBoxProperties);
             this.Name = "FormPropertiesReply";
-            this.Size = new System.Drawing.Size(369, 215);
+            this.Size = new System.Drawing.Size(369, 145);
             this.groupBoxProperties.ResumeLayout(false);
             this.groupBoxProperties.PerformLayout();
             this.ResumeLayout(false);
@@ -154,8 +112,5 @@
         private System.Windows.Forms.RichTextBox textBoxWorkstring;
         private System.Windows.Forms.Label labelWordCount;
         private System.Windows.Forms.GroupBox groupBoxProperties;
-        private System.Windows.Forms.CheckBox checkBoxRepeat;
-        private System.Windows.Forms.CheckBox checkBoxDeduction;
-        private System.Windows.Forms.CheckBox checkBoxAutoSelect;
     }
 }

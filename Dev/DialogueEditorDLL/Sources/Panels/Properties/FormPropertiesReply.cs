@@ -84,9 +84,6 @@ namespace DialogueEditor
             Project project = ResourcesHandler.Project;
 
             textBoxWorkstring.Text = dialogueNode.Reply;
-            checkBoxRepeat.Checked = dialogueNode.Repeat;
-            checkBoxDeduction.Checked = dialogueNode.Deduction;
-            checkBoxAutoSelect.Checked = dialogueNode.AutoSelect;
             RefreshWordCount();
 
             //AutoComplete
@@ -184,28 +181,6 @@ namespace DialogueEditor
                 return;
 
             document.ResolvePendingDirty();
-        }
-        
-        private void OnCheckBoxChanged(object sender, EventArgs e)
-        {
-            UpdateBools(false);
-        }
-
-        private void OnCheckBoxValidated(object sender, EventArgs e)
-        {
-            UpdateBools(true);
-        }
-
-        private void UpdateBools(bool validated)
-        {
-            if (!ready)
-                return;
-            dialogueNode.Repeat = checkBoxRepeat.Checked;
-            dialogueNode.Deduction = checkBoxDeduction.Checked;
-            dialogueNode.AutoSelect = checkBoxAutoSelect.Checked;
-            if(validated)
-                document.ResolvePendingDirty();
-            else document.SetDirty();
         }
     }
 }

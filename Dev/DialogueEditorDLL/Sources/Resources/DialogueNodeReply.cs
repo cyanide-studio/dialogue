@@ -12,9 +12,6 @@ namespace DialogueEditor
         // Serialized vars
 
         public string Reply { get; set; }
-        public bool Repeat { get; set; }
-        public bool Deduction { get; set; }
-        public bool AutoSelect { get; set; }
         public DateTime LastEditDate { get; set; }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -23,9 +20,6 @@ namespace DialogueEditor
         public DialogueNodeReply()
         {
             Reply = "";
-            Repeat = false;
-            Deduction = false;
-            AutoSelect = false;
             LastEditDate = Utility.GetCurrentTime();
         }
 
@@ -33,9 +27,6 @@ namespace DialogueEditor
             : base(other)
         {
             Reply = other.Reply;
-            Repeat = other.Repeat;
-            Deduction = other.Deduction;
-            AutoSelect = other.AutoSelect;
 
             //Clone all child nodes
             DialogueNode currentNode = this;
