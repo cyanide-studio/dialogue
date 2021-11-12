@@ -60,18 +60,6 @@ namespace DialogueEditor
             dialogueNode = inDialogueNode as DialogueNodeChoice;
 
             textBoxWorkstring.Text = dialogueNode.Choice;
-            textBoxTimer.Text = dialogueNode.Timer.ToString();
-
-            //TODO: Unreal Specific
-            if (EditorCore.CustomLists.ContainsKey("DialogueChoices"))
-            {
-                comboBoxBlueprint.DataSource = new BindingSource(EditorCore.CustomLists["DialogueChoices"], null);
-                comboBoxBlueprint.ValueMember = "Key";
-                comboBoxBlueprint.DisplayMember = "Value";
-                comboBoxBlueprint.SelectedValue = dialogueNode.Blueprint;
-            }
-
-            checkBoxTimer.Checked = dialogueNode.HideTimer;
 
             ready = true;
         }
@@ -95,53 +83,6 @@ namespace DialogueEditor
         private void OnWorkstringValidated(object sender, EventArgs e)
         {
             document.ResolvePendingDirty();
-        }
-
-        private void OnTimerChanged(object sender, EventArgs e)
-        {
-            if (!ready)
-                return;
-            UpdateTimer(false);
-            document.RefreshTreeNode(treeNode);
-            document.SetPendingDirty();
-        }
-
-        private void OnTimerValidated(object sender, EventArgs e)
-        {
-            if (!ready)
-                return;
-            UpdateTimer(true);
-            document.ResolvePendingDirty();
-        }
-
-        private void OnBlueprintChanged(object sender, EventArgs e)
-        {
-            if (!ready)
-                return;
-
-            dialogueNode.Blueprint = (sender as ComboBox).SelectedValue as string;
-
-            document.RefreshTreeNode(treeNode);
-            document.SetDirty();
-        }
-
-        private void OnHideTimerChanged(object sender, EventArgs e)
-        {
-            if (!ready)
-                return;
-
-            dialogueNode.HideTimer = checkBoxTimer.Checked;
-
-            document.SetDirty();
-        }
-
-        private void UpdateTimer(bool updateTextBox)
-        {
-            float value = 0.0f;
-            if (float.TryParse(textBoxTimer.Text, out value))
-                dialogueNode.Timer = Math.Max(0.0f, value);
-            if (updateTextBox)
-                textBoxTimer.Text = dialogueNode.Timer.ToString();
         }
     }
 }

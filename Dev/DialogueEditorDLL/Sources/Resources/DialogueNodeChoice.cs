@@ -14,9 +14,6 @@ namespace DialogueEditor
         // Serialized vars
 
         public string Choice { get; set; }
-        public float Timer { get; set; }
-        public bool HideTimer { get; set; }
-        public string Blueprint { get; set; }
 
         /// <summary>
         /// List of available replies
@@ -31,9 +28,6 @@ namespace DialogueEditor
         public DialogueNodeChoice()
         {
             Choice = "";
-            Timer = 0.0f;
-            HideTimer = false;
-            Blueprint = "";
 
             Replies = new List<DialogueNodeReply>();
             RepliesIDs = new List<int>();
@@ -43,9 +37,6 @@ namespace DialogueEditor
             : base(other)
         {
             Choice = other.Choice;
-            Timer = other.Timer;
-            HideTimer = other.HideTimer;
-            Blueprint = other.Blueprint;
             RepliesIDs = new List<int>();
 
             //Clone all child nodes
