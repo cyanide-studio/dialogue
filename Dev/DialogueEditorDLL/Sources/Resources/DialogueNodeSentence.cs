@@ -31,14 +31,6 @@ namespace DialogueEditor
         public string SpeakerAnim { get; set; }
         public string ListenerAnim { get; set; }
 
-        //Delay
-        public float PreDelay { get; set; }
-        public float PostDelay { get; set; }
-
-        //Camera
-        public string Camera { get; set; }
-        public float CameraBlendTime { get; set; }
-
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
 
@@ -59,12 +51,6 @@ namespace DialogueEditor
             ListenerAnimset = "";
             SpeakerAnim = "";
             ListenerAnim = "";
-
-            PreDelay = 0.0f;
-            PostDelay = 0.0f;
-
-            Camera = "";
-            CameraBlendTime = -1.0f;
 
             if (EditorCore.CustomLists["Intensities"].Count > 0)
             {
@@ -90,12 +76,6 @@ namespace DialogueEditor
             ListenerAnimset = other.ListenerAnimset;
             SpeakerAnim = other.SpeakerAnim;
             ListenerAnim = other.ListenerAnim;
-
-            PreDelay = other.PreDelay;
-            PostDelay = other.PostDelay;
-
-            Camera = other.Camera;
-            CameraBlendTime = other.CameraBlendTime;
         }
 
         public override object Clone()

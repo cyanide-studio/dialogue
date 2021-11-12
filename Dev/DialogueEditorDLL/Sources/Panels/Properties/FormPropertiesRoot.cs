@@ -77,12 +77,6 @@ namespace DialogueEditor
             comboBoxSceneType.DisplayMember = "Value";
             comboBoxSceneType.SelectedValue = dialogue.SceneType;
 
-            comboBoxCamera.DataSource = new BindingSource(EditorCore.CustomLists["Cameras"], null);
-            comboBoxCamera.ValueMember = "Key";
-            comboBoxCamera.DisplayMember = "Value";
-            comboBoxCamera.SelectedValue = dialogue.Camera;
-            textBoxCameraBlendTime.Text = dialogue.CameraBlendTime.ToString();
-
             foreach (var actorID in dialogue.ListAdditionalActors)
             {
                 Actor actor = ResourcesHandler.Project.GetActorFromID(actorID);
@@ -159,39 +153,6 @@ namespace DialogueEditor
             dialogue.SceneType = (sender as ComboBox).SelectedValue as string;
 
             document.SetDirty();
-        }
-
-        private void OnCameraChanged(object sender, EventArgs e)
-        {
-            if (!ready)
-                return;
-
-            dialogue.Camera = (sender as ComboBox).SelectedValue as string;
-
-            document.SetDirty();
-        }
-
-        private void OnCameraBlendTimeChanged(object sender, EventArgs e)
-        {
-            if (!ready)
-                return;
-
-            float Value = 0.0f;
-            if (float.TryParse(textBoxCameraBlendTime.Text, out Value))
-            {
-                dialogue.CameraBlendTime = Value;
-            }
-            else if (textBoxCameraBlendTime.Text == "")
-                dialogue.CameraBlendTime = 0.0f;
-
-            document.SetPendingDirty();
-        }
-
-        private void OnCameraBlendTimeValidated(object sender, EventArgs e)
-        {
-            textBoxCameraBlendTime.Text = dialogue.CameraBlendTime.ToString();
-
-            document.ResolvePendingDirty();
         }
 
         private void OnVoiceBankChanged(object sender, EventArgs e)

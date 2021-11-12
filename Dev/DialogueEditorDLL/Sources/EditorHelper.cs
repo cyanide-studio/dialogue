@@ -275,11 +275,6 @@ namespace DialogueEditor
                 EditorCore.LogError(String.Format("{0} - Unknown Scene Type : {1}", dialogue.GetName(), dialogue.SceneType), dialogue);
             }
 
-            if (!EditorCore.CustomLists["Cameras"].ContainsKey(dialogue.Camera))
-            {
-                EditorCore.LogError(String.Format("{0} - Unknown Camera : {1}", dialogue.GetName(), dialogue.Camera), dialogue);
-            }
-
             var usedIDs = new HashSet<int>();
 
             foreach (DialogueNode node in dialogue.ListNodes)

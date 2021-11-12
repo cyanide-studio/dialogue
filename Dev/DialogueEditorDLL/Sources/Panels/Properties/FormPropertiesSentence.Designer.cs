@@ -38,15 +38,7 @@
             System.Windows.Forms.Button button9;
             System.Windows.Forms.Label label10;
             System.Windows.Forms.Label label4;
-            System.Windows.Forms.Label label9;
-            System.Windows.Forms.Label label11;
             this.groupBoxProperties = new System.Windows.Forms.GroupBox();
-            this.textBoxCameraBlendTime = new System.Windows.Forms.TextBox();
-            this.comboBoxCamera = new System.Windows.Forms.ComboBox();
-            this.labelPostDelay = new System.Windows.Forms.Label();
-            this.labelPreDelay = new System.Windows.Forms.Label();
-            this.textBoxPostDelay = new System.Windows.Forms.TextBox();
-            this.textBoxPreDelay = new System.Windows.Forms.TextBox();
             this.comboBoxIntensity = new System.Windows.Forms.ComboBox();
             this.textBoxComment = new System.Windows.Forms.RichTextBox();
             this.comboBoxAnimListener = new System.Windows.Forms.ComboBox();
@@ -71,8 +63,6 @@
             button9 = new System.Windows.Forms.Button();
             label10 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
-            label9 = new System.Windows.Forms.Label();
-            label11 = new System.Windows.Forms.Label();
             this.groupBoxProperties.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picturePortraitSpeaker)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picturePortraitListener)).BeginInit();
@@ -155,7 +145,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new System.Drawing.Point(6, 374);
+            label10.Location = new System.Drawing.Point(6, 306);
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(48, 13);
             label10.TabIndex = 30;
@@ -164,42 +154,16 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(6, 441);
+            label4.Location = new System.Drawing.Point(6, 373);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(98, 13);
             label4.TabIndex = 19;
             label4.Text = "Context (directing) :";
             // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new System.Drawing.Point(6, 304);
-            label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(49, 13);
-            label9.TabIndex = 36;
-            label9.Text = "Camera :";
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Location = new System.Drawing.Point(5, 331);
-            label11.Name = "label11";
-            label11.Size = new System.Drawing.Size(100, 13);
-            label11.TabIndex = 39;
-            label11.Text = "Camera blend time :";
-            // 
             // groupBoxProperties
             // 
             this.groupBoxProperties.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxProperties.Controls.Add(label11);
-            this.groupBoxProperties.Controls.Add(this.textBoxCameraBlendTime);
-            this.groupBoxProperties.Controls.Add(this.comboBoxCamera);
-            this.groupBoxProperties.Controls.Add(label9);
-            this.groupBoxProperties.Controls.Add(this.labelPostDelay);
-            this.groupBoxProperties.Controls.Add(this.labelPreDelay);
-            this.groupBoxProperties.Controls.Add(this.textBoxPostDelay);
-            this.groupBoxProperties.Controls.Add(this.textBoxPreDelay);
             this.groupBoxProperties.Controls.Add(button9);
             this.groupBoxProperties.Controls.Add(this.comboBoxIntensity);
             this.groupBoxProperties.Controls.Add(label10);
@@ -226,71 +190,16 @@
             this.groupBoxProperties.Controls.Add(label1);
             this.groupBoxProperties.Location = new System.Drawing.Point(3, 3);
             this.groupBoxProperties.Name = "groupBoxProperties";
-            this.groupBoxProperties.Size = new System.Drawing.Size(316, 577);
+            this.groupBoxProperties.Size = new System.Drawing.Size(316, 448);
             this.groupBoxProperties.TabIndex = 16;
             this.groupBoxProperties.TabStop = false;
             this.groupBoxProperties.Text = "Sentence Properties";
-            // 
-            // textBoxCameraBlendTime
-            // 
-            this.textBoxCameraBlendTime.Location = new System.Drawing.Point(111, 328);
-            this.textBoxCameraBlendTime.Name = "textBoxCameraBlendTime";
-            this.textBoxCameraBlendTime.Size = new System.Drawing.Size(199, 20);
-            this.textBoxCameraBlendTime.TabIndex = 38;
-            this.textBoxCameraBlendTime.TextChanged += new System.EventHandler(this.OnCameraBlendTimeChanged);
-            this.textBoxCameraBlendTime.Validated += new System.EventHandler(this.OnCameraBlendTimeValidated);
-            // 
-            // comboBoxCamera
-            // 
-            this.comboBoxCamera.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxCamera.FormattingEnabled = true;
-            this.comboBoxCamera.Location = new System.Drawing.Point(60, 301);
-            this.comboBoxCamera.Name = "comboBoxCamera";
-            this.comboBoxCamera.Size = new System.Drawing.Size(250, 21);
-            this.comboBoxCamera.TabIndex = 37;
-            this.comboBoxCamera.SelectedIndexChanged += new System.EventHandler(this.OnCameraChanged);
-            // 
-            // labelPostDelay
-            // 
-            this.labelPostDelay.AutoSize = true;
-            this.labelPostDelay.Location = new System.Drawing.Point(6, 543);
-            this.labelPostDelay.Name = "labelPostDelay";
-            this.labelPostDelay.Size = new System.Drawing.Size(62, 13);
-            this.labelPostDelay.TabIndex = 35;
-            this.labelPostDelay.Text = "Post delay :";
-            // 
-            // labelPreDelay
-            // 
-            this.labelPreDelay.AutoSize = true;
-            this.labelPreDelay.Location = new System.Drawing.Point(6, 517);
-            this.labelPreDelay.Name = "labelPreDelay";
-            this.labelPreDelay.Size = new System.Drawing.Size(57, 13);
-            this.labelPreDelay.TabIndex = 34;
-            this.labelPreDelay.Text = "Pre delay :";
-            // 
-            // textBoxPostDelay
-            // 
-            this.textBoxPostDelay.Location = new System.Drawing.Point(74, 543);
-            this.textBoxPostDelay.Name = "textBoxPostDelay";
-            this.textBoxPostDelay.Size = new System.Drawing.Size(236, 20);
-            this.textBoxPostDelay.TabIndex = 33;
-            this.textBoxPostDelay.TextChanged += new System.EventHandler(this.OnPostDelayChanged);
-            this.textBoxPostDelay.Validated += new System.EventHandler(this.OnDelayValidated);
-            // 
-            // textBoxPreDelay
-            // 
-            this.textBoxPreDelay.Location = new System.Drawing.Point(74, 514);
-            this.textBoxPreDelay.Name = "textBoxPreDelay";
-            this.textBoxPreDelay.Size = new System.Drawing.Size(236, 20);
-            this.textBoxPreDelay.TabIndex = 17;
-            this.textBoxPreDelay.TextChanged += new System.EventHandler(this.OnPreDelayChanged);
-            this.textBoxPreDelay.Validated += new System.EventHandler(this.OnDelayValidated);
             // 
             // comboBoxIntensity
             // 
             this.comboBoxIntensity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxIntensity.FormattingEnabled = true;
-            this.comboBoxIntensity.Location = new System.Drawing.Point(60, 371);
+            this.comboBoxIntensity.Location = new System.Drawing.Point(60, 303);
             this.comboBoxIntensity.Name = "comboBoxIntensity";
             this.comboBoxIntensity.Size = new System.Drawing.Size(121, 21);
             this.comboBoxIntensity.TabIndex = 31;
@@ -300,7 +209,7 @@
             // 
             this.textBoxComment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxComment.Location = new System.Drawing.Point(6, 395);
+            this.textBoxComment.Location = new System.Drawing.Point(6, 327);
             this.textBoxComment.Name = "textBoxComment";
             this.textBoxComment.Size = new System.Drawing.Size(304, 35);
             this.textBoxComment.TabIndex = 29;
@@ -360,7 +269,7 @@
             // 
             this.textBoxContext.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxContext.Location = new System.Drawing.Point(6, 457);
+            this.textBoxContext.Location = new System.Drawing.Point(6, 389);
             this.textBoxContext.Name = "textBoxContext";
             this.textBoxContext.Size = new System.Drawing.Size(304, 51);
             this.textBoxContext.TabIndex = 10;
@@ -452,7 +361,7 @@
             // 
             this.Controls.Add(this.groupBoxProperties);
             this.Name = "FormPropertiesSentence";
-            this.Size = new System.Drawing.Size(322, 583);
+            this.Size = new System.Drawing.Size(322, 454);
             this.groupBoxProperties.ResumeLayout(false);
             this.groupBoxProperties.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picturePortraitSpeaker)).EndInit();
@@ -478,11 +387,5 @@
         private System.Windows.Forms.RichTextBox textBoxComment;
         private System.Windows.Forms.ComboBox comboBoxIntensity;
         private System.Windows.Forms.GroupBox groupBoxProperties;
-        private System.Windows.Forms.Label labelPostDelay;
-        private System.Windows.Forms.Label labelPreDelay;
-        private System.Windows.Forms.TextBox textBoxPostDelay;
-        private System.Windows.Forms.TextBox textBoxPreDelay;
-        private System.Windows.Forms.ComboBox comboBoxCamera;
-        private System.Windows.Forms.TextBox textBoxCameraBlendTime;
     }
 }

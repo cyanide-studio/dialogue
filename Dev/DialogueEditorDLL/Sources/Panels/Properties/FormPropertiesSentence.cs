@@ -141,10 +141,6 @@ namespace DialogueEditor
             textBoxComment.Text = dialogueNode.Comment;
             textBoxContext.Text = dialogueNode.Context;
 
-            //Delays
-            textBoxPreDelay.Text = dialogueNode.PreDelay.ToString();
-            textBoxPostDelay.Text = dialogueNode.PostDelay.ToString();
-
             comboBoxIntensity.DataSource = new BindingSource(EditorCore.CustomLists["Intensities"], null);
             comboBoxIntensity.ValueMember = "Key";
             comboBoxIntensity.DisplayMember = "Value";
@@ -158,12 +154,6 @@ namespace DialogueEditor
             autoComplete.OnValidate = ValidateAutoComplete;
             autoComplete.OnClose = CloseAutoComplete;
             autoComplete.OnDrawItem = DrawItemAutoComplete;
-
-            comboBoxCamera.DataSource = new BindingSource(EditorCore.CustomLists["Cameras"], null);
-            comboBoxCamera.ValueMember = "Key";
-            comboBoxCamera.DisplayMember = "Value";
-            comboBoxCamera.SelectedValue = dialogueNode.Camera;
-            textBoxCameraBlendTime.Text = dialogueNode.CameraBlendTime.ToString();
 
             //Ready !
             ready = true;
@@ -372,17 +362,6 @@ namespace DialogueEditor
             document.SetDirty();
         }
 
-        private void OnCameraChanged(object sender, EventArgs e)
-        {
-            if (!ready)
-                return;
-
-            dialogueNode.Camera = (sender as ComboBox).SelectedValue as string;
-
-            document.RefreshTreeNode(treeNode);
-            document.SetDirty();
-        }
-
         private void OnHideSubtitleChanged(object sender, EventArgs e)
         {
             if (!ready)
@@ -416,71 +395,6 @@ namespace DialogueEditor
 
         private void OnCommentValidated(object sender, EventArgs e)
         {
-            document.ResolvePendingDirty();
-        }
-
-        private void OnCameraBlendTimeChanged(object sender, EventArgs e)
-        {
-            if (!ready)
-                return;
-
-            float Value = 0.0f;
-            if (float.TryParse(textBoxCameraBlendTime.Text, out Value))
-            {
-                dialogueNode.CameraBlendTime = Value;
-            }
-            else if (textBoxCameraBlendTime.Text == "")
-                dialogueNode.CameraBlendTime = 0.0f;
-
-            document.SetPendingDirty();
-        }
-        private void OnCameraBlendTimeValidated(object sender, EventArgs e)
-        {
-            textBoxCameraBlendTime.Text = dialogueNode.CameraBlendTime.ToString();
-
-            document.ResolvePendingDirty();
-        }
-
-        private void OnPreDelayChanged(object sender, EventArgs e)
-        {
-            if (!ready)
-                return;
-
-            float Value = 0.0f;
-            if (float.TryParse(textBoxPreDelay.Text, out Value))
-            {
-                dialogueNode.PreDelay = Value;
-            }
-            else if (textBoxPreDelay.Text == "")
-                dialogueNode.PreDelay = 0.0f;
-
-
-            //document.SetDirty();
-            document.SetPendingDirty();
-        }
-
-        private void OnPostDelayChanged(object sender, EventArgs e)
-        {
-            if (!ready)
-                return;
-
-            float Value = 0.0f;
-            if (float.TryParse(textBoxPostDelay.Text, out Value))
-            {
-                dialogueNode.PostDelay = Value;
-            }
-            else if (textBoxPostDelay.Text == "")
-                dialogueNode.PostDelay = 0.0f;
-
-            //document.SetDirty();
-            document.SetPendingDirty();
-        }
-
-        private void OnDelayValidated(object sender, EventArgs e)
-        {
-            textBoxPreDelay.Text = dialogueNode.PreDelay.ToString();
-            textBoxPostDelay.Text = dialogueNode.PostDelay.ToString();
-
             document.ResolvePendingDirty();
         }
 

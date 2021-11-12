@@ -29,9 +29,6 @@ namespace DialogueEditor
         public string Context { get; set; }
         public string Comment { get; set; }
 
-        public string Camera { get; set; }
-        public float CameraBlendTime { get; set; }
-
         //[JsonConverter(typeof(ExporterJson.ConverterTriBool))]
         //public Utility.ETriBool Spatialized { get; set; }         //Should note be useful, and implicit through SceneType
 
@@ -75,8 +72,6 @@ namespace DialogueEditor
             VoiceBank = "";
             Context = "";
             Comment = "";
-            Camera = "";
-            CameraBlendTime = -1.0f;
             //Spatialized = Utility.ETriBool.TB_undefined;
 
             ListNodes = new List<DialogueNode>();
@@ -103,8 +98,6 @@ namespace DialogueEditor
             SceneType = other.SceneType;
             VoiceBank = other.VoiceBank;
             Comment = other.Comment;
-            Camera = other.Camera;
-            CameraBlendTime = other.CameraBlendTime;
             //Spatialized = other.Spatialized;
             ListAdditionalActors = other.ListAdditionalActors;
         }

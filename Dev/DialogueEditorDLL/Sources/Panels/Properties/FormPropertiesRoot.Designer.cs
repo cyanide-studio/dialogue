@@ -30,7 +30,6 @@
         {
             System.Windows.Forms.Label label2;
             System.Windows.Forms.GroupBox groupBox1;
-            System.Windows.Forms.Label label7;
             System.Windows.Forms.Label label19;
             System.Windows.Forms.Button button1;
             System.Windows.Forms.Button button14;
@@ -40,8 +39,6 @@
             System.Windows.Forms.Label label4;
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Label label1;
-            System.Windows.Forms.Label label8;
-            this.comboBoxCamera = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.comboBoxAdditionalActors = new System.Windows.Forms.ComboBox();
             this.listBoxAdditionalActors = new System.Windows.Forms.ListBox();
@@ -50,10 +47,8 @@
             this.textBoxVoiceBank = new System.Windows.Forms.TextBox();
             this.comboBoxSceneType = new System.Windows.Forms.ComboBox();
             this.textBoxComment = new System.Windows.Forms.RichTextBox();
-            this.textBoxCameraBlendTime = new System.Windows.Forms.TextBox();
             label2 = new System.Windows.Forms.Label();
             groupBox1 = new System.Windows.Forms.GroupBox();
-            label7 = new System.Windows.Forms.Label();
             label19 = new System.Windows.Forms.Label();
             button1 = new System.Windows.Forms.Button();
             button14 = new System.Windows.Forms.Button();
@@ -63,7 +58,6 @@
             label4 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
-            label8 = new System.Windows.Forms.Label();
             groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,10 +74,6 @@
             // 
             groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            groupBox1.Controls.Add(label8);
-            groupBox1.Controls.Add(this.textBoxCameraBlendTime);
-            groupBox1.Controls.Add(label7);
-            groupBox1.Controls.Add(this.comboBoxCamera);
             groupBox1.Controls.Add(this.label6);
             groupBox1.Controls.Add(label19);
             groupBox1.Controls.Add(this.comboBoxAdditionalActors);
@@ -104,36 +94,15 @@
             groupBox1.Controls.Add(this.textBoxComment);
             groupBox1.Location = new System.Drawing.Point(3, 3);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(321, 514);
+            groupBox1.Size = new System.Drawing.Size(321, 416);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Dialogue Properties";
             // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new System.Drawing.Point(7, 109);
-            label7.Name = "label7";
-            label7.Size = new System.Drawing.Size(49, 13);
-            label7.TabIndex = 50;
-            label7.Text = "Camera :";
-            // 
-            // comboBoxCamera
-            // 
-            this.comboBoxCamera.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxCamera.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxCamera.FormattingEnabled = true;
-            this.comboBoxCamera.Location = new System.Drawing.Point(84, 106);
-            this.comboBoxCamera.Name = "comboBoxCamera";
-            this.comboBoxCamera.Size = new System.Drawing.Size(231, 21);
-            this.comboBoxCamera.TabIndex = 49;
-            this.comboBoxCamera.SelectedIndexChanged += new System.EventHandler(this.OnCameraChanged);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 355);
+            this.label6.Location = new System.Drawing.Point(7, 307);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(92, 13);
             this.label6.TabIndex = 48;
@@ -142,7 +111,7 @@
             // label19
             // 
             label19.AutoSize = true;
-            label19.Location = new System.Drawing.Point(148, 405);
+            label19.Location = new System.Drawing.Point(148, 357);
             label19.Name = "label19";
             label19.Size = new System.Drawing.Size(38, 13);
             label19.TabIndex = 47;
@@ -152,7 +121,7 @@
             // 
             this.comboBoxAdditionalActors.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxAdditionalActors.FormattingEnabled = true;
-            this.comboBoxAdditionalActors.Location = new System.Drawing.Point(148, 421);
+            this.comboBoxAdditionalActors.Location = new System.Drawing.Point(148, 373);
             this.comboBoxAdditionalActors.Name = "comboBoxAdditionalActors";
             this.comboBoxAdditionalActors.Size = new System.Drawing.Size(163, 21);
             this.comboBoxAdditionalActors.TabIndex = 46;
@@ -162,7 +131,7 @@
             // 
             button1.FlatAppearance.BorderSize = 0;
             button1.Image = global::DialogueEditor.Properties.Resources.add;
-            button1.Location = new System.Drawing.Point(148, 371);
+            button1.Location = new System.Drawing.Point(148, 323);
             button1.Name = "button1";
             button1.Size = new System.Drawing.Size(24, 24);
             button1.TabIndex = 42;
@@ -173,7 +142,7 @@
             // 
             button14.FlatAppearance.BorderSize = 0;
             button14.Image = global::DialogueEditor.Properties.Resources.cross;
-            button14.Location = new System.Drawing.Point(260, 371);
+            button14.Location = new System.Drawing.Point(260, 323);
             button14.Name = "button14";
             button14.Size = new System.Drawing.Size(24, 24);
             button14.TabIndex = 45;
@@ -184,7 +153,7 @@
             // 
             button15.FlatAppearance.BorderSize = 0;
             button15.Image = global::DialogueEditor.Properties.Resources.arrow_down;
-            button15.Location = new System.Drawing.Point(202, 371);
+            button15.Location = new System.Drawing.Point(202, 323);
             button15.Name = "button15";
             button15.Size = new System.Drawing.Size(24, 24);
             button15.TabIndex = 44;
@@ -195,7 +164,7 @@
             // 
             button16.FlatAppearance.BorderSize = 0;
             button16.Image = global::DialogueEditor.Properties.Resources.arrow_up;
-            button16.Location = new System.Drawing.Point(178, 371);
+            button16.Location = new System.Drawing.Point(178, 323);
             button16.Name = "button16";
             button16.Size = new System.Drawing.Size(24, 24);
             button16.TabIndex = 43;
@@ -205,7 +174,7 @@
             // listBoxAdditionalActors
             // 
             this.listBoxAdditionalActors.FormattingEnabled = true;
-            this.listBoxAdditionalActors.Location = new System.Drawing.Point(6, 371);
+            this.listBoxAdditionalActors.Location = new System.Drawing.Point(6, 323);
             this.listBoxAdditionalActors.Name = "listBoxAdditionalActors";
             this.listBoxAdditionalActors.Size = new System.Drawing.Size(136, 82);
             this.listBoxAdditionalActors.TabIndex = 41;
@@ -214,7 +183,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(7, 161);
+            label5.Location = new System.Drawing.Point(7, 113);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(49, 13);
             label5.TabIndex = 8;
@@ -224,7 +193,7 @@
             // 
             this.textBoxContext.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxContext.Location = new System.Drawing.Point(6, 177);
+            this.textBoxContext.Location = new System.Drawing.Point(6, 129);
             this.textBoxContext.Name = "textBoxContext";
             this.textBoxContext.Size = new System.Drawing.Size(309, 74);
             this.textBoxContext.TabIndex = 9;
@@ -288,7 +257,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(7, 254);
+            label1.Location = new System.Drawing.Point(7, 206);
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(160, 13);
             label1.TabIndex = 2;
@@ -298,7 +267,7 @@
             // 
             this.textBoxComment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxComment.Location = new System.Drawing.Point(6, 270);
+            this.textBoxComment.Location = new System.Drawing.Point(6, 222);
             this.textBoxComment.Name = "textBoxComment";
             this.textBoxComment.Size = new System.Drawing.Size(309, 74);
             this.textBoxComment.TabIndex = 2;
@@ -306,31 +275,13 @@
             this.textBoxComment.TextChanged += new System.EventHandler(this.OnCommentChanged);
             this.textBoxComment.Validated += new System.EventHandler(this.OnCommentValidated);
             // 
-            // textBoxCameraBlendTime
-            // 
-            this.textBoxCameraBlendTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCameraBlendTime.Location = new System.Drawing.Point(113, 133);
-            this.textBoxCameraBlendTime.Name = "textBoxCameraBlendTime";
-            this.textBoxCameraBlendTime.Size = new System.Drawing.Size(202, 20);
-            this.textBoxCameraBlendTime.TabIndex = 51;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(7, 136);
-            label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(100, 13);
-            label8.TabIndex = 52;
-            label8.Text = "Camera blend time :";
-            // 
             // FormPropertiesRoot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(groupBox1);
             this.Name = "FormPropertiesRoot";
-            this.Size = new System.Drawing.Size(327, 520);
+            this.Size = new System.Drawing.Size(327, 422);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -347,7 +298,5 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBoxAdditionalActors;
         private System.Windows.Forms.ListBox listBoxAdditionalActors;
-        private System.Windows.Forms.ComboBox comboBoxCamera;
-        private System.Windows.Forms.TextBox textBoxCameraBlendTime;
     }
 }
