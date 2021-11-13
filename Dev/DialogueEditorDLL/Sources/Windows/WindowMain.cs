@@ -886,6 +886,8 @@ namespace DialogueEditor
 
             EditorCore.LogInfo("Checking all Dialogues - End");
 
+            EditorCore.LogInfo("Saving all Dialogues - Begin");
+
             ResourcesHandler.SaveAll();
 
             foreach (DocumentDialogue document in documentDialogues)
@@ -895,7 +897,7 @@ namespace DialogueEditor
 
             RefreshDirtyFlags();
 
-            EditorCore.LogInfo("All Project Files Saved");
+            EditorCore.LogInfo("Saving all Dialogues - End");
         }
 
         private void OnCheckAll(object sender, EventArgs e)
