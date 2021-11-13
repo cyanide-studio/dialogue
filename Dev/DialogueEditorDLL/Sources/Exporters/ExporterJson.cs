@@ -6,11 +6,39 @@ using System.Threading.Tasks;
 
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace DialogueEditor
 {
     static public class ExporterJson
     {
+        //--------------------------------------------------------------------------------------------------------------
+        // Dummy Serialized Types (can be used to load deprecated serialized types)
+
+        public class DummySerializedCustomProperties : NodeCustomProperties
+        {
+            [JsonExtensionData]
+            public IDictionary<string, JToken> ExtensionData { get; set; }
+        }
+
+        public class DummySerializedCondition : NodeCondition
+        {
+            [JsonExtensionData]
+            public IDictionary<string, JToken> ExtensionData { get; set; }
+        }
+
+        public class DummySerializedAction : NodeAction
+        {
+            [JsonExtensionData]
+            public IDictionary<string, JToken> ExtensionData { get; set; }
+        }
+
+        public class DummySerializedFlag : NodeFlag
+        {
+            [JsonExtensionData]
+            public IDictionary<string, JToken> ExtensionData { get; set; }
+        }
+
         //--------------------------------------------------------------------------------------------------------------
         // Binding
 

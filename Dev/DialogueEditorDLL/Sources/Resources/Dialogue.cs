@@ -258,7 +258,7 @@ namespace DialogueEditor
         {
             foreach (CustomPropertiesSlot slot in EditorCore.CustomPropertiesSlots)
             {
-                if (slot.CustomPropertiesType != null && slot.DialogueNodeType.IsAssignableFrom(node.GetType()))
+                if (slot.AddOnEveryNode && slot.CustomPropertiesType != null && slot.DialogueNodeType.IsAssignableFrom(node.GetType()))
                 {
                     bool hasProperties = false;
 

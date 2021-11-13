@@ -32,8 +32,10 @@ namespace DialogueEditor
     public struct CustomPropertiesSlot
     {
         public Type DialogueNodeType;
+        public string CustomPropertiesName;
         public Type CustomPropertiesType;
         public Type FormType;
+        public bool AddOnEveryNode;
     };
 
     //--------------------------------------------------------------------------------------------------------------
@@ -192,25 +194,37 @@ namespace DialogueEditor
 
         static public void BindCustomProperties(Type dialogueNodeType, string customPropertiesName, Type customPropertiesType, Type formType)
         {
-            if (!dialogueNodeType.IsSubclassOf(typeof(DialogueNode)))
+            CustomPropertiesSlot slot = new CustomPropertiesSlot();
+            slot.DialogueNodeType = dialogueNodeType;
+            slot.CustomPropertiesName = customPropertiesName;
+            slot.CustomPropertiesType = customPropertiesType;
+            slot.FormType = formType;
+            slot.AddOnEveryNode = true;
+
+            BindCustomProperties(slot);
+        }
+            
+        static public void BindCustomProperties(CustomPropertiesSlot slot)
+        {
+            if (!slot.DialogueNodeType.IsSubclassOf(typeof(DialogueNode)))
             {
                 System.Diagnostics.Debug.Fail("BindCustomProperties : Invalid dialogue node type provided, please use a subclass of DialogueNode.");
                 return;
             }
 
-            if (customPropertiesType != null && !customPropertiesType.IsSubclassOf(typeof(NodeCustomProperties)))
+            if (slot.CustomPropertiesType != null && !slot.CustomPropertiesType.IsSubclassOf(typeof(NodeCustomProperties)))
             {
                 System.Diagnostics.Debug.Fail("BindCustomProperties : Invalid custom properties type provided, please use a subclass of NodeCustomProperties.");
                 return;
             }
 
-            if (formType != null && (!typeof(IFormProperties).IsAssignableFrom(formType) || !formType.IsSubclassOf(typeof(UserControl))))
+            if (slot.FormType != null && (!typeof(IFormProperties).IsAssignableFrom(slot.FormType) || !slot.FormType.IsSubclassOf(typeof(UserControl))))
             {
                 System.Diagnostics.Debug.Fail("BindCustomProperties : Invalid properties form type provided, please use a subclass of IFormProperties + UserControl.");
                 return;
             }
 
-            if (customPropertiesType == null && formType == null)
+            if (slot.CustomPropertiesType == null && slot.FormType == null)
             {
                 System.Diagnostics.Debug.Fail("BindCustomProperties : Please provide either a CustomProperties type or a Form type.");
                 return;
@@ -221,15 +235,11 @@ namespace DialogueEditor
                 EditorCore.CustomProperties = new PanelCustomProperties();
             }
 
-            if (customPropertiesType != null)
+            if (slot.CustomPropertiesType != null)
             {
-                SerializationBinder.AddBinding(customPropertiesName, customPropertiesType);
+                SerializationBinder.AddBinding(slot.CustomPropertiesName, slot.CustomPropertiesType);
             }
 
-            CustomPropertiesSlot slot = new CustomPropertiesSlot();
-            slot.DialogueNodeType = dialogueNodeType;
-            slot.CustomPropertiesType = customPropertiesType;
-            slot.FormType = formType;
             CustomPropertiesSlots.Add(slot);
         }
 
