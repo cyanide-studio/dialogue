@@ -341,11 +341,14 @@ namespace DialogueEditor
 
             dialogueNode.SpeakerID = comboBoxSpeaker.SelectedValue as string;
 
+            // Animsets will also raise a SetDirty, so I prefer to use a pending flag just in case, to also avoid a double SaveState.
+            document.SetPendingDirty();
+
             RefreshPortraits();
             RefreshAnimSetList(comboBoxAnimsetSpeaker, dialogueNode.SpeakerID);
 
             document.RefreshTreeNode(treeNode);
-            document.SetDirty();
+            document.ResolvePendingDirty();
         }
 
         private void OnListenerChanged(object sender, EventArgs e)
@@ -355,11 +358,14 @@ namespace DialogueEditor
 
             dialogueNode.ListenerID = comboBoxListener.SelectedValue as string;
 
+            // Animsets will also raise a SetDirty, so I prefer to use a pending flag just in case, to also avoid a double SaveState.
+            document.SetPendingDirty();
+
             RefreshPortraits();
             RefreshAnimSetList(comboBoxAnimsetListener, dialogueNode.ListenerID);
 
             document.RefreshTreeNode(treeNode);
-            document.SetDirty();
+            document.ResolvePendingDirty();
         }
 
         private void OnHideSubtitleChanged(object sender, EventArgs e)
