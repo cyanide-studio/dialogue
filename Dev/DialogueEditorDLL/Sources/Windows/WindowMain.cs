@@ -594,7 +594,7 @@ namespace DialogueEditor
             dialog.Title = "Open Project";
             //dialog.Filter = "Project Files|*.project|Dialogue Files|*.dlg";
             dialog.Filter = "Project Files|*.project";
-            dialog.InitialDirectory = System.Environment.CurrentDirectory;
+            dialog.InitialDirectory = File.Exists(EditorCore.Settings.LastProject) ? Path.GetDirectoryName(EditorCore.Settings.LastProject) : System.Environment.CurrentDirectory;
 
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
@@ -616,7 +616,7 @@ namespace DialogueEditor
             dialog.Title = "Create Project";
             //dialog.Filter = "Project Files|*.project|Dialogue Files|*.dlg";
             dialog.Filter = "Project Files|*.project";
-            dialog.InitialDirectory = System.Environment.CurrentDirectory;
+            dialog.InitialDirectory = File.Exists(EditorCore.Settings.LastProject) ? Path.GetDirectoryName(EditorCore.Settings.LastProject) : System.Environment.CurrentDirectory;
 
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.OK)
