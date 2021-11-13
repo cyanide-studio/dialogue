@@ -475,19 +475,19 @@ namespace DialogueEditor
 
             if (panel == EditorCore.ProjectExplorer)
             {
-                menuItemProjectExplorer.Checked = panel.Visible;
+                menuItemProjectExplorer.Checked = !panel.IsHidden;
             }
             else if (panel == EditorCore.Properties)
             {
-                menuItemProjectProperties.Checked = panel.Visible;
+                menuItemProjectProperties.Checked = !panel.IsHidden;
             }
             else if (panel == EditorCore.OutputLog)
             {
-                menuItemOutputLog.Checked = panel.Visible;
+                menuItemOutputLog.Checked = !panel.IsHidden;
             }
             else if (panel == EditorCore.SearchResults)
             {
-                menuItemSearchResults.Checked = panel.Visible;
+                menuItemSearchResults.Checked = !panel.IsHidden;
             }
 
             ignoreMenuItemEvents = false;
@@ -502,7 +502,7 @@ namespace DialogueEditor
             }
             else
             {
-                if (panel.Visible)
+                if (panel.Visible || !panel.IsHidden)
                     panel.Hide();
             }
         }

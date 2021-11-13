@@ -133,7 +133,7 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // Events
 
-        private void OnVisibleChanged(object sender, EventArgs e)
+        private void OnDockStateChanged(object sender, EventArgs e)
         {
             EditorCore.MainWindow.SyncMenuItemFromPanel(this);
         }

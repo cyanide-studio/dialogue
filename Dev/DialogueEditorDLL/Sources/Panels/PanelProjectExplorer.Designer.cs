@@ -344,7 +344,7 @@
             this.HideOnClose = true;
             this.Name = "PanelProjectExplorer";
             this.Text = "Project Explorer";
-            this.VisibleChanged += new System.EventHandler(this.OnVisibleChanged);
+            this.DockStateChanged += new System.EventHandler(this.OnDockStateChanged);
             this.menuFolder.ResumeLayout(false);
             this.menuPackage.ResumeLayout(false);
             this.menuDocument.ResumeLayout(false);

@@ -102,7 +102,7 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // Events
 
-        private void OnVisibleChanged(object sender, EventArgs e)
+        private void OnDockStateChanged(object sender, EventArgs e)
         {
             // I prefer to avoid a dedicated checkbox for custom panels for now.
             // Instead, the standard Properties checkbox will affect all properties panels.

@@ -399,10 +399,9 @@ namespace DialogueEditor
             OpenDocument(e.Node, false);
         }
 
-        private void OnVisibleChanged(object sender, EventArgs e)
+        private void OnDockStateChanged(object sender, EventArgs e)
         {
-            if (EditorCore.MainWindow != null)
-                EditorCore.MainWindow.SyncMenuItemFromPanel(this);
+            EditorCore.MainWindow?.SyncMenuItemFromPanel(this);
         }
 
         private void OnFolderNewDialogue(object sender, EventArgs e)

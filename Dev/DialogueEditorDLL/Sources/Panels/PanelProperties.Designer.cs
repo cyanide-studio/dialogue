@@ -57,7 +57,7 @@
             this.HideOnClose = true;
             this.Name = "PanelProperties";
             this.Text = "Properties";
-            this.VisibleChanged += new System.EventHandler(this.OnVisibleChanged);
+            this.DockStateChanged += new System.EventHandler(this.OnDockStateChanged);
             this.ResumeLayout(false);
 
         }

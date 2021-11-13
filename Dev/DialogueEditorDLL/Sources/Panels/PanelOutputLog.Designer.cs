@@ -94,7 +94,7 @@
             this.checkBoxShowWarnings.UseVisualStyleBackColor = true;
             this.checkBoxShowWarnings.CheckedChanged += new System.EventHandler(this.OnCheckDisplayOptions);
             // 
-            // OutputLog
+            // PanelOutputLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -107,9 +107,9 @@
             this.Controls.Add(this.listBoxLog);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HideOnClose = true;
-            this.Name = "OutputLog";
+            this.Name = "PanelOutputLog";
             this.Text = "Output Log";
-            this.VisibleChanged += new System.EventHandler(this.OnVisibleChanged);
+            this.DockStateChanged += new System.EventHandler(this.OnDockStateChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 

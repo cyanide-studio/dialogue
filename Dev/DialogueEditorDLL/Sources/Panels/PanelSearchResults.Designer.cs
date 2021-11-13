@@ -81,7 +81,7 @@
             this.HideOnClose = true;
             this.Name = "PanelSearchResults";
             this.Text = "Search Results";
-            this.VisibleChanged += new System.EventHandler(this.OnVisibleChanged);
+            this.DockStateChanged += new System.EventHandler(this.OnDockStateChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 
