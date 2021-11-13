@@ -152,8 +152,6 @@ namespace DialogueEditor
             builds.Add("Slender", "Slender");
             builds.Add("Athletic", "Athletic");
             builds.Add("Curvy", "Curvy");
-            builds.Add("Big", "Big");
-            builds.Add("Obese", "Obese");
             CustomLists["Builds"] = builds;
 
             var intensities = new Dictionary<string, string>();
