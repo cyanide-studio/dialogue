@@ -99,11 +99,6 @@ namespace DialogueEditor
             comboBoxAdditionalActors.ValueMember = "Key";
             comboBoxAdditionalActors.DisplayMember = "Value";
 
-            /*comboBoxSpatialized.DataSource = new BindingSource(EditorHelper.GetTriBoolDictionary("<Auto>"), null);
-            comboBoxSpatialized.ValueMember = "Key";
-            comboBoxSpatialized.DisplayMember = "Value";
-            comboBoxSpatialized.SelectedValue = dialogue.Spatialized;*/
-
             RefreshAdditionalActorView();
 
             ready = true;

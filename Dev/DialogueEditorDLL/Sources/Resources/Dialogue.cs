@@ -29,9 +29,6 @@ namespace DialogueEditor
         public string Context { get; set; }
         public string Comment { get; set; }
 
-        //[JsonConverter(typeof(ExporterJson.ConverterTriBool))]
-        //public Utility.ETriBool Spatialized { get; set; }         //Should note be useful, and implicit through SceneType
-
         [JsonIgnore]
         public DialogueNodeRoot RootNode { get; set; }
         public int RootNodeID { get; set; }
@@ -72,7 +69,6 @@ namespace DialogueEditor
             VoiceBank = "";
             Context = "";
             Comment = "";
-            //Spatialized = Utility.ETriBool.TB_undefined;
 
             ListNodes = new List<DialogueNode>();
             ListAdditionalActors = new List<string>();
@@ -98,7 +94,6 @@ namespace DialogueEditor
             SceneType = other.SceneType;
             VoiceBank = other.VoiceBank;
             Comment = other.Comment;
-            //Spatialized = other.Spatialized;
             ListAdditionalActors = other.ListAdditionalActors;
         }
 
