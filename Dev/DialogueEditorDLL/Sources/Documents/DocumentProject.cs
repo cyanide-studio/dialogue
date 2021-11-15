@@ -43,6 +43,12 @@ namespace DialogueEditor
         {
             InitializeComponent();
 
+            EditorHelper.AbsorbMouseWheelEvent(comboBoxSpecies);
+            EditorHelper.AbsorbMouseWheelEvent(comboBoxGender);
+            EditorHelper.AbsorbMouseWheelEvent(comboBoxBuild);
+            EditorHelper.AbsorbMouseWheelEvent(comboBoxVoiceKit);
+            EditorHelper.AbsorbMouseWheelEvent(comboBoxVoiceKitVoiceActor);
+
             project = ResourcesHandler.Project;
 
             ResyncDocument();

@@ -266,6 +266,15 @@ namespace DialogueEditor
             node.SelectedImageKey = name;
         }
 
+        public static void AbsorbMouseWheelEvent(ComboBox comboBox)
+        {
+            comboBox.MouseWheel += (object sender, MouseEventArgs e) =>
+            {
+                HandledMouseEventArgs handledEvent = e as HandledMouseEventArgs;
+                handledEvent.Handled = true;
+            };
+        }
+
         public static void CheckDialogueErrors(Dialogue dialogue)
         {
             Project project = ResourcesHandler.Project;

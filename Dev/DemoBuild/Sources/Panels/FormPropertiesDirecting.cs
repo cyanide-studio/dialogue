@@ -32,6 +32,10 @@ namespace DemoBuild
             InitializeComponent();
 
             Dock = System.Windows.Forms.DockStyle.Fill;
+
+            EditorHelper.AbsorbMouseWheelEvent(comboBoxCamera);
+            EditorHelper.AbsorbMouseWheelEvent(comboBoxApplyZoom);
+            EditorHelper.AbsorbMouseWheelEvent(comboBoxApplyOrbitalMove);
         }
 
         public void Clear()

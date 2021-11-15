@@ -33,6 +33,10 @@ namespace DialogueEditor
             InitializeComponent();
 
             Dock = System.Windows.Forms.DockStyle.Fill;
+
+            EditorHelper.AbsorbMouseWheelEvent(comboBoxPackage);
+            EditorHelper.AbsorbMouseWheelEvent(comboBoxSceneType);
+            EditorHelper.AbsorbMouseWheelEvent(comboBoxAdditionalActors);
         }
 
         public void Clear()

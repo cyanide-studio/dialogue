@@ -58,6 +58,8 @@ namespace DialogueEditor
         {
             InitializeComponent();
 
+            EditorHelper.AbsorbMouseWheelEvent(comboBoxLanguages);
+
             Dialogue = inDialogue;
             Name = Dialogue.GetName();
             tree.ImageList = EditorCore.DefaultImageList;

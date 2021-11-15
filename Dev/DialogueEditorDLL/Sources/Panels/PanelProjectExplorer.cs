@@ -52,6 +52,9 @@ namespace DialogueEditor
         {
             InitializeComponent();
 
+            EditorHelper.AbsorbMouseWheelEvent(comboBoxSearchSceneType);
+            EditorHelper.AbsorbMouseWheelEvent(comboBoxSearchActor);
+
             listBoxSearchResults.Location = tree.Location;
             listBoxSearchResults.Size = tree.Size;
 
