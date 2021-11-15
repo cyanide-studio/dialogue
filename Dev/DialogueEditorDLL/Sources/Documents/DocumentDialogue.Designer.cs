@@ -313,9 +313,9 @@
             this.checkBoxDisplayID.AutoSize = true;
             this.checkBoxDisplayID.Location = new System.Drawing.Point(74, 23);
             this.checkBoxDisplayID.Name = "checkBoxDisplayID";
-            this.checkBoxDisplayID.Size = new System.Drawing.Size(37, 17);
+            this.checkBoxDisplayID.Size = new System.Drawing.Size(76, 17);
             this.checkBoxDisplayID.TabIndex = 13;
-            this.checkBoxDisplayID.Text = "ID";
+            this.checkBoxDisplayID.Text = "ID (debug)";
             this.checkBoxDisplayID.UseVisualStyleBackColor = true;
             this.checkBoxDisplayID.CheckedChanged += new System.EventHandler(this.OnCheckDisplayOptions);
             // 
