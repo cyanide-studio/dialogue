@@ -109,7 +109,7 @@ namespace DialogueEditor
 
             public override bool CanConvert (Type type)
             {
-                //Legu: je passe jamais ici, wtf ??
+                //TODO: not sure when this callback triggers ?
                 return true;
             }
         }*/
@@ -129,6 +129,7 @@ namespace DialogueEditor
 
             public override bool CanConvert(Type type)
             {
+                //TODO: not sure when this callback triggers ?
                 return true;
             }
         }

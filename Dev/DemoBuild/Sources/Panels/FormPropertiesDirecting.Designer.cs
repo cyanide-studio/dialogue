@@ -32,12 +32,14 @@ namespace DemoBuild
             System.Windows.Forms.Label label9;
             System.Windows.Forms.Label label11;
             this.groupBoxProperties = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxApplyOrbitalMove = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxApplyZoom = new System.Windows.Forms.ComboBox();
             this.textBoxCameraBlendTime = new System.Windows.Forms.TextBox();
             this.comboBoxCamera = new System.Windows.Forms.ComboBox();
-            this.labelPostDelay = new System.Windows.Forms.Label();
             this.labelPreDelay = new System.Windows.Forms.Label();
-            this.textBoxPostDelay = new System.Windows.Forms.TextBox();
-            this.textBoxPreDelay = new System.Windows.Forms.TextBox();
+            this.textBoxCameraDelay = new System.Windows.Forms.TextBox();
             label9 = new System.Windows.Forms.Label();
             label11 = new System.Windows.Forms.Label();
             this.groupBoxProperties.SuspendLayout();
@@ -65,20 +67,64 @@ namespace DemoBuild
             // 
             this.groupBoxProperties.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxProperties.Controls.Add(this.label2);
+            this.groupBoxProperties.Controls.Add(this.comboBoxApplyOrbitalMove);
+            this.groupBoxProperties.Controls.Add(this.label1);
+            this.groupBoxProperties.Controls.Add(this.comboBoxApplyZoom);
             this.groupBoxProperties.Controls.Add(label11);
             this.groupBoxProperties.Controls.Add(this.textBoxCameraBlendTime);
             this.groupBoxProperties.Controls.Add(this.comboBoxCamera);
             this.groupBoxProperties.Controls.Add(label9);
-            this.groupBoxProperties.Controls.Add(this.labelPostDelay);
             this.groupBoxProperties.Controls.Add(this.labelPreDelay);
-            this.groupBoxProperties.Controls.Add(this.textBoxPostDelay);
-            this.groupBoxProperties.Controls.Add(this.textBoxPreDelay);
+            this.groupBoxProperties.Controls.Add(this.textBoxCameraDelay);
             this.groupBoxProperties.Location = new System.Drawing.Point(3, 3);
             this.groupBoxProperties.Name = "groupBoxProperties";
-            this.groupBoxProperties.Size = new System.Drawing.Size(316, 169);
+            this.groupBoxProperties.Size = new System.Drawing.Size(316, 174);
             this.groupBoxProperties.TabIndex = 0;
             this.groupBoxProperties.TabStop = false;
             this.groupBoxProperties.Text = "Directing Properties";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 138);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(99, 13);
+            this.label2.TabIndex = 48;
+            this.label2.Text = "Apply orbital move :";
+            // 
+            // comboBoxApplyOrbitalMove
+            // 
+            this.comboBoxApplyOrbitalMove.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxApplyOrbitalMove.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxApplyOrbitalMove.FormattingEnabled = true;
+            this.comboBoxApplyOrbitalMove.Location = new System.Drawing.Point(113, 135);
+            this.comboBoxApplyOrbitalMove.Name = "comboBoxApplyOrbitalMove";
+            this.comboBoxApplyOrbitalMove.Size = new System.Drawing.Size(198, 21);
+            this.comboBoxApplyOrbitalMove.TabIndex = 47;
+            this.comboBoxApplyOrbitalMove.SelectedIndexChanged += new System.EventHandler(this.OnApplyOrbitalMoveChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 111);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.TabIndex = 46;
+            this.label1.Text = "Apply zoom :";
+            // 
+            // comboBoxApplyZoom
+            // 
+            this.comboBoxApplyZoom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxApplyZoom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxApplyZoom.FormattingEnabled = true;
+            this.comboBoxApplyZoom.Location = new System.Drawing.Point(113, 108);
+            this.comboBoxApplyZoom.Name = "comboBoxApplyZoom";
+            this.comboBoxApplyZoom.Size = new System.Drawing.Size(198, 21);
+            this.comboBoxApplyZoom.TabIndex = 45;
+            this.comboBoxApplyZoom.SelectedIndexChanged += new System.EventHandler(this.OnApplyZoomChanged);
             // 
             // textBoxCameraBlendTime
             // 
@@ -103,45 +149,25 @@ namespace DemoBuild
             this.comboBoxCamera.TabIndex = 41;
             this.comboBoxCamera.SelectedIndexChanged += new System.EventHandler(this.OnCameraChanged);
             // 
-            // labelPostDelay
-            // 
-            this.labelPostDelay.AutoSize = true;
-            this.labelPostDelay.Location = new System.Drawing.Point(6, 129);
-            this.labelPostDelay.Name = "labelPostDelay";
-            this.labelPostDelay.Size = new System.Drawing.Size(62, 13);
-            this.labelPostDelay.TabIndex = 39;
-            this.labelPostDelay.Text = "Post delay :";
-            // 
             // labelPreDelay
             // 
             this.labelPreDelay.AutoSize = true;
-            this.labelPreDelay.Location = new System.Drawing.Point(6, 103);
+            this.labelPreDelay.Location = new System.Drawing.Point(6, 85);
             this.labelPreDelay.Name = "labelPreDelay";
-            this.labelPreDelay.Size = new System.Drawing.Size(57, 13);
+            this.labelPreDelay.Size = new System.Drawing.Size(77, 13);
             this.labelPreDelay.TabIndex = 38;
-            this.labelPreDelay.Text = "Pre delay :";
+            this.labelPreDelay.Text = "Camera delay :";
             // 
-            // textBoxPostDelay
+            // textBoxCameraDelay
             // 
-            this.textBoxPostDelay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxCameraDelay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxPostDelay.Location = new System.Drawing.Point(74, 129);
-            this.textBoxPostDelay.Name = "textBoxPostDelay";
-            this.textBoxPostDelay.Size = new System.Drawing.Size(236, 20);
-            this.textBoxPostDelay.TabIndex = 44;
-            this.textBoxPostDelay.TextChanged += new System.EventHandler(this.OnPostDelayChanged);
-            this.textBoxPostDelay.Validated += new System.EventHandler(this.OnPostDelayValidated);
-            // 
-            // textBoxPreDelay
-            // 
-            this.textBoxPreDelay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxPreDelay.Location = new System.Drawing.Point(74, 100);
-            this.textBoxPreDelay.Name = "textBoxPreDelay";
-            this.textBoxPreDelay.Size = new System.Drawing.Size(236, 20);
-            this.textBoxPreDelay.TabIndex = 43;
-            this.textBoxPreDelay.TextChanged += new System.EventHandler(this.OnPreDelayChanged);
-            this.textBoxPreDelay.Validated += new System.EventHandler(this.OnPreDelayValidated);
+            this.textBoxCameraDelay.Location = new System.Drawing.Point(113, 82);
+            this.textBoxCameraDelay.Name = "textBoxCameraDelay";
+            this.textBoxCameraDelay.Size = new System.Drawing.Size(198, 20);
+            this.textBoxCameraDelay.TabIndex = 43;
+            this.textBoxCameraDelay.TextChanged += new System.EventHandler(this.OnDelayChanged);
+            this.textBoxCameraDelay.Validated += new System.EventHandler(this.OnDelayValidated);
             // 
             // FormPropertiesDirecting
             // 
@@ -149,7 +175,7 @@ namespace DemoBuild
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBoxProperties);
             this.Name = "FormPropertiesDirecting";
-            this.Size = new System.Drawing.Size(322, 175);
+            this.Size = new System.Drawing.Size(322, 180);
             this.groupBoxProperties.ResumeLayout(false);
             this.groupBoxProperties.PerformLayout();
             this.ResumeLayout(false);
@@ -159,11 +185,13 @@ namespace DemoBuild
         #endregion
 
         private System.Windows.Forms.GroupBox groupBoxProperties;
-        private System.Windows.Forms.Label labelPostDelay;
         private System.Windows.Forms.Label labelPreDelay;
-        private System.Windows.Forms.TextBox textBoxPostDelay;
-        private System.Windows.Forms.TextBox textBoxPreDelay;
+        private System.Windows.Forms.TextBox textBoxCameraDelay;
         private System.Windows.Forms.ComboBox comboBoxCamera;
         private System.Windows.Forms.TextBox textBoxCameraBlendTime;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBoxApplyOrbitalMove;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxApplyZoom;
     }
 }

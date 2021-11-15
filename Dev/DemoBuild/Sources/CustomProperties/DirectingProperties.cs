@@ -1,4 +1,5 @@
 ﻿using DialogueEditor;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,12 @@ namespace DemoBuild
     {
         public string Camera { get; set; } = "";
         public float CameraBlendTime { get; set; } = -1.0f;
-        public float PreDelay { get; set; } = 0.0f;
-        public float PostDelay { get; set; } = 0.0f;
+        public float CameraDelay { get; set; } = 0.0f;
+
+        [JsonConverter(typeof(ExporterJson.ConverterTriBool))]
+        public Utility.ETriBool ApplyZoomIn { get; set; } = Utility.ETriBool.TB_undefined;
+
+        [JsonConverter(typeof(ExporterJson.ConverterTriBool))]
+        public Utility.ETriBool ApplyOrbitalMove { get; set; } = Utility.ETriBool.TB_undefined;
     }
 }

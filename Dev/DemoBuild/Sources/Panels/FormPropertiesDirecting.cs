@@ -68,8 +68,17 @@ namespace DemoBuild
             comboBoxCamera.SelectedValue = directingProperties.Camera;
 
             textBoxCameraBlendTime.Text = directingProperties.CameraBlendTime.ToString();
-            textBoxPreDelay.Text = directingProperties.PreDelay.ToString();
-            textBoxPostDelay.Text = directingProperties.PostDelay.ToString();
+            textBoxCameraDelay.Text = directingProperties.CameraDelay.ToString();
+
+            comboBoxApplyZoom.DataSource = new BindingSource(EditorHelper.GetTriBoolDictionary("<Auto>"), null);
+            comboBoxApplyZoom.ValueMember = "Key";
+            comboBoxApplyZoom.DisplayMember = "Value";
+            comboBoxApplyZoom.SelectedValue = directingProperties.ApplyZoomIn;
+
+            comboBoxApplyOrbitalMove.DataSource = new BindingSource(EditorHelper.GetTriBoolDictionary("<Auto>"), null);
+            comboBoxApplyOrbitalMove.ValueMember = "Key";
+            comboBoxApplyOrbitalMove.DisplayMember = "Value";
+            comboBoxApplyOrbitalMove.SelectedValue = directingProperties.ApplyOrbitalMove;
 
             ready = true;
         }
@@ -107,46 +116,43 @@ namespace DemoBuild
             document.ResolvePendingDirty();
         }
 
-        private void OnPreDelayChanged(object sender, EventArgs e)
+        private void OnDelayChanged(object sender, EventArgs e)
         {
             if (!ready)
                 return;
 
             float value = 0.0f;
-            float.TryParse(textBoxPreDelay.Text, out value);
+            float.TryParse(textBoxCameraDelay.Text, out value);
 
-            if (directingProperties.PreDelay != value)
+            if (directingProperties.CameraDelay != value)
             {
-                directingProperties.PreDelay = value;
+                directingProperties.CameraDelay = value;
                 document.SetPendingDirty();
             }
         }
 
-        private void OnPreDelayValidated(object sender, EventArgs e)
+        private void OnDelayValidated(object sender, EventArgs e)
         {
-            textBoxPreDelay.Text = directingProperties.PreDelay.ToString();
+            textBoxCameraDelay.Text = directingProperties.CameraDelay.ToString();
             document.ResolvePendingDirty();
         }
 
-        private void OnPostDelayChanged(object sender, EventArgs e)
+        private void OnApplyZoomChanged(object sender, EventArgs e)
         {
             if (!ready)
                 return;
 
-            float value = 0.0f;
-            float.TryParse(textBoxPostDelay.Text, out value);
-
-            if (directingProperties.PostDelay != value)
-            {
-                directingProperties.PostDelay = value;
-                document.SetPendingDirty();
-            }
+            directingProperties.ApplyZoomIn = (Utility.ETriBool)comboBoxApplyZoom.SelectedValue;
+            document.SetDirty();
         }
 
-        private void OnPostDelayValidated(object sender, EventArgs e)
+        private void OnApplyOrbitalMoveChanged(object sender, EventArgs e)
         {
-            textBoxPostDelay.Text = directingProperties.PostDelay.ToString();
-            document.ResolvePendingDirty();
+            if (!ready)
+                return;
+
+            directingProperties.ApplyOrbitalMove = (Utility.ETriBool)comboBoxApplyOrbitalMove.SelectedValue;
+            document.SetDirty();
         }
     }
 }
