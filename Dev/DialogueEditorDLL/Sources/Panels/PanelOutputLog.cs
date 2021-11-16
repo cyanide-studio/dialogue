@@ -71,7 +71,7 @@ namespace DialogueEditor
             bool displayLine = false;
             bool showPanel = false;
 
-            stringBuilder.Append(String.Format("[{0}]  ", Utility.GetCurrentTimeAsString()));
+            stringBuilder.Append(String.Format("[{0}]  ", Utility.GetDisplayTimeAsString()));
 
             switch (level)
             {

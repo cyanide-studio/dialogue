@@ -61,9 +61,9 @@ namespace DialogueEditor
             return DateTime.UtcNow;
         }
 
-        static public string GetCurrentTimeAsString()
+        static public string GetDisplayTimeAsString()
         {
-            return GetTimeAsString(DateTime.UtcNow);
+            return GetTimeAsString(DateTime.Now);
         }
 
         static public string GetTimeAsString(DateTime date)
@@ -71,12 +71,7 @@ namespace DialogueEditor
             return date.ToString("HH:mm:ss");
         }
 
-        static public string GetCurrentDateAsString()
-        {
-            return GetDateAsString(DateTime.UtcNow);
-        }
-
-        static public string GetDateAsString(DateTime date)
+        static public string GetDateTimeAsString(DateTime date)
         {
             return date.ToString("yyyy-MM-dd_HH-mm-ss");
         }

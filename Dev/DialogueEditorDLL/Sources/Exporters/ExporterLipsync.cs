@@ -33,7 +33,7 @@ namespace DialogueEditor
 
             exportDirectory = dialog.ExportPath;
             if (dialog.UseDateDirectory)
-                exportDirectory = Path.Combine(exportDirectory, Utility.GetCurrentDateAsString());
+                exportDirectory = Path.Combine(exportDirectory, Utility.GetDateTimeAsString(Utility.GetCurrentTime()));
 
             if (!Directory.Exists(exportDirectory))
                 Directory.CreateDirectory(exportDirectory);

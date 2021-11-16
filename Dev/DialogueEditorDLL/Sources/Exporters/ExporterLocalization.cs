@@ -34,7 +34,7 @@ namespace DialogueEditor
 
             exportDirectory = dialog.ExportPath;
             if (dialog.UseDateDirectory)
-                exportDirectory = Path.Combine(exportDirectory, Utility.GetCurrentDateAsString());
+                exportDirectory = Path.Combine(exportDirectory, Utility.GetDateTimeAsString(Utility.GetCurrentTime()));
 
             if (!Directory.Exists(exportDirectory))
                 Directory.CreateDirectory(exportDirectory);
@@ -183,7 +183,7 @@ namespace DialogueEditor
             //Re-write file
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(path, false, Encoding.UTF8))
             {
-                string date = Utility.GetDateAsString(Utility.GetCurrentTime());
+                string date = Utility.GetDateTimeAsString(Utility.GetCurrentTime());
 
                 //Header
                 file.WriteLine("# Dialogues " + language.Name + " translation.");
