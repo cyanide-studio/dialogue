@@ -85,19 +85,16 @@ namespace DialogueEditor
             comboBoxSpecies.DataSource = new BindingSource(EditorCore.CustomLists["Species"], null);
             comboBoxSpecies.ValueMember = "Key";
             comboBoxSpecies.DisplayMember = "Value";
-            //comboBoxSpecies.SelectedValue = "Human";
 
             //Gender
             comboBoxGender.DataSource = new BindingSource(EditorCore.CustomLists["Genders"], null);
             comboBoxGender.ValueMember = "Key";
             comboBoxGender.DisplayMember = "Value";
-            //comboBoxGender.SelectedValue = "Male";
 
             //Build
             comboBoxBuild.DataSource = new BindingSource(EditorCore.CustomLists["Builds"], null);
             comboBoxBuild.ValueMember = "Key";
             comboBoxBuild.DisplayMember = "Value";
-            //comboBoxBuild.SelectedValue = "Normal";
 
             //Actors
             listBoxActors.DataSource = new BindingSource(project.ListActors, null);
