@@ -1,4 +1,4 @@
-# ![Icon](/Icons/led24/bookmark_book.png) Dialogue Editor 1.1 
+# ![Icon](/Icons/led24/bookmark_book.png) Dialogue Editor 1.2
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 A Dialogue Editor for branching dialogues, built in C# and mainly based on WinForms.  
@@ -26,6 +26,7 @@ It is mostly inspired by the tools used on Cyanide's Game of Thrones RPG, and th
 - Unique IDs assigned for every sentence in the project, from creation to updates and reorders.
 - Localized constants can be used inside sentences.
 - Entry points for simple animations, custom conditions, actions and flags on every node.
+- Entry points for additional custom properties and associated panels on every node.
 - Import/Export for localization and voicing (csv files with pre-generated unique files and events IDs).
 - Actors settings, including parameters and voice-kit assignation for voicing sessions.
 
@@ -35,8 +36,9 @@ It is mostly inspired by the tools used on Cyanide's Game of Thrones RPG, and th
 - Icons from [led24.de](http://www.led24.de/)
 
 ## Documentation
+- [Changelog](/Docs/Changelog.md)
+- [Samples](/Docs/Samples.md)
 - [User Documentation](/Docs/UserDocumentation.pdf)
 - [Technical Documentation](/Docs/TechnicalDocumentation.pdf)
-- [Changelog](/Docs/Changelog.md)
 
 You can reach the author here : [twitter/Legulysse](https://twitter.com/legulysse) or here : [github/Legulysse](https://github.com/Legulysse)
