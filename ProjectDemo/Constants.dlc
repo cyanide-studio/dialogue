@@ -1,0 +1,16 @@
+{
+  "constants": [
+    {
+      "ID": "OldKing",
+      "Workstring": "Robert Baratheon",
+      "LastEditDate": "2016-04-26T15:49:19.1289867Z",
+      "Comment": ""
+    },
+    {
+      "ID": "Executionner",
+      "Workstring": "Ser Illyn Paine",
+      "LastEditDate": "2016-04-27T09:34:35.2446744Z",
+      "Comment": "The royal executionner. His name must reflect pain."
+    }
+  ]
+}

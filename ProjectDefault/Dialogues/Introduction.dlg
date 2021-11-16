@@ -1,6 +1,6 @@
 {
   "VersionProject": "1.0.0",
-  "VersionEditor": "1.0.0",
+  "VersionEditor": "1.2.0",
   "PackageName": "Default",
   "LastIndex": 3,
   "SceneType": "Interactive",
@@ -15,7 +15,8 @@
       "NextID": 2,
       "Conditions": [],
       "Actions": [],
-      "Flags": []
+      "Flags": [],
+      "CustomProperties": []
     },
     {
       "$type": "NodeSentence",
@@ -36,7 +37,8 @@
       "NextID": 3,
       "Conditions": [],
       "Actions": [],
-      "Flags": []
+      "Flags": [],
+      "CustomProperties": []
     },
     {
       "$type": "NodeSentence",
@@ -57,7 +59,8 @@
       "NextID": -1,
       "Conditions": [],
       "Actions": [],
-      "Flags": []
+      "Flags": [],
+      "CustomProperties": []
     }
   ],
   "ListAdditionalActors": [],

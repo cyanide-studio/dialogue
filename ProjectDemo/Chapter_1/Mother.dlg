@@ -1,6 +1,6 @@
 {
   "VersionProject": "1.0.0",
-  "VersionEditor": "1.0.0",
+  "VersionEditor": "1.2.0",
   "PackageName": "Default",
   "LastIndex": 10,
   "SceneType": "Interactive",
@@ -15,7 +15,8 @@
       "NextID": 2,
       "Conditions": [],
       "Actions": [],
-      "Flags": []
+      "Flags": [],
+      "CustomProperties": []
     },
     {
       "$type": "NodeSentence",
@@ -36,7 +37,17 @@
       "NextID": 3,
       "Conditions": [],
       "Actions": [],
-      "Flags": []
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
     },
     {
       "$type": "NodeSentence",
@@ -57,7 +68,17 @@
       "NextID": 4,
       "Conditions": [],
       "Actions": [],
-      "Flags": []
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
     },
     {
       "$type": "NodeSentence",
@@ -78,7 +99,17 @@
       "NextID": 5,
       "Conditions": [],
       "Actions": [],
-      "Flags": []
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
     },
     {
       "$type": "NodeSentence",
@@ -99,7 +130,17 @@
       "NextID": 6,
       "Conditions": [],
       "Actions": [],
-      "Flags": []
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
     },
     {
       "$type": "NodeSentence",
@@ -120,7 +161,17 @@
       "NextID": 7,
       "Conditions": [],
       "Actions": [],
-      "Flags": []
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
     },
     {
       "$type": "NodeSentence",
@@ -141,7 +192,17 @@
       "NextID": 8,
       "Conditions": [],
       "Actions": [],
-      "Flags": []
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
     },
     {
       "$type": "NodeSentence",
@@ -162,7 +223,17 @@
       "NextID": 9,
       "Conditions": [],
       "Actions": [],
-      "Flags": []
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
     },
     {
       "$type": "NodeSentence",
@@ -183,7 +254,17 @@
       "NextID": 10,
       "Conditions": [],
       "Actions": [],
-      "Flags": []
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
     },
     {
       "$type": "NodeSentence",
@@ -204,7 +285,17 @@
       "NextID": -1,
       "Conditions": [],
       "Actions": [],
-      "Flags": []
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
     }
   ],
   "ListAdditionalActors": [],
