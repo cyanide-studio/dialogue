@@ -7,7 +7,7 @@
 - Deprecate project-specific properties  (should be handled via CustomProperties and/or NodeFlags instead) :
   - Dialogue : Camera, CameraBlendTime.
   - NodeSentence : Camera, CameraBlendTime, PreDelay, PostDelay.
-  - NodeChoice : Timer HideTimer, Blueprint.
+  - NodeChoice : Timer, HideTimer, Blueprint.
   - NodeReply : Repeat, Deduction, AutoSelect.
 - Add mechanisms to handle deprecated data migration :
   - ExtensionData dictionnary : used on several serialized classes to store unhandled properties.
