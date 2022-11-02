@@ -148,9 +148,6 @@ namespace DialogueEditor
         ///<summary> Current Language used on documents edition </summary>
         static public Language CurrentLanguage = null;
 
-        ///<summary> Current Font used on documents edition </summary>
-        static public System.Drawing.Font CurrentFont = null;   //TODO: store on EditorSettings
-
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
 

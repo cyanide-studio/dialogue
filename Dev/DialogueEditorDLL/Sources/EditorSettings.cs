@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
+using System.Drawing;
 
 namespace DialogueEditor
 {
@@ -33,6 +34,7 @@ namespace DialogueEditor
         public bool UseActorColors { get; set; }
         public bool UseConstants { get; set; }
         public bool RefreshTreeViewOnEdit { get; set; }
+        public Font DialogueTreeViewFont { get; set; }
 
         public int MaxUndoLevels { get; set; }
 
@@ -61,6 +63,7 @@ namespace DialogueEditor
             UseActorColors = false;
             UseConstants = false;
             RefreshTreeViewOnEdit = false;
+            DialogueTreeViewFont = null;
 
             MaxUndoLevels = 50;
         }

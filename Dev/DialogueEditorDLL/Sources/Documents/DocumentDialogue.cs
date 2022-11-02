@@ -49,8 +49,6 @@ namespace DialogueEditor
         protected List<State> previousStates = new List<State>();
         protected int indexState = 0;
 
-        private Font font = null;
-
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
 
@@ -67,7 +65,6 @@ namespace DialogueEditor
             //Use this to have multiple colors on a single node.
             //If there are visual glitches, you can try commenting this block.
             //Note: Allowing default rendering will allow drag&drop with left mouse button.
-            font = tree.Font;
             tree.DrawMode = TreeViewDrawMode.OwnerDrawText;
             tree.DrawNode += OnTreeViewDrawNode;
 
@@ -851,7 +848,7 @@ namespace DialogueEditor
 
             Color color = GetTreeNodeColorContent(dialogueNode);
 
-            treeNode.NodeFont = new Font(font, style);
+            treeNode.NodeFont = new Font(tree.Font, style);
             treeNode.ForeColor = color;
             treeNode.BackColor = tree.BackColor;
 
@@ -1044,7 +1041,7 @@ namespace DialogueEditor
 
             Font nodeFont = node.NodeFont;
             if (nodeFont == null)
-                nodeFont = font;
+                nodeFont = tree.Font;
 
             // Retrieve texts
             string textID = GetTreeNodeTextID(dialogueNode);
@@ -1123,13 +1120,16 @@ namespace DialogueEditor
 
         public void RefreshFont()
         {
-            if (font != EditorHelper.CurrentFont)
+            if (EditorCore.Settings.DialogueTreeViewFont == null)
             {
-                font = EditorHelper.CurrentFont;
-                tree.Font = font;
+                EditorCore.Settings.DialogueTreeViewFont = tree.Font;
+            }
+            else if (tree.Font != EditorCore.Settings.DialogueTreeViewFont)
+            {
+                tree.Font = EditorCore.Settings.DialogueTreeViewFont;
             }
 
-            labelFont.Text = String.Format("{0} {1}", font.Name, font.Size);
+            labelFont.Text = String.Format("{0} {1}", tree.Font.Name, tree.Font.Size);
         }
 
         public void Highlight(TreeNode node)
@@ -1294,9 +1294,6 @@ namespace DialogueEditor
                 comboBoxLanguages.DisplayMember = "Name";
                 comboBoxLanguages.SelectedItem = EditorHelper.CurrentLanguage;
             }
-
-            if (EditorHelper.CurrentFont == null)
-                EditorHelper.CurrentFont = tree.Font;
 
             RefreshFont();
 
@@ -1950,12 +1947,12 @@ namespace DialogueEditor
                 return;
 
             var dialog = new FontDialog();
-            dialog.Font = font;
+            dialog.Font = tree.Font;
 
             var result = dialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                EditorHelper.CurrentFont = dialog.Font;
+                EditorCore.Settings.DialogueTreeViewFont = dialog.Font;
 
                 RefreshFont();
                 RefreshAllTreeNodes();
