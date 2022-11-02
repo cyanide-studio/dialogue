@@ -43,11 +43,11 @@ namespace DialogueEditor
         {
             LastProject = "";
 
-            DirectoryExportDialogues = "Export";
-            DirectoryExportLocalization = "Localization";
-            DirectoryExportVoicing = "Voicing";
-            DirectoryExportLipsync = "Lipsync";
-            DirectoryExportStats = "Stats";
+            DirectoryExportDialogues = "Exports\\Dialogues";
+            DirectoryExportLocalization = "Exports\\Localization";
+            DirectoryExportVoicing = "Exports\\Voicing";
+            DirectoryExportLipsync = "Exports\\Lipsync";
+            DirectoryExportStats = "Exports\\Stats";
             DirectoryPortraits = "";
 
             DisplaySpeaker = true;
