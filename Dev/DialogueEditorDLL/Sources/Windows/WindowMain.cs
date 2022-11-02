@@ -751,6 +751,15 @@ namespace DialogueEditor
             }
         }
 
+        private void OnExportLocalizationUnity(object sender, EventArgs e)
+        {
+            if (ResourcesHandler.Project != null)
+            {
+                if (ExporterLocalization.ExportToUnity())
+                    EditorCore.LogInfo("Export Localization Finished");
+            }
+        }
+
         private void OnExportVoicing(object sender, EventArgs e)
         {
             if (ResourcesHandler.Project != null)

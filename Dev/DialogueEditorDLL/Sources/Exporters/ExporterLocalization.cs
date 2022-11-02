@@ -22,10 +22,14 @@ namespace DialogueEditor
             string exportDirectory = Path.Combine(projectDirectory, EditorCore.Settings.DirectoryExportLocalization);
 
             var dialog = new DialogExport("Export Localization Unreal 4",
-                                            exportDirectory,
-                                            true, false,
-                                            false, true,
-                                            true, DateTime.MinValue);
+                                            path: exportDirectory,
+                                            defaultDateDirectory: true,
+                                            defaultPackageDirectory: false,
+                                            allowConstants: false,
+                                            allowWorkstringFallback: true,
+                                            allowDateFrom: true,
+                                            dateFrom: DateTime.MinValue);
+
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.Cancel)
                 return false;
@@ -49,8 +53,6 @@ namespace DialogueEditor
             {
                 packageGroups.Add(dialog.ListPackages);
             }
-
-            ExporterStats.ProjectStats projectStats = new ExporterStats.ProjectStats();
 
             var listLanguages = new List<Language>() { EditorCore.LanguageWorkstring };
             if (!dialog.WorkstringOnly)
@@ -87,6 +89,103 @@ namespace DialogueEditor
             System.Diagnostics.Process.Start(exportDirectory);
 
             return true;
+        }
+
+        static public bool ExportToUnity()
+        {
+            var project = ResourcesHandler.Project;
+
+            string projectDirectory = EditorHelper.GetProjectDirectory();
+            string exportDirectory = Path.Combine(projectDirectory, EditorCore.Settings.DirectoryExportLocalization);
+
+            var dialog = new DialogExport("Export Localization Unity",
+                                            path: exportDirectory,
+                                            defaultDateDirectory: true,
+                                            defaultPackageDirectory: false,
+                                            allowConstants: false,
+                                            allowWorkstringFallback: true,
+                                            allowDateFrom: true,
+                                            dateFrom: DateTime.MinValue);
+
+            DialogResult result = dialog.ShowDialog();
+            if (result == DialogResult.Cancel)
+                return false;
+
+            EditorCore.Settings.DirectoryExportLocalization = Utility.GetRelativePath(dialog.ExportPath, projectDirectory);
+
+            exportDirectory = dialog.ExportPath;
+            if (dialog.UseDateDirectory)
+                exportDirectory = Path.Combine(exportDirectory, Utility.GetDateTimeAsString(Utility.GetCurrentTime()));
+
+            if (!Directory.Exists(exportDirectory))
+                Directory.CreateDirectory(exportDirectory);
+
+            var packageGroups = new List<List<Package>>();
+            if (dialog.UsePackagesDirectory)
+            {
+                foreach (var package in dialog.ListPackages)
+                    packageGroups.Add(new List<Package>() { package });
+            }
+            else
+            {
+                packageGroups.Add(dialog.ListPackages);
+            }
+
+            var listLanguages = new List<Language>() { EditorCore.LanguageWorkstring };
+            if (!dialog.WorkstringOnly)
+                listLanguages = dialog.ListLanguages;
+
+            foreach (var packageGroup in packageGroups)     //Either a list of individual packages, or 1 entry with all the packages
+            {
+                var packageDirectory = exportDirectory;
+                if (dialog.UsePackagesDirectory)
+                    packageDirectory = Path.Combine(packageDirectory, packageGroup[0].Name);
+
+                if (!Directory.Exists(packageDirectory))
+                    Directory.CreateDirectory(packageDirectory);
+
+                var dialogues = dialog.SelectedDialogues;
+                if (!dialog.UseCustomSelection)
+                {
+                    dialogues = ResourcesHandler.GetAllDialoguesFromPackages(packageGroup);
+                }
+
+                ExportToCSV(packageDirectory, project, dialogues, listLanguages, workstringOnly: dialog.WorkstringOnly, workstringFallback: dialog.WorkstringFallback);
+            }
+
+            System.Diagnostics.Process.Start(exportDirectory);
+
+            return true;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Common export utilities
+
+        private static string GetLocalizedText(Dialogue dialogue, Language language, DialogueNode dialogueNode, bool workstringOnly, bool workstringFallback)
+        {
+            string workstring;
+            if (dialogueNode is DialogueNodeSentence)
+                workstring = (dialogueNode as DialogueNodeSentence).Sentence;
+            else
+                workstring = (dialogueNode as DialogueNodeReply).Reply;
+
+            string localizedText = workstring;
+            if (!workstringOnly)
+            {
+                TranslationEntry translation = dialogue.Translations.GetNodeEntry(dialogueNode, language);
+                if (translation == null)
+                {
+                    if (!workstringFallback)
+                        localizedText = "";
+                }
+                else
+                {
+                    localizedText = translation.Text;
+                }
+            }
+
+            localizedText = EditorHelper.FormatTextEntry(localizedText, language);  //language = workstring if workstringOnly
+            return localizedText;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -154,22 +253,7 @@ namespace DialogueEditor
                         POEntry entry;
                         if (!locas.TryGetValue(workstring, out entry))
                         {
-                            string localizedText = workstring;
-                            if (!workstringOnly)
-                            {
-                                TranslationEntry translation = dialogue.Translations.GetNodeEntry(dialogueNode, language);
-                                if (translation == null)
-                                {
-                                    if (!workstringFallback)
-                                        localizedText = "";
-                                }
-                                else
-                                {
-                                    localizedText = translation.Text;
-                                }
-                            }
-
-                            localizedText = EditorHelper.FormatTextEntry(localizedText, language);  //language = workstring if workstringOnly
+                            string localizedText = GetLocalizedText(dialogue, language, dialogueNode, workstringOnly: workstringOnly, workstringFallback: workstringFallback);
 
                             entry = new POEntry() { text = localizedText };
                             locas.Add(workstring, entry);
@@ -213,6 +297,54 @@ namespace DialogueEditor
                             file.WriteLine(String.Format("#: {0}", node));
                         file.WriteLine(String.Format("msgid \"{0}\"", kvp.Key));
                         file.WriteLine(String.Format("msgstr \"{0}\"", kvp.Value.text));
+                    }
+                }
+            }
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Export CSV
+
+        static public void ExportToCSV(string directory, Project project, List<Dialogue> dialogues, List<Language> languages, bool workstringOnly, bool workstringFallback)
+        {
+            string path = Path.Combine(directory, $"Localization_{project.GetName()}.csv");
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(path, false, Encoding.UTF8))
+            {
+                // Key, ID, ...Languages...
+                {
+                    ExporterCsv.CsvLineWriter header = new ExporterCsv.CsvLineWriter();
+                    header.AddField("Key");
+                    header.AddField("Id");
+                    foreach (var language in languages)
+                    {
+                        header.AddField($"{language.Name}({language.LocalizationCode})");
+                    }
+                    header.WriteLine(file);
+                }
+
+                foreach (Dialogue dialogue in dialogues)
+                {
+                    var orderedListNodes = new List<DialogueNode>();
+                    dialogue.GetOrderedNodes(ref orderedListNodes);
+
+                    foreach (var dialogueNode in orderedListNodes)
+                    {
+                        if (dialogueNode is DialogueNodeSentence || dialogueNode is DialogueNodeReply)
+                        {
+                            // Key, ID, ...Languages...
+                            ExporterCsv.CsvLineWriter line = new ExporterCsv.CsvLineWriter();
+
+                            line.AddField(EditorHelper.GetPrettyNodeID(dialogue, dialogueNode));
+                            line.AddEmptyField();
+
+                            foreach (var language in languages)
+                            {
+                                string localizedText = GetLocalizedText(dialogue, language, dialogueNode, workstringOnly: workstringOnly, workstringFallback: workstringFallback);
+                                line.AddField(localizedText);
+                            }
+
+                            line.WriteLine(file);
+                        }
                     }
                 }
             }
