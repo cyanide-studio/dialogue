@@ -89,6 +89,22 @@ namespace DemoBuild
                 //...
             };
 
+            // Custom Menu injection
+            ToolStripMenuItem menuItemImportGameData = new System.Windows.Forms.ToolStripMenuItem();
+            menuItemImportGameData.Text = "&Import Custom Game Data";
+            menuItemImportGameData.Click += delegate
+            {
+                MessageBox.Show("This is just an example !\nAdd any process of your choice here.");
+            };
+
+            ToolStripMenuItem menuItemGame = new System.Windows.Forms.ToolStripMenuItem();
+            menuItemGame.Text = "My Game";
+            menuItemGame.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+                menuItemImportGameData,
+            });
+
+            EditorCore.MainWindow.AddCustomMenu(menuItemGame);
+
             //..............................................................
 
             // MainWindow
