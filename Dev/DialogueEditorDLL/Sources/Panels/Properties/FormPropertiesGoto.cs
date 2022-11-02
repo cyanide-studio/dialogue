@@ -47,6 +47,10 @@ namespace DialogueEditor
             return false;
         }
 
+        public void ValidateEditedWorkstring()
+        {
+        }
+
         public void OnResolvePendingDirty()
         {
         }

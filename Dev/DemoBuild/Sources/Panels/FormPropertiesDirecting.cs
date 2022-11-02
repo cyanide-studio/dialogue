@@ -53,6 +53,10 @@ namespace DemoBuild
         {
             return false;
         }
+        
+        public void ValidateEditedWorkstring()
+        {
+        }
 
         public void OnResolvePendingDirty()
         {

@@ -788,16 +788,25 @@ namespace DialogueEditor
             this.Refresh();
         }
 
+        public void RefreshTreeNodeForWorkstringEdit(TreeNode treeNode)
+        {
+            if (EditorCore.Settings.RefreshTreeViewOnEdit)
+            {
+                RefreshTreeNode(treeNode);
+            }
+        }
+
+        public void RefreshTreeNodeForWorkstringValidation(TreeNode treeNode)
+        {
+            if (!EditorCore.Settings.RefreshTreeViewOnEdit)
+            {
+                RefreshTreeNode(treeNode);
+            }
+        }
+
         public void RefreshSelectedTreeNode()
         {
-            WIN32.StopRedraw(this);
-            tree.BeginUpdate();
-
-            RefreshTreeNode_Impl(tree.SelectedNode);
-
-            tree.EndUpdate();
-            WIN32.ResumeRedraw(this);
-            this.Refresh();
+            RefreshTreeNode(tree.SelectedNode);
         }
 
         private void RefreshAllTreeNodes_Impl(TreeNode parent)
@@ -1383,6 +1392,7 @@ namespace DialogueEditor
         {
             if (tree.Focused && (keyData == (Keys.F2) || keyData == (Keys.Enter)))
             {
+                // Move the focus from the document TreeView to the Properties.
                 if (tree.SelectedNode != null)
                 {
                     if (IsTreeNodeSentence(tree.SelectedNode)
@@ -1398,26 +1408,18 @@ namespace DialogueEditor
             }
             else if (!tree.Focused && keyData == (Keys.F2))
             {
+                // Move the focus back from the Properties to the document TreeView.
                 tree.Focus();
                 return true;
             }
-            else if (keyData == (Keys.Enter))
+            else if (!tree.Focused && (keyData == (Keys.Enter) || keyData == (Keys.Shift | Keys.Enter)))
             {
+                // Validate edited workstring, then move the focus back from the Properties to the document TreeView.
                 if (tree.SelectedNode != null && EditorCore.Properties != null && EditorCore.Properties.IsEditingWorkstring())
                 {
-                    if (IsTreeNodeSentence(tree.SelectedNode))
-                    {
-                        var next = GetSelectedDialogueNode().Next;
-                        if (next != null)
-                        {
-                            ResolvePendingDirty();
+                    EditorCore.Properties.ValidateEditedWorkstring();
 
-                            SelectNode(next);
-
-                            if (EditorCore.Properties != null)
-                                EditorCore.Properties.ForceFocus();
-                        }
-                    }
+                    tree.Focus();
                     return true;
                 }
             }

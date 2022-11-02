@@ -13,6 +13,7 @@ namespace DialogueEditor
         void Clear();
         void ForceFocus();
         bool IsEditingWorkstring();
+        void ValidateEditedWorkstring();
         void OnResolvePendingDirty();
     }
 }

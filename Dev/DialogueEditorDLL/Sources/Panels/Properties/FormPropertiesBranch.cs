@@ -75,13 +75,19 @@ namespace DialogueEditor
             RichTextBox textBox = sender as RichTextBox;
             dialogueNode.Workstring = EditorHelper.SanitizeText(textBox.Text);
 
-            document.RefreshTreeNode(treeNode);
+            document.RefreshTreeNodeForWorkstringEdit(treeNode);
             //document.SetDirty();
             document.SetPendingDirty();
         }
 
         private void OnWorkstringValidated(object sender, EventArgs e)
         {
+            ValidateEditedWorkstring();
+        }
+
+        public void ValidateEditedWorkstring()
+        {
+            document.RefreshTreeNodeForWorkstringValidation(treeNode);
             document.ResolvePendingDirty();
         }
     }

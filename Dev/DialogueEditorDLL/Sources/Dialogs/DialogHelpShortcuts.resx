@@ -127,7 +127,7 @@
 - Ctrl+Shift+R : Reload all project files.
 - Ctrl+Shift+T : Open last closed file.
 
-- Enter : Edit current node Text / edit next node Text.
+- Enter : Edit current node Text (and focus properties) / validate current node Text (and focus tree).
 - F2 : Edit current node text / return on node tree.
 - Ctrl+Enter : Insert sentence after selected node with same actors.
 - Ctrl+Shift+Enter : Insert sentence after selected node with inversed actors.

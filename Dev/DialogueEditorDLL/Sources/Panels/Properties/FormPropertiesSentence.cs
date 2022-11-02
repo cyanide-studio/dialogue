@@ -329,7 +329,7 @@ namespace DialogueEditor
 
             RefreshWordCount();
 
-            document.RefreshTreeNode(treeNode);
+            document.RefreshTreeNodeForWorkstringEdit(treeNode);
             //document.SetDirty();
             document.SetPendingDirty();
         }
@@ -339,6 +339,12 @@ namespace DialogueEditor
             if (!ready)
                 return;
 
+            ValidateEditedWorkstring();
+        }
+
+        public void ValidateEditedWorkstring()
+        {
+            document.RefreshTreeNodeForWorkstringValidation(treeNode);
             document.ResolvePendingDirty();
         }
 

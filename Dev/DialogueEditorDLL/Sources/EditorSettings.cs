@@ -32,6 +32,7 @@ namespace DialogueEditor
 
         public bool UseActorColors { get; set; }
         public bool UseConstants { get; set; }
+        public bool RefreshTreeViewOnEdit { get; set; }
 
         public int MaxUndoLevels { get; set; }
 
@@ -59,6 +60,7 @@ namespace DialogueEditor
 
             UseActorColors = false;
             UseConstants = false;
+            RefreshTreeViewOnEdit = false;
 
             MaxUndoLevels = 50;
         }

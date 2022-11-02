@@ -152,6 +152,19 @@ namespace DialogueEditor
             return false;
         }
 
+        public void ValidateEditedWorkstring()
+        {
+            foreach (UserControl property in layoutPanel.Controls)
+            {
+                IFormProperties propertyBase = property as IFormProperties;
+                if (propertyBase != null && propertyBase.IsEditingWorkstring())
+                {
+                    propertyBase.ValidateEditedWorkstring();
+                    return;
+                }
+            }
+        }
+
         public void OnResolvePendingDirty()
         {
             foreach (UserControl property in layoutPanel.Controls)
