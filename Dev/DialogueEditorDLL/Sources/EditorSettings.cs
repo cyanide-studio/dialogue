@@ -14,6 +14,7 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // Serialized vars
 
+        public string VersionEditor { get; set; }
         public string LastProject { get; set; }
 
         public string DirectoryExportDialogues { get; set; }
@@ -43,6 +44,7 @@ namespace DialogueEditor
 
         public EditorSettings()
         {
+            VersionEditor = "";
             LastProject = "";
 
             DirectoryExportDialogues = "Exports\\Dialogues";
@@ -81,6 +83,8 @@ namespace DialogueEditor
 
         public void Save()
         {
+            VersionEditor = EditorVersion.GetVersion();
+
             string path = EditorCore.PathUserConfig;
             using (StreamWriter file = File.CreateText(path))
             {
