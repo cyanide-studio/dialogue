@@ -21,10 +21,14 @@ namespace DialogueEditor
             string exportDirectory = Path.Combine(projectDirectory, EditorCore.Settings.DirectoryExportVoicing);
 
             var dialog = new DialogExport("Export Voicing",
-                                            exportDirectory,
-                                            true, false,
-                                            false, true,
-                                            true, project.LastVoicingExportDate);
+                                            path: exportDirectory,
+                                            defaultDateDirectory: true,
+                                            defaultPackageDirectory: false,
+                                            allowConstants: false,
+                                            allowWorkstringFallback: true,
+                                            allowDateFrom: true,
+                                            dateFrom: project.LastVoicingExportDate);
+
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.Cancel)
                 return false;

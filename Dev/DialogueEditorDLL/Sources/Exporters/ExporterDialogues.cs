@@ -21,10 +21,14 @@ namespace DialogueEditor
             string exportDirectory = Path.Combine(projectDirectory, EditorCore.Settings.DirectoryExportDialogues);
 
             var dialog = new DialogExport("Export Dialogues",
-                                            exportDirectory,
-                                            true, false,
-                                            true, false,
-                                            true, DateTime.MinValue);
+                                            path: exportDirectory,
+                                            defaultDateDirectory: true,
+                                            defaultPackageDirectory: false,
+                                            allowConstants: true,
+                                            allowWorkstringFallback: false,
+                                            allowDateFrom: true,
+                                            dateFrom: DateTime.MinValue);
+
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.Cancel)
                 return false;

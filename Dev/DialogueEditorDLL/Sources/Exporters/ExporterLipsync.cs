@@ -21,10 +21,14 @@ namespace DialogueEditor
             string exportDirectory = Path.Combine(projectDirectory, EditorCore.Settings.DirectoryExportLipsync);
 
             var dialog = new DialogExport("Export FaceFX",
-                                            exportDirectory,
-                                            true, false,
-                                            false, false,
-                                            false, DateTime.MinValue);
+                                            path: exportDirectory,
+                                            defaultDateDirectory: true,
+                                            defaultPackageDirectory: false,
+                                            allowConstants: false,
+                                            allowWorkstringFallback: false,
+                                            allowDateFrom: false,
+                                            dateFrom: DateTime.MinValue);
+
             DialogResult result = dialog.ShowDialog();
             if (result == DialogResult.Cancel)
                 return false;
