@@ -1397,7 +1397,8 @@ namespace DialogueEditor
                 {
                     if (IsTreeNodeSentence(tree.SelectedNode)
                     || IsTreeNodeChoice(tree.SelectedNode)
-                    || IsTreeNodeReply(tree.SelectedNode))
+                    || IsTreeNodeReply(tree.SelectedNode)
+                    || IsTreeNodeBranch(tree.SelectedNode))
                     {
                         if (EditorCore.Properties != null)
                             EditorCore.Properties.ForceFocus();
