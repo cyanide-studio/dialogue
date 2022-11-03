@@ -26,5 +26,18 @@ namespace DemoBuild
 
             EditorCore.LogInfo($"{name} now has an honor value of {honor[character]}");
         }
+
+        public bool HasHonor(string character, int min, int max)
+        {
+            if (honor.ContainsKey(character))
+            {
+                int value = honor[character];
+                return value >= min && value <= max;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
