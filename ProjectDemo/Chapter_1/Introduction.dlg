@@ -2,7 +2,7 @@
   "VersionProject": "1.0.0",
   "VersionEditor": "1.2.0",
   "PackageName": "Default",
-  "LastIndex": 18,
+  "LastIndex": 35,
   "SceneType": "Interactive",
   "VoiceBank": "",
   "Context": "Inspector Joffrey has been killed, and wants to know who did it.\nHe starts by talking with the cunning Littlefinger.",
@@ -12,7 +12,7 @@
     {
       "$type": "NodeRoot",
       "ID": 1,
-      "NextID": 2,
+      "NextID": 28,
       "Conditions": [],
       "Actions": [],
       "Flags": [],
@@ -34,7 +34,7 @@
       "SpeakerAnim": "",
       "ListenerAnim": "",
       "ID": 2,
-      "NextID": 13,
+      "NextID": 3,
       "Conditions": [],
       "Actions": [],
       "Flags": [],
@@ -51,11 +51,11 @@
     },
     {
       "$type": "NodeSentence",
-      "Sentence": "Before we start, I wish to insist on my innocence and purity of heart.",
+      "Sentence": "Before we start, I wish to insist on my innocence and purity.",
       "SpeakerID": "ActorID_2",
       "ListenerID": "ActorID_1",
       "VoicingID": "VX_Introduction_3",
-      "LastEditDate": "2016-02-18T18:10:56.8818474Z",
+      "LastEditDate": "2022-11-02T11:51:19.223184Z",
       "HideSubtitle": false,
       "Context": "He's talking to a ghost",
       "Comment": "Nervous",
@@ -97,15 +97,7 @@
       "ListenerAnim": "",
       "ID": 4,
       "NextID": 5,
-      "Conditions": [
-        {
-          "$type": "ConditionHasHonor",
-          "Min": 0,
-          "Max": 100,
-          "Character": "ActorID_1",
-          "IntendedResult": true
-        }
-      ],
+      "Conditions": [],
       "Actions": [],
       "Flags": [],
       "CustomProperties": [
@@ -121,10 +113,11 @@
     },
     {
       "$type": "NodeChoice",
-      "Choice": "Trust Littlefinger ?",
+      "Choice": "Trust Littlefinger and die horribly ?",
       "RepliesIDs": [
         6,
-        7
+        7,
+        19
       ],
       "ID": 5,
       "NextID": -1,
@@ -136,14 +129,14 @@
     {
       "$type": "NodeReply",
       "Reply": "Trust him like a Stark",
-      "LastEditDate": "2016-02-18T10:20:29.517126Z",
+      "LastEditDate": "2022-11-03T12:30:22.624735Z",
       "ID": 6,
       "NextID": 8,
       "Conditions": [],
       "Actions": [
         {
           "$type": "ActionAddHonor",
-          "Value": 1,
+          "Value": 50,
           "Character": "ActorID_1",
           "OnNodeStart": true
         }
@@ -164,11 +157,11 @@
     },
     {
       "$type": "NodeSentence",
-      "Sentence": "Ok, I trust you.",
+      "Sentence": "Ok, I trust you brave man.",
       "SpeakerID": "ActorID_1",
       "ListenerID": "ActorID_2",
       "VoicingID": "VX_Introduction_8",
-      "LastEditDate": "2016-02-16T17:02:42.165199Z",
+      "LastEditDate": "2022-11-03T12:51:46.4496951Z",
       "HideSubtitle": false,
       "Context": "",
       "Comment": "",
@@ -226,11 +219,11 @@
     },
     {
       "$type": "NodeSentence",
-      "Sentence": "See you soon.",
+      "Sentence": "See you soon !",
       "SpeakerID": "ActorID_2",
       "ListenerID": "ActorID_1",
       "VoicingID": "VX_Introduction_11",
-      "LastEditDate": "2016-04-18T16:47:28.8844673Z",
+      "LastEditDate": "2022-11-03T12:52:25.7306911Z",
       "HideSubtitle": false,
       "Context": "",
       "Comment": "",
@@ -267,14 +260,14 @@
     },
     {
       "$type": "NodeBranch",
-      "Workstring": "",
+      "Workstring": "Test this out.",
       "BranchID": 14,
       "ID": 13,
-      "NextID": 3,
+      "NextID": 2,
       "Conditions": [
         {
           "$type": "ConditionHasHonor",
-          "Min": 75,
+          "Min": 1,
           "Max": 100,
           "Character": "ActorID_1",
           "IntendedResult": true
@@ -288,7 +281,7 @@
       "$type": "NodeSentence",
       "Sentence": "Hey, let's branch a bit.",
       "SpeakerID": "ActorID_1",
-      "ListenerID": "ActorID_4",
+      "ListenerID": "ActorID_5",
       "VoicingID": "VX_Introduction_14",
       "LastEditDate": "2016-05-02T17:23:46.1131465Z",
       "HideSubtitle": false,
@@ -319,9 +312,9 @@
       "$type": "NodeSentence",
       "Sentence": "Or maybe not.",
       "SpeakerID": "ActorID_1",
-      "ListenerID": "ActorID_4",
+      "ListenerID": "ActorID_5",
       "VoicingID": "VX_Introduction_15",
-      "LastEditDate": "2016-05-02T17:23:54.6359987Z",
+      "LastEditDate": "2022-11-03T12:30:40.5697592Z",
       "HideSubtitle": false,
       "Context": "",
       "Comment": "",
@@ -359,10 +352,10 @@
     {
       "$type": "NodeSentence",
       "Sentence": "Are you sure you want to do that ?",
-      "SpeakerID": "ActorID_4",
+      "SpeakerID": "ActorID_5",
       "ListenerID": "ActorID_1",
       "VoicingID": "VX_Introduction_18",
-      "LastEditDate": "2016-05-02T17:24:58.4693814Z",
+      "LastEditDate": "2022-11-02T11:51:47.172782Z",
       "HideSubtitle": false,
       "Context": "",
       "Comment": "",
@@ -386,6 +379,415 @@
           "ApplyOrbitalMove": "undefined"
         }
       ]
+    },
+    {
+      "$type": "NodeReply",
+      "Reply": "Corrupt him",
+      "LastEditDate": "2022-11-03T12:32:02.5974303Z",
+      "ID": 19,
+      "NextID": 20,
+      "Conditions": [
+        {
+          "$type": "ConditionHasHonor",
+          "Min": -100,
+          "Max": -1,
+          "Character": "ActorID_1",
+          "IntendedResult": true
+        }
+      ],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Please forgive my manners, I realize my mistake.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_2",
+      "VoicingID": "VX_Introduction_20",
+      "LastEditDate": "2022-11-03T12:33:07.5141204Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 20,
+      "NextID": 21,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "By royal decree, I grant you the hand of lady Lysa Arryn.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_2",
+      "VoicingID": "VX_Introduction_21",
+      "LastEditDate": "2022-11-03T12:49:18.9952612Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 21,
+      "NextID": 22,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Thank you my lord, you have my eternal gratitude.",
+      "SpeakerID": "ActorID_2",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Introduction_22",
+      "LastEditDate": "2022-11-03T12:34:41.9472562Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 22,
+      "NextID": 23,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "This will be a wonderful marriage.",
+      "SpeakerID": "ActorID_2",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Introduction_23",
+      "LastEditDate": "2022-11-03T12:34:57.4511396Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 23,
+      "NextID": 24,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "I kind of doubt that but whatever.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_2",
+      "VoicingID": "VX_Introduction_24",
+      "LastEditDate": "2022-11-03T12:35:14.7401279Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 24,
+      "NextID": 35,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeChoice",
+      "Choice": "Are you honourable ?",
+      "RepliesIDs": [
+        26,
+        27
+      ],
+      "ID": 25,
+      "NextID": 32,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": []
+    },
+    {
+      "$type": "NodeReply",
+      "Reply": "Yes.",
+      "LastEditDate": "2022-11-03T12:49:49.8230245Z",
+      "ID": 26,
+      "NextID": 34,
+      "Conditions": [],
+      "Actions": [
+        {
+          "$type": "ActionAddHonor",
+          "Value": 10,
+          "Character": "ActorID_1",
+          "OnNodeStart": true
+        }
+      ],
+      "Flags": [],
+      "CustomProperties": []
+    },
+    {
+      "$type": "NodeReply",
+      "Reply": "No.",
+      "LastEditDate": "2022-11-03T12:49:32.9340585Z",
+      "ID": 27,
+      "NextID": 33,
+      "Conditions": [],
+      "Actions": [
+        {
+          "$type": "ActionAddHonor",
+          "Value": -10,
+          "Character": "ActorID_1",
+          "OnNodeStart": true
+        }
+      ],
+      "Flags": [],
+      "CustomProperties": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Before we start, lets check something.",
+      "SpeakerID": "ActorID_4",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Introduction_28",
+      "LastEditDate": "2022-11-03T12:45:37.41359Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 28,
+      "NextID": 29,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Are you an honourable man ?",
+      "SpeakerID": "ActorID_4",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Introduction_29",
+      "LastEditDate": "2022-11-03T12:45:46.7091216Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 29,
+      "NextID": 25,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeGoto",
+      "GotoID": 32,
+      "ID": 30,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": []
+    },
+    {
+      "$type": "NodeGoto",
+      "GotoID": 32,
+      "ID": 31,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Alright, lets start the actual dialogue now.",
+      "SpeakerID": "ActorID_4",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Introduction_32",
+      "LastEditDate": "2022-11-03T12:46:40.5997029Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 32,
+      "NextID": 13,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Are you really asking ?",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_4",
+      "VoicingID": "VX_Introduction_33",
+      "LastEditDate": "2022-11-03T12:49:39.3404249Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 33,
+      "NextID": 31,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Of course I am !",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_4",
+      "VoicingID": "VX_Introduction_34",
+      "LastEditDate": "2022-11-03T12:49:53.1342138Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 34,
+      "NextID": 30,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeGoto",
+      "GotoID": 11,
+      "ID": 35,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": []
     }
   ],
   "ListAdditionalActors": [],
