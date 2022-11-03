@@ -2,7 +2,7 @@
   "VersionProject": "1.0.0",
   "VersionEditor": "1.2.0",
   "PackageName": "Default",
-  "LastIndex": 35,
+  "LastIndex": 40,
   "SceneType": "Interactive",
   "VoiceBank": "",
   "Context": "Inspector Joffrey has been killed, and wants to know who did it.\nHe starts by talking with the cunning Littlefinger.",
@@ -120,7 +120,7 @@
         19
       ],
       "ID": 5,
-      "NextID": -1,
+      "NextID": 38,
       "Conditions": [],
       "Actions": [],
       "Flags": [],
@@ -202,38 +202,7 @@
       "SpeakerAnim": "",
       "ListenerAnim": "",
       "ID": 9,
-      "NextID": 11,
-      "Conditions": [],
-      "Actions": [],
-      "Flags": [],
-      "CustomProperties": [
-        {
-          "$type": "DirectingProperties",
-          "Camera": "",
-          "CameraBlendTime": -1.0,
-          "CameraDelay": 0.0,
-          "ApplyZoomIn": "undefined",
-          "ApplyOrbitalMove": "undefined"
-        }
-      ]
-    },
-    {
-      "$type": "NodeSentence",
-      "Sentence": "See you soon !",
-      "SpeakerID": "ActorID_2",
-      "ListenerID": "ActorID_1",
-      "VoicingID": "VX_Introduction_11",
-      "LastEditDate": "2022-11-03T12:52:25.7306911Z",
-      "HideSubtitle": false,
-      "Context": "",
-      "Comment": "",
-      "VoiceIntensity": "",
-      "SpeakerAnimset": "",
-      "ListenerAnimset": "",
-      "SpeakerAnim": "",
-      "ListenerAnim": "",
-      "ID": 11,
-      "NextID": -1,
+      "NextID": 40,
       "Conditions": [],
       "Actions": [],
       "Flags": [],
@@ -250,7 +219,7 @@
     },
     {
       "$type": "NodeGoto",
-      "GotoID": 11,
+      "GotoID": 38,
       "ID": 12,
       "NextID": -1,
       "Conditions": [],
@@ -781,8 +750,88 @@
     },
     {
       "$type": "NodeGoto",
-      "GotoID": 11,
+      "GotoID": 38,
       "ID": 35,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "See you soon !",
+      "SpeakerID": "ActorID_2",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Introduction_38",
+      "LastEditDate": "2022-11-03T15:43:21.9959392Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 38,
+      "NextID": 39,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Impressive, you've become as foolish as I am.",
+      "SpeakerID": "ActorID_5",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Introduction_39",
+      "LastEditDate": "2022-11-03T15:43:27.7002654Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 39,
+      "NextID": -1,
+      "Conditions": [
+        {
+          "$type": "ConditionHasHonor",
+          "Min": 60,
+          "Max": 100,
+          "Character": "ActorID_1",
+          "IntendedResult": true
+        }
+      ],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeGoto",
+      "GotoID": 38,
+      "ID": 40,
       "NextID": -1,
       "Conditions": [],
       "Actions": [],
