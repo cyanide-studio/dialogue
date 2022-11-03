@@ -47,10 +47,16 @@ namespace DialogueEditor
             return "[NodeCondition]";
         }
 
+        public bool IsPlayConditionValid()
+        {
+            return OnTestPlayConditionValid() == IntendedResult;
+        }
+
         // Called by the PlayDialogue tool when the node is about to be played.
         // Can be overriden to simulate game flow through custom code.
-        public virtual bool IsPlayConditionValid()
+        protected virtual bool OnTestPlayConditionValid()
         {
+            EditorCore.LogWarning($"Condition type is not implemented for Play simulations: {GetType().Name}");
             return true;
         }
     }

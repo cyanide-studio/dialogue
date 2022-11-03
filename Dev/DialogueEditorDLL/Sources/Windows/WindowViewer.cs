@@ -22,20 +22,24 @@ namespace DialogueEditor
 
         protected bool runningDialogue = false;
         protected List<DialogueNode> previousNodes = new List<DialogueNode>();
+        protected List<DialogueNodeReply> currentReplies = null;
 
         private Font fontReplies = null;
         private Font fontConditions = null;
 
         protected enum EOptionConditions
         {
-            AskEveryTime,
+            AskEveryBranch,
+            //AskEveryTime,
             AlwaysTrue,
             AlwaysFalse,
         }
 
+        protected bool UseGameActions => checkUseGameActions.Checked;
+        protected bool UseGameConditions => checkUseGameConditions.Checked;
+        protected EOptionConditions OptionConditions { get { return GetOptionConditions(comboBoxOptionConditions.SelectedItem); } }
         protected bool ShowReplyConditions => checkBoxShowReplyConditions.Checked;
         protected bool ApplyConstants => checkBoxOptionConstants.Checked;
-        protected EOptionConditions OptionConditions { get { return GetOptionConditions(comboBoxOptionConditions.SelectedItem); } }
 
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
@@ -46,6 +50,7 @@ namespace DialogueEditor
 
             comboBoxOptionConditions.DataSource = new BindingSource(Enum.GetValues(typeof(EOptionConditions)), null);
 
+            // Put some group boxes atop each other
             groupBoxGoto.Location = groupBoxChoice.Location;
 
             fontReplies = listBoxReplies.Font;
@@ -106,6 +111,7 @@ namespace DialogueEditor
             // Do not call this here, because the user can still use the "back" command and go backwards.
             //EditorCore.OnPlayDialogueEnd();
 
+            currentReplies = null;
             currentNode = null;
 
             ResetGroups();
@@ -118,6 +124,7 @@ namespace DialogueEditor
             EditorCore.OnPlayDialogueEnd();
 
             previousNodes.Clear();
+            currentReplies = null;
             currentNode = null;
 
             ResetGroups();
@@ -204,6 +211,8 @@ namespace DialogueEditor
             if (forward && currentNode != null && !(currentNode is DialogueNodeReply) && !(currentNode is DialogueNodeGoto))
                 previousNodes.Add(currentNode);
 
+            currentReplies = null;
+
             if (currentNode != null)
             {
                 PlayNodeActions(false);
@@ -223,7 +232,7 @@ namespace DialogueEditor
 
             PlayNodeActions(true);
 
-            if (currentNode.Conditions.Count > 0 && OptionConditions == EOptionConditions.AlwaysFalse)
+            if (!TestNodeConditions(currentNode))
             {
                 PlayNode(currentNode.Next);
                 return;
@@ -262,16 +271,25 @@ namespace DialogueEditor
             }
             else if (currentNode is DialogueNodeChoice)
             {
-                var choice = currentNode as DialogueNodeChoice;
+                var nodeChoice = currentNode as DialogueNodeChoice;
+
+                currentReplies = new List<DialogueNodeReply>();
+                foreach (var nodeReply in nodeChoice.Replies)
+                {
+                    if (TestNodeConditions(nodeReply))
+                    {
+                        currentReplies.Add(nodeReply);
+                    }
+                }
 
                 groupBoxChoice.Visible = true;
-                labelChoice.Text = String.Format("Choice : {0}", choice.Choice);
-                listBoxReplies.DataSource = new BindingSource(choice.Replies, null);
+                labelChoice.Text = String.Format("Choice : {0}", nodeChoice.Choice);
+                listBoxReplies.DataSource = new BindingSource(currentReplies, null);
 
                 checkBoxShowReplyConditions.Checked = false;
                 radioButtonReplyConditionsTrue.Checked = true;
 
-                foreach (DialogueNodeReply reply in choice.Replies)
+                foreach (DialogueNodeReply reply in currentReplies)
                 {
                     if (reply.Conditions.Count > 0)
                     {
@@ -281,11 +299,6 @@ namespace DialogueEditor
                         radioButtonReplyConditionsFalse.Enabled = true;
                         break;
                     }
-                }
-
-                if (choice.Conditions.Count > 0 && OptionConditions == EOptionConditions.AskEveryTime)
-                {
-                    ShowConditions(choice);
                 }
             }
             else if (currentNode is DialogueNodeReply)
@@ -297,45 +310,104 @@ namespace DialogueEditor
             {
                 var nodeGoto = currentNode as DialogueNodeGoto;
 
-                if (nodeGoto.Conditions.Count > 0 && OptionConditions == EOptionConditions.AskEveryTime)
+                if (ShouldWaitForNodeConditions(nodeGoto, branchingNode: true))
                 {
                     groupBoxGoto.Visible = true;
                     labelGoto.Text = String.Format("Goto > \"{0}\"", GetGotoText(nodeGoto.Goto));
 
                     ShowConditions(nodeGoto);
                 }
-                else
+                else if (TestNodeConditions(nodeGoto))
                 {
                     PlayNode(nodeGoto.Goto);
+                }
+                else
+                {
+                    PlayNode(nodeGoto.Next);
                 }
             }
             else if (currentNode is DialogueNodeBranch)
             {
                 var nodeBranch = currentNode as DialogueNodeBranch;
 
-                if (nodeBranch.Conditions.Count > 0 && OptionConditions == EOptionConditions.AskEveryTime)
+                if (ShouldWaitForNodeConditions(nodeBranch, branchingNode: true))
                 {
                     groupBoxGoto.Visible = true;
                     labelGoto.Text = String.Format("Branch > \"{0}\"", GetGotoText(nodeBranch.Branch));
 
                     ShowConditions(nodeBranch);
                 }
-                else
+                else if (TestNodeConditions(nodeBranch))
                 {
                     PlayNode(nodeBranch.Branch);
+                }
+                else
+                {
+                    PlayNode(nodeBranch.Next);
                 }
             }
         }
 
         protected void PlayNodeActions(bool nodeStart)
         {
-            foreach (var action in currentNode.Actions)
+            if (UseGameActions)
             {
-                if (action.OnNodeStart == nodeStart)
+                foreach (var action in currentNode.Actions)
                 {
-                    action.OnPlayNode(nodeStart);
+                    if (action.OnNodeStart == nodeStart)
+                    {
+                        action.OnPlayNodeAction(nodeStart);
+                    }
                 }
             }
+        }
+
+        protected bool ShouldWaitForNodeConditions(DialogueNode node, bool branchingNode)
+        {
+            if (node.Conditions.Count > 0)
+            {
+                if (UseGameConditions)
+                {
+                    return false;
+                }
+                //else if (OptionConditions == EOptionConditions.AskEveryTime)
+                //{
+                //    return true;
+                //}
+                else if (branchingNode && OptionConditions == EOptionConditions.AskEveryBranch)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        protected bool TestNodeConditions(DialogueNode node)
+        {
+            if (node.Conditions.Count > 0)
+            {
+                if (UseGameConditions)
+                {
+                    bool result = true;
+                    foreach (var condition in node.Conditions)
+                    {
+                        result &= condition.IsPlayConditionValid();
+                    }
+
+                    return result;
+                }
+                else if (OptionConditions == EOptionConditions.AlwaysFalse)
+                {
+                    return false;
+                }
+                else if (OptionConditions == EOptionConditions.AlwaysTrue)
+                {
+                    return true;
+                }
+            }
+
+            return true;
         }
 
         protected void ShowConditions(DialogueNode node)
@@ -473,8 +545,10 @@ namespace DialogueEditor
         private void OnComboBoxOptionConditionsFormat(object sender, ListControlConvertEventArgs e)
         {
             EOptionConditions value = GetOptionConditions(e.ListItem);
-            if (value == EOptionConditions.AskEveryTime)
-                e.Value = "Ask Every Time";
+            if (value == EOptionConditions.AskEveryBranch)
+                e.Value = "Ask Every Branch";
+            //else if (value == EOptionConditions.AskEveryTime)
+            //    e.Value = "Ask Every Time";
             else if (value == EOptionConditions.AlwaysTrue)
                 e.Value = "Always True";
             else if (value == EOptionConditions.AlwaysFalse)
@@ -518,6 +592,15 @@ namespace DialogueEditor
         private void OnOptionConstantsChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void OnUseGameActionsChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void OnUseGameConditionsChanged(object sender, EventArgs e)
+        {
+            comboBoxOptionConditions.Enabled = !UseGameConditions;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

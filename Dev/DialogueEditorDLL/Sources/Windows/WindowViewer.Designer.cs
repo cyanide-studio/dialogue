@@ -56,6 +56,8 @@
             this.labelGoto = new System.Windows.Forms.Label();
             this.pictureBoxListener = new System.Windows.Forms.PictureBox();
             this.pictureBoxSpeaker = new System.Windows.Forms.PictureBox();
+            this.checkUseGameActions = new System.Windows.Forms.CheckBox();
+            this.checkUseGameConditions = new System.Windows.Forms.CheckBox();
             button1 = new System.Windows.Forms.Button();
             button2 = new System.Windows.Forms.Button();
             button3 = new System.Windows.Forms.Button();
@@ -107,21 +109,23 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new System.Drawing.Point(6, 25);
+            label1.Location = new System.Drawing.Point(6, 62);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(62, 13);
+            label1.Size = new System.Drawing.Size(87, 13);
             label1.TabIndex = 12;
-            label1.Text = "Conditions :";
+            label1.Text = "Auto Conditions :";
             // 
             // groupBox1
             // 
             groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            groupBox1.Controls.Add(this.checkUseGameConditions);
+            groupBox1.Controls.Add(this.checkUseGameActions);
             groupBox1.Controls.Add(this.checkBoxOptionConstants);
             groupBox1.Controls.Add(this.comboBoxOptionConditions);
             groupBox1.Controls.Add(label1);
-            groupBox1.Location = new System.Drawing.Point(586, 12);
+            groupBox1.Location = new System.Drawing.Point(555, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new System.Drawing.Size(209, 76);
+            groupBox1.Size = new System.Drawing.Size(240, 112);
             groupBox1.TabIndex = 13;
             groupBox1.TabStop = false;
             groupBox1.Text = "Options";
@@ -129,11 +133,11 @@
             // checkBoxOptionConstants
             // 
             this.checkBoxOptionConstants.AutoSize = true;
-            this.checkBoxOptionConstants.Location = new System.Drawing.Point(9, 49);
+            this.checkBoxOptionConstants.Location = new System.Drawing.Point(6, 86);
             this.checkBoxOptionConstants.Name = "checkBoxOptionConstants";
-            this.checkBoxOptionConstants.Size = new System.Drawing.Size(73, 17);
+            this.checkBoxOptionConstants.Size = new System.Drawing.Size(102, 17);
             this.checkBoxOptionConstants.TabIndex = 14;
-            this.checkBoxOptionConstants.Text = "Constants";
+            this.checkBoxOptionConstants.Text = "Apply Constants";
             this.checkBoxOptionConstants.UseVisualStyleBackColor = true;
             this.checkBoxOptionConstants.CheckedChanged += new System.EventHandler(this.OnOptionConstantsChanged);
             // 
@@ -141,7 +145,7 @@
             // 
             this.comboBoxOptionConditions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxOptionConditions.FormattingEnabled = true;
-            this.comboBoxOptionConditions.Location = new System.Drawing.Point(74, 22);
+            this.comboBoxOptionConditions.Location = new System.Drawing.Point(99, 59);
             this.comboBoxOptionConditions.Name = "comboBoxOptionConditions";
             this.comboBoxOptionConditions.Size = new System.Drawing.Size(129, 21);
             this.comboBoxOptionConditions.TabIndex = 13;
@@ -358,6 +362,28 @@
             this.pictureBoxSpeaker.TabIndex = 0;
             this.pictureBoxSpeaker.TabStop = false;
             // 
+            // checkUseGameActions
+            // 
+            this.checkUseGameActions.AutoSize = true;
+            this.checkUseGameActions.Location = new System.Drawing.Point(6, 19);
+            this.checkUseGameActions.Name = "checkUseGameActions";
+            this.checkUseGameActions.Size = new System.Drawing.Size(114, 17);
+            this.checkUseGameActions.TabIndex = 15;
+            this.checkUseGameActions.Text = "Use Game Actions";
+            this.checkUseGameActions.UseVisualStyleBackColor = true;
+            this.checkUseGameActions.CheckedChanged += new System.EventHandler(this.OnUseGameActionsChanged);
+            // 
+            // checkUseGameConditions
+            // 
+            this.checkUseGameConditions.AutoSize = true;
+            this.checkUseGameConditions.Location = new System.Drawing.Point(6, 42);
+            this.checkUseGameConditions.Name = "checkUseGameConditions";
+            this.checkUseGameConditions.Size = new System.Drawing.Size(128, 17);
+            this.checkUseGameConditions.TabIndex = 16;
+            this.checkUseGameConditions.Text = "Use Game Conditions";
+            this.checkUseGameConditions.UseVisualStyleBackColor = true;
+            this.checkUseGameConditions.CheckedChanged += new System.EventHandler(this.OnUseGameConditionsChanged);
+            // 
             // WindowViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -420,6 +446,7 @@
         private System.Windows.Forms.ListBox listBoxReplies;
         private System.Windows.Forms.ListBox listBoxConditions;
         private System.Windows.Forms.CheckBox checkBoxOptionConstants;
-
+        private System.Windows.Forms.CheckBox checkUseGameConditions;
+        private System.Windows.Forms.CheckBox checkUseGameActions;
     }
 }
