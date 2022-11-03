@@ -20,6 +20,7 @@ namespace DialogueEditor
         protected Dialogue currentDialogue = null;
         protected DialogueNode currentNode = null;
 
+        protected bool runningDialogue = false;
         protected List<DialogueNode> previousNodes = new List<DialogueNode>();
 
         private Font fontReplies = null;
@@ -31,6 +32,10 @@ namespace DialogueEditor
             AlwaysTrue,
             AlwaysFalse,
         }
+
+        protected bool ShowReplyConditions => checkBoxShowReplyConditions.Checked;
+        protected bool ApplyConstants => checkBoxOptionConstants.Checked;
+        protected EOptionConditions OptionConditions { get { return GetOptionConditions(comboBoxOptionConditions.SelectedItem); } }
 
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
@@ -76,6 +81,12 @@ namespace DialogueEditor
                 }
             }
 
+            runningDialogue = true;
+
+            PlayDialogueContext context = new PlayDialogueContext();
+            context.FullDialogue = nodeFrom == null;
+            EditorCore.OnPlayDialogueStart(context);
+
             if (nodeFrom != null  && !(nodeFrom is DialogueNodeRoot))
             {
                 PlayNode(nodeFrom);
@@ -92,6 +103,9 @@ namespace DialogueEditor
 
         public void Finish()
         {
+            // Do not call this here, because the user can still use the "back" command and go backwards.
+            //EditorCore.OnPlayDialogueEnd();
+
             currentNode = null;
 
             ResetGroups();
@@ -100,6 +114,9 @@ namespace DialogueEditor
 
         public void Stop()
         {
+            runningDialogue = false;
+            EditorCore.OnPlayDialogueEnd();
+
             previousNodes.Clear();
             currentNode = null;
 
@@ -152,7 +169,7 @@ namespace DialogueEditor
                     var reply = listBoxReplies.SelectedItem as DialogueNodeReply;
                     if (reply != null)
                     {
-                        PlayNode(reply.Next);
+                        PlayNode(reply);
                     }
                 }
                 else if (currentNode is DialogueNodeGoto)
@@ -187,6 +204,11 @@ namespace DialogueEditor
             if (forward && currentNode != null && !(currentNode is DialogueNodeReply) && !(currentNode is DialogueNodeGoto))
                 previousNodes.Add(currentNode);
 
+            if (currentNode != null)
+            {
+                PlayNodeActions(false);
+            }
+
             if (nextNode == null)
             {
                 Finish();
@@ -198,8 +220,10 @@ namespace DialogueEditor
             currentDocument.SelectNode(currentNode);
 
             ResetGroups();
-            
-            if (currentNode.Conditions.Count > 0 && GetCurrentOptionConditions() == EOptionConditions.AlwaysFalse)
+
+            PlayNodeActions(true);
+
+            if (currentNode.Conditions.Count > 0 && OptionConditions == EOptionConditions.AlwaysFalse)
             {
                 PlayNode(currentNode.Next);
                 return;
@@ -231,7 +255,7 @@ namespace DialogueEditor
                         pictureBoxListener.Image = Image.FromFile(strPathPortraitListener);
                 }
 
-                if (checkBoxOptionConstants.Checked)
+                if (ApplyConstants)
                     labelSentence.Text = EditorHelper.FormatTextEntry(sentence.Sentence, EditorCore.LanguageWorkstring);
                 else
                     labelSentence.Text = sentence.Sentence;
@@ -239,7 +263,7 @@ namespace DialogueEditor
             else if (currentNode is DialogueNodeChoice)
             {
                 var choice = currentNode as DialogueNodeChoice;
-                
+
                 groupBoxChoice.Visible = true;
                 labelChoice.Text = String.Format("Choice : {0}", choice.Choice);
                 listBoxReplies.DataSource = new BindingSource(choice.Replies, null);
@@ -259,16 +283,21 @@ namespace DialogueEditor
                     }
                 }
 
-                if (choice.Conditions.Count > 0 && GetCurrentOptionConditions() == EOptionConditions.AskEveryTime)
+                if (choice.Conditions.Count > 0 && OptionConditions == EOptionConditions.AskEveryTime)
                 {
                     ShowConditions(choice);
                 }
+            }
+            else if (currentNode is DialogueNodeReply)
+            {
+                var nodeReply = currentNode as DialogueNodeReply;
+                PlayNode(nodeReply.Next);
             }
             else if (currentNode is DialogueNodeGoto)
             {
                 var nodeGoto = currentNode as DialogueNodeGoto;
 
-                if (nodeGoto.Conditions.Count > 0 && GetCurrentOptionConditions() == EOptionConditions.AskEveryTime)
+                if (nodeGoto.Conditions.Count > 0 && OptionConditions == EOptionConditions.AskEveryTime)
                 {
                     groupBoxGoto.Visible = true;
                     labelGoto.Text = String.Format("Goto > \"{0}\"", GetGotoText(nodeGoto.Goto));
@@ -284,7 +313,7 @@ namespace DialogueEditor
             {
                 var nodeBranch = currentNode as DialogueNodeBranch;
 
-                if (nodeBranch.Conditions.Count > 0 && GetCurrentOptionConditions() == EOptionConditions.AskEveryTime)
+                if (nodeBranch.Conditions.Count > 0 && OptionConditions == EOptionConditions.AskEveryTime)
                 {
                     groupBoxGoto.Visible = true;
                     labelGoto.Text = String.Format("Branch > \"{0}\"", GetGotoText(nodeBranch.Branch));
@@ -294,6 +323,17 @@ namespace DialogueEditor
                 else
                 {
                     PlayNode(nodeBranch.Branch);
+                }
+            }
+        }
+
+        protected void PlayNodeActions(bool nodeStart)
+        {
+            foreach (var action in currentNode.Actions)
+            {
+                if (action.OnNodeStart == nodeStart)
+                {
+                    action.OnPlayNode(nodeStart);
                 }
             }
         }
@@ -313,7 +353,7 @@ namespace DialogueEditor
             {
                 if (node is DialogueNodeSentence)
                 {
-                    if (checkBoxOptionConstants.Checked)
+                    if (ApplyConstants)
                         return EditorHelper.FormatTextEntry((node as DialogueNodeSentence).Sentence, EditorCore.LanguageWorkstring);
                     else
                         return (node as DialogueNodeSentence).Sentence;
@@ -328,11 +368,6 @@ namespace DialogueEditor
                 }
             }
             return "";
-        }
-
-        protected EOptionConditions GetCurrentOptionConditions()
-        {
-            return GetOptionConditions(comboBoxOptionConditions.SelectedItem);
         }
 
         protected EOptionConditions GetOptionConditions(object item)
@@ -391,13 +426,13 @@ namespace DialogueEditor
 
             StringBuilder stringBuilder = new StringBuilder();
 
-            if (checkBoxShowReplyConditions.Checked)
+            if (ShowReplyConditions)
             {
                 foreach (NodeCondition condition in item.Conditions)
                     stringBuilder.AppendFormat("[{0}] ", condition.GetDisplayText());
             }
 
-            if (checkBoxOptionConstants.Checked)
+            if (ApplyConstants)
                 stringBuilder.Append(EditorHelper.FormatTextEntry(item.Reply, EditorCore.LanguageWorkstring));
             else
                 stringBuilder.Append(item.Reply);
@@ -493,6 +528,15 @@ namespace DialogueEditor
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void OnClose(object sender, FormClosingEventArgs e)
+        {
+            if (runningDialogue)
+            {
+                runningDialogue = false;
+                EditorCore.OnPlayDialogueEnd();
+            }
         }
     }
 }

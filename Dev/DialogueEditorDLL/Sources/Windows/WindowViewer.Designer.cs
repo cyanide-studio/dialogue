@@ -36,6 +36,7 @@
             System.Windows.Forms.Label label3;
             System.Windows.Forms.Button button4;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WindowViewer));
+            this.checkBoxOptionConstants = new System.Windows.Forms.CheckBox();
             this.comboBoxOptionConditions = new System.Windows.Forms.ComboBox();
             this.labelSentence = new System.Windows.Forms.Label();
             this.labelSpeaker = new System.Windows.Forms.Label();
@@ -55,7 +56,6 @@
             this.labelGoto = new System.Windows.Forms.Label();
             this.pictureBoxListener = new System.Windows.Forms.PictureBox();
             this.pictureBoxSpeaker = new System.Windows.Forms.PictureBox();
-            this.checkBoxOptionConstants = new System.Windows.Forms.CheckBox();
             button1 = new System.Windows.Forms.Button();
             button2 = new System.Windows.Forms.Button();
             button3 = new System.Windows.Forms.Button();
@@ -125,6 +125,17 @@
             groupBox1.TabIndex = 13;
             groupBox1.TabStop = false;
             groupBox1.Text = "Options";
+            // 
+            // checkBoxOptionConstants
+            // 
+            this.checkBoxOptionConstants.AutoSize = true;
+            this.checkBoxOptionConstants.Location = new System.Drawing.Point(9, 49);
+            this.checkBoxOptionConstants.Name = "checkBoxOptionConstants";
+            this.checkBoxOptionConstants.Size = new System.Drawing.Size(73, 17);
+            this.checkBoxOptionConstants.TabIndex = 14;
+            this.checkBoxOptionConstants.Text = "Constants";
+            this.checkBoxOptionConstants.UseVisualStyleBackColor = true;
+            this.checkBoxOptionConstants.CheckedChanged += new System.EventHandler(this.OnOptionConstantsChanged);
             // 
             // comboBoxOptionConditions
             // 
@@ -347,17 +358,6 @@
             this.pictureBoxSpeaker.TabIndex = 0;
             this.pictureBoxSpeaker.TabStop = false;
             // 
-            // checkBoxOptionConstants
-            // 
-            this.checkBoxOptionConstants.AutoSize = true;
-            this.checkBoxOptionConstants.Location = new System.Drawing.Point(9, 49);
-            this.checkBoxOptionConstants.Name = "checkBoxOptionConstants";
-            this.checkBoxOptionConstants.Size = new System.Drawing.Size(73, 17);
-            this.checkBoxOptionConstants.TabIndex = 14;
-            this.checkBoxOptionConstants.Text = "Constants";
-            this.checkBoxOptionConstants.UseVisualStyleBackColor = true;
-            this.checkBoxOptionConstants.CheckedChanged += new System.EventHandler(this.OnOptionConstantsChanged);
-            // 
             // WindowViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -384,6 +384,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Dialogue Player";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClose);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             this.groupBoxChoice.ResumeLayout(false);

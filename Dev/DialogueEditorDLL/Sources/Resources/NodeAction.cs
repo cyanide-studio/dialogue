@@ -36,5 +36,11 @@ namespace DialogueEditor
         {
             return "[NodeAction]";
         }
+
+        // Called by the PlayDialogue tool when the node is played.
+        // Parameter nodeStart will tell if the action is played at the start or end of the node execution.
+        public virtual void OnPlayNode(bool nodeStart)
+        {
+        }
     }
 }

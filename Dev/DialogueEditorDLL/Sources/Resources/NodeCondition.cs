@@ -46,6 +46,13 @@ namespace DialogueEditor
         {
             return "[NodeCondition]";
         }
+
+        // Called by the PlayDialogue tool when the node is about to be played.
+        // Can be overriden to simulate game flow through custom code.
+        public virtual bool IsPlayConditionValid()
+        {
+            return true;
+        }
     }
 
     public class NodeConditionGroup : NodeCondition

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace DialogueEditor
 {
     //--------------------------------------------------------------------------------------------------------------
-    // Helper struct
+    // Helper structs and classes
 
     public struct ConditionSlot
     {
@@ -38,6 +38,12 @@ namespace DialogueEditor
         public bool AddOnEveryNode;
     };
 
+    public class PlayDialogueContext
+    {
+        ///<summary> True if dialogue is played from the beginning, False if played from a specific node. </summary>
+        public bool FullDialogue { get; set; } = false;
+    }
+
     //--------------------------------------------------------------------------------------------------------------
     // Helper delegates
 
@@ -46,6 +52,8 @@ namespace DialogueEditor
     public delegate List<string> DelegateActorAnimsets(string ActorID);
     public delegate void DelegateCheckDialogueErrors(Dialogue dialogue);
     public delegate string DelegateProjectStats(ExporterStats.ProjectStats Stats);
+    public delegate void DelegatePlayDialogueStart(PlayDialogueContext context);
+    public delegate void DelegatePlayDialogueEnd();
 
     static public class EditorCore
     {
@@ -109,6 +117,12 @@ namespace DialogueEditor
 
         ///<summary> Custom callback used when checking a dialogue errors </summary>
         static public DelegateCheckDialogueErrors OnCheckDialogueErrors = null;
+
+        ///<summary> Custom callback used when a PlayDialogue session starts </summary>
+        static public DelegatePlayDialogueStart OnPlayDialogueStart = null;
+
+        ///<summary> Custom callback used when a PlayDialogue session ends </summary>
+        static public DelegatePlayDialogueEnd OnPlayDialogueEnd = null;
 
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
