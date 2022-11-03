@@ -88,9 +88,12 @@ namespace DialogueEditor
 
             runningDialogue = true;
 
-            PlayDialogueContext context = new PlayDialogueContext();
-            context.FullDialogue = nodeFrom == null;
-            EditorCore.OnPlayDialogueStart(context);
+            if (EditorCore.OnPlayDialogueStart != null)
+            {
+                PlayDialogueContext context = new PlayDialogueContext();
+                context.FullDialogue = nodeFrom == null;
+                EditorCore.OnPlayDialogueStart(context);
+            }
 
             if (nodeFrom != null  && !(nodeFrom is DialogueNodeRoot))
             {
@@ -121,7 +124,9 @@ namespace DialogueEditor
         public void Stop()
         {
             runningDialogue = false;
-            EditorCore.OnPlayDialogueEnd();
+
+            if (EditorCore.OnPlayDialogueEnd != null)
+                EditorCore.OnPlayDialogueEnd();
 
             previousNodes.Clear();
             currentReplies = null;
@@ -618,7 +623,9 @@ namespace DialogueEditor
             if (runningDialogue)
             {
                 runningDialogue = false;
-                EditorCore.OnPlayDialogueEnd();
+
+                if (EditorCore.OnPlayDialogueEnd != null)
+                    EditorCore.OnPlayDialogueEnd();
             }
         }
     }
