@@ -105,6 +105,10 @@ namespace DemoBuild
 
             EditorCore.MainWindow.AddCustomMenu(menuItemGame);
 
+            // PlayDialogue setup
+            EditorCore.OnPlayDialogueStart = delegate (PlayDialogueContext context) { GameData.StartPlaySession(context); };
+            EditorCore.OnPlayDialogueEnd = delegate { GameData.EndPlaySession(); };
+
             //..............................................................
 
             // MainWindow

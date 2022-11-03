@@ -53,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Sources\CustomProperties\DirectingProperties.cs" />
+    <Compile Include="Sources\Game\GameData.cs" />
+    <Compile Include="Sources\Game\PlaySession.cs" />
     <Compile Include="Sources\NodeAttributes\NodeActionAddHonor.cs" />
     <Compile Include="Sources\NodeAttributes\NodeConditionHasHonor.cs" />
     <Compile Include="Sources\Panels\FormPropertiesDirecting.cs">

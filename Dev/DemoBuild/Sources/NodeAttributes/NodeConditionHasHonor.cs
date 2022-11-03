@@ -35,5 +35,12 @@ namespace DemoBuild
         {
             return "[Has Honor]" + " [" + Min + "]" + " [" + Max + "]" + " [" + ResourcesHandler.Project.GetActorName(Character) + "]";
         }
+
+        // Called by the PlayDialogue tool when the node is about to be played.
+        // Can be overriden to simulate game flow through custom code.
+        public override bool IsPlayConditionValid()
+        {
+            return true;
+        }
     }
 }
