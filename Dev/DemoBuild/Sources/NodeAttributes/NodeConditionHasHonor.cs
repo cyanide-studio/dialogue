@@ -38,7 +38,7 @@ namespace DemoBuild
 
         // Called by the PlayDialogue tool when the node is about to be played.
         // Can be overriden to simulate game flow through custom code.
-        protected override bool OnTestPlayConditionValid()
+        protected override bool OnTestPlayConditionValid(PlayDialogueConditionContext context)
         {
             return GameData.PlaySession.HasHonor(Character, Min, Max);
         }

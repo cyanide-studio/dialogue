@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace DialogueEditor
 {
-    public class NodeAction : ICloneable
+    public abstract class NodeAction : ICloneable
     {
         //--------------------------------------------------------------------------------------------------------------
         // Serialized vars
@@ -39,7 +39,7 @@ namespace DialogueEditor
 
         // Called by the PlayDialogue tool when the node is played.
         // Parameter nodeStart will tell if the action is played at the start or end of the node execution.
-        public virtual void OnPlayNodeAction(bool nodeStart)
+        public virtual void OnPlayNodeAction(PlayDialogueActionContext context)
         {
             EditorCore.LogWarning($"Action type is not implemented for Play simulations: {GetType().Name}");
         }

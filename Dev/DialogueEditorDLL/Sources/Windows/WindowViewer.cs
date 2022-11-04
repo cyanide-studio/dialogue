@@ -224,7 +224,7 @@ namespace DialogueEditor
 
             if (currentNode != null)
             {
-                PlayNodeActions(false);
+                PlayNodeActions(currentNode, false);
             }
 
             if (nextNode == null)
@@ -239,7 +239,7 @@ namespace DialogueEditor
 
             ResetGroups();
 
-            PlayNodeActions(true);
+            PlayNodeActions(currentNode, true);
 
             if (!TestNodeConditions(currentNode))
             {
@@ -357,15 +357,19 @@ namespace DialogueEditor
             }
         }
 
-        protected void PlayNodeActions(bool nodeStart)
+        protected void PlayNodeActions(DialogueNode node, bool nodeStart)
         {
             if (UseGameActions)
             {
+                PlayDialogueActionContext context = new PlayDialogueActionContext();
+                context.Node = node;
+                context.NodeStart = nodeStart;
+
                 foreach (var action in currentNode.Actions)
                 {
                     if (action.OnNodeStart == nodeStart)
                     {
-                        action.OnPlayNodeAction(nodeStart);
+                        action.OnPlayNodeAction(context);
                     }
                 }
             }
@@ -398,10 +402,13 @@ namespace DialogueEditor
             {
                 if (UseGameConditions)
                 {
+                    PlayDialogueConditionContext context = new PlayDialogueConditionContext();
+                    context.Node = node;
+
                     bool result = true;
                     foreach (var condition in node.Conditions)
                     {
-                        result &= condition.IsPlayConditionValid();
+                        result &= condition.IsPlayConditionValid(context);
                     }
 
                     return result;

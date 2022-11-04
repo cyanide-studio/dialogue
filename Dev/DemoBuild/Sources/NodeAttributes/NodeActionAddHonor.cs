@@ -36,7 +36,7 @@ namespace DemoBuild
 
         // Called by the PlayDialogue tool when the node is played.
         // Parameter nodeStart will tell if the action is played at the start or end of the node execution.
-        public override void OnPlayNodeAction(bool nodeStart)
+        public override void OnPlayNodeAction(PlayDialogueActionContext context)
         {
             GameData.PlaySession.AddHonor(Character, Value);
         }

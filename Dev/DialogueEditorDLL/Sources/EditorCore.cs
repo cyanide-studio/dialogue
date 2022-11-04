@@ -41,7 +41,18 @@ namespace DialogueEditor
     public class PlayDialogueContext
     {
         ///<summary> True if dialogue is played from the beginning, False if played from a specific node. </summary>
-        public bool FullDialogue { get; set; } = false;
+        public bool FullDialogue = false;
+    }
+
+    public class PlayDialogueConditionContext
+    {
+        public DialogueNode Node = null;
+    }
+
+    public class PlayDialogueActionContext
+    {
+        public DialogueNode Node = null;
+        public bool NodeStart = true;
     }
 
     //--------------------------------------------------------------------------------------------------------------

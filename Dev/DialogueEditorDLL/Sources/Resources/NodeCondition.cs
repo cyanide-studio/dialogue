@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace DialogueEditor
 {
-    public class NodeCondition : ICloneable
+    public abstract class NodeCondition : ICloneable
     {
         //--------------------------------------------------------------------------------------------------------------
         // Serialized vars
@@ -47,21 +47,21 @@ namespace DialogueEditor
             return "[NodeCondition]";
         }
 
-        public bool IsPlayConditionValid()
+        public bool IsPlayConditionValid(PlayDialogueConditionContext context)
         {
-            return OnTestPlayConditionValid() == IntendedResult;
+            return OnTestPlayConditionValid(context) == IntendedResult;
         }
 
         // Called by the PlayDialogue tool when the node is about to be played.
         // Can be overriden to simulate game flow through custom code.
-        protected virtual bool OnTestPlayConditionValid()
+        protected virtual bool OnTestPlayConditionValid(PlayDialogueConditionContext context)
         {
             EditorCore.LogWarning($"Condition type is not implemented for Play simulations: {GetType().Name}");
             return true;
         }
     }
 
-    public class NodeConditionGroup : NodeCondition
+    public abstract class NodeConditionGroup : NodeCondition
     {
         //--------------------------------------------------------------------------------------------------------------
         // Serialized vars
@@ -115,6 +115,22 @@ namespace DialogueEditor
             text += "]";
             return text;
         }
+
+        protected override bool OnTestPlayConditionValid(PlayDialogueConditionContext context)
+        {
+            if (Conditions.Count == 0)
+            {
+                return true;
+            }
+
+            bool result = true;
+            foreach (var condition in Conditions)
+            {
+                result &= condition.IsPlayConditionValid(context);
+            }
+
+            return result;
+        }
     }
 
     public class NodeConditionOr : NodeConditionGroup
@@ -144,6 +160,22 @@ namespace DialogueEditor
             }
             text += "]";
             return text;
+        }
+
+        protected override bool OnTestPlayConditionValid(PlayDialogueConditionContext context)
+        {
+            if (Conditions.Count == 0)
+            {
+                return true;
+            }
+
+            bool result = false;
+            foreach (var condition in Conditions)
+            {
+                result |= condition.IsPlayConditionValid(context);
+            }
+
+            return result;
         }
     }
 }
