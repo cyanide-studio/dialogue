@@ -61,7 +61,11 @@ namespace DialogueEditor
             listBoxConditions.DrawMode = DrawMode.OwnerDrawFixed;
             listBoxConditions.DrawItem += OnListBoxConditions_DrawItem;
 
-            checkBoxOptionConstants.Checked = true; // EditorCore.Settings.UseConstants;
+            checkUseGameActions.Checked = EditorCore.Settings.PlayViewerUseGameActions;
+            checkUseGameConditions.Checked = EditorCore.Settings.PlayViewerUseGameConditions;
+            checkBoxOptionConstants.Checked = true; // EditorCore.Settings.UseConstants ?
+
+            comboBoxOptionConditions.Enabled = !UseGameConditions;
 
             currentDocument = document;
             currentDialogue = dialogue;
@@ -596,15 +600,16 @@ namespace DialogueEditor
 
         private void OnOptionConstantsChanged(object sender, EventArgs e)
         {
-
         }
 
         private void OnUseGameActionsChanged(object sender, EventArgs e)
         {
+            EditorCore.Settings.PlayViewerUseGameActions = UseGameActions;
         }
 
         private void OnUseGameConditionsChanged(object sender, EventArgs e)
         {
+            EditorCore.Settings.PlayViewerUseGameConditions = UseGameConditions;
             comboBoxOptionConditions.Enabled = !UseGameConditions;
         }
 

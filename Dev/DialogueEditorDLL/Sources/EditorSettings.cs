@@ -36,8 +36,10 @@ namespace DialogueEditor
         public bool UseConstants { get; set; }
         public bool RefreshTreeViewOnEdit { get; set; }
         public Font DialogueTreeViewFont { get; set; }
-
         public int MaxUndoLevels { get; set; }
+
+        public bool PlayViewerUseGameActions { get; set; }
+        public bool PlayViewerUseGameConditions { get; set; }
 
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
@@ -66,8 +68,10 @@ namespace DialogueEditor
             UseConstants = false;
             RefreshTreeViewOnEdit = false;
             DialogueTreeViewFont = null;
-
             MaxUndoLevels = 50;
+
+            PlayViewerUseGameActions = false;
+            PlayViewerUseGameConditions = false;
         }
 
         public void Load()
