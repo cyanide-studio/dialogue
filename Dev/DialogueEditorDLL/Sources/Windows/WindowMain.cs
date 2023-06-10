@@ -228,8 +228,12 @@ namespace DialogueEditor
             EditorCore.ProjectExplorer?.Show(dockPanel, DockState.DockLeft);
             EditorCore.Properties?.Show(dockPanel, DockState.DockRight);
             EditorCore.CustomProperties?.Show(dockPanel, DockState.DockRight);
-            EditorCore.SearchResults?.Show(dockPanel, DockState.DockBottom);
             EditorCore.OutputLog?.Show(dockPanel, DockState.DockBottom);
+            EditorCore.SearchResults?.Show(dockPanel, DockState.DockBottom);
+
+            // Force default priorities.
+            EditorCore.Properties?.Show();
+            EditorCore.OutputLog?.Show();
         }
 
         private IDockContent GetContentFromPersistString(string persistString)
