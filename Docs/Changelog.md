@@ -1,5 +1,14 @@
 # Dialogue Editor - Changelog
 
+### Version 1.3 _(2023-06-11)_
+
+- Add callbacks for the Dialogue Player on dialogue start/end and on nodes execution (Actions and Conditions), allowing custom builds to simulate a play session.
+- Add User.config option "RefreshTreeViewOnEdit" to control TreeView refresh during edition (default to false).
+- Add User.config option "DialogueTreeViewFont" to store the selected display font.
+- Add User.config options to store preferences for the Dialogue Player.
+- Add a first implementation of a localization exporter for Unity (needs test).
+- Update default exports directories to regroup them into an "Exports" root directory.
+
 ### Version 1.2 _(2021-11-16)_
 
 - Add a new CustomProperties mechanism for custom additional node data and its associated edition panels.
