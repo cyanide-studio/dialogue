@@ -27,6 +27,7 @@ It is mostly inspired by the tools used on Cyanide's Game of Thrones RPG, and th
 - Localized constants can be used inside sentences.
 - Entry points for simple animations, custom conditions, actions and flags on every node.
 - Entry points for additional custom properties and associated panels on every node.
+- Entry Points for custom behaviours inside the native Dialogue Player (conditions and actions) to simulate gameplay sessions.
 - Import/Export for localization and voicing (csv files with pre-generated unique files and events IDs).
 - Actors settings, including parameters and voice-kit assignation for voicing sessions.
 
