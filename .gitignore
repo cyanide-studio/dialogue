@@ -1,9 +1,15 @@
-Dev/.vs/
-Dev/*.v12.suo
-Dev/*.VC.db
-Dev/*.VC.opendb
-Dev/*/bin/
-Dev/*/obj/
-Dev/packages/
+## Project
+
 Build/*
 ProjectBig/*
+**/Exports/
+
+## Visual Studio
+
+**/.vs/
+**/*.v12.suo
+**/*.VC.db
+**/*.VC.opendb
+**/bin/
+**/obj/
+**/packages/
