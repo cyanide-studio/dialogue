@@ -28,21 +28,7 @@ namespace DialogueEditor
             var constants = new Constants();
             constants.constants = project.ListConstants;
 
-            if (!Directory.Exists(Path.GetDirectoryName(exportDirectory)))
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(exportDirectory));
-            }
-
-            using (StreamWriter file = File.CreateText(exportDirectory))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Formatting = Formatting.Indented;
-                serializer.TypeNameHandling = TypeNameHandling.Auto;
-                serializer.SerializationBinder = EditorCore.SerializationBinder;
-                serializer.Serialize(file, constants);
-            }
-
-            return true;
+            return ExporterJson.SerializeToFile(exportDirectory, constants);
         }
     }
 }

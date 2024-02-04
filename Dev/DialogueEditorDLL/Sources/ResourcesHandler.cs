@@ -391,49 +391,67 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // 
 
-        static public void SaveProject()
+        static public bool SaveProject()
         {
-            ExporterJson.SaveProjectFile(Project);
-            Project.Dirty = false;
+            if (ExporterJson.SaveProjectFile(Project))
+            {
+                Project.Dirty = false;
+                return true;
+            }
+
+            return false;
         }
 
-        static public void SaveDialogue(Dialogue dialogue)
+        static public bool SaveDialogue(Dialogue dialogue)
         {
             var holder = dialogues[dialogue.GetName()];
             if (dialogue != null && holder != null)
             {
-                ExporterJson.SaveDialogueFile(Project, dialogue);
-                holder.Dirty = false;
+                if (ExporterJson.SaveDialogueFile(Project, dialogue))
+                {
+                    holder.Dirty = false;
+                    return true;
+                }
             }
+
+            return false;
         }
 
         static public void SaveAllDirty()
         {
             if (Project.Dirty)
             {
-                ExporterJson.SaveProjectFile(Project);
-                Project.Dirty = false;
+                if (ExporterJson.SaveProjectFile(Project))
+                {
+                    Project.Dirty = false;
+                }
             }
 
             foreach (var kvp in dialogues)
             {
                 if (kvp.Value.Dirty)
                 {
-                    ExporterJson.SaveDialogueFile(Project, kvp.Value.Dialogue);
-                    kvp.Value.Dirty = false;
+                    if (ExporterJson.SaveDialogueFile(Project, kvp.Value.Dialogue))
+                    {
+                        kvp.Value.Dirty = false;
+                    }
                 }
             }
         }
 
         static public void SaveAll()
         {
-            ExporterJson.SaveProjectFile(Project);
-            Project.Dirty = false;
+            if (ExporterJson.SaveProjectFile(Project))
+            {
+                Project.Dirty = false;
+            }
 
             foreach (var kvp in dialogues)
             {
-                ExporterJson.SaveDialogueFile(Project, kvp.Value.Dialogue);
-                kvp.Value.Dirty = false;
+                if (ExporterJson.SaveDialogueFile(Project, kvp.Value.Dialogue))
+                {
+                    kvp.Value.Dirty = false;
+                }
             }
         }
 

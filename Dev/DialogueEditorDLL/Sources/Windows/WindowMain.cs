@@ -422,13 +422,20 @@ namespace DialogueEditor
                 }
                 else if (result == DialogResult.OK)
                 {
+                    bool couldSave = true;
+
                     if (dirtyProject != null)
-                        ResourcesHandler.SaveProject();
+                    {
+                        couldSave &= ResourcesHandler.SaveProject();
+                    }
 
                     foreach (Dialogue dialogue in dirtyDialogues)
                     {
-                        ResourcesHandler.SaveDialogue(dialogue);
+                        couldSave &= ResourcesHandler.SaveDialogue(dialogue);
                     }
+
+                    // If errors happened during save, we should not close the application.
+                    return couldSave;
                 }
                 else    //DialogResult.Ignore > Close without saving
                 {

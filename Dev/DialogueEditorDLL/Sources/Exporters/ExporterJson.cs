@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Windows.Forms;
 
 namespace DialogueEditor
 {
@@ -137,26 +138,30 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // Exports
 
-        static public void SaveProjectFile(Project project)
+        static public bool SaveProjectFile(Project project)
         {
             //PreSave
             project.PreSave();
 
             //Serialize
             string path = Path.Combine(EditorHelper.GetProjectDirectory(), project.GetFileName());
-            SerializeToFile(path, project);
+            bool result = SerializeToFile(path, project);
 
-            ExporterConstants.ExportToUnreal4();
+            result &= ExporterConstants.ExportToUnreal4();
+
+            return result;
         }
 
-        static public void SaveDialogueFile(Project project, Dialogue dialogue)
+        static public bool SaveDialogueFile(Project project, Dialogue dialogue)
         {
             //PreSave
             dialogue.PreSave(project);
 
             //Serialize
             string path = Path.Combine(EditorHelper.GetProjectDirectory(), dialogue.GetFilePathName());
-            SerializeToFile(path, dialogue);
+            bool result = SerializeToFile(path, dialogue);
+
+            return result;
         }
 
         static public string SaveDialogueToString(Project project, Dialogue dialogue)
@@ -204,21 +209,43 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // Helpers
 
-        static private void SerializeToFile<T>(string path, T value)
+        static public bool SerializeToFile<T>(string path, T value)
         {
-            if (!Directory.Exists(Path.GetDirectoryName(path)))
+            bool result = false;
+
+            try
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(path));
+                if (!Directory.Exists(Path.GetDirectoryName(path)))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(path));
+                }
+
+                FileAttributes fileAttributes = File.GetAttributes(path);
+                if ((fileAttributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+                {
+                    fileAttributes &= ~FileAttributes.ReadOnly;
+                    File.SetAttributes(path, fileAttributes);
+
+                    EditorCore.LogWarning("A read-only file has been marked writable : " + path);
+                }
+
+                using (StreamWriter file = File.CreateText(path))
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    serializer.Formatting = Formatting.Indented;
+                    serializer.TypeNameHandling = TypeNameHandling.Auto;
+                    serializer.SerializationBinder = EditorCore.SerializationBinder;
+                    serializer.Serialize(file, value);
+
+                    result = true;
+                }
+            }
+            catch (Exception e)
+            {
+                EditorCore.LogError($"Exception during save file : {e.Message}");
             }
 
-            using (StreamWriter file = File.CreateText(path))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Formatting = Formatting.Indented;
-                serializer.TypeNameHandling = TypeNameHandling.Auto;
-                serializer.SerializationBinder = EditorCore.SerializationBinder;
-                serializer.Serialize(file, value);
-            }
+            return result;
         }
 
         static private string SerializeToString<T>(T value)
