@@ -35,7 +35,16 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // Class Methods
 
-        public DialogExport(string title, string path, bool defaultDateDirectory, bool defaultPackageDirectory, bool allowConstants, bool allowWorkstringFallback, bool allowDateFrom, DateTime dateFrom)
+        public DialogExport(
+            string title,
+            string path,
+            bool defaultDateDirectory,
+            bool defaultPackageDirectory,
+            bool allowConstants,
+            bool allowLanguages,
+            bool allowWorkstringFallback,
+            bool allowDateFrom,
+            DateTime dateFrom)
         {
             InitializeComponent();
 
@@ -62,8 +71,13 @@ namespace DialogueEditor
             checkBoxConstants.Visible = allowConstants;
             checkBoxConstants.Enabled = allowConstants;
 
+            if (!allowLanguages)
+                WorkstringOnly = true;
             checkBoxWorkstringOnly.Checked = WorkstringOnly;
+            checkBoxWorkstringOnly.Enabled = allowLanguages;
 
+            if (!allowLanguages)
+                allowWorkstringFallback = false;
             if (!allowWorkstringFallback)
                 WorkstringFallback = false;
             checkBoxWorkstringFallback.Checked = WorkstringFallback;

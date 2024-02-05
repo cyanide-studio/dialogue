@@ -93,6 +93,7 @@ namespace DialogueEditor
                                             defaultDateDirectory: true,
                                             defaultPackageDirectory: false,
                                             allowConstants: false,
+                                            allowLanguages: true,
                                             allowWorkstringFallback: true,
                                             allowDateFrom: true,
                                             dateFrom: DateTime.MinValue);

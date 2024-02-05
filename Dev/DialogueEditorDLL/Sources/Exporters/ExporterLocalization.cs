@@ -26,6 +26,7 @@ namespace DialogueEditor
                                             defaultDateDirectory: true,
                                             defaultPackageDirectory: false,
                                             allowConstants: false,
+                                            allowLanguages: true,
                                             allowWorkstringFallback: true,
                                             allowDateFrom: true,
                                             dateFrom: DateTime.MinValue);
@@ -103,6 +104,7 @@ namespace DialogueEditor
                                             defaultDateDirectory: true,
                                             defaultPackageDirectory: false,
                                             allowConstants: false,
+                                            allowLanguages: true,
                                             allowWorkstringFallback: true,
                                             allowDateFrom: true,
                                             dateFrom: DateTime.MinValue);
@@ -161,7 +163,7 @@ namespace DialogueEditor
         //--------------------------------------------------------------------------------------------------------------
         // Common export utilities
 
-        private static string GetLocalizedText(Dialogue dialogue, Language language, DialogueNode dialogueNode, bool workstringOnly, bool workstringFallback)
+        public static string GetLocalizedText(Dialogue dialogue, Language language, DialogueNode dialogueNode, bool workstringOnly, bool workstringFallback)
         {
             string workstring;
             if (dialogueNode is DialogueNodeSentence)
