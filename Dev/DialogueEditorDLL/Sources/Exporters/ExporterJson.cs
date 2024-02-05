@@ -220,13 +220,16 @@ namespace DialogueEditor
                     Directory.CreateDirectory(Path.GetDirectoryName(path));
                 }
 
-                FileAttributes fileAttributes = File.GetAttributes(path);
-                if ((fileAttributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+                if (File.Exists(path))
                 {
-                    fileAttributes &= ~FileAttributes.ReadOnly;
-                    File.SetAttributes(path, fileAttributes);
+                    FileAttributes fileAttributes = File.GetAttributes(path);
+                    if ((fileAttributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+                    {
+                        fileAttributes &= ~FileAttributes.ReadOnly;
+                        File.SetAttributes(path, fileAttributes);
 
-                    EditorCore.LogWarning("A read-only file has been marked writable : " + path);
+                        EditorCore.LogWarning("A read-only file has been marked writable : " + path);
+                    }
                 }
 
                 using (StreamWriter file = File.CreateText(path))
