@@ -1,0 +1,817 @@
+{
+  "VersionProject": "1.0.0",
+  "VersionEditor": "1.3.0",
+  "PackageName": "Default",
+  "LastIndex": 30,
+  "SceneType": "Interactive",
+  "VoiceBank": "",
+  "Context": "",
+  "Comment": "",
+  "RootNodeID": 0,
+  "ListNodes": [
+    {
+      "$type": "NodeRoot",
+      "ID": 0,
+      "NextID": 8,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": []
+    },
+    {
+      "$type": "NodeChoice",
+      "Choice": "",
+      "RepliesIDs": [
+        4,
+        2,
+        3,
+        5
+      ],
+      "ID": 1,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": []
+    },
+    {
+      "$type": "NodeReply",
+      "Reply": "Ask about him.",
+      "LastEditDate": "2024-02-05T15:54:00.6892087Z",
+      "ID": 2,
+      "NextID": 11,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": []
+    },
+    {
+      "$type": "NodeReply",
+      "Reply": "Ask about his shop.",
+      "LastEditDate": "2024-02-05T15:54:14.2528533Z",
+      "ID": 3,
+      "NextID": 20,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": []
+    },
+    {
+      "$type": "NodeReply",
+      "Reply": "Trade.",
+      "LastEditDate": "2024-02-05T15:59:42.2360911Z",
+      "ID": 4,
+      "NextID": 17,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": []
+    },
+    {
+      "$type": "NodeReply",
+      "Reply": "Leave.",
+      "LastEditDate": "2024-02-05T15:53:28.5145996Z",
+      "ID": 5,
+      "NextID": 9,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": []
+    },
+    {
+      "$type": "NodeReturn",
+      "ID": 6,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": []
+    },
+    {
+      "$type": "NodeReturn",
+      "ID": 7,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": []
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Welcome into my humble sh...",
+      "SpeakerID": "ActorID_4",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Shop_8",
+      "LastEditDate": "2024-02-05T16:01:10.2195913Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 8,
+      "NextID": 19,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "In fact I don't need anything, goodbye.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_4",
+      "VoicingID": "VX_Shop_9",
+      "LastEditDate": "2024-02-05T15:56:17.0173609Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 9,
+      "NextID": 10,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Why did you even come here...",
+      "SpeakerID": "ActorID_4",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Shop_10",
+      "LastEditDate": "2024-02-05T15:56:34.6373819Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 10,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Who are you again ?",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_4",
+      "VoicingID": "VX_Shop_11",
+      "LastEditDate": "2024-02-05T15:56:51.4241294Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 11,
+      "NextID": 12,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Im your loving uncle, did you already forget ?",
+      "SpeakerID": "ActorID_4",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Shop_12",
+      "LastEditDate": "2024-02-05T15:57:15.7923789Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 12,
+      "NextID": 13,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Oh right I knew you looked like somebody I know.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_4",
+      "VoicingID": "VX_Shop_13",
+      "LastEditDate": "2024-02-05T15:57:33.1317299Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 13,
+      "NextID": 14,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "I just didn't remember you were a merchant.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_4",
+      "VoicingID": "VX_Shop_14",
+      "LastEditDate": "2024-02-05T15:57:49.6672301Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 14,
+      "NextID": 15,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Well I had to find another job, after I got kicked out of the city with a bounty on my head.",
+      "SpeakerID": "ActorID_4",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Shop_15",
+      "LastEditDate": "2024-02-05T15:58:37.7327952Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 15,
+      "NextID": 16,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "At least you're still alive, I'm almost jealous.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_4",
+      "VoicingID": "VX_Shop_16",
+      "LastEditDate": "2024-02-05T15:59:28.7837515Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 16,
+      "NextID": 7,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Alright I wanna buy some good stuff, show me a good sword.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_4",
+      "VoicingID": "VX_Shop_17",
+      "LastEditDate": "2024-02-05T16:00:06.4731237Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 17,
+      "NextID": 18,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Nothing beats a good old fashioned dragon-forged steel, my good sir, have a look !",
+      "SpeakerID": "ActorID_4",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Shop_18",
+      "LastEditDate": "2024-02-05T16:01:48.78408Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 18,
+      "NextID": -1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Oh, it's you...",
+      "SpeakerID": "ActorID_4",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Shop_19",
+      "LastEditDate": "2024-02-05T16:01:18.0163718Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 19,
+      "NextID": 1,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "This place looks miserable.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_4",
+      "VoicingID": "VX_Shop_20",
+      "LastEditDate": "2024-02-05T16:03:01.3460847Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 20,
+      "NextID": 21,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "I'm sorry if it does not suit your royal highness.",
+      "SpeakerID": "ActorID_4",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Shop_21",
+      "LastEditDate": "2024-02-05T16:03:25.3896266Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 21,
+      "NextID": 22,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Does it have some interesting lore at least ?",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_4",
+      "VoicingID": "VX_Shop_22",
+      "LastEditDate": "2024-02-05T16:03:39.7119763Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 22,
+      "NextID": 23,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Well some people say it was once the home of a very important knight !",
+      "SpeakerID": "ActorID_4",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Shop_23",
+      "LastEditDate": "2024-02-05T16:04:11.1521445Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 23,
+      "NextID": 24,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Great ! Who was he ?",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_4",
+      "VoicingID": "VX_Shop_24",
+      "LastEditDate": "2024-02-05T16:04:18.1059701Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 24,
+      "NextID": 25,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Nobody remembers.",
+      "SpeakerID": "ActorID_4",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Shop_25",
+      "LastEditDate": "2024-02-05T16:04:27.8833112Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 25,
+      "NextID": 26,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "And when did he live here ?",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_4",
+      "VoicingID": "VX_Shop_26",
+      "LastEditDate": "2024-02-05T16:04:47.1568794Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 26,
+      "NextID": 27,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Long ago.",
+      "SpeakerID": "ActorID_4",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Shop_27",
+      "LastEditDate": "2024-02-05T16:04:58.974714Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 27,
+      "NextID": 28,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "Ok nice, at least do you know the House he served ?",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_4",
+      "VoicingID": "VX_Shop_28",
+      "LastEditDate": "2024-02-05T16:07:46.4225278Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 28,
+      "NextID": 29,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "How would a humble merchant like me know such things ?",
+      "SpeakerID": "ActorID_4",
+      "ListenerID": "ActorID_1",
+      "VoicingID": "VX_Shop_29",
+      "LastEditDate": "2024-02-05T16:07:41.5096496Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 29,
+      "NextID": 30,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    },
+    {
+      "$type": "NodeSentence",
+      "Sentence": "I feel tired already.",
+      "SpeakerID": "ActorID_1",
+      "ListenerID": "ActorID_4",
+      "VoicingID": "VX_Shop_30",
+      "LastEditDate": "2024-02-05T16:06:06.3595586Z",
+      "HideSubtitle": false,
+      "Context": "",
+      "Comment": "",
+      "VoiceIntensity": "",
+      "SpeakerAnimset": "",
+      "ListenerAnimset": "",
+      "SpeakerAnim": "",
+      "ListenerAnim": "",
+      "ID": 30,
+      "NextID": 6,
+      "Conditions": [],
+      "Actions": [],
+      "Flags": [],
+      "CustomProperties": [
+        {
+          "$type": "DirectingProperties",
+          "Camera": "",
+          "CameraBlendTime": -1.0,
+          "CameraDelay": 0.0,
+          "ApplyZoomIn": "undefined",
+          "ApplyOrbitalMove": "undefined"
+        }
+      ]
+    }
+  ],
+  "ListAdditionalActors": [],
+  "Translations": {
+    "Entries": {}
+  }
+}
