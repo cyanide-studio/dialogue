@@ -55,6 +55,7 @@ namespace DialogueEditor
                 AddBinding("NodeReply", typeof(DialogueNodeReply));
                 AddBinding("NodeGoto", typeof(DialogueNodeGoto));
                 AddBinding("NodeBranch", typeof(DialogueNodeBranch));
+                AddBinding("NodeReturn", typeof(DialogueNodeReturn));
 
                 AddBinding("ConditionAnd", typeof(NodeConditionAnd));
                 AddBinding("ConditionOr", typeof(NodeConditionOr));

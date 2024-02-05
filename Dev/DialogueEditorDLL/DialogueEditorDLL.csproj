@@ -205,6 +205,7 @@
     </Compile>
     <Compile Include="Sources\Panels\Properties\IFormProperties.cs" />
     <Compile Include="Sources\Resources\Actor.cs" />
+    <Compile Include="Sources\Resources\DialogueNodeReturn.cs" />
     <Compile Include="Sources\Resources\NodeCustomProperties.cs" />
     <Compile Include="Sources\Resources\DialogueNodeBranch.cs" />
     <Compile Include="Sources\Resources\Language.cs" />

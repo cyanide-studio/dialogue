@@ -100,10 +100,6 @@ namespace DialogueEditor
             {
                 DialogueNodeGoto castNode = dialogueNode as DialogueNodeGoto;
 
-                //FormPropertiesGoto properties = new FormPropertiesGoto();
-                //properties.Init(document, treeNode, castNode);
-                //layoutPanel.Controls.Add(properties);
-
                 FormPropertiesCommon propertiesCommon = new FormPropertiesCommon();
                 propertiesCommon.Init(document, treeNode, castNode);
                 layoutPanel.Controls.Add(propertiesCommon);
@@ -115,6 +111,14 @@ namespace DialogueEditor
                 FormPropertiesBranch properties = new FormPropertiesBranch();
                 properties.Init(document, treeNode, castNode);
                 layoutPanel.Controls.Add(properties);
+
+                FormPropertiesCommon propertiesCommon = new FormPropertiesCommon();
+                propertiesCommon.Init(document, treeNode, castNode);
+                layoutPanel.Controls.Add(propertiesCommon);
+            }
+            else if (dialogueNode is DialogueNodeReturn)
+            {
+                DialogueNodeReturn castNode = dialogueNode as DialogueNodeReturn;
 
                 FormPropertiesCommon propertiesCommon = new FormPropertiesCommon();
                 propertiesCommon.Init(document, treeNode, castNode);

@@ -259,6 +259,23 @@ namespace DialogueEditor
             SetDirty();
         }
 
+        public void CreateNodeReturn(TreeNode treeNodeFrom, bool branch)
+        {
+            if (branch && (!(GetDialogueNode(treeNodeFrom) is DialogueNodeBranch)))
+                return;
+
+            DialogueNodeReturn nodeReturn = new DialogueNodeReturn();
+            Dialogue.AddNode(nodeReturn);
+
+            TreeNode newTreeNode = AddNodeReturn(treeNodeFrom, nodeReturn, branch);
+            SelectTreeNode(newTreeNode);
+
+            if (EditorCore.Properties != null)
+                EditorCore.Properties.ForceFocus();
+
+            SetDirty();
+        }
+
         public virtual TreeNode AddNodeSentence(TreeNode treeNodeFrom, DialogueNodeSentence sentence, bool branch)
         {
             if (treeNodeFrom == null || sentence == null)
@@ -393,6 +410,34 @@ namespace DialogueEditor
             return newTreeNode;
         }
 
+        public virtual TreeNode AddNodeReturn(TreeNode treeNodeFrom, DialogueNodeReturn nodeReturn, bool branch)
+        {
+            if (treeNodeFrom == null || nodeReturn == null)
+                return null;
+
+            WIN32.StopRedraw(this);
+            tree.BeginUpdate();
+
+            TreeNode newTreeNode = null;
+            if (branch || IsTreeNodeRoot(treeNodeFrom) || IsTreeNodeReply(treeNodeFrom))
+            {
+                newTreeNode = AddTreeNodeChild(nodeReturn, treeNodeFrom);
+                treeNodeFrom.Expand();
+            }
+            else
+            {
+                newTreeNode = AddTreeNodeSibling(nodeReturn, treeNodeFrom);
+            }
+
+            ResolvePostNodeInsertion(treeNodeFrom, nodeReturn, branch);
+
+            tree.EndUpdate();
+            WIN32.ResumeRedraw(this);
+            this.Refresh();
+
+            return newTreeNode;
+        }
+
         private void ResolvePostNodeInsertion(TreeNode treeNodeFrom, DialogueNode newNode, bool branch)
         {
             var nodeDialogueFrom = GetDialogueNode(treeNodeFrom);
@@ -513,6 +558,17 @@ namespace DialogueEditor
 
                 AddTreeNodeSibling(node.Next, newTreeNode);
                 newTreeNode.Expand();
+            }
+            else if (node is DialogueNodeReturn)
+            {
+                DialogueNodeReturn nodeReturn = node as DialogueNodeReturn;
+
+                newTreeNode = parentTreeNode.Nodes.Insert(insertIndex, GetNodeKey(node.ID), "");
+                newTreeNode.Tag = new NodeWrap(node);
+                newTreeNode.ContextMenuStrip = contextMenu;
+                EditorHelper.SetNodeIcon(newTreeNode, ENodeIcon.Goto);
+
+                AddTreeNodeSibling(node.Next, newTreeNode);
             }
 
             if (newTreeNode != null)
@@ -834,9 +890,10 @@ namespace DialogueEditor
             FontStyle style = FontStyle.Regular;
 
             if (dialogueNode is DialogueNodeRoot
-            ||  dialogueNode is DialogueNodeChoice
-            ||  dialogueNode is DialogueNodeGoto
-            ||  dialogueNode is DialogueNodeBranch)
+            || dialogueNode is DialogueNodeChoice
+            || dialogueNode is DialogueNodeGoto
+            || dialogueNode is DialogueNodeBranch
+            || dialogueNode is DialogueNodeReturn)
             {
                 style |= FontStyle.Italic;
             }
@@ -892,6 +949,10 @@ namespace DialogueEditor
                     return GetTreeNodeColorContent((dialogueNode as DialogueNodeGoto).Goto);
             }
             else if (dialogueNode is DialogueNodeBranch)
+            {
+                return Color.FromArgb(220, 100, 0);   //Orange
+            }
+            else if (dialogueNode is DialogueNodeReturn)
             {
                 return Color.FromArgb(220, 100, 0);   //Orange
             }
@@ -1027,6 +1088,10 @@ namespace DialogueEditor
             {
                 DialogueNodeBranch nodeBranch = dialogueNode as DialogueNodeBranch;
                 return String.Format("Branch > {0}", nodeBranch.Workstring);
+            }
+            else if (dialogueNode is DialogueNodeReturn)
+            {
+                return String.Format("Return");
             }
 
             return "";
@@ -1560,6 +1625,8 @@ namespace DialogueEditor
                         newTreeNode = AddNodeGoto(tree.SelectedNode, firsNode as DialogueNodeGoto, asBranch);
                     else if (firsNode is DialogueNodeBranch)
                         newTreeNode = AddNodeBranch(tree.SelectedNode, firsNode as DialogueNodeBranch, asBranch);
+                    else if (firsNode is DialogueNodeReturn)
+                        newTreeNode = AddNodeReturn(tree.SelectedNode, firsNode as DialogueNodeReturn, asBranch);
 
                     if (dialogueNode is DialogueNodeRoot)
                     {
@@ -1624,6 +1691,16 @@ namespace DialogueEditor
                     Dialogue.AddNode(newNode);
 
                     var newTreeNode = AddNodeBranch(tree.SelectedNode, newNode, asBranch);
+                    SelectTreeNode(newTreeNode);
+
+                    SetDirty();
+                }
+                else if (EditorHelper.Clipboard is DialogueNodeReturn)
+                {
+                    var newNode = (EditorHelper.Clipboard as DialogueNodeReturn).Clone() as DialogueNodeReturn;
+                    Dialogue.AddNode(newNode);
+
+                    var newTreeNode = AddNodeReturn(tree.SelectedNode, newNode, asBranch);
                     SelectTreeNode(newTreeNode);
 
                     SetDirty();
@@ -1699,6 +1776,7 @@ namespace DialogueEditor
             menuItemAddChoice.Visible = false;
             menuItemAddGoto.Visible = false;
             menuItemAddBranch.Visible = false;
+            menuItemAddReturn.Visible = false;
 
             separatorReference.Visible = false;
             menuItemCopyReference.Visible = false;
@@ -1720,12 +1798,14 @@ namespace DialogueEditor
             || node is DialogueNodeChoice
             || node is DialogueNodeReply
             || node is DialogueNodeGoto
-            || node is DialogueNodeBranch)
+            || node is DialogueNodeBranch
+            || node is DialogueNodeReturn)
             {
                 menuItemAddSentence.Visible = true;
                 menuItemAddChoice.Visible = true;
                 menuItemAddGoto.Visible = true;
                 menuItemAddBranch.Visible = true;
+                menuItemAddReturn.Visible = true;
             }
 
             //Root
@@ -1758,7 +1838,10 @@ namespace DialogueEditor
                 menuItemPasteReference.Enabled = (copyReference != -1);
                 menuItemCopyID.Visible = true;
             }
-            else if (node is DialogueNodeSentence || node is DialogueNodeChoice || node is DialogueNodeBranch)
+            else if (node is DialogueNodeSentence
+                || node is DialogueNodeChoice
+                || node is DialogueNodeBranch
+                || node is DialogueNodeReturn)
             {
                 separatorReference.Visible = true;
                 menuItemCopyReference.Visible = true;
@@ -1822,6 +1905,11 @@ namespace DialogueEditor
         private void OnAddNodeBranch(object sender, EventArgs e)
         {
             CreateNodeBranch(tree.SelectedNode, false);
+        }
+
+        private void OnAddNodeReturn(object sender, EventArgs e)
+        {
+            CreateNodeReturn(tree.SelectedNode, false);
         }
 
         private void OnBranchNodeSentence(object sender, EventArgs e)

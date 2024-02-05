@@ -70,6 +70,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.labelFont = new System.Windows.Forms.Label();
             this.checkBoxUseConstants = new System.Windows.Forms.CheckBox();
+            this.menuItemAddReturn = new System.Windows.Forms.ToolStripMenuItem();
             addSentenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             addChoiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             addGotoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -141,6 +142,7 @@
             this.menuItemAddChoice,
             this.menuItemAddGoto,
             this.menuItemAddBranch,
+            this.menuItemAddReturn,
             this.separatorReference,
             this.menuItemCopyReference,
             this.menuItemPasteReference,
@@ -430,6 +432,13 @@
             this.checkBoxUseConstants.UseVisualStyleBackColor = true;
             this.checkBoxUseConstants.CheckedChanged += new System.EventHandler(this.OnCheckDisplayOptions);
             // 
+            // menuItemAddReturn
+            // 
+            this.menuItemAddReturn.Name = "menuItemAddReturn";
+            this.menuItemAddReturn.Size = new System.Drawing.Size(180, 22);
+            this.menuItemAddReturn.Text = "Add Return";
+            this.menuItemAddReturn.Click += new System.EventHandler(this.OnAddNodeReturn);
+            // 
             // DocumentDialogue
             // 
             this.ClientSize = new System.Drawing.Size(775, 462);
@@ -499,5 +508,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemAddBranch;
         private System.Windows.Forms.ToolStripMenuItem menuItemBranch;
         private System.Windows.Forms.ToolStripSeparator separatorBranch;
+        private System.Windows.Forms.ToolStripMenuItem menuItemAddReturn;
     }
 }
