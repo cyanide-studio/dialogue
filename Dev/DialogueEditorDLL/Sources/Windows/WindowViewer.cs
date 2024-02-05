@@ -23,6 +23,7 @@ namespace DialogueEditor
         protected bool runningDialogue = false;
         protected List<DialogueNode> previousNodes = new List<DialogueNode>();
         protected List<DialogueNodeReply> currentReplies = null;
+        protected DialogueNodeChoice lastChoice = null;
 
         private Font fontReplies = null;
         private Font fontConditions = null;
@@ -118,6 +119,7 @@ namespace DialogueEditor
             // Do not call this here, because the user can still use the "back" command and go backwards.
             //EditorCore.OnPlayDialogueEnd();
 
+            lastChoice = null;
             currentReplies = null;
             currentNode = null;
 
@@ -133,6 +135,7 @@ namespace DialogueEditor
                 EditorCore.OnPlayDialogueEnd();
 
             previousNodes.Clear();
+            lastChoice = null;
             currentReplies = null;
             currentNode = null;
 
@@ -198,6 +201,10 @@ namespace DialogueEditor
                     var nodeBranch = currentNode as DialogueNodeBranch;
                     PlayNode(nodeBranch.Branch);
                 }
+                else if (currentNode is DialogueNodeReturn)
+                {
+                    PlayNode(lastChoice);
+                }
                 else
                 {
                     PlayNode(currentNode.Next);
@@ -217,8 +224,13 @@ namespace DialogueEditor
 
         protected void PlayNode(DialogueNode nextNode, bool forward = true)
         {
-            if (forward && currentNode != null && !(currentNode is DialogueNodeReply) && !(currentNode is DialogueNodeGoto))
+            if (forward && currentNode != null
+                && !(currentNode is DialogueNodeReply)
+                && !(currentNode is DialogueNodeGoto)
+                && !(currentNode is DialogueNodeReturn))
+            {
                 previousNodes.Add(currentNode);
+            }
 
             currentReplies = null;
 
@@ -281,6 +293,8 @@ namespace DialogueEditor
             else if (currentNode is DialogueNodeChoice)
             {
                 var nodeChoice = currentNode as DialogueNodeChoice;
+
+                lastChoice = nodeChoice;
 
                 currentReplies = new List<DialogueNodeReply>();
                 foreach (var nodeReply in nodeChoice.Replies)
@@ -353,6 +367,26 @@ namespace DialogueEditor
                 else
                 {
                     PlayNode(nodeBranch.Next);
+                }
+            }
+            else if (currentNode is DialogueNodeReturn)
+            {
+                var nodeReturn = currentNode as DialogueNodeReturn;
+
+                if (ShouldWaitForNodeConditions(nodeReturn, branchingNode: true))
+                {
+                    groupBoxGoto.Visible = true;
+                    labelGoto.Text = "Return to last Choice";
+
+                    ShowConditions(nodeReturn);
+                }
+                else if (TestNodeConditions(nodeReturn))
+                {
+                    PlayNode(lastChoice);
+                }
+                else
+                {
+                    PlayNode(nodeReturn.Next);
                 }
             }
         }
