@@ -1,4 +1,4 @@
-# ![Icon](/Icons/led24/bookmark_book.png) Dialogue Editor 1.3
+# ![Icon](/Icons/led24/bookmark_book.png) Dialogue Editor 1.4
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 A Dialogue Editor for branching dialogues, built in C# and mainly based on WinForms.  

@@ -1,5 +1,15 @@
 # Dialogue Editor - Changelog
 
+### Version 1.4 _(2024-10-20)_
+
+- Add "Return" dialogue nodes.
+  - Used to represent a return to the latest "Choice" ancestor node.
+- Handle readonly files when saving.
+  - Try to force as writable with a log of the operation.
+  - Cancel the "save and close" popup if some files could not be saved.
+- Add allowLanguages option on the Export dialog settings (can be used to force workstrings on some exports).
+- Update .Net target version from 4.6.1 to 4.6.2.
+
 ### Version 1.3 _(2023-06-11)_
 
 - Add callbacks for the Dialogue Player on dialogue start/end and on nodes execution (Actions and Conditions), allowing custom builds to simulate a play session.
@@ -8,6 +18,7 @@
 - Add User.config options to store preferences for the Dialogue Player.
 - Add a first implementation of a localization exporter for Unity (needs test).
 - Update default exports directories to regroup them into an "Exports" root directory.
+- Update Newtonsoft.Json version from 10.0.3 to 13.0.2.
 
 ### Version 1.2 _(2021-11-16)_
 
@@ -25,6 +36,7 @@
 - Fix windows "beep" sounds when using some editor shortcuts.
 - Fix a behaviour where changing speaker/listener properties would generate two undo steps instead of one.
 - Fix a behaviour where scrolling on a panel would scroll a combobox instead.
+- Update .Net target version from 4.5 to 4.6.1.
 
 ### Version 1.1 _(2021-02-03)_
 
