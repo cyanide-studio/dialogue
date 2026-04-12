@@ -42,4 +42,4 @@ It is mostly inspired by the tools used on Cyanide's Game of Thrones RPG, and th
 - [User Documentation](/Docs/UserDocumentation.pdf)
 - [Technical Documentation](/Docs/TechnicalDocumentation.pdf)
 
-You can reach the author here : [twitter/Legulysse](https://twitter.com/legulysse) or here : [github/Legulysse](https://github.com/Legulysse)
+You can reach the author here : [bluesky/Legulysse](https://bsky.app/profile/legulysse.bsky.social) or here : [github/Legulysse](https://github.com/Legulysse)
