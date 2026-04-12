@@ -3,18 +3,22 @@
 
 A Dialogue Editor for branching dialogues, built in C# and mainly based on WinForms.  
 
-The Editor is designed for large scale production, primarily targeting the needs of writers and game designers.  
+The Editor is designed for large scale production, primarily targeting the needs of writers and game designers, and acting as a backbone for automated staged dialogues.  
 It is based on individual Json files for easy integration in any game engine, and provides import/export pipelines for localization and voicing.  
 
 The main goal of the tool is to provide consistent and dependable unique IDs on every sentence in the project, to allow easier and safer iterations on localization and voicing, even for already integrated dialogues.  
-It is designed as a backbone for automated staged dialogues, with very minimal camera and animation options.  
+IDs take the form of \<dialogue-name\>\_\<increment\> instead of uuids to favor human-readability, and be usable directly for naming files like voicing audio files.  
+It provides integrated entry-points for Conditions, Actions (triggers) and Flags hosting their own set of properties.  
+Custom property panels can also be added inside the editor, as well as custom menus and commands.  
+The tool must be recompiled with your project data structure definitions to fill all those entry-points (see the Demo build for integrated samples).  
 
-What it does NOT do, is to provide tools for timelines and advanced staged dialogues.    
-You can, however, plug the exported data on top of your game engine timelines.
+What it does NOT do, is to provide tools for timelines and advanced staged dialogues.  
+You can, however, plug the exported data on top of your game engine timelines.  
 
-The tool has been created at Cyanide for its various projects needs.  
-It is mostly inspired by the tools used on Cyanide's Game of Thrones RPG, and the Aurora tool used on Neverwinter Nights.
-
+The Editor has been created at Cyanide for its various projects needs.  
+It is inspired by the tools used on Cyanide's Game of Thrones RPG, and the Aurora tool used on Neverwinter Nights.  
+Since its open-source release in 2017, it has been used by several other game studios.  
+  
 ![Screenshot](/Docs/DemoScreenshot.png)
 
 ## Features
